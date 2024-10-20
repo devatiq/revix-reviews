@@ -1,0 +1,19 @@
+{
+    "name": "abcplugin/revix-reviews",
+    "license": "GPL-2.0-or-later",
+    "version": "1.0.0",
+    "authors": [
+        {
+            "name": "ABCPlugin",
+            "homepage": "https://abcplugin.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "RevixReviews\\": "inc/",
+            "RevixReviews\\Public\\": "public/",            
+            "RevixReviews\\Admin\\": "admin/"
+        }
+    },
+    "require": {}
+}
