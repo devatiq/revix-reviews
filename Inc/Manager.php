@@ -10,11 +10,13 @@ if (!defined('ABSPATH')) {
 }
 
 use RevixReviews\Admin\Inc\Reviews\PostTypes\Reviews;
+use RevixReviews\Admin\Inc\Reviews\MetaBox\ReviewsMetaBox;
 
 class Manager
 {
 
     protected $reviews;
+    protected $reviews_meta_box;
 
     /**
      * Class constructor
@@ -50,6 +52,7 @@ class Manager
     public function init_classes()
     {
         $this->reviews = new Reviews();
+        $this->reviews_meta_box = new ReviewsMetaBox();
     }
 
 
