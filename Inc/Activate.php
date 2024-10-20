@@ -1,5 +1,5 @@
 <?php 
-namespace RevixReviews\Base;
+namespace RevixReviews;
 
 /**
  * Don't call the file directly.

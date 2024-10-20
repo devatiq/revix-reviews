@@ -10,9 +10,9 @@
     ],
     "autoload": {
         "psr-4": {
-            "RevixReviews\\": "inc/",
-            "RevixReviews\\Public\\": "public/",            
-            "RevixReviews\\Admin\\": "admin/"
+            "RevixReviews\\": "Inc/",
+            "RevixReviews\\Public\\": "Public/",            
+            "RevixReviews\\Admin\\": "Admin/"
         }
     },
     "require": {}

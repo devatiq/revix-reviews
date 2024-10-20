@@ -1,5 +1,5 @@
 <?php 
-namespace RevixReviews\Admin\Inc\Reviews\PostType;
+namespace RevixReviews\Admin\Inc\Reviews\PostTypes;
 /**
  * don't call the file directly.
  */
@@ -9,7 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 class Reviews {
-    public function register() {
+    public function __construct() {
         add_action( 'init', [ $this, 'create_review_post_type' ] );
     }
 
