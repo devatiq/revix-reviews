@@ -3,7 +3,7 @@
 **Contributors**: abcplugins, atiqbd4ever, supreoxltd  
 **Tags**: reviews, business reviews, feedback, testimonials  
 **Requires at least**: 5.4  
-**Tested up to**: 6.2.2  
+**Tested up to**: 6.6.2  
 **Stable tag**: 1.0.0  
 **Requires PHP**: 7.4  
 **License**: GPLv2 or later  
