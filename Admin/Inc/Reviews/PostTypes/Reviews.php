@@ -9,10 +9,23 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 class Reviews {
+    /**
+     * Constructor for the Reviews class.
+     *
+     * Registers a custom post type for reviews by hooking into the 'init' action.
+     */
     public function __construct() {
         add_action( 'init', [ $this, 'create_review_post_type' ] );
     }
 
+    /**
+     * Creates a custom post type for reviews.
+     *
+     * Registers a custom post type with the key 'revix_reviews' and assigns it
+     * labels, public visibility, and support for various features like title,
+     * editor, thumbnails, and comments. The post type is also registered to be
+     * shown in the WordPress REST API.
+     */
     public function create_review_post_type() {
         $labels = [
             'name'               => __( 'Reviews', 'revix-reviews' ),

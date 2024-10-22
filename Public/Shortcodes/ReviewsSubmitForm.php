@@ -29,35 +29,35 @@ class ReviewsSubmitForm
             <input type="hidden" name="action" value="submit_revix_feedback">
 
             <p><label for="revix_name">
-                    <?php esc_html_e('Name:', 'revix-reviews'); ?>
+                    <?php echo esc_html__('Name:', 'revix-reviews'); ?>
                 </label>
                 <input type="text" id="revix_name" name="revix_name" required>
             </p>
 
             <p><label for="revix_email">
-                    <?php esc_html_e('Email:', 'revix-reviews'); ?>
+                    <?php echo esc_html__('Email:', 'revix-reviews'); ?>
                 </label>
                 <input type="email" id="revix_email" name="revix_email" required>
             </p>
 
             <p><label for="revix_subject">
-                    <?php esc_html_e('Subject:', 'revix-reviews'); ?>
+                    <?php echo esc_html__('Subject:', 'revix-reviews'); ?>
                 </label>
                 <input type="text" id="revix_subject" name="revix_subject" required>
             </p>
 
             <p><label for="revix_comments">
-                    <?php esc_html_e('Comments:', 'revix-reviews'); ?>
+                    <?php echo esc_html__('Comments:', 'revix-reviews'); ?>
                 </label>
                 <textarea id="revix_comments" name="revix_comments" required></textarea>
             </p>
 
             <p><label for="revix_rating">
-                    <?php esc_html_e('Rating:', 'revix-reviews'); ?>
+                    <?php echo esc_html__('Rating:', 'revix-reviews'); ?>
                 </label>
                 <select id="revix_rating" name="revix_rating" required>
                     <option value="">
-                        <?php esc_html_e('Select a rating', 'revix-reviews'); ?>
+                        <?php echo esc_html__('Select a rating', 'revix-reviews'); ?>
                     </option>
                     <option value="1">1</option>
                     <option value="2">2</option>

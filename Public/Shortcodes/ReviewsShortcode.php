@@ -12,8 +12,7 @@ class ReviewsShortcode
     public static function display_grid_review_markup()
     {
 
-        ob_start();
-        // Define your custom query to fetch reviews
+        ob_start();        
         $args = [
             'post_type' => 'revix_reviews',
             'post_status' => 'publish',
@@ -40,10 +39,8 @@ class ReviewsShortcode
                             <i class="<?php echo ($i <= $testimonial_rating) ? 'eicon-star' : 'eicon-star-o'; ?>"></i>
                         <?php endfor; ?>
                     </div>
-                    <div class="revix-testimonial-content">
-                        <p>
-                            <?php the_content(); ?>
-                        </p>
+                    <div class="revix-testimonial-content">                        
+                         <?php the_content(); ?>                        
                     </div>
                     <div class="revix-testimonial-quote">
                         <svg xmlns="http://www.w3.org/2000/svg" width="68" height="50" viewBox="0 0 68 50" fill="none">

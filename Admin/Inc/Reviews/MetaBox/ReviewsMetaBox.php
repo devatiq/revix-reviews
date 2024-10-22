@@ -10,12 +10,22 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 class ReviewsMetaBox
 {
+    /**
+     * Hook into the appropriate actions when the class is constructed.
+     *
+     * @return void
+     */
     public function __construct()
     {
         add_action('add_meta_boxes', array($this, 'add_custom_meta_boxes'));
         add_action('save_post', array($this, 'save_custom_meta_boxes'), 10, 2);
     }
 
+    /**
+     * Add a meta box to the "revix_reviews" post type, which holds review details.
+     *
+     * @return void
+     */
     public function add_custom_meta_boxes()
     {
         add_meta_box(
@@ -28,6 +38,13 @@ class ReviewsMetaBox
         );
     }
 
+    /**
+     * Renders the meta box containing review details, such as name, email, and rating.
+     *
+     * @param WP_Post $post The post object for which the meta box is being rendered.
+     *
+     * @return void
+     */
     public function render_meta_boxes($post)
     {
         // Security field for validating request
@@ -57,6 +74,14 @@ class ReviewsMetaBox
 
     }
 
+    /**
+     * Handles saving the custom meta boxes for the "revix_reviews" post type.
+     *
+     * @param int     $post_id The ID of the post being saved.
+     * @param WP_Post $post    The post object being saved.
+     *
+     * @return int The post ID.
+     */
     public function save_custom_meta_boxes($post_id, $post)
     {
         // Verify the nonce before proceeding.
