@@ -15,6 +15,8 @@ use RevixReviews\Admin\Inc\Reviews\PostTypes\Reviews;
 use RevixReviews\Admin\Inc\Reviews\MetaBox\ReviewsMetaBox;
 use RevixReviews\Public\Assets\Assets;
 use RevixReviews\Public\Shortcodes\ReviewsShortcode;
+use RevixReviews\Public\Shortcodes\ReviewsSubmitForm;
+use RevixReviews\Admin\Inc\Dashboard\Settings\Settings;
 
 class Manager
 {
@@ -23,7 +25,10 @@ class Manager
     protected $reviews;
     protected $reviews_meta_box;    
     protected $assets;
-    protected $reviews_shortcode;
+    protected $reviewsShortcode;
+    protected $reviewsSubmitForm;
+    protected $settings;
+
 
 
     /**
@@ -65,7 +70,9 @@ class Manager
         $this->reviews = new Reviews();
         $this->reviews_meta_box = new ReviewsMetaBox();
         $this->assets = new Assets();
-        $this->reviews_shortcode = new ReviewsShortcode();
+        $this->reviewsShortcode = new ReviewsShortcode();
+        $this->reviewsSubmitForm = new ReviewsSubmitForm();
+        $this->settings = new Settings();
     }
 
 

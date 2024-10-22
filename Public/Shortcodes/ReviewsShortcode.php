@@ -1,5 +1,5 @@
 <?php
-namespace QuickOrders\Public\Shortcodes;
+namespace RevixReviews\Public\Shortcodes;
 
 defined('ABSPATH') or die('This is not the place you deserve!');
 
