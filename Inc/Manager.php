@@ -14,6 +14,7 @@ use RevixReviews\Deactivate;
 use RevixReviews\Admin\Inc\Reviews\PostTypes\Reviews;
 use RevixReviews\Admin\Inc\Reviews\MetaBox\ReviewsMetaBox;
 use RevixReviews\Public\Assets\Assets;
+use RevixReviews\Public\Shortcodes\ReviewsShortcode;
 
 class Manager
 {
@@ -22,6 +23,7 @@ class Manager
     protected $reviews;
     protected $reviews_meta_box;    
     protected $assets;
+    protected $reviews_shortcode;
 
 
     /**
@@ -63,6 +65,7 @@ class Manager
         $this->reviews = new Reviews();
         $this->reviews_meta_box = new ReviewsMetaBox();
         $this->assets = new Assets();
+        $this->reviews_shortcode = new ReviewsShortcode();
     }
 
 
