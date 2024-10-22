@@ -14,29 +14,29 @@
 
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
-    exit;
+	exit;
 }
 
-// Define Plugin Version
+// Define Plugin Version.
 define( 'REVIX_REVIEWS_VERSION', '1.0.0' );
-// Define Plugin Path
+// Define Plugin Path.
 define( 'REVIX_REVIEWS_PATH', plugin_dir_path( __FILE__ ) );
-// Define Plugin URL
+// Define Plugin URL.
 define( 'REVIX_REVIEWS_URL', plugin_dir_url( __FILE__ ) );
 
-// Include the autoloader
-if (file_exists(REVIX_REVIEWS_PATH . 'vendor/autoload.php')) {
-    require_once REVIX_REVIEWS_PATH . 'vendor/autoload.php';
+// Include the autoloader.
+if ( file_exists( REVIX_REVIEWS_PATH . 'vendor/autoload.php' ) ) {
+	require_once REVIX_REVIEWS_PATH . 'vendor/autoload.php';
 }
-
 
 /**
  * Initializes the Revix Reviews plugin by registering all classes and services.
  */
 function revix_reviews_initialize() {
 
-    if(class_exists('RevixReviews\Manager')){ 
-        new \RevixReviews\Manager();
-     }
+	if ( class_exists( 'RevixReviews\Manager' ) ) {
+		new \RevixReviews\Manager();
+	}
 }
+
 add_action( 'plugins_loaded', 'revix_reviews_initialize' );

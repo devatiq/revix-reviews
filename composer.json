@@ -15,5 +15,20 @@
             "RevixReviews\\Admin\\": "Admin/"
         }
     },
-    "require": {}
+    "config": {
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        }
+    },
+    "require-dev": {
+        "wp-coding-standards/wpcs": "^3.0",
+        "wp-cli/i18n-command": "^2.6",
+        "phpcompatibility/phpcompatibility-wp": "*"
+    },
+    "scripts": {
+		"lint:wpcs": "@php ./vendor/squizlabs/php_codesniffer/bin/phpcs",
+		"lint:php": "@php ./vendor/bin/parallel-lint --exclude .git --exclude vendor .",
+		"make-pot": "wp i18n make-pot . languages/revix-reviews.pot",
+		"lint:autofix": "vendor/bin/phpcbf"
+	}
 }

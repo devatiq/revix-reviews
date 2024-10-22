@@ -1,18 +1,19 @@
-<?php 
+<?php
 namespace RevixReviews;
 
 /**
  * Don't call the file directly.
  */
 if ( ! defined( 'ABSPATH' ) ) {
-    exit;
+	exit;
 }
 
 class Activate {
-    /**
-     * This method is responsible for activating the plugin.
-     */
-    public static function activate() {
-        flush_rewrite_rules();
-    }
+
+	/**
+	 * This method is responsible for activating the plugin.
+	 */
+	public static function activate() {
+		flush_rewrite_rules();
+	}
 }
