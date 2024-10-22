@@ -21,7 +21,7 @@ class ReviewsSubmitForm {
 		);
 
 		// Override defaults with user-provided attributes.
-		$atts = shortcode_atts( $defaults, $atts, 'revix_feedback_form' );
+		$atts = shortcode_atts( $defaults, $atts, 'revix_reviews_form' );
 
 		// Form HTML
 		?>
@@ -87,22 +87,29 @@ class ReviewsSubmitForm {
 			}
 		}
 
+		// Sanitize inputs after ensuring they exist and are non-empty.
+		$name     = isset( $_POST['revix_name'] ) ? sanitize_text_field( wp_unslash( $_POST['revix_name'] ) ) : '';
+		$email    = isset( $_POST['revix_email'] ) ? sanitize_email( wp_unslash( $_POST['revix_email'] ) ) : '';
+		$subject  = isset( $_POST['revix_subject'] ) ? sanitize_text_field( wp_unslash( $_POST['revix_subject'] ) ) : '';
+		$comments = isset( $_POST['revix_comments'] ) ? sanitize_textarea_field( wp_unslash( $_POST['revix_comments'] ) ) : '';
+		$rating   = isset( $_POST['revix_rating'] ) ? intval( wp_unslash( $_POST['revix_rating'] ) ) : '';
+		
 		// Enhanced email validation.
-		if ( ! is_email( $_POST['revix_email'] ) ) {
-			wp_die( __( 'Please enter a valid email address.', 'revix-reviews' ) );
+		if ( ! is_email( $email ) ) {
+			wp_die( esc_html__( 'Please enter a valid email address.', 'revix-reviews' ) );
 		}
 
 		$post_status = get_option( 'revix_review_status', 'pending' ); // Default to 'pending' if not set.
-		// Sanitize and prepare post data.
+		// Prepare post data.
 		$post_data = array(
-			'post_title'   => sanitize_text_field( $_POST['revix_subject'] ),
-			'post_content' => sanitize_textarea_field( $_POST['revix_comments'] ),
+			'post_title'   => $subject,
+			'post_content' => $comments,
 			'post_status'  => $post_status,
 			'post_type'    => 'revix_reviews',
 			'meta_input'   => array(
-				'revix_review_name'   => sanitize_text_field( $_POST['revix_name'] ),
-				'revix_review_email'  => sanitize_email( $_POST['revix_email'] ),
-				'revix_review_rating' => intval( $_POST['revix_rating'] ),
+				'revix_review_name'   => $name,
+				'revix_review_email'  => $email,
+				'revix_review_rating' => $rating,
 			),
 		);
 
