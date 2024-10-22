@@ -17,8 +17,8 @@ class ReviewsMetaBox {
 	 * @return void
 	 */
 	public function __construct() {
-		add_action( 'add_meta_boxes', array( $this, 'add_custom_meta_boxes' ) );
-		add_action( 'save_post', array( $this, 'save_custom_meta_boxes' ), 10, 2 );
+		add_action( 'add_meta_boxes', array( $this, 'register_meta_boxes' ) );
+		add_action( 'save_post', array( $this, 'save_review_meta_data' ), 10, 2 );
 	}
 
 	/**
@@ -26,11 +26,11 @@ class ReviewsMetaBox {
 	 *
 	 * @return void
 	 */
-	public function add_custom_meta_boxes() {
+	public function register_meta_boxes() {
 		add_meta_box(
 			'revix_review_details',
 			__( 'Review Details', 'revix-reviews' ),
-			array( $this, 'render_meta_boxes' ),
+			array( $this, 'register_review_metabox_fields' ),
 			'revix_reviews',
 			'normal',
 			'high'
@@ -44,9 +44,9 @@ class ReviewsMetaBox {
 	 *
 	 * @return void
 	 */
-	public function render_meta_boxes( $post ) {
+	public function register_review_metabox_fields( $post ) {
 		// Security field for validating request.
-		wp_nonce_field( 'revix_custom_fields', 'revix_custom_fields_nonce' );
+		wp_nonce_field( 'revix_fields_nonce', 'revix_review_meta_nonce' );
 
 		// Retrieve current values based on post ID.
 		$name   = get_post_meta( $post->ID, 'revix_review_name', true );
@@ -79,9 +79,9 @@ class ReviewsMetaBox {
 	 *
 	 * @return int The post ID.
 	 */
-	public function save_custom_meta_boxes( $post_id, $post ) {
+	public function save_review_meta_data( $post_id, $post ) {
 		// Verify the nonce before proceeding.
-		if ( ! isset( $_POST['revix_custom_fields_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['revix_custom_fields_nonce'] ) ), 'revix_custom_fields' ) ) {
+		if ( ! isset( $_POST['revix_review_meta_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['revix_review_meta_nonce'] ) ), 'revix_fields_nonce' ) ) {
 			return $post_id;
 		}
 

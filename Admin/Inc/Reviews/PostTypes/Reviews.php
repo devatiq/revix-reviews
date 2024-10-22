@@ -17,7 +17,7 @@ class Reviews {
 	 * Registers a custom post type for reviews by hooking into the 'init' action.
 	 */
 	public function __construct() {
-		add_action( 'init', array( $this, 'create_review_post_type' ) );
+		add_action( 'init', array( $this, 'register_review_post_type' ) );
 	}
 
 	/**
@@ -28,7 +28,7 @@ class Reviews {
 	 * editor, thumbnails, and comments. The post type is also registered to be
 	 * shown in the WordPress REST API.
 	 */
-	public function create_review_post_type() {
+	public function register_review_post_type() {
 		$labels = array(
 			'name'           => __( 'Reviews', 'revix-reviews' ),
 			'singular_name'  => __( 'Review', 'revix-reviews' ),
@@ -48,6 +48,8 @@ class Reviews {
 			'has_archive'  => true,
 			'supports'     => array( 'title', 'editor', 'thumbnail', 'comments' ),
 			'show_in_rest' => true,
+			'rewrite'      => array( 'slug' => 'revix-reviews' ),
+			'publicly_queryable' => false
 		);
 
 		register_post_type( 'revix_reviews', $args );
