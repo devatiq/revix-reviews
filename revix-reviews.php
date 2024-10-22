@@ -16,7 +16,6 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
-
 // Define Plugin Version.
 define( 'REVIX_REVIEWS_VERSION', '1.0.0' );
 // Define Plugin Path.
