@@ -1,4 +1,8 @@
 === Revix Reviews ===
+Plugin Name: Revix Reviews
+Version: 1.0.0
+Author: abcplugins
+Author URI: https://abcplugin.com/
 Contributors: abcplugins, atiqbd4ever, supreoxltd
 Tags: reviews, business reviews, feedback, testimonials
 Requires at least: 5.4
