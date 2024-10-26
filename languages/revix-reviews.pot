@@ -9,28 +9,33 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2024-10-26T12:21:03+00:00\n"
+"POT-Creation-Date: 2024-10-26T12:53:51+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"X-Generator: WP-CLI 2.7.0\n"
+"X-Generator: WP-CLI 2.11.0\n"
 "X-Domain: revix-reviews\n"
 
 #. Plugin Name of the plugin
+#: revix-reviews.php
 msgid "Revix Reviews"
 msgstr ""
 
 #. Plugin URI of the plugin
+#: revix-reviews.php
 msgid "https://github.com/devatiq/revix-reviews"
 msgstr ""
 
 #. Description of the plugin
+#: revix-reviews.php
 msgid "A WordPress plugin for managing reviews."
 msgstr ""
 
 #. Author of the plugin
+#: revix-reviews.php
 msgid "ABCPlugin"
 msgstr ""
 
 #. Author URI of the plugin
+#: revix-reviews.php
 msgid "https://abcplugin.com/"
 msgstr ""
 
