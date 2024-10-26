@@ -22,16 +22,16 @@ class ReviewsMetaBox {
 	}
 
 	/**
-	 * Add a meta box to the "revix_reviews" post type, which holds review details.
+	 * Add a meta box to the "revixreviews" post type, which holds review details.
 	 *
 	 * @return void
 	 */
 	public function register_meta_boxes() {
 		add_meta_box(
-			'revix_review_details',
+			'revixreviews_details',
 			__( 'Review Details', 'revix-reviews' ),
 			array( $this, 'register_review_metabox_fields' ),
-			'revix_reviews',
+			'revixreviews',
 			'normal',
 			'high'
 		);
@@ -46,23 +46,23 @@ class ReviewsMetaBox {
 	 */
 	public function register_review_metabox_fields( $post ) {
 		// Security field for validating request.
-		wp_nonce_field( 'revix_fields_nonce', 'revix_review_meta_nonce' );
+		wp_nonce_field( 'revixreviews_fields_nonce', 'revixreviews_meta_nonce' );
 
 		// Retrieve current values based on post ID.
-		$name   = get_post_meta( $post->ID, 'revix_review_name', true );
-		$email  = get_post_meta( $post->ID, 'revix_review_email', true );
-		$rating = get_post_meta( $post->ID, 'revix_review_rating', true );
+		$name   = get_post_meta( $post->ID, 'revixreviews_name', true );
+		$email  = get_post_meta( $post->ID, 'revixreviews_email', true );
+		$rating = get_post_meta( $post->ID, 'revixreviews_rating', true );
 
 		// HTML for the form fields.
-		echo '<p><label for="revix_review_name">' . esc_html__( 'Name:', 'revix-reviews' ) . '</label>';
-		echo '<input type="text" id="revix_review_name" name="revix_review_name" value="' . esc_attr( $name ) . '" class="widefat" /></p>';
+		echo '<p><label for="revixreviews_name">' . esc_html__( 'Name:', 'revix-reviews' ) . '</label>';
+		echo '<input type="text" id="revixreviews_name" name="revixreviews_name" value="' . esc_attr( $name ) . '" class="widefat" /></p>';
 
-		echo '<p><label for="revix_review_email">' . esc_html__( 'Email:', 'revix-reviews' ) . '</label>';
-		echo '<input type="email" id="revix_review_email" name="revix_review_email" value="' . esc_attr( $email ) . '" class="widefat" /></p>';
+		echo '<p><label for="revixreviews_email">' . esc_html__( 'Email:', 'revix-reviews' ) . '</label>';
+		echo '<input type="email" id="revixreviews_email" name="revixreviews_email" value="' . esc_attr( $email ) . '" class="widefat" /></p>';
 
 		// Dropdown for the rating.
-		echo '<p><label for="revix_review_rating">' . esc_html__( 'Rating:', 'revix-reviews' ) . '</label>';
-		echo '<select id="revix_review_rating" name="revix_review_rating" class="widefat">';
+		echo '<p><label for="revixreviews_rating">' . esc_html__( 'Rating:', 'revix-reviews' ) . '</label>';
+		echo '<select id="revixreviews_rating" name="revixreviews_rating" class="widefat">';
 		for ( $i = 1; $i <= 5; $i++ ) {
 			// Check if rating is set or not. If not set, default to 5.
 			$selected = selected( $rating ? $rating : 5, $i, false );
@@ -72,7 +72,7 @@ class ReviewsMetaBox {
 	}
 
 	/**
-	 * Handles saving the custom meta boxes for the "revix_reviews" post type.
+	 * Handles saving the custom meta boxes for the "revixreviews" post type.
 	 *
 	 * @param int     $post_id The ID of the post being saved.
 	 * @param WP_Post $post    The post object being saved.
@@ -81,7 +81,7 @@ class ReviewsMetaBox {
 	 */
 	public function save_review_meta_data( $post_id, $post ) {
 		// Verify the nonce before proceeding.
-		if ( ! isset( $_POST['revix_review_meta_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['revix_review_meta_nonce'] ) ), 'revix_fields_nonce' ) ) {
+		if ( ! isset( $_POST['revixreviews_meta_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['revixreviews_meta_nonce'] ) ), 'revixreviews_fields_nonce' ) ) {
 			return $post_id;
 		}
 
@@ -96,16 +96,16 @@ class ReviewsMetaBox {
 		}	
 
 		// update custom fields.
-		if ( isset( $_POST['revix_review_name'] ) ) {
-			update_post_meta( $post_id, 'revix_review_name', sanitize_text_field( wp_unslash($_POST['revix_review_name'] )) );
+		if ( isset( $_POST['revixreviews_name'] ) ) {
+			update_post_meta( $post_id, 'revixreviews_name', sanitize_text_field( wp_unslash($_POST['revixreviews_name'] )) );
 		}
 		//
-		if ( isset( $_POST['revix_review_email'] ) ) {
-			update_post_meta( $post_id, 'revix_review_email', sanitize_email( wp_unslash($_POST['revix_review_email']) ) );
+		if ( isset( $_POST['revixreviews_email'] ) ) {
+			update_post_meta( $post_id, 'revixreviews_email', sanitize_email( wp_unslash($_POST['revixreviews_email']) ) );
 		}
 
-		if ( isset( $_POST['revix_review_rating'] ) ) {
-			update_post_meta( $post_id, 'revix_review_rating', intval( $_POST['revix_review_rating'] ) );
+		if ( isset( $_POST['revixreviews_rating'] ) ) {
+			update_post_meta( $post_id, 'revixreviews_rating', intval( $_POST['revixreviews_rating'] ) );
 		}	
 	}
 }

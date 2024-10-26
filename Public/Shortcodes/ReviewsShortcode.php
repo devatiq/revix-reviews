@@ -9,14 +9,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 class ReviewsShortcode {
 
 	public function __construct() {
-		add_shortcode( 'revix_reviews', array( $this, 'display_grid_review_markup' ) ); // Display grid review.
+		add_shortcode( 'revixreviews', array( $this, 'display_grid_review_markup' ) ); // Display grid review.
 	}
 
 	public static function display_grid_review_markup() {
 
 		ob_start();
 		$args  = array(
-			'post_type'      => 'revix_reviews',
+			'post_type'      => 'revixreviews',
 			'post_status'    => 'publish',
 			'posts_per_page' => -1,
 		);
@@ -28,7 +28,7 @@ class ReviewsShortcode {
 			// Loop through the posts.
 			while ( $query->have_posts() ) {
 				$query->the_post();
-				$testimonial_rating = get_post_meta( get_the_ID(), 'revix_review_rating', true );
+				$testimonial_rating = get_post_meta( get_the_ID(), 'revixreviews_rating', true );
 				?>
 				<div class="revix-testimonial-single-item">
 					<div class="revix-testimonial-client-info">
