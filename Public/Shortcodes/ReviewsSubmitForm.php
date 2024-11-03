@@ -10,8 +10,8 @@ class ReviewsSubmitForm {
 
 	public function __construct() {
 		add_shortcode( 'revixreviews_form', array( $this, 'display_feedback_form' ) ); // Display feedback form.
-		add_action( 'admin_post_nopriv_submit_revix_feedback', array( $this, 'handle_submission' ) ); // For non-logged-in users.
-		add_action( 'admin_post_submit_revix_feedback', array( $this, 'handle_submission' ) ); // For logged-in users.
+		add_action( 'admin_post_nopriv_submit_revixreviews_feedback', array( $this, 'handle_submission' ) ); // For non-logged-in users.
+		add_action( 'admin_post_submit_revixreviews_feedback', array( $this, 'handle_submission' ) ); // For logged-in users.
 	}
 
 	public function display_feedback_form( $atts = array() ) {
@@ -26,37 +26,37 @@ class ReviewsSubmitForm {
 		// Form HTML
 		?>
 		<form action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>" method="post">
-			<?php wp_nonce_field( 'revix_feedback_nonce_action', 'revix_feedback_nonce' ); ?>
-			<input type="hidden" name="action" value="submit_revix_feedback">
+			<?php wp_nonce_field( 'revixreviews_feedback_nonce_action', 'revixreviews_feedback_nonce' ); ?>
+			<input type="hidden" name="action" value="submit_revixreviews_feedback">
 
-			<p><label for="revix_name">
+			<p><label for="revixreviews_name">
 					<?php echo esc_html__( 'Name:', 'revix-reviews' ); ?>
 				</label>
-				<input type="text" id="revix_name" name="revix_name" required>
+				<input type="text" id="revixreviews_name" name="revixreviews_name" required>
 			</p>
 
-			<p><label for="revix_email">
+			<p><label for="revixreviews_email">
 					<?php echo esc_html__( 'Email:', 'revix-reviews' ); ?>
 				</label>
-				<input type="email" id="revix_email" name="revix_email" required>
+				<input type="email" id="revixreviews_email" name="revixreviews_email" required>
 			</p>
 
-			<p><label for="revix_subject">
+			<p><label for="revixreviews_subject">
 					<?php echo esc_html__( 'Subject:', 'revix-reviews' ); ?>
 				</label>
-				<input type="text" id="revix_subject" name="revix_subject" required>
+				<input type="text" id="revixreviews_subject" name="revixreviews_subject" required>
 			</p>
 
-			<p><label for="revix_comments">
+			<p><label for="revixreviews_comments">
 					<?php echo esc_html__( 'Comments:', 'revix-reviews' ); ?>
 				</label>
-				<textarea id="revix_comments" name="revix_comments" required></textarea>
+				<textarea id="revixreviews_comments" name="revixreviews_comments" required></textarea>
 			</p>
 
-			<p><label for="revix_rating">
+			<p><label for="revixreviews_rating">
 					<?php echo esc_html__( 'Rating:', 'revix-reviews' ); ?>
 				</label>
-				<select id="revix_rating" name="revix_rating" required>
+				<select id="revixreviews_rating" name="revixreviews_rating" required>
 					<option value="">
 						<?php echo esc_html__( 'Select a rating', 'revix-reviews' ); ?>
 					</option>
@@ -75,12 +75,12 @@ class ReviewsSubmitForm {
 
 	public function handle_submission() {
 		// Check nonce for security.
-		if ( ! isset( $_POST['revix_feedback_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['revix_feedback_nonce'] ) ), 'revix_feedback_nonce_action' ) ) {
+		if ( ! isset( $_POST['revixreviews_feedback_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['revixreviews_feedback_nonce'] ) ), 'revixreviews_feedback_nonce_action' ) ) {
 			wp_die( 'Security check failed' );
 		}
 
 		// Server-side validation for required fields.
-		$required_fields = array( 'revix_name', 'revix_email', 'revix_subject', 'revix_comments', 'revix_rating' );
+		$required_fields = array( 'revixreviews_name', 'revixreviews_email', 'revixreviews_subject', 'revixreviews_comments', 'revixreviews_rating' );
 		foreach ( $required_fields as $field ) {
 			if ( empty( $_POST[ $field ] ) ) {
 				wp_die( 'Please fill all required fields.' );
@@ -88,18 +88,18 @@ class ReviewsSubmitForm {
 		}
 
 		// Sanitize inputs after ensuring they exist and are non-empty.
-		$name     = isset( $_POST['revix_name'] ) ? sanitize_text_field( wp_unslash( $_POST['revix_name'] ) ) : '';
-		$email    = isset( $_POST['revix_email'] ) ? sanitize_email( wp_unslash( $_POST['revix_email'] ) ) : '';
-		$subject  = isset( $_POST['revix_subject'] ) ? sanitize_text_field( wp_unslash( $_POST['revix_subject'] ) ) : '';
-		$comments = isset( $_POST['revix_comments'] ) ? sanitize_textarea_field( wp_unslash( $_POST['revix_comments'] ) ) : '';
-		$rating   = isset( $_POST['revix_rating'] ) ? intval( wp_unslash( $_POST['revix_rating'] ) ) : '';
+		$name     = isset( $_POST['revixreviews_name'] ) ? sanitize_text_field( wp_unslash( $_POST['revixreviews_name'] ) ) : '';
+		$email    = isset( $_POST['revixreviews_email'] ) ? sanitize_email( wp_unslash( $_POST['revixreviews_email'] ) ) : '';
+		$subject  = isset( $_POST['revixreviews_subject'] ) ? sanitize_text_field( wp_unslash( $_POST['revixreviews_subject'] ) ) : '';
+		$comments = isset( $_POST['revixreviews_comments'] ) ? sanitize_textarea_field( wp_unslash( $_POST['revixreviews_comments'] ) ) : '';
+		$rating   = isset( $_POST['revixreviews_rating'] ) ? intval( wp_unslash( $_POST['revixreviews_rating'] ) ) : '';
 		
 		// Enhanced email validation.
 		if ( ! is_email( $email ) ) {
 			wp_die( esc_html__( 'Please enter a valid email address.', 'revix-reviews' ) );
 		}
 
-		$post_status = get_option( 'revix_review_status', 'pending' ); // Default to 'pending' if not set.
+		$post_status = get_option( 'revixreviews_status', 'pending' ); // Default to 'pending' if not set.
 		// Prepare post data.
 		$post_data = array(
 			'post_title'   => $subject,
@@ -107,9 +107,9 @@ class ReviewsSubmitForm {
 			'post_status'  => $post_status,
 			'post_type'    => 'revixreviews',
 			'meta_input'   => array(
-				'revix_review_name'   => $name,
-				'revix_review_email'  => $email,
-				'revix_review_rating' => $rating,
+				'revixreviews_name'   => $name,
+				'revixreviews_email'  => $email,
+				'revixreviews_rating' => $rating,
 			),
 		);
 
@@ -118,7 +118,7 @@ class ReviewsSubmitForm {
 
 		if ( $post_id ) {
 
-			$redirect_url = get_option( 'revix_redirect_url' );
+			$redirect_url = get_option( 'revixreviews_redirect_url' );
 			// If a redirect URL is set and is a valid URL, redirect to it. Otherwise, redirect to the home page.
 			if ( ! empty( $redirect_url ) && filter_var( $redirect_url, FILTER_VALIDATE_URL ) ) {
 				wp_safe_redirect( $redirect_url );
