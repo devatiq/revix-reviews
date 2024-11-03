@@ -9,7 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 class ReviewsSubmitForm {
 
 	public function __construct() {
-		add_shortcode( 'revix_reviews_form', array( $this, 'display_feedback_form' ) ); // Display feedback form.
+		add_shortcode( 'revixreviews_form', array( $this, 'display_feedback_form' ) ); // Display feedback form.
 		add_action( 'admin_post_nopriv_submit_revix_feedback', array( $this, 'handle_submission' ) ); // For non-logged-in users.
 		add_action( 'admin_post_submit_revix_feedback', array( $this, 'handle_submission' ) ); // For logged-in users.
 	}
@@ -21,7 +21,7 @@ class ReviewsSubmitForm {
 		);
 
 		// Override defaults with user-provided attributes.
-		$atts = shortcode_atts( $defaults, $atts, 'revix_reviews_form' );
+		$atts = shortcode_atts( $defaults, $atts, 'revixreviews_form' );
 
 		// Form HTML
 		?>
@@ -105,7 +105,7 @@ class ReviewsSubmitForm {
 			'post_title'   => $subject,
 			'post_content' => $comments,
 			'post_status'  => $post_status,
-			'post_type'    => 'revix_reviews',
+			'post_type'    => 'revixreviews',
 			'meta_input'   => array(
 				'revix_review_name'   => $name,
 				'revix_review_email'  => $email,

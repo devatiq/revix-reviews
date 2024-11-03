@@ -36,8 +36,8 @@ Revix Reviews is perfect for business owners, service providers, and e-commerce 
 
 Revix Reviews provides two intuitive shortcodes to easily integrate review functionality into your site:
 
-1. `[revix_reviews_form]`: Embed a feedback form into your posts, pages, or widgets, allowing visitors to submit their reviews. Simply insert the shortcode `[revix_reviews_form]` where you want the form to appear.
-2. `[revix_reviews]`: Display a grid of submitted reviews, showcasing real customer feedback on any post, page, or widget area.
+1. `[revixreviews_form]`: Embed a feedback form into your posts, pages, or widgets, allowing visitors to submit their reviews. Simply insert the shortcode `[revixreviews_form]` where you want the form to appear.
+2. `[revixreviews]`: Display a grid of submitted reviews, showcasing real customer feedback on any post, page, or widget area.
 
 ## Frequently Asked Questions
 

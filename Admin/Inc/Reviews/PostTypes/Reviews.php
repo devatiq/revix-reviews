@@ -23,7 +23,7 @@ class Reviews {
 	/**
 	 * Creates a custom post type for reviews.
 	 *
-	 * Registers a custom post type with the key 'revix_reviews' and assigns it
+	 * Registers a custom post type with the key 'revixreviews' and assigns it
 	 * labels, public visibility, and support for various features like title,
 	 * editor, thumbnails, and comments. The post type is also registered to be
 	 * shown in the WordPress REST API.
@@ -52,6 +52,6 @@ class Reviews {
 			'publicly_queryable' => false
 		);
 
-		register_post_type( 'revix_reviews', $args );
+		register_post_type( 'revixreviews', $args );
 	}
 }

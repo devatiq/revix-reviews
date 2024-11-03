@@ -32,6 +32,6 @@ class Assets {
 	 */
 	public function enqueue_styles( $hook ) {
 
-		wp_enqueue_style( 'revix-style', REVIX_REVIEWS_URL . 'public/assets/css/style.css', array(), REVIX_REVIEWS_VERSION );
+		wp_enqueue_style( 'revix-style', REVIXREVIEWS_URL . 'public/assets/css/style.css', array(), REVIXREVIEWS_VERSION );
 	}
 }
