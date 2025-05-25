@@ -1,11 +1,11 @@
 {
-    "name": "abcplugin/revix-reviews",
+    "name": "supreoxltd/revix-reviews",
     "license": "GPL-2.0-or-later",
     "version": "1.0.0",
     "authors": [
         {
-            "name": "ABCPlugin",
-            "homepage": "https://abcplugin.com"
+            "name": "SupreoX Limited",
+            "homepage": "https://supreox.com"
         }
     ],
     "autoload": {
