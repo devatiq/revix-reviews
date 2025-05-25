@@ -4,8 +4,9 @@
  * Version: 1.0.0
  * Plugin URI: https://github.com/devatiq/revix-reviews
  * Description: A WordPress plugin for managing reviews.
- * Author: ABCPlugin
- * Author URI: https://abcplugin.com/
+ * Author: SupreoX Limited
+ * Author URI: https://supreox.com/
+ * Plugin URL: https://abcplugin.com
  * License: GPL2
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain: revix-reviews
