@@ -2,15 +2,14 @@
 namespace RevixReviews\Public\Trustpilot;
 
 class TrustpilotFetcher {
-    const ENABLE_CACHE = false; // Toggle for production
-    const DEBUG = true; // Show debug info in HTML comment
+    const ENABLE_CACHE = false;
+    const DEBUG = true;
 
     public function get_reviews($count = 5) {
         $url = get_option('revix_trustpilot_url');
         if (!$url) return [];
 
         $cache_key = 'revix_trustpilot_reviews_cache';
-
         if (self::ENABLE_CACHE) {
             $cached = get_transient($cache_key);
             if ($cached) return $cached;
@@ -33,26 +32,27 @@ class TrustpilotFetcher {
         @$doc->loadHTML($html);
         $xpath = new \DOMXPath($doc);
 
-        $review_elements = $xpath->query("//section[contains(@class,'styles_reviewCard')]");
+        // Broader selector
+        $review_elements = $xpath->query("//div[contains(@class,'styles_cardWrapper') or contains(@class,'review-card')]");
         $reviews = [];
 
         if (self::DEBUG && $review_elements->length === 0) {
-            echo "<!-- Trustpilot: no .styles_reviewCard found -->";
+            echo "<!-- Trustpilot: no styles_cardWrapper or review-card found -->";
         }
 
         foreach ($review_elements as $index => $element) {
             if ($index >= $count) break;
 
-            $author = $xpath->query(".//div[contains(@class,'consumerInformation__name')]", $element);
-            $text = $xpath->query(".//p[contains(@class,'review-content__text')]", $element);
-            $rating = $xpath->query(".//img[contains(@alt,'stars')]", $element);
-            $date = $xpath->query(".//time", $element);
+            $authorNode = $xpath->query(".//*[contains(@class,'consumerInformation__name') or contains(@class,'typography_heading')]", $element);
+            $textNode = $xpath->query(".//*[contains(@class,'review-content__text') or contains(@class,'typography_body')]", $element);
+            $ratingNode = $xpath->query(".//img[contains(@alt,'stars')]", $element);
+            $dateNode = $xpath->query(".//time", $element);
 
             $reviews[] = [
-                'author' => $author->length ? trim($author->item(0)->nodeValue) : 'Anonymous',
-                'text'   => $text->length ? trim($text->item(0)->nodeValue) : '(No review content)',
-                'rating' => $rating->length ? $rating->item(0)->getAttribute('alt') : 'No rating',
-                'date'   => $date->length ? $date->item(0)->getAttribute('datetime') : '',
+                'author' => $authorNode->length ? trim($authorNode->item(0)->nodeValue) : 'Anonymous',
+                'text'   => $textNode->length ? trim($textNode->item(0)->nodeValue) : '(No content found)',
+                'rating' => $ratingNode->length ? $ratingNode->item(0)->getAttribute('alt') : 'No rating',
+                'date'   => $dateNode->length ? $dateNode->item(0)->getAttribute('datetime') : '',
             ];
         }
 
