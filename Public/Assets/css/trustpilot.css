@@ -1,0 +1,26 @@
+.revix-trustpilot-reviews {
+    margin-top: 20px;
+}
+.revix-trustpilot-reviews .revix-review {
+    background: #f8f8f8;
+    border-left: 4px solid #00b67a;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 6px;
+}
+.revix-trustpilot-reviews .revix-author {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+.revix-trustpilot-reviews .revix-rating {
+    color: #ffb400;
+    margin-bottom: 5px;
+}
+.revix-trustpilot-reviews .revix-date {
+    font-size: 0.85em;
+    color: #666;
+    margin-bottom: 10px;
+}
+.revix-trustpilot-reviews .revix-text {
+    font-size: 1em;
+}

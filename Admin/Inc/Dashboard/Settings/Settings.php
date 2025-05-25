@@ -2,19 +2,21 @@
 namespace RevixReviews\Admin\Inc\Dashboard\Settings;
 
 // Exit if accessed directly.
-if ( ! defined( 'ABSPATH' ) ) {
+if (!defined('ABSPATH')) {
 	exit;
 }
-class Settings {
+class Settings
+{
 
 	/**
 	 * Initializes the plugin by adding the menu page and setting up the settings fields
 	 *
 	 * @since 1.0.0
 	 */
-	public function __construct() {
-		add_action( 'admin_menu', array( $this, 'revixreviews_add_admin_menu' ) );
-		add_action( 'admin_init', array( $this, 'revixreviews_settings_init' ) );
+	public function __construct()
+	{
+		add_action('admin_menu', array($this, 'revixreviews_add_admin_menu'));
+		add_action('admin_init', array($this, 'revixreviews_settings_init'));
 	}
 
 	/**
@@ -22,14 +24,15 @@ class Settings {
 	 *
 	 * @since 1.0.0
 	 */
-	public function revixreviews_add_admin_menu() {
+	public function revixreviews_add_admin_menu()
+	{
 		add_submenu_page(
 			'edit.php?post_type=revixreviews',
-			__( 'Revix Reviews Settings', 'revix-reviews' ),
-			__( 'Settings', 'revix-reviews' ),
+			__('Revix Reviews Settings', 'revix-reviews'),
+			__('Settings', 'revix-reviews'),
 			'manage_options',
 			'revixreviews_settings',
-			array( $this, 'revixreviews_create_settings_page' )
+			array($this, 'revixreviews_create_settings_page')
 		);
 	}
 
@@ -37,15 +40,16 @@ class Settings {
 	 * Renders the settings page for Revix Reviews.
 	 * Displays a form with settings fields, sections, and submit button.
 	 */
-	public function revixreviews_create_settings_page() {
+	public function revixreviews_create_settings_page()
+	{
 		?>
 		<div class="wrap revixreviews_admin_wrap">
-			<h2><?php echo esc_html( get_admin_page_title() ); ?></h2>
+			<h2><?php echo esc_html(get_admin_page_title()); ?></h2>
 			<form action="options.php" method="post">
 				<?php
 				settings_errors();
-				settings_fields( 'revixreviews' );
-				do_settings_sections( 'revixreviews' );
+				settings_fields('revixreviews');
+				do_settings_sections('revixreviews');
 				submit_button();
 				?>
 			</form>
@@ -58,21 +62,22 @@ class Settings {
 	 * Registers setting options for redirect URL and default review status.
 	 * Adds a main settings section for the settings page.
 	 */
-	public function revixreviews_settings_init() {
-		register_setting( 'revixreviews', 'revixreviews_redirect_url', array( 'sanitize_callback' => 'esc_url_raw' ) );
-		register_setting( 'revixreviews', 'revixreviews_status', array( 'sanitize_callback' => 'sanitize_text_field' ) );
+	public function revixreviews_settings_init()
+	{
+		register_setting('revixreviews', 'revixreviews_redirect_url', array('sanitize_callback' => 'esc_url_raw'));
+		register_setting('revixreviews', 'revixreviews_status', array('sanitize_callback' => 'sanitize_text_field'));
 
 		add_settings_section(
 			'revixreviews_main_section',
-			__( 'Main Settings', 'revix-reviews' ),
-			array( $this, 'revixreviews_main_section_cb' ),
+			__('Main Settings', 'revix-reviews'),
+			array($this, 'revixreviews_main_section_cb'),
 			'revixreviews'
 		);
 		// redirect url.
 		add_settings_field(
 			'revixreviews_redirect_url',
-			__( 'Redirect URL', 'revix-reviews' ),
-			array( $this, 'revixreviews_redirect_url_field_cb' ),
+			__('Redirect URL', 'revix-reviews'),
+			array($this, 'revixreviews_redirect_url_field_cb'),
 			'revixreviews',
 			'revixreviews_main_section'
 		);
@@ -80,11 +85,37 @@ class Settings {
 		// post status.
 		add_settings_field(
 			'revixreviews_status',
-			__( 'Default Review Status', 'revix-reviews' ),
-			array( $this, 'revixreviews_status_field_cb' ),
+			__('Default Review Status', 'revix-reviews'),
+			array($this, 'revixreviews_status_field_cb'),
 			'revixreviews',
 			'revixreviews_main_section'
 		);
+
+		// Trustpilot URL setting
+		register_setting(
+			'revixreviews',
+			'revix_trustpilot_url',
+			array('sanitize_callback' => 'esc_url_raw')
+		);
+
+		add_settings_field(
+			'revix_trustpilot_url',
+			__('Trustpilot Review Page URL', 'revix-reviews'),
+			array($this, 'revix_trustpilot_url_field_cb'),
+			'revixreviews',
+			'revixreviews_main_section'
+		);
+
+	}
+	/**
+	 * Renders the Trustpilot URL field for the settings page.
+	 *
+	 * @since 1.0.0
+	 */
+	public function revix_trustpilot_url_field_cb()
+	{
+		$url = get_option('revix_trustpilot_url');
+		echo '<input type="text" id="revix_trustpilot_url" class="regular-text" name="revix_trustpilot_url" value="' . esc_attr($url) . '" placeholder="https://www.trustpilot.com/review/example.com" />';
 	}
 
 	/**
@@ -94,8 +125,9 @@ class Settings {
 	 *
 	 * @since 1.0.0
 	 */
-	public function revixreviews_main_section_cb() {
-		echo '<p>' . esc_html__( 'Set your preferences for the Revix Reviews plugin.', 'revix-reviews' ) . '</p>';
+	public function revixreviews_main_section_cb()
+	{
+		echo '<p>' . esc_html__('Set your preferences for the Revix Reviews plugin.', 'revix-reviews') . '</p>';
 	}
 
 	/**
@@ -105,9 +137,10 @@ class Settings {
 	 *
 	 * @since 1.0.0
 	 */
-	public function revixreviews_redirect_url_field_cb() {
-		$redirect_url = get_option( 'revixreviews_redirect_url' );
-		echo '<input type="text" id="revixreviews_redirect_url" class="regular-text" name="revixreviews_redirect_url" value="' . esc_attr( $redirect_url ) . '" />';
+	public function revixreviews_redirect_url_field_cb()
+	{
+		$redirect_url = get_option('revixreviews_redirect_url');
+		echo '<input type="text" id="revixreviews_redirect_url" class="regular-text" name="revixreviews_redirect_url" value="' . esc_attr($redirect_url) . '" />';
 	}
 
 	/**
@@ -118,17 +151,19 @@ class Settings {
 	 *
 	 * @since 1.0.0
 	 */
-	public function revixreviews_status_field_cb() {
-		$post_status = get_option( 'revixreviews_status', 'pending' );
+	public function revixreviews_status_field_cb()
+	{
+		$post_status = get_option('revixreviews_status', 'pending');
 		?>
 		<select id="revixreviews_status" name="revixreviews_status">
-			<option value="publish" <?php selected( $post_status, 'publish' ); ?>>
-				<?php echo esc_html__( 'Publish', 'revix-reviews' ); ?>
+			<option value="publish" <?php selected($post_status, 'publish'); ?>>
+				<?php echo esc_html__('Publish', 'revix-reviews'); ?>
 			</option>
-			<option value="pending" <?php selected( $post_status, 'pending' ); ?>>
-				<?php echo esc_html__( 'Pending', 'revix-reviews' ); ?>
+			<option value="pending" <?php selected($post_status, 'pending'); ?>>
+				<?php echo esc_html__('Pending', 'revix-reviews'); ?>
 			</option>
-			<option value="draft" <?php selected( $post_status, 'draft' ); ?>><?php echo esc_html__( 'Draft', 'revix-reviews' ); ?>
+			<option value="draft" <?php selected($post_status, 'draft'); ?>>
+				<?php echo esc_html__('Draft', 'revix-reviews'); ?>
 			</option>
 		</select>
 		<?php

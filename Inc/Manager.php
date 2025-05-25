@@ -16,6 +16,9 @@ use RevixReviews\Public\Shortcodes\ReviewsShortcode;
 use RevixReviews\Public\Shortcodes\ReviewsSubmitForm;
 use RevixReviews\Admin\Inc\Dashboard\Settings\Settings;
 
+
+use RevixReviews\Admin\Trustpilot\TrustpilotSettings;
+use RevixReviews\Public\Trustpilot\TrustpilotShortcode;
 class Manager {
 	protected $reviews;
 	protected $reviews_meta_box;
@@ -23,6 +26,9 @@ class Manager {
 	protected $reviews_shortcode;
 	protected $reviews_submit_form;
 	protected $settings;
+
+	protected $trustpilot_settings;
+	protected $trustpilot_shortcode;
 
 	/**
 	 * Class constructor
@@ -59,5 +65,7 @@ class Manager {
 		$this->reviews_shortcode   = new ReviewsShortcode();
 		$this->reviews_submit_form = new ReviewsSubmitForm();
 		$this->settings            = new Settings();
+		$this->trustpilot_settings = new TrustpilotSettings();
+		$this->trustpilot_shortcode = new TrustpilotShortcode();
 	}
 }
