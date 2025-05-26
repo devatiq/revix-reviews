@@ -32,30 +32,32 @@ class TrustpilotFetcher {
         @$doc->loadHTML($html);
         $xpath = new \DOMXPath($doc);
 
-        // Broader selector
-        $review_elements = $xpath->query("//div[contains(@class,'styles_cardWrapper') or contains(@class,'review-card')]");
+        $review_elements = $xpath->query("//article[contains(@class,'styles_reviewCard')]");
         $reviews = [];
 
         if (self::DEBUG && $review_elements->length === 0) {
-            echo "<!-- Trustpilot: no styles_cardWrapper or review-card found -->";
+            echo "<!-- Trustpilot: no styles_reviewCard found -->";
         }
 
         foreach ($review_elements as $index => $element) {
             if ($index >= $count) break;
 
-            $authorNode = $xpath->query(".//*[contains(@class,'consumerInformation__name') or contains(@class,'typography_heading')]", $element);
-            $textNode = $xpath->query(".//*[contains(@class,'review-content__text') or contains(@class,'typography_body')]", $element);
-            $ratingNode = $xpath->query(".//img[contains(@alt,'stars')]", $element);
-            $dateNode = $xpath->query(".//time", $element);
-            $avatarNode = $xpath->query(".//img[contains(@class,'consumerAvatar') or contains(@alt,'Profile') or contains(@alt,'avatar')]", $element);
-
+            $author = $xpath->query(".//span[@data-consumer-name-typography='true']", $element);
+            $country = $xpath->query(".//span[@data-consumer-country-typography='true']", $element);
+            $avatar = $xpath->query(".//img[@data-consumer-avatar-image='true']", $element);
+            $title = $xpath->query(".//h2[@data-service-review-title-typography='true']", $element);
+            $content = $xpath->query(".//p[@data-service-review-text-typography='true']", $element);
+            $rating = $xpath->query(".//img[contains(@alt,'Rated')]", $element);
+            $date = $xpath->query(".//time", $element);
 
             $reviews[] = [
-                'author' => $authorNode->length ? trim($authorNode->item(0)->nodeValue) : 'Anonymous',
-                'text'   => $textNode->length ? trim($textNode->item(0)->nodeValue) : '(No content found)',
-                'rating' => $ratingNode->length ? $ratingNode->item(0)->getAttribute('alt') : 'No rating',
-                'date'   => $dateNode->length ? $dateNode->item(0)->getAttribute('datetime') : '',
-                'avatar' => $avatarNode->length ? $avatarNode->item(0)->getAttribute('src') : '',
+                'author'  => $author->length ? trim($author->item(0)->nodeValue) : 'Anonymous',
+                'country' => $country->length ? trim($country->item(0)->nodeValue) : '',
+                'avatar'  => $avatar->length ? $avatar->item(0)->getAttribute('src') : '',
+                'title'   => $title->length ? trim($title->item(0)->nodeValue) : '',
+                'text'    => $content->length ? trim($content->item(0)->nodeValue) : '(No content found)',
+                'rating'  => $rating->length ? $rating->item(0)->getAttribute('alt') : '',
+                'date'    => $date->length ? $date->item(0)->getAttribute('datetime') : '',
             ];
         }
 
