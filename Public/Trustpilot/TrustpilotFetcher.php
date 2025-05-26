@@ -47,12 +47,15 @@ class TrustpilotFetcher {
             $textNode = $xpath->query(".//*[contains(@class,'review-content__text') or contains(@class,'typography_body')]", $element);
             $ratingNode = $xpath->query(".//img[contains(@alt,'stars')]", $element);
             $dateNode = $xpath->query(".//time", $element);
+            $avatarNode = $xpath->query(".//img[contains(@class,'consumerAvatar') or contains(@alt,'Profile') or contains(@alt,'avatar')]", $element);
+
 
             $reviews[] = [
                 'author' => $authorNode->length ? trim($authorNode->item(0)->nodeValue) : 'Anonymous',
                 'text'   => $textNode->length ? trim($textNode->item(0)->nodeValue) : '(No content found)',
                 'rating' => $ratingNode->length ? $ratingNode->item(0)->getAttribute('alt') : 'No rating',
                 'date'   => $dateNode->length ? $dateNode->item(0)->getAttribute('datetime') : '',
+                'avatar' => $avatarNode->length ? $avatarNode->item(0)->getAttribute('src') : '',
             ];
         }
 
