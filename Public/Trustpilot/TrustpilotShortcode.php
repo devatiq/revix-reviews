@@ -16,7 +16,7 @@ class TrustpilotShortcode
         ], $atts);
         
         $fetcher = new TrustpilotFetcher();
-        $reviews = $fetcher->get_reviews($atts['count']);
+        $reviews = $fetcher->get_reviews($atts['count'], floatval($atts['min_rating']));
 
         ob_start();
         echo '<div class="revix-trustpilot-reviews">';
