@@ -27,6 +27,9 @@ class TrustpilotFetcher {
             return [];
         }
 
+        // Ensure UTF-8 and better parsing
+        $html = mb_convert_encoding($html, 'HTML-ENTITIES', 'UTF-8');
+
         libxml_use_internal_errors(true);
         $doc = new \DOMDocument();
         @$doc->loadHTML($html);
@@ -50,19 +53,30 @@ class TrustpilotFetcher {
             $rating = $xpath->query(".//img[contains(@alt,'Rated')]", $element);
             $date = $xpath->query(".//time", $element);
 
+            // Fallback for missing content
+            $text = $content->length ? trim($content->item(0)->nodeValue) : '';
+            if (empty($text)) {
+                $altContent = $xpath->query(".//div[@data-review-content='true']//p", $element);
+                $text = $altContent->length ? trim($altContent->item(0)->nodeValue) : '';
+            }
+
             $reviews[] = [
                 'author'  => $author->length ? trim($author->item(0)->nodeValue) : 'Anonymous',
                 'country' => $country->length ? trim($country->item(0)->nodeValue) : '',
                 'avatar'  => $avatar->length ? $avatar->item(0)->getAttribute('src') : '',
                 'title'   => $title->length ? trim($title->item(0)->nodeValue) : '',
-                'text'    => $content->length ? trim($content->item(0)->nodeValue) : '(No content found)',
+                'text'    => $text,
                 'rating'  => $rating->length ? $rating->item(0)->getAttribute('alt') : '',
                 'date'    => $date->length ? $date->item(0)->getAttribute('datetime') : '',
             ];
         }
 
+        // Only cache if there's actual content and not all are empty
         if (self::ENABLE_CACHE && !empty($reviews)) {
-            set_transient($cache_key, $reviews, 12 * HOUR_IN_SECONDS);
+            $valid = array_filter($reviews, fn($r) => $r['text'] !== '(No content found)');
+            if (!empty($valid)) {
+                set_transient($cache_key, $valid, 12 * HOUR_IN_SECONDS);
+            }
         }
 
         return $reviews;
