@@ -61,12 +61,13 @@ class Settings
 				settings_errors();				
 
 				if ($active_tab === 'trustpilot') {
-					settings_fields('revixreviews');
+					settings_fields('revixreviews_trustpilot'); //  correct group
 					do_settings_sections('revixreviews_trustpilot');
 				} else {
 					settings_fields('revixreviews');
 					do_settings_sections('revixreviews');
 				}
+				
 
 				submit_button();
 				?>
