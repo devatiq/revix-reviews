@@ -12,14 +12,38 @@ class ReviewsShortcode {
 		add_shortcode( 'revixreviews', array( $this, 'display_grid_review_markup' ) ); // Display grid review.
 	}
 
-	public static function display_grid_review_markup() {
+	public function display_grid_review_markup( $atts = [] ) {
+
+		// Shortcode attributes: count, min_rating, max_rating
+		$atts = shortcode_atts([
+			'count'      => -1,
+			'min_rating' => 0,
+			'max_rating' => 5,
+		], $atts, 'revixreviews' );
 
 		ob_start();
-		$args  = array(
+
+		$args = array(
 			'post_type'      => 'revixreviews',
 			'post_status'    => 'publish',
-			'posts_per_page' => -1,
+			'posts_per_page' => intval( $atts['count'] ),
+			'meta_query'     => array(
+				'relation' => 'AND',
+				array(
+					'key'     => 'revixreviews_rating',
+					'value'   => floatval( $atts['min_rating'] ),
+					'compare' => '>=',
+					'type'    => 'NUMERIC'
+				),
+				array(
+					'key'     => 'revixreviews_rating',
+					'value'   => floatval( $atts['max_rating'] ),
+					'compare' => '<=',
+					'type'    => 'NUMERIC'
+				)
+			),
 		);
+
 		$query = new \WP_Query( $args );
 
 		// Check if the query returns any posts.

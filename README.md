@@ -1,67 +1,100 @@
 # Revix Reviews
 
 **Contributors**: abcplugins, atiqbd4ever, supreoxltd  
-**Tags**: reviews, business reviews, feedback, testimonials  
+**Tags**: reviews, business reviews, trustpilot, testimonials, feedback, reputation, google reviews  
 **Requires at least**: 5.4  
-**Tested up to**: 6.6.2  
-**Stable tag**: 1.0.0  
-**Requires PHP**: 7.4  
+**Tested up to**: 6.8  
+**Stable tag**: 1.1.0  
+**Requires PHP**: 8.0  
 **License**: GPLv2 or later  
 **License URI**: http://www.gnu.org/licenses/gpl-2.0.html  
 
-Revix Reviews is a comprehensive plugin designed to add and display business reviews and feedback on WordPress sites.
+Revix Reviews is a powerful and extendable WordPress plugin for collecting, importing, and displaying customer reviews—including native reviews and Trustpilot integration—with more platforms coming soon.
 
 ## Description
 
-Revix Reviews allows WordPress site owners to easily add business reviews and feedback sections to their website. It offers a simple way to manage and showcase customer reviews, enhancing trust and transparency for businesses.
+Revix Reviews allows you to manage, showcase, and collect customer feedback directly on your WordPress site, with built-in Trustpilot integration and flexible display options. 
+
+Whether you're a business owner, freelancer, or eCommerce site, this plugin helps boost credibility and conversion by showing authentic testimonials.
 
 ### Key Features:
-- Collect customer reviews using a feedback form.
-- Easily add and manage business reviews.
-- Display reviews anywhere on the site using shortcodes.
-- Customizable review form fields.
-- Supports custom post types for reviews.
-- Options for moderation and review approval.
 
-Revix Reviews is perfect for business owners, service providers, and e-commerce websites that want to prominently showcase customer testimonials and feedback.
+- 📝 Add and manage reviews using a built-in submission form
+- 🌐 Fetch and display public reviews from Trustpilot (with pagination & filters)
+- 🌟 Star-rating SVG icons to visually match the review score
+- 🎯 Filter reviews by minimum and maximum rating via shortcode
+- 📊 Show company-wide review summary (average rating + total count)
+- 📎 Custom post type support for native review management
+- 🔒 Review moderation and approval settings
+- ⚙️ Shortcode support to embed forms, display grids, or summaries anywhere
+
+### Coming Soon:
+- ⭐ Google Reviews integration
+- 🛠️ Yelp, Facebook, and more third-party sources
+- 🎨 Gutenberg & Elementor widgets
+- 📈 Analytics dashboard for review insights
 
 ## Installation
 
-1. Upload the plugin files to the `/wp-content/plugins/revix-reviews` directory, or install the plugin directly through the WordPress plugins screen.
-2. Activate the plugin via the 'Plugins' screen in WordPress.
-3. Go to **Settings** -> **Revix Reviews** to configure the plugin.
-4. Add the review form and display reviews using the provided shortcodes in your posts, pages, or template files.
+1. Upload the plugin files to the `/wp-content/plugins/revix-reviews` directory, or install the plugin via the WordPress plugin repository
+2. Activate the plugin from the 'Plugins' menu in WordPress
+3. Go to **Settings → Revix Reviews** to configure plugin options
+4. Use the shortcodes below to add review forms and displays to your pages
 
 ## Shortcodes
 
-Revix Reviews provides two intuitive shortcodes to easily integrate review functionality into your site:
+**1. `[revixreviews_form]`**  
+Displays the native customer review submission form.
 
-1. `[revixreviews_form]`: Embed a feedback form into your posts, pages, or widgets, allowing visitors to submit their reviews. Simply insert the shortcode `[revixreviews_form]` where you want the form to appear.
-2. `[revixreviews]`: Display a grid of submitted reviews, showcasing real customer feedback on any post, page, or widget area.
+**2. `[revixreviews]`**  
+Displays native reviews in a customizable grid layout. Supports:
+- `count`
+- `min_rating`
+- `max_rating`
+
+**3. `[revix_trustpilot_reviews]`**  
+Displays Trustpilot reviews pulled from the public business profile. Supports:
+- `count`
+- `min_rating`
+- `max_rating`
+
+**4. `[revix_trustpilot_summary]`**  
+Displays Trustpilot summary: star rating and total number of reviews.
 
 ## Frequently Asked Questions
 
-**Can I customize the review form fields?**  
-Yes, the review form fields can be customized from the plugin's settings page.
+**Can I customize the form fields?**  
+Yes. You can customize the native review form fields from the settings page.
 
-**How do I display reviews on my site?**  
-You can display reviews using the provided shortcodes in posts, pages, or directly within your theme's template files.
+**Can I show only 5-star Trustpilot reviews?**  
+Absolutely. Use `[revix_trustpilot_reviews min_rating="5"]` to filter.
 
-**Is it possible to moderate reviews before they are published?**  
-Yes, Revix Reviews provides options for moderation and review approval, ensuring that only genuine feedback is displayed.
+**Will it support Google reviews?**  
+Yes, Google Reviews integration is planned for future updates.
+
+**Can I show average rating and total count separately?**  
+Yes, use `[revix_trustpilot_summary]` to show the business summary pulled directly from Trustpilot.
+
+**Can I moderate reviews before they appear?**  
+Yes, the plugin allows you to manually approve or auto-publish native reviews.
 
 ## Screenshots
 
-1. The settings page where you can configure the plugin.
-2. Example of a review form on a website.
-3. Display of business reviews using a shortcode.
+1. Admin settings panel for Revix Reviews
+2. Native review form on the front end
+3. Display of reviews using Trustpilot shortcode
+4. Star-rating icons mapped to scores
+5. Company summary with average and total reviews
 
 ## Changelog
 
-### 1.0
-* Initial release.
+### 1.1.0
+* NEW: Trustpilot review integration
+* NEW: Filter reviews by rating (min & max)
+* NEW: Trustpilot summary shortcode
+* NEW: Pagination support for up to 10 pages of Trustpilot reviews
+* NEW: Star-rating SVG icons
+* Tweak: Improved shortcode flexibility
 
-## Upgrade Notice
-
-### 1.0
-Initial release. Please provide feedback and report any issues through the plugin support forum.
+### 1.0.0
+* Initial release
