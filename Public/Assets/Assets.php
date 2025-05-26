@@ -19,6 +19,7 @@ class Assets {
 	 */
 	public function __construct() {
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_styles' ) );
+		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
 	}
 
 	/**
@@ -34,5 +35,18 @@ class Assets {
 
 		wp_enqueue_style( 'revix-style', REVIXREVIEWS_URL . 'public/assets/css/style.css', array(), REVIXREVIEWS_VERSION );
 		wp_enqueue_style('revix-trustpilot', REVIXREVIEWS_URL. 'public/assets/css/trustpilot.css', array(), REVIXREVIEWS_VERSION );
+	}
+
+	/**
+	 * Enqueue frontend scripts.
+	 *
+	 * Enqueues the frontend scripts for the plugin.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param string $hook The current WordPress admin page.
+	 */
+	public function enqueue_scripts( $hook ) {
+		wp_enqueue_script( 'revix-trustpilot', REVIXREVIEWS_URL . 'public/assets/js/trustpilot.js', array('jquery'), REVIXREVIEWS_VERSION, true );
 	}
 }
