@@ -2,7 +2,7 @@
 namespace RevixReviews\Public\Trustpilot;
 class TrustpilotFetcher
 {
-    const ENABLE_CACHE = false;
+    const ENABLE_CACHE = true;
     const DEBUG = true;
     const MAX_PAGES = 10;
 

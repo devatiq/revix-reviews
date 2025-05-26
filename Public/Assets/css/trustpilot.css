@@ -88,7 +88,7 @@
   border-radius: 50%;
   width: 48px;
   height: 48px;
-  color: #fff;
+  color: #00b67a;
   position: relative;
   display: inline-block;
 }
@@ -120,4 +120,28 @@
   62%     { box-shadow: -.2em -.2em 0 0 currentColor; }
   75%     { box-shadow: 0 -.2em 0 0 currentColor; }
   87%     { box-shadow: .2em -.2em 0 0 currentColor; }
+}
+.revix-summary {
+  font-size: 16px;
+  font-weight: 500;
+  display: flex;
+  gap: 20px;
+  padding: 10px 0;
+}
+.revix-average {
+  color: #00b67a;
+}
+.revix-total {
+  color: #444;
+}
+.revix-summary-wrapper {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.revix-summary-average,
+.revix-summary-count {
+  font-size: 16px;
+  font-weight: 600;
 }
