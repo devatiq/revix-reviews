@@ -17,7 +17,6 @@ use RevixReviews\Public\Shortcodes\ReviewsSubmitForm;
 use RevixReviews\Admin\Inc\Dashboard\Settings\Settings;
 
 
-use RevixReviews\Admin\Trustpilot\TrustpilotSettings;
 use RevixReviews\Public\Trustpilot\TrustpilotShortcode;
 use RevixReviews\Public\Trustpilot\TrustpilotSummaryShortcode;
 class Manager {
@@ -67,7 +66,6 @@ class Manager {
 		$this->reviews_shortcode   = new ReviewsShortcode();
 		$this->reviews_submit_form = new ReviewsSubmitForm();
 		$this->settings            = new Settings();
-		$this->trustpilot_settings = new TrustpilotSettings();
 		$this->trustpilot_shortcode = new TrustpilotShortcode();
 		$this->trustpilot_summary_shortcode = new TrustpilotSummaryShortcode();
 	}

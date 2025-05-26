@@ -5,9 +5,12 @@ namespace RevixReviews\Admin\Inc\Dashboard\Settings;
 if (!defined('ABSPATH')) {
 	exit;
 }
+
+use RevixReviews\Admin\Inc\Dashboard\Tabs\Tabs;
 class Settings
 {
 
+	protected $tabs;
 	/**
 	 * Initializes the plugin by adding the menu page and setting up the settings fields
 	 *
@@ -15,8 +18,14 @@ class Settings
 	 */
 	public function __construct()
 	{
+		$this->class_initialize();
 		add_action('admin_menu', array($this, 'revixreviews_add_admin_menu'));
 		add_action('admin_init', array($this, 'revixreviews_settings_init'));
+	}
+
+	private function class_initialize() { 
+
+		$this->tabs = new Tabs();
 	}
 
 	/**
@@ -42,14 +51,23 @@ class Settings
 	 */
 	public function revixreviews_create_settings_page()
 	{
+		$active_tab = isset($_GET['tab']) ? sanitize_text_field($_GET['tab']) : 'general';
 		?>
 		<div class="wrap revixreviews_admin_wrap">
 			<h2><?php echo esc_html(get_admin_page_title()); ?></h2>
+			<?php Tabs::render_tabs($active_tab); ?>
 			<form action="options.php" method="post">
 				<?php
-				settings_errors();
-				settings_fields('revixreviews');
-				do_settings_sections('revixreviews');
+				settings_errors();				
+
+				if ($active_tab === 'trustpilot') {
+					settings_fields('revixreviews');
+					do_settings_sections('revixreviews_trustpilot');
+				} else {
+					settings_fields('revixreviews');
+					do_settings_sections('revixreviews');
+				}
+
 				submit_button();
 				?>
 			</form>
@@ -91,31 +109,7 @@ class Settings
 			'revixreviews_main_section'
 		);
 
-		// Trustpilot URL setting
-		register_setting(
-			'revixreviews',
-			'revix_trustpilot_url',
-			array('sanitize_callback' => 'esc_url_raw')
-		);
 
-		add_settings_field(
-			'revix_trustpilot_url',
-			__('Trustpilot Review Page URL', 'revix-reviews'),
-			array($this, 'revix_trustpilot_url_field_cb'),
-			'revixreviews',
-			'revixreviews_main_section'
-		);
-
-	}
-	/**
-	 * Renders the Trustpilot URL field for the settings page.
-	 *
-	 * @since 1.0.0
-	 */
-	public function revix_trustpilot_url_field_cb()
-	{
-		$url = get_option('revix_trustpilot_url');
-		echo '<input type="text" id="revix_trustpilot_url" class="regular-text" name="revix_trustpilot_url" value="' . esc_attr($url) . '" placeholder="https://www.trustpilot.com/review/example.com" />';
 	}
 
 	/**
