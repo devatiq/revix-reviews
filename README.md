@@ -1,4 +1,4 @@
-# Revix Reviews
+# Revix Reviews – Trustpilot Integration & Review Showcase
 
 **Contributors**: abcplugins, atiqbd4ever, supreoxltd  
 **Tags**: reviews, business reviews, trustpilot, testimonials, feedback, reputation, google reviews  

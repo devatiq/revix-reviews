@@ -1,4 +1,4 @@
-=== Revix Reviews ===
+=== Revix Reviews – Trustpilot Integration & Review Showcase ===
 Plugin Name: Revix Reviews
 Version: 1.1.0
 Author: supreoxltd

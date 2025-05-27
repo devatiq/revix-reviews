@@ -1,8 +1,7 @@
 <?php
 /**
- * Plugin Name: Revix Reviews
+ * Plugin Name: Revix Reviews – Trustpilot Integration & Review Showcase
  * Version: 1.0.0
- * Plugin URI: https://github.com/devatiq/revix-reviews
  * Description: A WordPress plugin for managing reviews.
  * Author: SupreoX Limited
  * Author URI: https://supreox.com/
