@@ -35,27 +35,30 @@ class TrustpilotShortcode
             }
 
             if (!empty($review['text'])) {
-                echo '<div class="revix-review">';
+                echo '<div class="revix-trustpilot-single-review"> <div class="revix-trustpilot-author-info">';
 
                 if (!empty($review['avatar'])) {
-                    echo '<img class="revix-avatar" src="' . esc_url($review['avatar']) . '" alt="' . esc_attr($review['author']) . '" />';
+					// phpcs:ignore WordPress.WP.EnqueuedResourceParameters.NonEnqueuedImage -- Using external avatar image from Trustpilot, not a WordPress attachment.
+                    echo '<img class="revix-trustpilot-avatar" loading="lazy" src="' . esc_url($review['avatar']) . '" alt="' . esc_attr($review['author']) . '" />';
                 } else {
                     $initial = strtoupper(substr($review['author'], 0, 1));
-                    echo '<div class="revix-avatar-fallback">' . esc_html($initial) . '</div>';
+                    echo '<div class="revix-trustpilot-avatar-fallback">' . esc_html($initial) . '</div>';
                 }
-
-                echo '<div class="revix-author"><strong>' . esc_html($review['author']) . '</strong></div>';
-                echo '<div class="revix-rating">';
-                echo '<img src="' . esc_url($ratingImg) . '" alt="' . esc_attr($ratingText) . '" style="height: 18px; vertical-align: middle; margin-right: 5px;" />';
-                echo esc_html($ratingText);
+           
+                echo '<div class="revix-trustpilot-author"><strong>' . esc_html($review['author']) . '</strong>';
+                echo '<div class="revix-trustpilot-date">' . esc_html(gmdate('F j, Y', strtotime($review['date']))) . '</div></div>';
                 echo '</div>';
-                echo '<div class="revix-date">' . esc_html(date('F j, Y', strtotime($review['date']))) . '</div>';
-                echo '<div class="revix-text">' . esc_html($review['text']) . '</div>';
+                echo '<div class="revix-trustpilot-rating">';
+                echo '<img src="' . esc_url($ratingImg) . '" alt="' . esc_attr($ratingText) . '"  />'; // phpcs:ignore WordPress.WP.EnqueuedResourceParameters.NonEnqueuedImage -- Using external avatar image from Trustpilot, not a WordPress attachment.
+                echo '<p>' . esc_html($ratingText) . '</p>';
+                echo '</div>';
+              
+                echo '<div class="revix-trustpilot-text">' . esc_html($review['text']) . '</div>';
                 echo '</div>';
             }
         }
 
-        echo '</div>';      
+        echo '</div>';
 
         return ob_get_clean();
     }

@@ -77,13 +77,13 @@ class TrustpilotSummaryShortcode
             $svg = REVIXREVIEWS_URL . 'public/assets/img/' . $svgFile;
 
             echo '<div class="revix-summary-average">';
-            echo '<img src="' . esc_url($svg) . '" alt="Rated ' . esc_attr($average) . ' out of 5 stars" style="height:18px;vertical-align:middle;margin-right:6px;" />';
-            echo '<strong>' . esc_html($average) . '</strong> out of 5';
+            echo '<strong>' . esc_html($average) . '</strong>';
+            echo '<img src="' . esc_url($svg) . '" alt="Rated ' . esc_attr($average) . ' out of 5 stars" />';  // phpcs:ignore WordPress.WP.EnqueuedResourceParameters.NonEnqueuedImage -- Using external avatar image from Trustpilot, not a WordPress attachment.           
             echo '</div>';
         }
         if ($count) {
             echo '<div class="revix-summary-count">';
-            echo '<strong>' . number_format((int) $count) . '</strong> Reviews';
+            echo '<strong>' . number_format((int) $count) . '</strong> ' . esc_html__('Reviews', 'revix-reviews');
             echo '</div>';
         }
         echo '</div>';

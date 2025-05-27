@@ -9,8 +9,8 @@ class TrustpilotSettings {
 	public function register_settings() {
         register_setting('revixreviews_trustpilot', 'revix_trustpilot_url', ['sanitize_callback' => 'esc_url_raw']);
 
-
-		$current_tab = isset($_GET['tab']) ? sanitize_text_field($_GET['tab']) : 'general';
+		// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Safe usage, just reading `tab` for UI display logic only
+		$current_tab = isset($_GET['tab']) ? sanitize_text_field( wp_unslash( $_GET['tab'] ) ) : 'general';
 		// Only register Trustpilot section if we're in the TrustPilot tab
 		if ($current_tab !== 'trustpilot') {
 			return;

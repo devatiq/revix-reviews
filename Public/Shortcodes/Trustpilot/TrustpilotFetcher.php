@@ -3,7 +3,7 @@ namespace RevixReviews\Public\Shortcodes\Trustpilot;
 class TrustpilotFetcher
 {
     const ENABLE_CACHE = true;
-    const DEBUG = true;
+    const DEBUG = false;
     const MAX_PAGES = 10;
 
     public function get_reviews($count = 5, $minRating = 0)
@@ -35,10 +35,12 @@ class TrustpilotFetcher
             }
 
             $html = wp_remote_retrieve_body($response);
-            if (empty($html)) {
-                if (self::DEBUG) echo "<!-- Trustpilot: empty response body on page {$page} -->";
-                break;
-            }
+			if (empty($html)) {
+				if (self::DEBUG) {
+					echo "<!-- Trustpilot: empty response body on page " . esc_html($page) . " -->";
+				}
+				break;
+			}
 
             $html = mb_convert_encoding($html, 'HTML-ENTITIES', 'UTF-8');
             libxml_use_internal_errors(true);
@@ -47,10 +49,12 @@ class TrustpilotFetcher
             $xpath = new \DOMXPath($doc);
 
             $review_elements = $xpath->query("//article[contains(@class,'styles_reviewCard')]");
-            if ($review_elements->length === 0) {
-                if (self::DEBUG) echo "<!-- No reviews found on page {$page} -->";
-                break;
-            }
+			if ($review_elements->length === 0) {
+				if (self::DEBUG) {
+					echo "<!-- No reviews found on page " . esc_html($page) . " -->";
+				}
+				break;
+			}
 
             foreach ($review_elements as $element) {
                 if ($found >= $count) break;
@@ -77,7 +81,7 @@ class TrustpilotFetcher
                 }
 
                 $reviews[] = [
-                    'author' => $author->length ? trim($author->item(0)->nodeValue) : 'Anonymous',
+                    'author' => $author->length ? trim($author->item(0)->nodeValue) : esc_html__('Anonymous', 'revix-reviews'),
                     'country' => $country->length ? trim($country->item(0)->nodeValue) : '',
                     'avatar' => $avatar->length ? $avatar->item(0)->getAttribute('src') : '',
                     'title' => $title->length ? trim($title->item(0)->nodeValue) : '',

@@ -1,10 +1,10 @@
-=== Revix Reviews – Trustpilot Integration & Review Showcase ===
+=== Revix Reviews – All-in-One Business Review Manager ===
 Plugin Name: Revix Reviews
 Version: 1.1.0
 Author: supreoxltd
 Author URI: https://supreox.com/
 Contributors: abcplugins, atiqbd4ever, supreoxltd
-Tags: reviews, business reviews, trustpilot, testimonials, feedback, reputation, google reviews
+Tags: reviews, business reviews, trustpilot, testimonials, google reviews
 Requires at least: 5.4
 Tested up to: 6.8
 Stable tag: 1.1.0
@@ -12,7 +12,7 @@ Requires PHP: 8.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Revix Reviews is a powerful and extendable WordPress plugin for collecting, importing, and displaying customer reviews—including native reviews and Trustpilot integration—with more platforms coming soon.
+Revix Reviews helps you collect, import, and display reviews—including Trustpilot—with more platforms coming soon.
 
 == Description ==
 

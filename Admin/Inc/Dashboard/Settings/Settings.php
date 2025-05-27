@@ -51,7 +51,8 @@ class Settings
 	 */
 	public function revixreviews_create_settings_page()
 	{
-		$active_tab = isset($_GET['tab']) ? sanitize_text_field($_GET['tab']) : 'general';
+		// phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		$active_tab = isset($_GET['tab']) ? sanitize_text_field( wp_unslash($_GET['tab']) ) : 'general';
 		?>
 		<div class="wrap revixreviews_admin_wrap">
 			<h2><?php echo esc_html(get_admin_page_title()); ?></h2>

@@ -1,45 +1,11 @@
 .revix-trustpilot-reviews {
   margin-top: 20px;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 15px;
-}
-.revix-trustpilot-reviews .revix-review {
-  background: #f8f8f8;
-  border-left: 4px solid #00b67a;
-  padding: 15px;
-  margin-bottom: 15px;
-  border-radius: 6px;
-}
-.revix-trustpilot-reviews .revix-author {
-  font-weight: bold;
-  margin-bottom: 5px;
-}
-.revix-trustpilot-reviews .revix-rating {
-  color: #ffb400;
-  margin-bottom: 5px;
-}
-.revix-trustpilot-reviews .revix-date {
-  font-size: 0.85em;
-  color: #666;
-  margin-bottom: 10px;
-}
-.revix-trustpilot-reviews .revix-text {
-  font-size: 1em;
-}
-.revix-review {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  border-left: 4px solid #00b67a;
-  padding: 15px;
-  background: #f9f9f9;
-  margin-bottom: 20px;
-  border-radius: 8px;
-  position: relative;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
 }
 
-.revix-avatar {
+.revix-trustpilot-avatar {
   width: 48px;
   height: 48px;
   border-radius: 50%;
@@ -47,7 +13,7 @@
   border: 2px solid #ddd;
 }
 
-.revix-avatar-fallback {
+.revix-trustpilot-avatar-fallback {
   width: 48px;
   height: 48px;
   background-color: #00b67a;
@@ -60,21 +26,24 @@
   justify-content: center;
 }
 
-.revix-author {
+.revix-trustpilot-author {
   font-size: 16px;
   font-weight: 600;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
 }
 
-.revix-rating {
+.revix-trustpilot-rating {
   color: #ffb400;
 }
 
-.revix-date {
+.revix-trustpilot-date {
   font-size: 12px;
   color: #888;
 }
 
-.revix-text {
+.revix-trustpilot-text {
   font-size: 14px;
   line-height: 1.5;
 }
@@ -94,7 +63,7 @@
 }
 .revix-loader:before,
 .revix-loader:after {
-  content: '';
+  content: "";
   display: block;
   position: absolute;
   top: 0;
@@ -106,42 +75,91 @@
   animation: 1s revix-spin linear infinite;
 }
 .revix-loader:after {
-  color: #FF3D00;
+  color: #ff3d00;
   transform: rotateY(70deg);
-  animation-delay: .4s;
+  animation-delay: 0.4s;
 }
 
 @keyframes revix-spin {
-  0%, 100% { box-shadow: .2em 0 0 0 currentColor; }
-  12%     { box-shadow: .2em .2em 0 0 currentColor; }
-  25%     { box-shadow: 0 .2em 0 0 currentColor; }
-  37%     { box-shadow: -.2em .2em 0 0 currentColor; }
-  50%     { box-shadow: -.2em 0 0 0 currentColor; }
-  62%     { box-shadow: -.2em -.2em 0 0 currentColor; }
-  75%     { box-shadow: 0 -.2em 0 0 currentColor; }
-  87%     { box-shadow: .2em -.2em 0 0 currentColor; }
+  0%,
+  100% {
+    box-shadow: 0.2em 0 0 0 currentColor;
+  }
+  12% {
+    box-shadow: 0.2em 0.2em 0 0 currentColor;
+  }
+  25% {
+    box-shadow: 0 0.2em 0 0 currentColor;
+  }
+  37% {
+    box-shadow: -0.2em 0.2em 0 0 currentColor;
+  }
+  50% {
+    box-shadow: -0.2em 0 0 0 currentColor;
+  }
+  62% {
+    box-shadow: -0.2em -0.2em 0 0 currentColor;
+  }
+  75% {
+    box-shadow: 0 -0.2em 0 0 currentColor;
+  }
+  87% {
+    box-shadow: 0.2em -0.2em 0 0 currentColor;
+  }
 }
-.revix-summary {
-  font-size: 16px;
-  font-weight: 500;
+.revix-trustpilot-single-review {
+  background: #fdfdfd;
+  border: 2px solid rgba(217, 217, 217, 0.5);
+  box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  padding: 20px;
   display: flex;
-  gap: 20px;
-  padding: 10px 0;
+  flex-direction: column;
+  gap: 10px;
 }
-.revix-average {
-  color: #00b67a;
+.revix-trustpilot-rating p {
+  display: none;
 }
-.revix-total {
-  color: #444;
+.revix-trustpilot-rating img {
+  height: 25px;
+  display: flex;
+  width: auto;
+  max-width: 100%;
+}
+.revix-trustpilot-author-info {
+  display: flex;
+  gap: 10px;
+  align-items: center;
 }
 .revix-summary-wrapper {
   display: flex;
-  gap: 20px;
-  align-items: center;
-  margin-bottom: 20px;
+  gap: 10px;
 }
-.revix-summary-average,
-.revix-summary-count {
-  font-size: 16px;
+.revix-summary-average img {
+  height: 20px;
+  display: flex;
+  width: auto;
+  max-width: 100%;
+}
+.revix-summary-average {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  font-size: 18px;
   font-weight: 600;
+}
+.revix-summary-count {
+  font-size: 18px;
+}
+@media screen and (max-width: 1024px) {
+  .revix-trustpilot-reviews {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .revix-trustpilot-reviews {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
 }

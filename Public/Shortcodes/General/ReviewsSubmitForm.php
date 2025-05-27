@@ -20,7 +20,7 @@ class ReviewsSubmitForm
 	{
 		// Define default values for the attributes.
 		$defaults = array(
-			'btn_text' => 'Submit Feedback',
+			'btn_text' => esc_html__('Submit Feedback', 'revix-reviews'),
 		);
 
 		// Override defaults with user-provided attributes.
@@ -64,11 +64,11 @@ class ReviewsSubmitForm
 					<option value="">
 						<?php echo esc_html__('Select a rating', 'revix-reviews'); ?>
 					</option>
-					<option value="1">1</option>
-					<option value="2">2</option>
-					<option value="3">3</option>
-					<option value="4">4</option>
-					<option value="5" selected>5</option>
+					<option value="1"><?php echo esc_html__('1', 'revix-reviews'); ?></option>
+					<option value="2"><?php echo esc_html__('2', 'revix-reviews'); ?></option>
+					<option value="3"><?php echo esc_html__('3', 'revix-reviews'); ?></option>
+					<option value="4"><?php echo esc_html__('4', 'revix-reviews'); ?></option>
+					<option value="5" selected><?php echo esc_html__('5', 'revix-reviews'); ?></option>
 				</select>
 			</p>
 
@@ -135,7 +135,7 @@ class ReviewsSubmitForm
 
 			exit;
 		} else {
-			wp_die('An error occurred while submitting your feedback.');
+			wp_die(esc_html__('An error occurred while submitting your feedback.', 'revix-reviews'));
 		}
 	}
 }

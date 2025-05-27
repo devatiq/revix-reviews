@@ -1,7 +1,7 @@
 <?php
 /**
- * Plugin Name: Revix Reviews – Trustpilot Integration & Review Showcase
- * Version: 1.0.0
+ * Plugin Name: Revix Reviews – All-in-One Business Review Manager
+ * Version: 1.1.0
  * Description: A WordPress plugin for managing reviews.
  * Author: SupreoX Limited
  * Author URI: https://supreox.com/
@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 // Define Plugin Version.
-define( 'REVIXREVIEWS_VERSION', '1.0.0' );
+define( 'REVIXREVIEWS_VERSION', '1.1.0' );
 // Define Plugin Path.
 define( 'REVIXREVIEWS_PATH', plugin_dir_path( __FILE__ ) );
 // Define Plugin URL.
