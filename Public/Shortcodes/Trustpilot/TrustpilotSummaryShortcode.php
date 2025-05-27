@@ -1,5 +1,5 @@
 <?php
-namespace RevixReviews\Public\Trustpilot;
+namespace RevixReviews\Public\Shortcodes\Trustpilot;
 
 class TrustpilotSummaryShortcode
 {

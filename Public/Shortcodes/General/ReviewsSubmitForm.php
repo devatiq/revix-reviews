@@ -1,5 +1,5 @@
 <?php
-namespace RevixReviews\Public\Shortcodes;
+namespace RevixReviews\Public\Shortcodes\General;
 
 // Exit if accessed directly.
 if (!defined('ABSPATH')) {

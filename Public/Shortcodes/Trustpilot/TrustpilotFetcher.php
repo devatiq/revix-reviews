@@ -1,5 +1,5 @@
 <?php
-namespace RevixReviews\Public\Trustpilot;
+namespace RevixReviews\Public\Shortcodes\Trustpilot;
 class TrustpilotFetcher
 {
     const ENABLE_CACHE = true;
