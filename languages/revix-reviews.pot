@@ -2,26 +2,21 @@
 # This file is distributed under the GPL2.
 msgid ""
 msgstr ""
-"Project-Id-Version: Revix Reviews 1.0.0\n"
+"Project-Id-Version: Revix Reviews – All-in-One Business Review Manager 1.1.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/revix-reviews\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-05-25T09:38:16+00:00\n"
+"POT-Creation-Date: 2025-05-27T11:03:53+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: revix-reviews\n"
 
 #. Plugin Name of the plugin
 #: revix-reviews.php
-msgid "Revix Reviews"
-msgstr ""
-
-#. Plugin URI of the plugin
-#: revix-reviews.php
-msgid "https://github.com/devatiq/revix-reviews"
+msgid "Revix Reviews – All-in-One Business Review Manager"
 msgstr ""
 
 #. Description of the plugin
@@ -39,40 +34,60 @@ msgstr ""
 msgid "https://supreox.com/"
 msgstr ""
 
-#: Admin/Inc/Dashboard/Settings/Settings.php:28
+#: Admin/Inc/Dashboard/Settings/Settings.php:40
 msgid "Revix Reviews Settings"
 msgstr ""
 
-#: Admin/Inc/Dashboard/Settings/Settings.php:29
+#: Admin/Inc/Dashboard/Settings/Settings.php:41
 msgid "Settings"
 msgstr ""
 
-#: Admin/Inc/Dashboard/Settings/Settings.php:67
+#: Admin/Inc/Dashboard/Settings/Settings.php:91
 msgid "Main Settings"
 msgstr ""
 
-#: Admin/Inc/Dashboard/Settings/Settings.php:74
+#: Admin/Inc/Dashboard/Settings/Settings.php:98
 msgid "Redirect URL"
 msgstr ""
 
-#: Admin/Inc/Dashboard/Settings/Settings.php:83
+#: Admin/Inc/Dashboard/Settings/Settings.php:107
 msgid "Default Review Status"
 msgstr ""
 
-#: Admin/Inc/Dashboard/Settings/Settings.php:98
+#: Admin/Inc/Dashboard/Settings/Settings.php:125
 msgid "Set your preferences for the Revix Reviews plugin."
 msgstr ""
 
-#: Admin/Inc/Dashboard/Settings/Settings.php:126
+#: Admin/Inc/Dashboard/Settings/Settings.php:155
 msgid "Publish"
 msgstr ""
 
-#: Admin/Inc/Dashboard/Settings/Settings.php:129
+#: Admin/Inc/Dashboard/Settings/Settings.php:158
 msgid "Pending"
 msgstr ""
 
-#: Admin/Inc/Dashboard/Settings/Settings.php:131
+#: Admin/Inc/Dashboard/Settings/Settings.php:161
 msgid "Draft"
+msgstr ""
+
+#: Admin/Inc/Dashboard/Tabs/Tabs.php:17
+msgid "General"
+msgstr ""
+
+#: Admin/Inc/Dashboard/Tabs/Tabs.php:18
+msgid "TrustPilot"
+msgstr ""
+
+#: Admin/Inc/Dashboard/Tabs/Trustpilot/TrustpilotSettings.php:21
+msgid "Trustpilot Reviews Settings"
+msgstr ""
+
+#: Admin/Inc/Dashboard/Tabs/Trustpilot/TrustpilotSettings.php:23
+msgid "Enter your public Trustpilot business review page URL."
+msgstr ""
+
+#: Admin/Inc/Dashboard/Tabs/Trustpilot/TrustpilotSettings.php:30
+msgid "Trustpilot Review Page URL"
 msgstr ""
 
 #: Admin/Inc/Reviews/MetaBox/ReviewsMetaBox.php:32
@@ -80,22 +95,23 @@ msgid "Review Details"
 msgstr ""
 
 #: Admin/Inc/Reviews/MetaBox/ReviewsMetaBox.php:57
-#: Public/Shortcodes/ReviewsSubmitForm.php:37
+#: Public/Shortcodes/General/ReviewsSubmitForm.php:37
 msgid "Name:"
 msgstr ""
 
 #: Admin/Inc/Reviews/MetaBox/ReviewsMetaBox.php:60
-#: Public/Shortcodes/ReviewsSubmitForm.php:43
+#: Public/Shortcodes/General/ReviewsSubmitForm.php:43
 msgid "Email:"
 msgstr ""
 
 #: Admin/Inc/Reviews/MetaBox/ReviewsMetaBox.php:64
-#: Public/Shortcodes/ReviewsSubmitForm.php:61
+#: Public/Shortcodes/General/ReviewsSubmitForm.php:61
 msgid "Rating:"
 msgstr ""
 
 #: Admin/Inc/Reviews/PostTypes/Reviews.php:33
 #: Admin/Inc/Reviews/PostTypes/Reviews.php:35
+#: Public/Shortcodes/Trustpilot/TrustpilotSummaryShortcode.php:86
 msgid "Reviews"
 msgstr ""
 
@@ -128,18 +144,50 @@ msgstr ""
 msgid "All Reviews"
 msgstr ""
 
-#: Public/Shortcodes/ReviewsSubmitForm.php:49
+#: Public/Shortcodes/General/ReviewsSubmitForm.php:23
+msgid "Submit Feedback"
+msgstr ""
+
+#: Public/Shortcodes/General/ReviewsSubmitForm.php:49
 msgid "Subject:"
 msgstr ""
 
-#: Public/Shortcodes/ReviewsSubmitForm.php:55
+#: Public/Shortcodes/General/ReviewsSubmitForm.php:55
 msgid "Comments:"
 msgstr ""
 
-#: Public/Shortcodes/ReviewsSubmitForm.php:65
+#: Public/Shortcodes/General/ReviewsSubmitForm.php:65
 msgid "Select a rating"
 msgstr ""
 
-#: Public/Shortcodes/ReviewsSubmitForm.php:106
+#: Public/Shortcodes/General/ReviewsSubmitForm.php:67
+msgid "1"
+msgstr ""
+
+#: Public/Shortcodes/General/ReviewsSubmitForm.php:68
+msgid "2"
+msgstr ""
+
+#: Public/Shortcodes/General/ReviewsSubmitForm.php:69
+msgid "3"
+msgstr ""
+
+#: Public/Shortcodes/General/ReviewsSubmitForm.php:70
+msgid "4"
+msgstr ""
+
+#: Public/Shortcodes/General/ReviewsSubmitForm.php:71
+msgid "5"
+msgstr ""
+
+#: Public/Shortcodes/General/ReviewsSubmitForm.php:106
 msgid "Please enter a valid email address."
+msgstr ""
+
+#: Public/Shortcodes/General/ReviewsSubmitForm.php:138
+msgid "An error occurred while submitting your feedback."
+msgstr ""
+
+#: Public/Shortcodes/Trustpilot/TrustpilotFetcher.php:84
+msgid "Anonymous"
 msgstr ""
