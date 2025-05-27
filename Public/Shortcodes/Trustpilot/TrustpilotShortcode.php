@@ -17,7 +17,7 @@ class TrustpilotShortcode
         ], $atts);
 
         $fetcher = new TrustpilotFetcher();
-        $reviews = $fetcher->get_reviews($atts['count'], floatval($atts['min_rating']));
+        $reviews = $fetcher->get_reviews($atts['count'] + 4, floatval($atts['min_rating']));
 
         ob_start();
 
@@ -34,7 +34,7 @@ class TrustpilotShortcode
                 continue;
             }
 
-            //if (!empty($review['text'])) {
+            if (!empty($review['text'])) {
                 echo '<div class="revix-trustpilot-single-review"> <div class="revix-trustpilot-author-info">';
 
                 if (!empty($review['avatar'])) {
@@ -55,7 +55,7 @@ class TrustpilotShortcode
               
                 echo '<div class="revix-trustpilot-text">' . esc_html($review['text']) . '</div>';
                 echo '</div>';
-           // }
+            }
         }
 
         echo '</div>';
