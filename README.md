@@ -88,6 +88,9 @@ Yes, the plugin allows you to manually approve or auto-publish native reviews.
 
 ## Changelog
 
+### 1.1.1
+* Count issue fix for `[revix_trustpilot_reviews]` shortcode
+
 ### 1.1.0
 * NEW: Trustpilot review integration
 * NEW: Filter reviews by rating (min & max)

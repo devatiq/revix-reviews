@@ -1,13 +1,13 @@
 === Revix Reviews – All-in-One Business Review Manager ===
 Plugin Name: Revix Reviews
-Version: 1.1.0
+Version: 1.1.1
 Author: supreoxltd
 Author URI: https://supreox.com/
 Contributors: abcplugins, atiqbd4ever, supreoxltd
 Tags: reviews, business reviews, trustpilot, testimonials, google reviews
 Requires at least: 5.4
 Tested up to: 6.8
-Stable tag: 1.1.0
+Stable tag: 1.1.1
 Requires PHP: 8.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -93,6 +93,8 @@ Yes, the plugin allows you to manually approve or auto-publish native reviews.
 5. Company summary with average and total reviews.
 
 == Changelog ==
+= 1.1.1 =
+* Count issue fix for [revix_trustpilot_reviews] shortcode
 
 = 1.1.0 =
 * NEW: Trustpilot review integration
@@ -109,6 +111,8 @@ Yes, the plugin allows you to manually approve or auto-publish native reviews.
 * Initial release
 
 == Upgrade Notice ==
+= 1.1.1 = 
+- Count issue fix for [revix_trustpilot_reviews] shortcode
 
 = 1.1.0 =
 This update adds Trustpilot integration, filtering, summary features, and SVG star icons. Future updates will include Google Reviews support and more.
