@@ -87,9 +87,9 @@ Yes, the plugin allows you to manually approve or auto-publish native reviews.
 == Screenshots ==
 
 1. Admin settings panel for Revix Reviews.
-2. Native review form on the front end.
-3. Display of reviews using Trustpilot shortcode.
-4. Star-rating icons mapped to scores.
+2. General Review post type.
+3. Trustpilot admin settings
+4. Display of reviews using Trustpilot shortcode.
 5. Company summary with average and total reviews.
 
 == Changelog ==
