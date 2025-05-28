@@ -36,7 +36,6 @@ composer.lock
 *.zip
 
 # WordPress specific
-.wordpress-org/
 *.log
 wp-config.php
 
