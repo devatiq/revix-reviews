@@ -163,3 +163,71 @@
     gap: 10px;
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.revix-google-reviews {
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+}
+
+.revix-review-item {
+	display: flex;
+	gap: 15px;
+	background: #f8f8f8;
+	padding: 15px;
+	border-radius: 8px;
+	align-items: flex-start;
+}
+
+.revix-avatar {
+	width: 50px;
+	height: 50px;
+	border-radius: 50%;
+	object-fit: cover;
+}
+
+.revix-avatar-fallback {
+	width: 50px;
+	height: 50px;
+	background: #ccc;
+	color: #fff;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 50%;
+	font-size: 20px;
+}
+
+.revix-review-content {
+	flex: 1;
+}
+
+.revix-rating {
+	color: #f39c12;
+	font-weight: bold;
+	margin-top: 4px;
+}
+
+.revix-text {
+	margin-top: 5px;
+	color: #333;
+}
+
+.revix-date {
+	font-size: 12px;
+	color: #666;
+}
