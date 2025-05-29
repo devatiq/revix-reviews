@@ -3,10 +3,11 @@ namespace RevixReviews\Admin\Inc\Dashboard\Tabs;
 
 
 use RevixReviews\Admin\Inc\Dashboard\Tabs\Trustpilot\TrustpilotSettings;
-
+use RevixReviews\Admin\Inc\Dashboard\Tabs\Google\GoogleSettings;
 class Tabs {
 
     protected $trustpilot; // Trustpilot object
+    protected $google; // Google object
 
     public function __construct() {
         $this->class_initialize();
@@ -15,7 +16,8 @@ class Tabs {
     public static function render_tabs($active_tab = 'general') {
         $tabs = [
             'general'    => __('General', 'revix-reviews'),
-            'trustpilot' => __('TrustPilot', 'revix-reviews')
+            'trustpilot' => __('TrustPilot', 'revix-reviews'),
+            'google'     => __('Google Reviews', 'revix-reviews')
         ];
 
         echo '<h2 class="nav-tab-wrapper">';
@@ -30,7 +32,7 @@ class Tabs {
     private function class_initialize() {
         
         $this->trustpilot = new TrustpilotSettings();
-
+        $this->google     = new GoogleSettings();
 
     }
 
