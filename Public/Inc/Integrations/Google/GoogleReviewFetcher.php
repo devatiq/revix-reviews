@@ -1,5 +1,5 @@
 <?php
-namespace RevixReviews\Frontend\Inc\Integrations\Google;
+namespace RevixReviews\Public\Inc\Integrations\Google;
 
 class GoogleReviewFetcher {
 

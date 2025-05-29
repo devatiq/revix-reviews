@@ -11,13 +11,17 @@ use RevixReviews\Public\Shortcodes\General\ReviewsShortcode;
 use RevixReviews\Public\Shortcodes\General\ReviewsSubmitForm;
 use RevixReviews\Public\Shortcodes\Trustpilot\TrustpilotShortcode;
 use RevixReviews\Public\Shortcodes\Trustpilot\TrustpilotSummaryShortcode;
+use RevixReviews\Public\Shortcodes\Google\GoogleReviews;
 class Shortcodes
 {
 	protected $assets;
 	protected $reviews_submit_form;
 	protected $trustpilot_shortcode;
 	protected $trustpilot_summary_shortcode;
+	protected $google_reviews;
 
+
+	
 	public function __construct()
 	{
 		$this->setConstants();
@@ -40,5 +44,6 @@ class Shortcodes
 		$this->reviews_submit_form = new ReviewsSubmitForm();
 		$this->trustpilot_shortcode = new TrustpilotShortcode();
 		$this->trustpilot_summary_shortcode = new TrustpilotSummaryShortcode();
+		$this->google_reviews = new GoogleReviews();
 	}
 }

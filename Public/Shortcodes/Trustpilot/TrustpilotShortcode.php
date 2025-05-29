@@ -1,6 +1,7 @@
 <?php
 namespace RevixReviews\Public\Shortcodes\Trustpilot;
 
+use RevixReviews\Public\Inc\Integrations\Trustpilot\TrustpilotFetcher;
 class TrustpilotShortcode
 {
     public function __construct()
