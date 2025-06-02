@@ -2,6 +2,7 @@
 namespace RevixReviews\Public\Shortcodes\Google;
 
 use RevixReviews\Public\Inc\Integrations\Google\GoogleReviewFetcher;
+use RevixReviews\Public\Assets\Library\Icons\SVG;
 
 class GoogleReviews
 {
@@ -37,12 +38,12 @@ class GoogleReviews
             $rating = intval($review['rating']);
             for ($i = 1; $i <= 5; $i++) {
                 if ($i <= $rating) {
-                    echo '<img src="' . REVIXREVIEWS_SHORTCODE_ASSETS . '/img/star.svg" class="star filled" alt="Filled Star">';
+                    SVG::star_icon(['class' => 'star filled']);
                 } else {
-                    echo '<img src="' . REVIXREVIEWS_SHORTCODE_ASSETS . '/img/empty-star.svg" class="star empty" alt="Empty Star">';
+                    SVG::empty_star_icon(['class' => 'star empty']);
                 }
             }
-            echo ' <span class="revix-google-rating-text">' . $rating . '/' . esc_html__('5', 'revix-reviews') . '</span>';
+            echo ' <span class="rating-text">' . $rating . '/5</span>';
             echo '</div>';
             if (!empty($review['text'])) {
                 echo '<p class="revix-google-review-text">' . esc_html($review['text']) . '</p>';
@@ -54,8 +55,8 @@ class GoogleReviews
             }
             echo '<strong>' . esc_html($review['author_name']) . '</strong>';     
             echo '<small>' . esc_html($review['relative_time_description']) . '</small>';
-            echo '</div><div class="revix-google-review-logo">';
-            echo '<img class="revix-google-review-logo-img" src="'. REVIXREVIEWS_SHORTCODE_ASSETS . '/img/google.svg" alt="'. esc_attr($review['author_name']). '">';
+            echo '<div class="revix-google-review-logo">';
+                SVG::google_logo(['class' => 'revix-google-review-logo-img']);
             echo '</div>';
             echo '</div>';
             echo '</div>'; // Close .revix-google-review-item
