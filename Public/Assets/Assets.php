@@ -47,6 +47,6 @@ class Assets {
 	 * @param string $hook The current WordPress admin page.
 	 */
 	public function enqueue_scripts( $hook ) {
-		
+
 	}
 }

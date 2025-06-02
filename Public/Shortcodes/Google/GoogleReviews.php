@@ -23,6 +23,11 @@ class GoogleReviews
      */
     public static function render_reviews($atts = [])
     {
+        $atts = shortcode_atts([
+            'masonry' => 'false',
+            'words' => '500'
+        ], $atts, 'revix_google_reviews');
+
         $reviews = GoogleReviewFetcher::get_reviews();
 
         if (empty($reviews)) {
@@ -30,7 +35,11 @@ class GoogleReviews
         }
 
         ob_start();
-        echo '<div class="revix-google-reviews">';
+        $classes = ['revix-google-reviews'];
+        if ($atts['masonry'] === 'true') {
+            $classes[] = 'revix-google-masonry';
+        }
+        echo '<div class="' . esc_attr(implode(' ', $classes)) . '">';
         foreach ($reviews as $review) {
             echo '<div class="revix-google-review-item">';
                 echo '<div class="revix-google-rating">';
@@ -46,7 +55,7 @@ class GoogleReviews
                     echo ' <span class="revix-google-rating-text">' . $rating . '/5</span>';
                 echo '</div>';
                 if (!empty($review['text'])) {
-                    echo '<p class="revix-google-review-text">' . esc_html($review['text']) . '</p>';
+                    echo '<p class="revix-google-review-text">' . esc_html(wp_trim_words( $review['text'], $atts['words'], '...' )) . '</p>';
                 }
                 echo '<div class="revix-google-review-meta">';
                     echo '<div class="revix-google-review-author">';

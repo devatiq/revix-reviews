@@ -51,5 +51,22 @@ class Assets {
      */
     public function enqueue_scripts( $hook ) {
         wp_enqueue_script( 'revix-trustpilot', REVIXREVIEWS_SHORTCODE_ASSETS . '/js/trustpilot.js', array('jquery'), REVIXREVIEWS_VERSION, true );
+
+        if ( is_singular() || is_front_page() ) { // Adjust condition if needed
+			wp_enqueue_script('masonry-js', REVIXREVIEWS_SHORTCODE_ASSETS. '/js/masonry.pkgd.min.js', [], null, true);
+			wp_add_inline_script('masonry-js', "
+				document.addEventListener('DOMContentLoaded', function () {
+					var container = document.querySelector('.revix-google-masonry');
+					if(container){
+						new Masonry(container, {
+							itemSelector: '.revix-google-review-item',
+							columnWidth: '.revix-google-review-item',
+							percentPosition: true,
+							gutter: 25
+						});
+					}
+				});
+			");
+		}
     }
 }

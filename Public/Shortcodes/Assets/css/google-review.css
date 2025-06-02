@@ -5,10 +5,14 @@
   width: 16px;
   height: 16px;
 }
-.revix-google-reviews {
+.revix-google-reviews:not(.revix-google-masonry) {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 25px;
+  gap: 25px; 
+}
+.revix-google-reviews.revix-google-masonry {
+  column-count: 3;
+  column-gap: 25px;
 }
 
 .revix-google-review-item {
@@ -19,6 +23,10 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
+ 
+}
+.revix-google-masonry .revix-google-review-item {
+  max-width: 360px;
 }
 
 .revix-google-rating svg {
@@ -79,7 +87,10 @@
   flex-direction: column;
   align-items: flex-start;
 }
-
+.revix-google-review-logo svg {
+  width: 90px;
+  height: auto;
+}
 @media screen and (max-width: 1024px) {
   .revix-google-reviews {
     grid-template-columns: repeat(2, 1fr);
@@ -164,4 +175,29 @@
   .revix-summary-rating {
     font-size: 14px;
   }
+}
+
+
+.revix-google-reviews {
+  column-count: 3;
+  column-gap: 25px;
+}
+
+@media screen and (max-width: 1024px) {
+  .revix-google-reviews.revix-google-masonry {
+    column-count: 2;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .revix-google-reviews.revix-google-masonry {
+    column-count: 1;
+  }
+}
+
+.revix-google-masonry .revix-google-review-item {
+  display: inline-block;
+  width: 100%;
+  margin-bottom: 25px;
+  /* Keep rest of styling as-is */
 }
