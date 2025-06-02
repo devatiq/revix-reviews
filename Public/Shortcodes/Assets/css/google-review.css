@@ -1,4 +1,167 @@
-.revix-google-rating svg{
+/*------------------------------------
+* Google Reviews
+------------------------------------*/
+.revix-google-rating svg {
   width: 16px;
   height: 16px;
+}
+.revix-google-reviews {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 25px;
+}
+
+.revix-google-review-item {
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 20px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.revix-google-rating svg {
+  width: 21px;
+  height: auto;
+  fill: #f09d1f;
+  color: #f09d1f;
+}
+
+.revix-google-rating {
+  display: flex;
+  gap: 3px;
+  color: #000;
+}
+
+.revix-google-review-text {
+  color: #000;
+  font-size: 16px;
+}
+
+.revix-google-review-meta {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.revix-google-review-author {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+}
+
+.revix-google-review-author img {
+  width: 50px;
+  height: auto;
+  max-width: 100%;
+  object-fit: contain;
+}
+
+.revix-google-review-author strong {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 1.5em;
+}
+.revix-google-review-author small {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.5em;
+}
+.revix-google-review-author-info {
+  display: flex;
+  gap: 2px;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+@media screen and (max-width: 1024px) {
+  .revix-google-reviews {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .revix-google-reviews {
+    grid-template-columns: repeat(1, 1fr);
+    gap: 15px;
+  }
+  .revix-google-review-author strong {
+    font-size: 15px;
+  }
+}
+
+@media screen and (max-width: 360px) {
+  .revix-google-review-meta {
+    gap: 10px;
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
+
+
+/*------------------------------------------
+* Google Summary
+------------------------------------------*/
+.revix-google-summary {
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 400px;
+}
+
+.revix-google-summary strong {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 1.5em;
+  color: #000;
+}
+
+.revix-summary-rating {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: #000;
+  font-size: 15px;
+}
+
+.revix-summary-rating svg {
+  width: 21px;
+  height: auto;
+  fill: #f09d1f;
+  color: #f09d1f;
+}
+
+.revix-summary-count {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.5em;
+  color: #000;
+}
+
+@media screen and (max-width: 767px) {
+  .revix-google-summary {
+    padding: 15px;
+    gap: 8px;
+  }
+
+  .revix-google-summary strong {
+    font-size: 15px;
+  }
+
+  .revix-summary-rating {
+    font-size: 14px;
+  }
 }

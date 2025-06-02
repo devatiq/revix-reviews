@@ -33,32 +33,35 @@ class GoogleReviews
         echo '<div class="revix-google-reviews">';
         foreach ($reviews as $review) {
             echo '<div class="revix-google-review-item">';
-            echo '<div class="revix-google-rating">';
-            // Display star icons based on rating
-            $rating = intval($review['rating']);
-            for ($i = 1; $i <= 5; $i++) {
-                if ($i <= $rating) {
-                    SVG::star_icon(['class' => 'star filled']);
-                } else {
-                    SVG::empty_star_icon(['class' => 'star empty']);
+                echo '<div class="revix-google-rating">';
+                    // Display star icons based on rating
+                    $rating = intval($review['rating']);
+                    for ($i = 1; $i <= 5; $i++) {
+                        if ($i <= $rating) {
+                            SVG::star_icon(['class' => 'star filled']);
+                        } else {
+                            SVG::empty_star_icon(['class' => 'star empty']);
+                        }
+                    }
+                    echo ' <span class="revix-google-rating-text">' . $rating . '/5</span>';
+                echo '</div>';
+                if (!empty($review['text'])) {
+                    echo '<p class="revix-google-review-text">' . esc_html($review['text']) . '</p>';
                 }
-            }
-            echo ' <span class="rating-text">' . $rating . '/5</span>';
-            echo '</div>';
-            if (!empty($review['text'])) {
-                echo '<p class="revix-google-review-text">' . esc_html($review['text']) . '</p>';
-            }
-            echo '<div class="revix-google-review-meta">';
-            echo '<div class="revix-google-review-author">';
-            if (!empty($review['profile_photo_url'])) {
-                echo '<img class="revix-google-review-avatar" src="' . esc_url($review['profile_photo_url']) . '" alt="' . esc_attr($review['author_name']) . '">';
-            }
-            echo '<strong>' . esc_html($review['author_name']) . '</strong>';     
-            echo '<small>' . esc_html($review['relative_time_description']) . '</small>';
-            echo '<div class="revix-google-review-logo">';
-                SVG::google_logo(['class' => 'revix-google-review-logo-img']);
-            echo '</div>';
-            echo '</div>';
+                echo '<div class="revix-google-review-meta">';
+                    echo '<div class="revix-google-review-author">';
+                        if (!empty($review['profile_photo_url'])) {
+                            echo '<img class="revix-google-review-avatar" src="' . esc_url($review['profile_photo_url']) . '" alt="' . esc_attr($review['author_name']) . '">';
+                        }
+                    echo '<div class="revix-google-review-author-info">';
+                    echo '<strong>' . esc_html($review['author_name']) . '</strong>';     
+                    echo '<small>' . esc_html($review['relative_time_description']) . '</small>';
+                    echo '</div>'; // Close.revix-google-review-author-info
+                    echo '</div>'; // Close.revix-google-review-author
+                    echo '<div class="revix-google-review-logo">';
+                        SVG::google_logo(['class' => 'revix-google-review-logo-svg']);           
+                    echo '</div>';
+                echo '</div>'; // Close.revix-google-review-meta
             echo '</div>'; // Close .revix-google-review-item
 
         }
@@ -96,7 +99,9 @@ class GoogleReviews
 
         // Average rating
         if ($atts['average'] === 'true') {
-            echo '<div class="revix-summary-rating">⭐ ' . esc_html($summary['rating']) . ' / 5</div>';
+            echo '<div class="revix-summary-rating">';
+            SVG::star_icon(['class' => 'summary-star']);
+            echo ' ' . esc_html($summary['rating']) . ' / 5</div>';
         }
 
         // Review count
