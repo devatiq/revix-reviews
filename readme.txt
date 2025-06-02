@@ -70,6 +70,9 @@ Displays Trustpilot summary: star rating and total number of reviews.
 Displays reviews from a public Google Maps place using your API key.  
 Displays:
 - Author, rating stars, time, review text, profile image, and Google logo.
+Supports:
+- `words`
+- `masonry`
 
 **6. `[revix_google_summary]`**  
 Displays summary of Google reviews (place name, average, total count).  
