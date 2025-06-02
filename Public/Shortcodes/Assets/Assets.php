@@ -35,6 +35,8 @@ class Assets {
      */
     public function enqueue_styles( $hook ) {
         wp_enqueue_style('revix-trustpilot', REVIXREVIEWS_SHORTCODE_ASSETS. '/css/trustpilot.css', array(), REVIXREVIEWS_VERSION );
+        wp_enqueue_style('revix-google-review', REVIXREVIEWS_SHORTCODE_ASSETS. '/css/google-review.css', array(), REVIXREVIEWS_VERSION );
+      
        
     }
 
