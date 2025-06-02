@@ -102,6 +102,8 @@ Yes, moderation can be turned on/off for native reviews via settings.
 3. Trustpilot admin integration panel
 4. Google Reviews settings panel
 5. Google and Trustpilot review displays with SVG icons
+6. Google Reviews
+7. Google Review Settings
 
 == Changelog ==
 = 1.2.0 =
