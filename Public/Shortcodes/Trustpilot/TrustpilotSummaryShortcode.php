@@ -74,7 +74,7 @@ class TrustpilotSummaryShortcode
             } else {
                 $svgFile = 'stars-1.svg';
             }
-            $svg = REVIXREVIEWS_URL . 'public/assets/img/' . $svgFile;
+            $svg = REVIXREVIEWS_FRONTEND_ASSETS . '/img/' . $svgFile;
 
             echo '<div class="revix-summary-average">';
             echo '<strong>' . esc_html($average) . '</strong>';
