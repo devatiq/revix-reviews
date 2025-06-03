@@ -121,7 +121,7 @@
   display: none;
 }
 .revix-trustpilot-rating img {
-  height: 25px;
+  height: 25px !important;
   display: flex;
   width: auto;
   max-width: 100%;

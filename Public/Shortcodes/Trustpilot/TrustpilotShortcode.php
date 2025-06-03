@@ -29,7 +29,7 @@ class TrustpilotShortcode
             $ratingText = $review['rating'];
             preg_match('/([0-9]+(?:\\.[0-9])?)/', $ratingText, $matches);
             $ratingValue = isset($matches[1]) ? $matches[1] : '0';
-            $ratingImg = REVIXREVIEWS_URL . 'public/assets/img/stars-' . $ratingValue . '.svg';
+            $ratingImg = REVIXREVIEWS_FRONTEND_ASSETS . '/img/stars-' . $ratingValue . '.svg';
 
             if ($ratingValue < floatval($atts['min_rating']) || $ratingValue > floatval($atts['max_rating'])) {
                 continue;
