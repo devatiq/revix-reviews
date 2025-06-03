@@ -98,6 +98,34 @@ Yes. Use the `name` attribute in `[revix_google_summary]` to hide or replace it.
 = Do I need to approve reviews before they appear? =
 Yes, moderation can be turned on/off for native reviews via settings.
 
+= How do I create a Google Maps API key? =
+Watch this helpful video tutorial that walks through the process step-by-step: https://www.youtube.com/watch?v=hsNlz7-abd0
+
+= How do I create a Google Maps API key? =
+Watch this helpful video tutorial that walks through the process step-by-step: https://www.youtube.com/watch?v=hsNlz7-abd0
+
+= I've created an API key but reviews still don't show up? =
+Make sure you have enabled the Places API in your Google Cloud Console. Without the Places API enabled, reviews won't display even with a valid API key. Watch this tutorial for step-by-step guidance: https://www.youtube.com/watch?v=eycjk3APuoI
+Note: Only need Places API, don't need others to enable.
+
+
+= Can I customize the review form fields? =
+Yes, native review form fields are fully editable from the plugin settings.
+
+= Can I filter Trustpilot or Google reviews by star rating? =
+Yes. Use `min_rating` and `max_rating` attributes in the shortcodes.
+
+= Can I display Google reviews for any place ID? =
+Yes, as long as you have a valid Google Maps API key and set the correct place ID.
+
+= Can I disable the Google place name or customize the label? =
+Yes. Use the `name` attribute in `[revix_google_summary]` to hide or replace it.
+
+= Do I need to approve reviews before they appear? =
+Yes, moderation can be turned on/off for native reviews via settings.
+
+
+
 == Screenshots ==
 
 1. Admin settings panel for Revix Reviews
