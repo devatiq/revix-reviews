@@ -1,12 +1,15 @@
 <?php
 namespace RevixReviews\Admin\Inc\Dashboard\Tabs\Google;
 
-class GoogleSettings {
-    public function __construct() {
+class GoogleSettings
+{
+    public function __construct()
+    {
         add_action('admin_init', [$this, 'register_settings']);
     }
 
-    public function register_settings() {
+    public function register_settings()
+    {
         register_setting('revixreviews_google', 'revix_google_api_key', ['sanitize_callback' => 'sanitize_text_field']);
         register_setting('revixreviews_google', 'revix_google_place_id', ['sanitize_callback' => 'sanitize_text_field']);
 
@@ -20,22 +23,26 @@ class GoogleSettings {
             'revix_google_section',
             __('Google Maps Reviews Settings', 'revix-reviews'),
             function () {
-                echo '<p>' . esc_html__('Enter your Google Maps API key and Place ID to fetch reviews.', 'revix-reviews') . '</p>';               
+                echo '<p>' . esc_html__('Enter your Google Maps API key and Place ID to fetch reviews.', 'revix-reviews') . '</p>';
             },
             'revixreviews_google'
         );
 
-        // Google API Key Field
+
+        // Google API Key Field (as password)
         add_settings_field(
             'revix_google_api_key',
             __('Google API Key', 'revix-reviews'),
             function () {
-                echo '<input type="text" name="revix_google_api_key" value="' . esc_attr(get_option('revix_google_api_key')) . '" class="regular-text" placeholder="AIza...">';
+                $value = esc_attr(get_option('revix_google_api_key'));
+                echo '<input type="password" id="revix_google_api_key" name="revix_google_api_key" value="' . $value . '" class="regular-text" placeholder="AIza..." />';
+                echo '<label> <input type="checkbox" id="revix_toggle_api_key" onclick="document.getElementById(\'revix_google_api_key\').type = this.checked ? \'text\' : \'password\'"> ' . esc_html__('Show', 'revix-reviews') . '</label>';
                 echo '<p class="description">' . esc_html__('Get your API key from the Google Cloud Console. Enable the Places API and restrict it for security.', 'revix-reviews') . '</p>';
             },
             'revixreviews_google',
             'revix_google_section'
         );
+
 
         // Place ID Field
         add_settings_field(
