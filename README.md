@@ -15,6 +15,9 @@ Revix Reviews helps you collect, import, and display reviews—including Trustpi
 
 Revix Reviews allows you to manage, showcase, and collect customer feedback directly on your WordPress site, with built-in Trustpilot and Google Reviews integration.
 
+
+(Demo)[https://revixreviews.com/demo/]
+
 Whether you're a business owner, freelancer, or eCommerce site, this plugin helps boost credibility and conversions by showing authentic testimonials from real customers.
 
 ### Key Features:
