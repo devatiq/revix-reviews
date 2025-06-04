@@ -1,13 +1,13 @@
 === Revix Reviews – All-in-One Business Review Manager ===
 Plugin Name: Revix Reviews
-Version: 1.2.2
+Version: 1.2.3
 Author: supreoxltd
 Author URI: https://supreox.com/
 Contributors: abcplugins, atiqbd4ever, supreoxltd
 Tags: Tags: reviews, business reviews, testimonials, trustpilot, google reviews
 Requires at least: 5.4
 Tested up to: 6.8
-Stable tag: 1.2.2
+Stable tag: 1.2.3
 Requires PHP: 8.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -137,6 +137,9 @@ Yes, moderation can be turned on/off for native reviews via settings.
 7. Google Review Settings
 
 == Changelog ==
+
+= 1.2.3 =
+* Bug fix and improvement
 
 = 1.2.2 = 
 * Bug Fix
