@@ -49,7 +49,8 @@ class Reviews {
 			'supports'     => array( 'title', 'editor', 'thumbnail', 'comments' ),
 			'show_in_rest' => true,
 			'rewrite'      => array( 'slug' => 'revix-reviews' ),
-			'publicly_queryable' => false
+			'publicly_queryable' => false,
+			'menu_icon' => REVIXREVIEWS_ADMIN_ASSETS . '/img/icon.svg',
 		);
 
 		register_post_type( 'revixreviews', $args );

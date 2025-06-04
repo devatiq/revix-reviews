@@ -5,7 +5,7 @@
  * Description: A WordPress plugin for managing reviews.
  * Author: SupreoX Limited
  * Author URI: https://supreox.com/
- * Plugin URI: https://abcplugin.com
+ * Plugin URI: https://revixreviews.com/
  * License: GPL2
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain: revix-reviews
