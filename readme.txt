@@ -20,6 +20,8 @@ Revix Reviews allows you to manage, showcase, and collect customer feedback dire
 
 [Demo](https://revixreviews.com/demo/)
 
+https://youtu.be/yB0dJ70jS2Y
+
 Whether you're a business owner, freelancer, or eCommerce site, this plugin helps boost credibility and conversions by showing authentic testimonials from real customers.
 
 **Key Features:**
