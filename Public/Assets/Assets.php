@@ -34,6 +34,7 @@ class Assets {
 	public function enqueue_styles( $hook ) {
 
 		wp_enqueue_style( 'revix-style', REVIXREVIEWS_FRONTEND_ASSETS . '/css/style.css', array(), REVIXREVIEWS_VERSION );
+		wp_enqueue_style( 'sweetalert2', REVIXREVIEWS_FRONTEND_ASSETS . '/css/sweetalert2.min.css', array(), REVIXREVIEWS_VERSION );
 		
 	}
 
@@ -48,5 +49,6 @@ class Assets {
 	 */
 	public function enqueue_scripts( $hook ) {
 
+		wp_enqueue_script( 'sweetalert2', REVIXREVIEWS_FRONTEND_ASSETS . '/js/sweetalert2.min.js', array(), REVIXREVIEWS_VERSION, true );
 	}
 }

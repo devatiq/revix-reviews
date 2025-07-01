@@ -74,7 +74,42 @@ class ReviewsSubmitForm
 
 			<input type="submit" value="<?php echo esc_attr($atts['btn_text']); ?>">
 		</form>
+
 		<?php
+		if (isset($_GET['review_submitted'])) {
+			$status = sanitize_text_field($_GET['review_submitted']);
+		
+			$redirect_url = get_option('revixreviews_redirect_url');
+			if (empty($redirect_url) || !filter_var($redirect_url, FILTER_VALIDATE_URL)) {
+				$redirect_url = home_url('/');
+			}
+			?>
+			<script>
+			document.addEventListener('DOMContentLoaded', function () {
+				const redirectUrl = <?php echo json_encode($redirect_url); ?>;
+		
+				<?php if ($status === 'success') : ?>
+					Swal.fire({
+						title: 'Thank you!',
+						text: 'Your feedback has been submitted successfully.',
+						icon: 'success'
+					}).then(() => {
+						window.location.href = redirectUrl;
+					});
+				<?php elseif ($status === 'error') : ?>
+					Swal.fire({
+						title: 'Oops!',
+						text: 'Something went wrong while submitting your feedback.',
+						icon: 'error'
+					}).then(() => {
+						window.location.href = redirectUrl;
+					});
+				<?php endif; ?>
+			});
+			</script>
+			<?php
+		}
+		
 
 		return ob_get_clean(); // Return the buffer contents
 	}
@@ -124,18 +159,18 @@ class ReviewsSubmitForm
 		$post_id = wp_insert_post($post_data);
 
 		if ($post_id) {
-
 			$redirect_url = get_option('revixreviews_redirect_url');
-			// If a redirect URL is set and is a valid URL, redirect to it. Otherwise, redirect to the home page.
-			if (!empty($redirect_url) && filter_var($redirect_url, FILTER_VALIDATE_URL)) {
-				wp_safe_redirect($redirect_url);
-			} else {
-				wp_safe_redirect(home_url('/'));
-			}
 
+			if (!empty($redirect_url) && filter_var($redirect_url, FILTER_VALIDATE_URL)) {
+				wp_safe_redirect(add_query_arg('review_submitted', 'success', wp_get_referer()));
+			} else {
+				wp_safe_redirect(add_query_arg('review_submitted', 'success', wp_get_referer()));
+			}
 			exit;
 		} else {
-			wp_die(esc_html__('An error occurred while submitting your feedback.', 'revix-reviews'));
+			wp_safe_redirect(add_query_arg('review_submitted', 'error', wp_get_referer()));
+			exit;
 		}
+
 	}
 }
