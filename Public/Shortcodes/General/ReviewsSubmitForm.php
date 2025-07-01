@@ -12,8 +12,9 @@ class ReviewsSubmitForm
 	public function __construct()
 	{
 		add_shortcode('revixreviews_form', array($this, 'display_feedback_form')); // Display feedback form.
-		add_action('admin_post_nopriv_submit_revixreviews_feedback', array($this, 'handle_submission')); // For non-logged-in users.
-		add_action('admin_post_submit_revixreviews_feedback', array($this, 'handle_submission')); // For logged-in users.
+		add_action('wp_ajax_submit_revixreviews_feedback_ajax', array($this, 'handle_submission_ajax'));
+		add_action('wp_ajax_nopriv_submit_revixreviews_feedback_ajax', array($this, 'handle_submission_ajax'));
+		
 	}
 
 	public function display_feedback_form($atts = array())
@@ -29,9 +30,10 @@ class ReviewsSubmitForm
 		ob_start(); // Start buffering
 		// Form HTML
 		?>
-		<form action="<?php echo esc_url(admin_url('admin-post.php')); ?>" method="post">
+		<form id="revixreviews-feedback-form" method="post">
 			<?php wp_nonce_field('revixreviews_feedback_nonce_action', 'revixreviews_feedback_nonce'); ?>
-			<input type="hidden" name="action" value="submit_revixreviews_feedback">
+			<input type="hidden" name="action" value="submit_revixreviews_feedback_ajax">
+
 
 			<p><label for="revixreviews_name">
 					<?php echo esc_html__('Name:', 'revix-reviews'); ?>
@@ -78,99 +80,82 @@ class ReviewsSubmitForm
 		<?php
 		if (isset($_GET['review_submitted'])) {
 			$status = sanitize_text_field($_GET['review_submitted']);
-		
+
 			$redirect_url = get_option('revixreviews_redirect_url');
 			if (empty($redirect_url) || !filter_var($redirect_url, FILTER_VALIDATE_URL)) {
 				$redirect_url = home_url('/');
 			}
 			?>
 			<script>
-			document.addEventListener('DOMContentLoaded', function () {
-				const redirectUrl = <?php echo json_encode($redirect_url); ?>;
-		
-				<?php if ($status === 'success') : ?>
-					Swal.fire({
-						title: 'Thank you!',
-						text: 'Your feedback has been submitted successfully.',
-						icon: 'success'
-					}).then(() => {
-						window.location.href = redirectUrl;
-					});
-				<?php elseif ($status === 'error') : ?>
-					Swal.fire({
-						title: 'Oops!',
-						text: 'Something went wrong while submitting your feedback.',
-						icon: 'error'
-					}).then(() => {
-						window.location.href = redirectUrl;
-					});
-				<?php endif; ?>
-			});
+				document.addEventListener('DOMContentLoaded', function () {
+					const redirectUrl = <?php echo json_encode($redirect_url); ?>;
+
+					<?php if ($status === 'success'): ?>
+						Swal.fire({
+							title: 'Thank you!',
+							text: 'Your feedback has been submitted successfully.',
+							icon: 'success'
+						}).then(() => {
+							window.location.href = redirectUrl;
+						});
+					<?php elseif ($status === 'error'): ?>
+						Swal.fire({
+							title: 'Oops!',
+							text: 'Something went wrong while submitting your feedback.',
+							icon: 'error'
+						}).then(() => {
+							window.location.href = redirectUrl;
+						});
+					<?php endif; ?>
+				});
 			</script>
 			<?php
 		}
-		
+
 
 		return ob_get_clean(); // Return the buffer contents
 	}
 
-	public function handle_submission()
-	{
-		// Check nonce for security.
-		if (!isset($_POST['revixreviews_feedback_nonce']) || !wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['revixreviews_feedback_nonce'])), 'revixreviews_feedback_nonce_action')) {
-			wp_die('Security check failed');
-		}
-
-		// Server-side validation for required fields.
-		$required_fields = array('revixreviews_name', 'revixreviews_email', 'revixreviews_subject', 'revixreviews_comments', 'revixreviews_rating');
+	public function handle_submission_ajax() {
+		check_ajax_referer('revixreviews_feedback_nonce_action', 'nonce');
+	
+		// Validate required fields
+		$required_fields = ['revixreviews_name', 'revixreviews_email', 'revixreviews_subject', 'revixreviews_comments', 'revixreviews_rating'];
 		foreach ($required_fields as $field) {
 			if (empty($_POST[$field])) {
-				wp_die('Please fill all required fields.');
+				wp_send_json_error(['message' => 'Please fill all required fields.']);
 			}
 		}
-
-		// Sanitize inputs after ensuring they exist and are non-empty.
-		$name = isset($_POST['revixreviews_name']) ? sanitize_text_field(wp_unslash($_POST['revixreviews_name'])) : '';
-		$email = isset($_POST['revixreviews_email']) ? sanitize_email(wp_unslash($_POST['revixreviews_email'])) : '';
-		$subject = isset($_POST['revixreviews_subject']) ? sanitize_text_field(wp_unslash($_POST['revixreviews_subject'])) : '';
-		$comments = isset($_POST['revixreviews_comments']) ? sanitize_textarea_field(wp_unslash($_POST['revixreviews_comments'])) : '';
-		$rating = isset($_POST['revixreviews_rating']) ? intval(wp_unslash($_POST['revixreviews_rating'])) : '';
-
-		// Enhanced email validation.
+	
+		// Sanitize inputs
+		$name = sanitize_text_field(wp_unslash($_POST['revixreviews_name']));
+		$email = sanitize_email(wp_unslash($_POST['revixreviews_email']));
+		$subject = sanitize_text_field(wp_unslash($_POST['revixreviews_subject']));
+		$comments = sanitize_textarea_field(wp_unslash($_POST['revixreviews_comments']));
+		$rating = intval(wp_unslash($_POST['revixreviews_rating']));
+	
 		if (!is_email($email)) {
-			wp_die(esc_html__('Please enter a valid email address.', 'revix-reviews'));
+			wp_send_json_error(['message' => 'Invalid email address.']);
 		}
-
-		$post_status = get_option('revixreviews_status', 'pending'); // Default to 'pending' if not set.
-		// Prepare post data.
-		$post_data = array(
+	
+		$post_status = get_option('revixreviews_status', 'pending');
+		$post_id = wp_insert_post([
 			'post_title' => $subject,
 			'post_content' => $comments,
 			'post_status' => $post_status,
 			'post_type' => 'revixreviews',
-			'meta_input' => array(
+			'meta_input' => [
 				'revixreviews_name' => $name,
 				'revixreviews_email' => $email,
 				'revixreviews_rating' => $rating,
-			),
-		);
-
-		// Insert the post.
-		$post_id = wp_insert_post($post_data);
-
+			],
+		]);
+	
 		if ($post_id) {
-			$redirect_url = get_option('revixreviews_redirect_url');
-
-			if (!empty($redirect_url) && filter_var($redirect_url, FILTER_VALIDATE_URL)) {
-				wp_safe_redirect(add_query_arg('review_submitted', 'success', wp_get_referer()));
-			} else {
-				wp_safe_redirect(add_query_arg('review_submitted', 'success', wp_get_referer()));
-			}
-			exit;
+			wp_send_json_success(['message' => 'Your feedback has been submitted successfully.']);
 		} else {
-			wp_safe_redirect(add_query_arg('review_submitted', 'error', wp_get_referer()));
-			exit;
+			wp_send_json_error(['message' => 'Failed to submit feedback.']);
 		}
-
 	}
+	
 }

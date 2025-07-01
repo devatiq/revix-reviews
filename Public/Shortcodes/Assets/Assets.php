@@ -50,6 +50,8 @@ class Assets
         if (has_shortcode($post->post_content, 'revix_google_reviews') || has_shortcode($post->post_content, 'revix_google_summary')) {
             wp_enqueue_style('revix-google-review', REVIXREVIEWS_SHORTCODE_ASSETS . '/css/google-review.css', [], REVIXREVIEWS_VERSION);
         }
+
+        
     }
     
 
@@ -90,6 +92,15 @@ class Assets
                 });
             ");
         }
+
+        wp_enqueue_script(
+            'revixreviews-form-ajax', REVIXREVIEWS_SHORTCODE_ASSETS . '/js/revixreviews-ajax.js', ['jquery'], REVIXREVIEWS_VERSION, true
+        );
+        
+        wp_localize_script('revixreviews-form-ajax', 'revixreviews_ajax_obj', [
+            'ajax_url' => admin_url('admin-ajax.php'),
+            'nonce'    => wp_create_nonce('revixreviews_feedback_nonce_action'),
+        ]);
     }
     
 }

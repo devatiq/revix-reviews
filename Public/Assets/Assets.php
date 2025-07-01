@@ -49,6 +49,6 @@ class Assets {
 	 */
 	public function enqueue_scripts( $hook ) {
 
-		wp_enqueue_script( 'sweetalert2', REVIXREVIEWS_FRONTEND_ASSETS . '/js/sweetalert2.min.js', array(), REVIXREVIEWS_VERSION, true );
+		wp_enqueue_script( 'sweetalert2', REVIXREVIEWS_FRONTEND_ASSETS . '/js/sweetalert2.all.min.js', array(), REVIXREVIEWS_VERSION, true );
 	}
 }
