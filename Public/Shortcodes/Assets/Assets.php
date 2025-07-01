@@ -100,6 +100,7 @@ class Assets
         wp_localize_script('revixreviews-form-ajax', 'revixreviews_ajax_obj', [
             'ajax_url' => admin_url('admin-ajax.php'),
             'nonce'    => wp_create_nonce('revixreviews_feedback_nonce_action'),
+            'redirect_url'  => get_option('revixreviews_redirect_url') ?: home_url('/'),
         ]);
     }
     
