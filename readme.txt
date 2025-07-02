@@ -139,6 +139,7 @@ Yes, moderation can be turned on/off for native reviews via settings.
 5. Google and Trustpilot review displays with SVG icons
 6. Google Reviews
 7. Google Review Settings
+8. General User Feedback submission form
 
 == Changelog ==
 
