@@ -154,7 +154,8 @@ class Settings
 	public function revixreviews_redirect_url_field_cb()
 	{
 		$redirect_url = get_option('revixreviews_redirect_url');
-		echo '<input type="text" id="revixreviews_redirect_url" class="regular-text" name="revixreviews_redirect_url" value="' . esc_attr($redirect_url) . '" />';
+		$placeholder  = esc_url(home_url('/thank-you'));
+		echo '<input type="text" id="revixreviews_redirect_url" class="regular-text" name="revixreviews_redirect_url" value="' . esc_attr($redirect_url) . '" placeholder="' . $placeholder . '" />' . '<p class="description">' . esc_html__('Enter the URL to redirect users to after they submit a review.', 'revix-reviews') . '</p>';
 	}
 
 	/**
@@ -170,16 +171,19 @@ class Settings
 		$post_status = get_option('revixreviews_status', 'pending');
 		?>
 		<select id="revixreviews_status" name="revixreviews_status">
-			<option value="publish" <?php selected($post_status, 'publish'); ?>>
-				<?php echo esc_html__('Publish', 'revix-reviews'); ?>
-			</option>
-			<option value="pending" <?php selected($post_status, 'pending'); ?>>
-				<?php echo esc_html__('Pending', 'revix-reviews'); ?>
-			</option>
-			<option value="draft" <?php selected($post_status, 'draft'); ?>>
-				<?php echo esc_html__('Draft', 'revix-reviews'); ?>
-			</option>
-		</select>
-		<?php
+            <option value="publish" <?php selected($post_status, 'publish'); ?>>
+                <?php echo esc_html__('Publish', 'revix-reviews'); ?>
+            </option>
+            <option value="pending" <?php selected($post_status, 'pending'); ?>>
+                <?php echo esc_html__('Pending', 'revix-reviews'); ?>
+            </option>
+            <option value="draft" <?php selected($post_status, 'draft'); ?>>
+                <?php echo esc_html__('Draft', 'revix-reviews'); ?>
+            </option>
+        </select>
+<p class="description">
+            <?php echo esc_html__('Select the default status for new reviews. \'Publish\' makes them public immediately, \'Pending\' requires admin approval, and \'Draft\' saves them as drafts.', 'revix-reviews'); ?>
+        </p>
+        <?php
 	}
 }
