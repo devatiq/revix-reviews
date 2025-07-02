@@ -51,34 +51,49 @@ class Settings
 	 */
 	public function revixreviews_create_settings_page()
 	{
-		// phpcs:ignore WordPress.Security.NonceVerification.Recommended
-		$active_tab = isset($_GET['tab']) ? sanitize_text_field( wp_unslash($_GET['tab']) ) : 'general';
+		$active_tab = isset($_GET['tab']) ? sanitize_text_field(wp_unslash($_GET['tab'])) : 'general';
 		?>
 		<div class="wrap revixreviews_admin_wrap">
 			<h2><?php echo esc_html(get_admin_page_title()); ?></h2>
 			<?php Tabs::render_tabs($active_tab); ?>
-			<form action="options.php" method="post">
-				<?php
-				settings_errors();				
-
-				if ($active_tab === 'trustpilot') {
-					settings_fields('revixreviews_trustpilot');
-					do_settings_sections('revixreviews_trustpilot');
-				} elseif ($active_tab === 'google') {
-					settings_fields('revixreviews_google');
-					do_settings_sections('revixreviews_google');
-				} else {
-					settings_fields('revixreviews');
-					do_settings_sections('revixreviews');
-				}
-						
-
-				submit_button();
-				?>
-			</form>
+	
+			<div style="display: flex; gap: 20px; align-items: flex-start;">
+				<!-- Main Form Area -->
+				<div style="flex: 2;">
+					<form action="options.php" method="post">
+						<?php
+						settings_errors();
+	
+						if ($active_tab === 'trustpilot') {
+							settings_fields('revixreviews_trustpilot');
+							do_settings_sections('revixreviews_trustpilot');
+						} elseif ($active_tab === 'google') {
+							settings_fields('revixreviews_google');
+							do_settings_sections('revixreviews_google');
+						} else {
+							settings_fields('revixreviews');
+							do_settings_sections('revixreviews');
+						}
+	
+						submit_button();
+						?>
+					</form>
+				</div>
+	
+				<!-- Sidebar Area -->
+				<div style="flex: 1; background: #fff; padding: 1rem; border: 1px solid #ddd; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.05);">
+					<h3 style="margin-top: 0;"><?php esc_html_e('Watch Tutorial', 'revix-reviews'); ?></h3>
+					<div style="aspect-ratio: 16 / 9; overflow: hidden; border-radius: 6px;">
+						<iframe width="100%" height="100%" src="https://www.youtube.com/embed/yB0dJ70jS2Y" 
+							title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+						</iframe>
+					</div>
+				</div>
+			</div>
 		</div>
 		<?php
 	}
+	
 
 	/**
 	 * Initializes the settings for Revix Reviews plugin.
