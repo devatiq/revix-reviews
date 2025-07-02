@@ -63,7 +63,7 @@ class ReviewsShortcode
 							<?php the_title(); ?>
 						</h3>
 					</div>
-					<div class="revix-testimonial-rating">
+					<div class="revix-testimonial-rating" aria-label="Rating: <?php echo intval( $testimonial_rating ); ?> out of 5 stars" title="<?php echo intval( $testimonial_rating ); ?> out of 5 stars">
 						<?php for ($i = 1; $i <= 5; $i++): ?>
 							<?php if ($i <= $testimonial_rating): ?>
 								<!-- Filled Star SVG -->

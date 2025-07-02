@@ -74,41 +74,7 @@ class ReviewsSubmitForm
 			<input type="submit" value="<?php echo esc_attr($atts['btn_text']); ?>">
 		</form>
 
-		<?php
-		if (isset($_GET['review_submitted'])) {
-			$status = sanitize_text_field($_GET['review_submitted']);
-
-			$redirect_url = get_option('revixreviews_redirect_url');
-			if (empty($redirect_url) || !filter_var($redirect_url, FILTER_VALIDATE_URL)) {
-				$redirect_url = home_url('/');
-			}
-			?>
-			<script>
-				document.addEventListener('DOMContentLoaded', function () {
-					const redirectUrl = <?php echo json_encode($redirect_url); ?>;
-
-					<?php if ($status === 'success'): ?>
-						Swal.fire({
-							title: 'Thank you!',
-							text: 'Your feedback has been submitted successfully.',
-							icon: 'success'
-						}).then(() => {
-							window.location.href = redirectUrl;
-						});
-					<?php elseif ($status === 'error'): ?>
-						Swal.fire({
-							title: 'Oops!',
-							text: 'Something went wrong while submitting your feedback.',
-							icon: 'error'
-						}).then(() => {
-							window.location.href = redirectUrl;
-						});
-					<?php endif; ?>
-				});
-			</script>
-			<?php
-		}
-
+		<?php		
 
 		return ob_get_clean(); // Return the buffer contents
 	}
