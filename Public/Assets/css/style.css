@@ -2,162 +2,174 @@
  * Testimonial
  * ---------------------------------------------*/
 
- .revix-testimonial-single-item {
-    background-color: #e6ebf2;
-    padding: 30px;
-    border-radius: 5px;
-    position: relative;
+.revix-testimonial-single-item {
+  background-color: #e6ebf2;
+  padding: 30px;
+  border-radius: 5px;
+  position: relative;
 }
 
 .revix-testimonial-header {
-    display: flex;
-    gap: 20px;
-    align-items: center;
+  display: flex;
+  gap: 20px;
+  align-items: center;
 }
 
 #revix-testimonial-client-img img {
-    width: 65px;
-    height: 65px;
-    border-radius: 50%;
-    max-width: 100% !important;
-    object-fit: cover;
-    object-position: top;
+  width: 65px;
+  height: 65px;
+  border-radius: 50%;
+  max-width: 100% !important;
+  object-fit: cover;
+  object-position: top;
 }
 
 .revix-testimonial-client-info h3 {
-    color: #000000;
-    font-size: 18px;
-    font-weight: 600;
-    line-height: 1.3em;
-    margin-bottom: 10px;
+  color: #000000;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.3em;
+  margin-bottom: 10px;
 }
 
 .revix-testimonial-client-info p {
-    color: #448E08;
-    font-size: 14px;
-    font-weight: 400;
-    line-height: 1.3em;
-    margin-bottom: 0;
+  color: #448e08;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.3em;
+  margin-bottom: 0;
 }
 
 .revix-testimonial-content p {
-    color: #000000;
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 1.3rem;
-    margin-top: 20px;
+  color: #000000;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.3rem;
+  margin-top: 20px;
 }
 
 .revix-testimonial-rating {
-    margin-top: 20px;
+  margin-top: 20px;
+  display: flex;
+  gap: 6px;
 }
-
+.revix-testimonial-rating svg {
+    width: 20px;
+    height: 20px;
+    fill: rgb(245, 166, 35);
+}
 .revix-testimonial-rating i {
-    color: #D3A500;
-    font-size: 14px;
-    font-weight: 400;
-    margin-right: 5px;
+  color: #d3a500;
+  font-size: 14px;
+  font-weight: 400;
+  margin-right: 5px;
 }
 
 .revix-testimonial-quote {
-    position: absolute;
-    top: 40px;
-    right: 65px;
+  position: absolute;
+  top: 40px;
+  right: 65px;
 }
 
 .revix-testimonial-quote svg,
 .revix-testimonial-quote svg path {
-    fill: #444444;
-    color: #444444;
-    opacity: 0.7;
+  fill: #444444;
+  color: #444444;
+  opacity: 0.7;
 }
 
 .swiper.revix-testimonial-slider {
-    padding-bottom: 65px;
+  padding-bottom: 65px;
 }
 
 .revix-testimonial-slider-nav-bar button.revix-testimonial-arrow {
-    cursor: pointer;
-    border: 0;
-    position: absolute;
-    top: 40%;
-    z-index: 1;
-    background-color: transparent;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  cursor: pointer;
+  border: 0;
+  position: absolute;
+  top: 40%;
+  z-index: 1;
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.revix-testimonial-slider-nav-bar button.revix-testimonial-arrow.revix-testimonial-arrow-right {
-    right: -60px;
-    outline: none;
+.revix-testimonial-slider-nav-bar
+  button.revix-testimonial-arrow.revix-testimonial-arrow-right {
+  right: -60px;
+  outline: none;
 }
 
 .revix-testimonial-slider-nav-bar button.revix-testimonial-arrow svg {
-    width: 40px;
-    height: 40px;
-    background-color: #6247ed;
-    border-radius: 50%;
-    fill: #444444;
-    padding: 8px;
+  width: 40px;
+  height: 40px;
+  background-color: #6247ed;
+  border-radius: 50%;
+  fill: #444444;
+  padding: 8px;
 }
 
-.revix-testimonial-slider-nav-bar button.revix-testimonial-arrow.revix-testimonial-arrow-right svg {
-    transform: rotate(180deg);
+.revix-testimonial-slider-nav-bar
+  button.revix-testimonial-arrow.revix-testimonial-arrow-right
+  svg {
+  transform: rotate(180deg);
 }
 
-.revix-testimonial-slider-nav-bar button.revix-testimonial-arrow.revix-testimonial-arrow-left {
-    left: -60px;
-    outline: none;
+.revix-testimonial-slider-nav-bar
+  button.revix-testimonial-arrow.revix-testimonial-arrow-left {
+  left: -60px;
+  outline: none;
 }
 
 .revix-testimonial-slider .revix-testimonial-arrow.slick-disabled,
 .revix-testimonial-slider .revix-testimonial-arrow.slick-disabled {
-    opacity: .25;
+  opacity: 0.25;
 }
 
 .revix-testimonial-slider-nav-bar .revix-testimonial-arrow:hover svg {
-    background-color: #FFAB01;
-    color: #fff;
-    fill: #fff;
-    transition: 0.3s ease;
+  background-color: #ffab01;
+  color: #fff;
+  fill: #fff;
+  transition: 0.3s ease;
 }
 
 .swiper-pagination.revix-testimonial-slider-pagination {
-    display: flex;
-    justify-content: center;
+  display: flex;
+  justify-content: center;
 }
 
-.swiper-pagination.revix-testimonial-slider-pagination .swiper-pagination-bullet {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
+.swiper-pagination.revix-testimonial-slider-pagination
+  .swiper-pagination-bullet {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
 }
 
-.swiper-pagination.revix-testimonial-slider-pagination .swiper-pagination-bullet-active {
-    background-color: #448E08;
+.swiper-pagination.revix-testimonial-slider-pagination
+  .swiper-pagination-bullet-active {
+  background-color: #448e08;
 }
 
 /*---------------------------
 * Testimonial grids
 -----------------------------*/
 .revix-testimonial-grids {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 30px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 30px;
 }
 
 .revix-testimonial-grids .revix-testimonial-single-item {
-    margin-right: 0;
-    margin-left: 0;
+  margin-right: 0;
+  margin-left: 0;
 }
 
 .revix-elementor-pagination {
-    width: 100%;
-    margin-top: 15px;
-    text-align: center;
+  width: 100%;
+  margin-top: 15px;
+  text-align: center;
 }
 
 .revix-elementor-pagination * {
-    display: inline-block;
+  display: inline-block;
 }

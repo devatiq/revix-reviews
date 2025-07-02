@@ -2,57 +2,60 @@
 namespace RevixReviews\Public\Shortcodes\General;
 
 // Exit if accessed directly.
-if ( ! defined( 'ABSPATH' ) ) {
+if (!defined('ABSPATH')) {
 	exit;
 }
 
-class ReviewsShortcode {
+class ReviewsShortcode
+{
 
-	public function __construct() {
-		add_shortcode( 'revixreviews', array( $this, 'display_grid_review_markup' ) ); // Display grid review.
+	public function __construct()
+	{
+		add_shortcode('revixreviews', array($this, 'display_grid_review_markup')); // Display grid review.
 	}
 
-	public function display_grid_review_markup( $atts = [] ) {
+	public function display_grid_review_markup($atts = [])
+	{
 
 		// Shortcode attributes: count, min_rating, max_rating
 		$atts = shortcode_atts([
-			'count'      => -1,
+			'count' => -1,
 			'min_rating' => 0,
 			'max_rating' => 5,
-		], $atts, 'revixreviews' );
+		], $atts, 'revixreviews');
 
 		ob_start();
 
 		$args = array(
-			'post_type'      => 'revixreviews',
-			'post_status'    => 'publish',
-			'posts_per_page' => intval( $atts['count'] ),
-			'meta_query'     => array(
+			'post_type' => 'revixreviews',
+			'post_status' => 'publish',
+			'posts_per_page' => intval($atts['count']),
+			'meta_query' => array(
 				'relation' => 'AND',
 				array(
-					'key'     => 'revixreviews_rating',
-					'value'   => floatval( $atts['min_rating'] ),
+					'key' => 'revixreviews_rating',
+					'value' => floatval($atts['min_rating']),
 					'compare' => '>=',
-					'type'    => 'NUMERIC'
+					'type' => 'NUMERIC'
 				),
 				array(
-					'key'     => 'revixreviews_rating',
-					'value'   => floatval( $atts['max_rating'] ),
+					'key' => 'revixreviews_rating',
+					'value' => floatval($atts['max_rating']),
 					'compare' => '<=',
-					'type'    => 'NUMERIC'
+					'type' => 'NUMERIC'
 				)
 			),
 		);
 
-		$query = new \WP_Query( $args );
+		$query = new \WP_Query($args);
 
 		// Check if the query returns any posts.
-		if ( $query->have_posts() ) {
+		if ($query->have_posts()) {
 			echo '<div class="revix-testimonial-wrapper-area"><div class="revix-testimonial-wrapper"><div class="revix-testimonial-slider revix-testimonial-grids">';
 			// Loop through the posts.
-			while ( $query->have_posts() ) {
+			while ($query->have_posts()) {
 				$query->the_post();
-				$testimonial_rating = get_post_meta( get_the_ID(), 'revixreviews_rating', true );
+				$testimonial_rating = get_post_meta(get_the_ID(), 'revixreviews_rating', true);
 				?>
 				<div class="revix-testimonial-single-item">
 					<div class="revix-testimonial-client-info">
@@ -61,12 +64,25 @@ class ReviewsShortcode {
 						</h3>
 					</div>
 					<div class="revix-testimonial-rating">
-						<?php for ( $i = 1; $i <= 5; $i++ ) : ?>
-							<i class="<?php echo ( $i <= $testimonial_rating ) ? 'eicon-star' : 'eicon-star-o'; ?>"></i>
+						<?php for ($i = 1; $i <= 5; $i++): ?>
+							<?php if ($i <= $testimonial_rating): ?>
+								<!-- Filled Star SVG -->
+								<svg xmlns="http://www.w3.org/2000/svg" height="18" viewBox="0 0 32 32" width="18" fill="#f5a623">
+									<path
+										d="m29.911 13.75-6.229 6.072 1.471 8.576c.064.375-.09.754-.398.978-.174.127-.381.191-.588.191-.159 0-.319-.038-.465-.115l-7.702-4.049-7.701 4.048c-.336.178-.745.149-1.053-.076-.308-.224-.462-.603-.398-.978l1.471-8.576-6.23-6.071c-.272-.266-.371-.664-.253-1.025s.431-.626.808-.681l8.609-1.25 3.85-7.802c.337-.683 1.457-.683 1.794 0l3.85 7.802 8.609 1.25c.377.055.69.319.808.681s.019.758-.253 1.025z" />
+								</svg>
+							<?php else: ?>
+								<!-- Outlined Star SVG -->
+								<svg xmlns="http://www.w3.org/2000/svg" height="18" viewBox="0 -10 512 512" width="18" fill="#ccc">
+									<path
+										d="m114.59375 491.140625c-5.609375 0-11.179688-1.75-15.933594-5.1875-8.855468-6.417969-12.992187-17.449219-10.582031-28.09375l32.9375-145.089844-111.703125-97.960937c-8.210938-7.167969-11.347656-18.519532-7.976562-28.90625 3.371093-10.367188 12.542968-17.707032 23.402343-18.710938l147.796875-13.417968 58.433594-136.746094c4.308594-10.046875 14.121094-16.535156 25.023438-16.535156 10.902343 0 20.714843 6.488281 25.023437 16.511718l58.433594 136.769532 147.773437 13.417968c10.882813.980469 20.054688 8.34375 23.425782 18.710938 3.371093 10.367187.253906 21.738281-7.957032 28.90625l-111.703125 97.941406 32.9375 145.085938c2.414063 10.667968-1.726562 21.699218-10.578125 28.097656-8.832031 6.398437-20.609375 6.890625-29.910156 1.300781l-127.445312-76.160156-127.445313 76.203125c-4.308594 2.558594-9.109375 3.863281-13.953125 3.863281zm141.398438-112.875c4.84375 0 9.640624 1.300781 13.953124 3.859375l120.277344 71.9375-31.085937-136.941406c-2.21875-9.746094 1.089843-19.921875 8.621093-26.515625l105.472657-92.5-139.542969-12.671875c-10.046875-.917969-18.6875-7.234375-22.613281-16.492188l-55.082031-129.046875-55.148438 129.066407c-3.882812 9.195312-12.523438 15.511718-22.546875 16.429687l-139.5625 12.671875 105.46875 92.5c7.554687 6.613281 10.859375 16.769531 8.621094 26.539062l-31.0625 136.9375 120.277343-71.914062c4.308594-2.558594 9.109376-3.859375 13.953126-3.859375z" />
+								</svg>
+							<?php endif; ?>
 						<?php endfor; ?>
 					</div>
-					<div class="revix-testimonial-content">                        
-						<?php the_content(); ?>                        
+
+					<div class="revix-testimonial-content">
+						<?php the_content(); ?>
 					</div>
 					<div class="revix-testimonial-quote">
 						<svg xmlns="http://www.w3.org/2000/svg" width="68" height="50" viewBox="0 0 68 50" fill="none">

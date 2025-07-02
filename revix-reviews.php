@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name: Revix Reviews – All-in-One Business Review Manager
- * Version: 1.2.4
+ * Version: 1.2.5
  * Description: A WordPress plugin for managing reviews.
  * Author: SupreoX Limited
  * Author URI: https://supreox.com/
@@ -61,7 +61,7 @@ final class RevixReviews
      */
     private function define_constants(): void
     {
-        define('REVIXREVIEWS_VERSION', '1.2.4');
+        define('REVIXREVIEWS_VERSION', '1.2.5');
         define('REVIXREVIEWS_PATH', plugin_dir_path(__FILE__));
         define('REVIXREVIEWS_URL', plugin_dir_url(__FILE__));
         define('REVIXREVIEWS_FILE', __FILE__);
