@@ -51,6 +51,10 @@ class Assets
             wp_enqueue_style('revix-google-review', REVIXREVIEWS_SHORTCODE_ASSETS . '/css/google-review.css', [], REVIXREVIEWS_VERSION);
         }
 
+        if (has_shortcode($post->post_content, 'revixreviews_form')) {
+            wp_enqueue_style('revixreviews-form-general', REVIXREVIEWS_SHORTCODE_ASSETS . '/css/general.css', [], REVIXREVIEWS_VERSION);
+        }
+
         
     }
     
@@ -91,6 +95,10 @@ class Assets
                     }
                 });
             ");
+        }
+
+        if (has_shortcode($post->post_content, 'revixreviews_form')) {
+            wp_enqueue_script('revixreviews-form', REVIXREVIEWS_SHORTCODE_ASSETS . '/js/revixreviews-form.js', [], REVIXREVIEWS_VERSION, true);
         }
 
         wp_enqueue_script(

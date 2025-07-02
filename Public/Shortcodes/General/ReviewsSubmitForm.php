@@ -14,7 +14,7 @@ class ReviewsSubmitForm
 		add_shortcode('revixreviews_form', array($this, 'display_feedback_form')); // Display feedback form.
 		add_action('wp_ajax_submit_revixreviews_feedback_ajax', array($this, 'handle_submission_ajax'));
 		add_action('wp_ajax_nopriv_submit_revixreviews_feedback_ajax', array($this, 'handle_submission_ajax'));
-		
+
 	}
 
 	public function display_feedback_form($atts = array())
@@ -59,19 +59,16 @@ class ReviewsSubmitForm
 				<textarea id="revixreviews_comments" name="revixreviews_comments" required></textarea>
 			</p>
 
-			<p><label for="revixreviews_rating">
-					<?php echo esc_html__('Rating:', 'revix-reviews'); ?>
-				</label>
-				<select id="revixreviews_rating" name="revixreviews_rating" required>
-					<option value="">
-						<?php echo esc_html__('Select a rating', 'revix-reviews'); ?>
-					</option>
-					<option value="1"><?php echo esc_html__('1', 'revix-reviews'); ?></option>
-					<option value="2"><?php echo esc_html__('2', 'revix-reviews'); ?></option>
-					<option value="3"><?php echo esc_html__('3', 'revix-reviews'); ?></option>
-					<option value="4"><?php echo esc_html__('4', 'revix-reviews'); ?></option>
-					<option value="5" selected><?php echo esc_html__('5', 'revix-reviews'); ?></option>
-				</select>
+			<p>
+				<label><?php echo esc_html__('Rating:', 'revix-reviews'); ?></label>
+				<div class="rating-stars">
+					<span class="star" data-value="1">&#9733;</span>
+					<span class="star" data-value="2">&#9733;</span>
+					<span class="star" data-value="3">&#9733;</span>
+					<span class="star" data-value="4">&#9733;</span>
+					<span class="star" data-value="5">&#9733;</span>
+				</div>
+			<input type="hidden" id="revixreviews_rating" name="revixreviews_rating" value="0" required>
 			</p>
 
 			<input type="submit" value="<?php echo esc_attr($atts['btn_text']); ?>">
@@ -116,9 +113,10 @@ class ReviewsSubmitForm
 		return ob_get_clean(); // Return the buffer contents
 	}
 
-	public function handle_submission_ajax() {
+	public function handle_submission_ajax()
+	{
 		check_ajax_referer('revixreviews_feedback_nonce_action', 'nonce');
-	
+
 		// Validate required fields
 		$required_fields = ['revixreviews_name', 'revixreviews_email', 'revixreviews_subject', 'revixreviews_comments', 'revixreviews_rating'];
 		foreach ($required_fields as $field) {
@@ -126,18 +124,18 @@ class ReviewsSubmitForm
 				wp_send_json_error(['message' => 'Please fill all required fields.']);
 			}
 		}
-	
+
 		// Sanitize inputs
 		$name = sanitize_text_field(wp_unslash($_POST['revixreviews_name']));
 		$email = sanitize_email(wp_unslash($_POST['revixreviews_email']));
 		$subject = sanitize_text_field(wp_unslash($_POST['revixreviews_subject']));
 		$comments = sanitize_textarea_field(wp_unslash($_POST['revixreviews_comments']));
 		$rating = intval(wp_unslash($_POST['revixreviews_rating']));
-	
+
 		if (!is_email($email)) {
 			wp_send_json_error(['message' => 'Invalid email address.']);
 		}
-	
+
 		$post_status = get_option('revixreviews_status', 'pending');
 		$post_id = wp_insert_post([
 			'post_title' => $subject,
@@ -150,12 +148,12 @@ class ReviewsSubmitForm
 				'revixreviews_rating' => $rating,
 			],
 		]);
-	
+
 		if ($post_id) {
 			wp_send_json_success(['message' => 'Your feedback has been submitted successfully.']);
 		} else {
 			wp_send_json_error(['message' => 'Failed to submit feedback.']);
 		}
 	}
-	
+
 }
