@@ -144,7 +144,7 @@ Yes, moderation can be turned on/off for native reviews via settings.
 = 1.2.5 =
 - bug fixes
 - Form styling improvements to Modern
-- Using Ajax to form submission
+- Using Ajax for form submission
 
 
 = 1.2.4 =
