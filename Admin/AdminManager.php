@@ -12,6 +12,7 @@ use RevixReviews\Admin\Inc\Reviews\PostTypes\Reviews;
 use RevixReviews\Admin\Inc\Reviews\MetaBox\ReviewsMetaBox;
 
 use RevixReviews\Admin\Inc\Dashboard\Settings\Settings;
+use RevixReviews\Admin\Core\Core;
 
 class AdminManager
 {
@@ -23,6 +24,8 @@ class AdminManager
 
     protected $settings;
     protected $trustpilot_settings;
+
+    protected $core;
 
     /**
      * 
@@ -50,5 +53,6 @@ class AdminManager
         $this->reviews = new Reviews();
         $this->reviews_meta_box = new ReviewsMetaBox();       
         $this->settings = new Settings();
+        $this->core = new Core();
     }
 }
