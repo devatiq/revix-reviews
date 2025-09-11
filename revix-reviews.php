@@ -3,8 +3,8 @@
  * Plugin Name: Revix Reviews – All-in-One Business Review Manager
  * Version: 1.2.5
  * Description: A WordPress plugin for managing reviews.
- * Author: SupreoX Limited
- * Author URI: https://supreox.com/
+ * Author: NexiBy LLC
+ * Author URI: https://nexiby.com/
  * Plugin URI: https://revixreviews.com/
  * License: GPL2
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html

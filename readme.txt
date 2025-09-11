@@ -1,9 +1,9 @@
 === Revix Reviews – All-in-One Business Review Manager ===
 Plugin Name: Revix Reviews
-Author: supreoxltd
-Author URI: https://supreox.com/
-Contributors: abcplugins, atiqbd4ever, supreoxltd
-Tags: Tags: reviews, business reviews, testimonials, trustpilot, google reviews
+Author: nexibyllc
+Author URI: https://nexiby.com/
+Contributors: abcplugins, atiqbd4ever, nexibyllc, supreoxltd
+Tags: reviews, business reviews, testimonials, trustpilot, google reviews
 Requires at least: 5.4
 Tested up to: 6.8
 Stable tag: 1.2.5
