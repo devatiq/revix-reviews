@@ -2,8 +2,8 @@
 namespace RevixReviews\Public\Inc\Integrations\Trustpilot;
 class TrustpilotFetcher
 {
-    const ENABLE_CACHE = false; // Disable cache temporarily for debugging
-    const DEBUG = true; // Enable debugging
+    const ENABLE_CACHE = true; // Cache enabled for performance
+    const DEBUG = false; // Debug disabled
     const MAX_PAGES = 10;
 
     /**
@@ -21,10 +21,13 @@ class TrustpilotFetcher
         if (!$base_url)
             return [];
 
-        $cache_key = 'revix_trustpilot_reviews_cache_' . md5($base_url . $count . $minRating);
+        // Include version in cache key to bust old cache when code changes
+        $cache_version = '2.0'; // Increment this when text extraction logic changes
+        $cache_key = 'revix_trustpilot_reviews_cache_v' . $cache_version . '_' . md5($base_url . $count . $minRating);
+        
         if (self::ENABLE_CACHE) {
             $cached = get_transient($cache_key);
-            if ($cached)
+            if ($cached && !empty($cached))
                 return $cached;
         }
 
