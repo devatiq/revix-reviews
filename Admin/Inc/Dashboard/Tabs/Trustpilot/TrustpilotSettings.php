@@ -4,6 +4,17 @@ namespace RevixReviews\Admin\Inc\Dashboard\Tabs\Trustpilot;
 class TrustpilotSettings {
     public function __construct() {
         add_action('admin_init', [$this, 'register_settings']);
+        add_action('update_option_revix_trustpilot_url', [$this, 'clear_cache_on_save'], 10, 2);
+    }
+
+    /**
+     * Clear Trustpilot cache when settings are saved
+     */
+    public function clear_cache_on_save($old_value, $new_value) {
+        // Clear all Trustpilot review caches
+        global $wpdb;
+        $wpdb->query("DELETE FROM {$wpdb->options} WHERE option_name LIKE '_transient_revix_trustpilot_%'");
+        $wpdb->query("DELETE FROM {$wpdb->options} WHERE option_name LIKE '_transient_timeout_revix_trustpilot_%'");
     }
 
 	public function register_settings() {
