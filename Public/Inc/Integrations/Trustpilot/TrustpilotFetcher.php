@@ -3,7 +3,7 @@ namespace RevixReviews\Public\Inc\Integrations\Trustpilot;
 class TrustpilotFetcher
 {
     const ENABLE_CACHE = true;
-    const DEBUG = false;
+    const DEBUG = true; // Enable debugging
     const MAX_PAGES = 10;
 
     public function get_reviews($count = 5, $minRating = 0)

@@ -1,4 +1,12 @@
 document.addEventListener('DOMContentLoaded', function() {
-    document.querySelector('.revix-loader-wrapper').style.display = 'none';
-    document.querySelector('.revix-trustpilot-reviews').style.display = 'grid';
+    var loader = document.querySelector('.revix-loader-wrapper');
+    var reviews = document.querySelector('.revix-trustpilot-reviews');
+    
+    if (loader) {
+        loader.style.display = 'none';
+    }
+    
+    if (reviews) {
+        reviews.style.display = 'grid';
+    }
 });

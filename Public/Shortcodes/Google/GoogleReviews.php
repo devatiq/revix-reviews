@@ -25,13 +25,39 @@ class GoogleReviews
     {
         $atts = shortcode_atts([
             'masonry' => 'false',
-            'words' => '500'
+            'words' => '500',
+            'debug' => 'false'
         ], $atts, 'revix_google_reviews');
 
+        $debug = ($atts['debug'] === 'true');
+        
+        // Check if API credentials are configured
+        $api_key = get_option('revix_google_api_key');
+        $place_id = get_option('revix_google_place_id');
+        
+        if (empty($api_key) || empty($place_id)) {
+            $message = __('Google API Key or Place ID not configured. Please set them in the WordPress dashboard under Revix Reviews > Google tab.', 'revix-reviews');
+            if ($debug) {
+                $details = 'API Key: ' . (empty($api_key) ? 'Not Set' : 'Set') . ', Place ID: ' . (empty($place_id) ? 'Not Set' : 'Set');
+                return '<div class="revix-google-error" style="padding:15px;background:#fee;border:1px solid #c33;color:#c33;">' . esc_html($message) . '<br><small>' . esc_html($details) . '</small></div>';
+            }
+            return '<!-- ' . esc_html($message) . ' -->';
+        }
+
         $reviews = GoogleReviewFetcher::get_reviews();
+        
+        if ($debug) {
+            error_log('Revix Google Debug: API Key = ' . (empty($api_key) ? 'Not Set' : 'Set'));
+            error_log('Revix Google Debug: Place ID = ' . $place_id);
+            error_log('Revix Google Debug: Reviews fetched = ' . count($reviews));
+        }
 
         if (empty($reviews)) {
-            return '<p>' . esc_html__('No Google reviews found.', 'revix-reviews') . '</p>';
+            $message = __('No Google reviews found. Please verify your API Key and Place ID are correct.', 'revix-reviews');
+            if ($debug) {
+                return '<div class="revix-google-error" style="padding:15px;background:#fee;border:1px solid #c33;color:#c33;">' . esc_html($message) . '</div>';
+            }
+            return '<!-- ' . esc_html($message) . ' -->';
         }
 
         ob_start();
@@ -75,6 +101,10 @@ class GoogleReviews
 
         }
         echo '</div>';
+        
+        if ($debug) {
+            echo '<!-- Revix Google: Rendered ' . count($reviews) . ' reviews -->';
+        }
 
         return ob_get_clean();
     }
