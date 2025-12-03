@@ -2,9 +2,18 @@
 namespace RevixReviews\Public\Inc\Integrations\Trustpilot;
 class TrustpilotFetcher
 {
-    const ENABLE_CACHE = true;
+    const ENABLE_CACHE = false; // Disable cache temporarily for debugging
     const DEBUG = true; // Enable debugging
     const MAX_PAGES = 10;
+
+    /**
+     * Clear all Trustpilot review caches
+     */
+    public static function clear_cache() {
+        global $wpdb;
+        $wpdb->query("DELETE FROM {$wpdb->options} WHERE option_name LIKE '_transient_revix_trustpilot_%'");
+        $wpdb->query("DELETE FROM {$wpdb->options} WHERE option_name LIKE '_transient_timeout_revix_trustpilot_%'");
+    }
 
     public function get_reviews($count = 5, $minRating = 0)
     {
@@ -63,9 +72,74 @@ class TrustpilotFetcher
                 $country = $xpath->query(".//span[@data-consumer-country-typography='true']", $element);
                 $avatar = $xpath->query(".//img[@data-consumer-avatar-image='true']", $element);
                 $title = $xpath->query(".//h2[@data-service-review-title-typography='true']", $element);
-                $content = $xpath->query(".//p[@data-service-review-text-typography='true']", $element);
                 $rating = $xpath->query(".//img[contains(@alt,'Rated')]", $element);
                 $date = $xpath->query(".//time", $element);
+                
+                // Multiple strategies to extract review text
+                $text = '';
+                
+                // Strategy 1: Standard data attribute
+                $content = $xpath->query(".//p[@data-service-review-text-typography='true']", $element);
+                if ($content->length > 0) {
+                    $text = trim($content->item(0)->nodeValue);
+                }
+                
+                // Strategy 2: Review content div
+                if (empty($text)) {
+                    $content = $xpath->query(".//div[@data-review-content='true']//p", $element);
+                    if ($content->length > 0) {
+                        $text = trim($content->item(0)->nodeValue);
+                    }
+                }
+                
+                // Strategy 3: Class-based selector
+                if (empty($text)) {
+                    $content = $xpath->query(".//div[contains(@class,'styles_reviewContent')]//p", $element);
+                    if ($content->length > 0) {
+                        $text = trim($content->item(0)->nodeValue);
+                    }
+                }
+                
+                // Strategy 4: Look for data-service-review-text attribute
+                if (empty($text)) {
+                    $content = $xpath->query(".//*[@data-service-review-text-typography]", $element);
+                    if ($content->length > 0) {
+                        $text = trim($content->item(0)->nodeValue);
+                    }
+                }
+                
+                // Strategy 5: Find the longest paragraph (likely the review)
+                if (empty($text)) {
+                    $allParagraphs = $xpath->query(".//p", $element);
+                    $longestText = '';
+                    foreach ($allParagraphs as $p) {
+                        $pText = trim($p->nodeValue);
+                        // Skip if it's rating text, date, or very short
+                        if (strlen($pText) > strlen($longestText) && 
+                            !preg_match('/^(Rated|Date of experience|Reply from|Verified)/i', $pText) &&
+                            strlen($pText) > 20) {
+                            $longestText = $pText;
+                        }
+                    }
+                    $text = $longestText;
+                }
+                
+                // Strategy 6: Look for any div with review text patterns
+                if (empty($text)) {
+                    $allDivs = $xpath->query(".//div", $element);
+                    foreach ($allDivs as $div) {
+                        $divText = trim($div->nodeValue);
+                        // Look for text that looks like a review (longer than author name, etc)
+                        if (strlen($divText) > 50 && strlen($divText) < 5000) {
+                            // Make sure it doesn't contain child elements text we already checked
+                            $hasChildren = $div->childNodes->length > 1;
+                            if (!$hasChildren || strpos($divText, 'Rated') === false) {
+                                $text = $divText;
+                                break;
+                            }
+                        }
+                    }
+                }
 
                 preg_match('/([0-9]+(?:\\.[0-9])?)/', $rating->length ? $rating->item(0)->getAttribute('alt') : '', $matches);
                 $ratingValue = isset($matches[1]) ? floatval($matches[1]) : 0;
@@ -74,10 +148,14 @@ class TrustpilotFetcher
                     continue;
                 }
 
-                $text = $content->length ? trim($content->item(0)->nodeValue) : '';
-                if (empty($text)) {
-                    $altContent = $xpath->query(".//div[@data-review-content='true']//p", $element);
-                    $text = $altContent->length ? trim($altContent->item(0)->nodeValue) : '';
+                // Debug: Log what we found
+                if (self::DEBUG) {
+                    $authorName = $author->length ? trim($author->item(0)->nodeValue) : 'Unknown';
+                    error_log('Revix Trustpilot: Processing review by ' . $authorName);
+                    error_log('Revix Trustpilot: Text length = ' . strlen($text) . ' chars');
+                    if (empty($text)) {
+                        error_log('Revix Trustpilot: WARNING - No text found for this review!');
+                    }
                 }
 
                 $reviews[] = [
