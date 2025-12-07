@@ -52,9 +52,9 @@ Supports:
 **3. `[revix_trustpilot_reviews]`**  
 Displays Trustpilot reviews pulled from your business profile.  
 Supports:
-- `count`
-- `min_rating`
-- `max_rating`
+- `count` – Limit the number of reviews displayed (default: all reviews, example: `count="6"`)
+- `min_rating` – Show only reviews with this rating or higher (1-5 scale, example: `min_rating="4"`)
+- `max_rating` – Show only reviews with this rating or lower (1-5 scale, example: `max_rating="5"`)
 
 **4. `[revix_trustpilot_summary]`**  
 Displays Trustpilot summary: star rating and total number of reviews.
@@ -63,6 +63,9 @@ Displays Trustpilot summary: star rating and total number of reviews.
 Displays reviews from a public Google Maps place using your API key.  
 Displays:
 - Author, rating stars, time, review text, profile image, and Google logo.
+Supports:
+- `words` – Limit review text length by word count (default: `55`, example: `words="30"`)
+- `masonry` – Enable Pinterest-style masonry layout for varying review heights (`masonry="true"` or `masonry="false"`)
 
 **6. `[revix_google_summary]`**  
 Displays summary of Google reviews (place name, average, total count).  
@@ -88,10 +91,104 @@ Yes. Use the `name` attribute in `[revix_google_summary]` to hide or replace it.
 **Do I need to approve reviews before they appear?**  
 Yes, moderation can be turned on/off for native reviews via settings.
 
+**How do I create a Google Maps API key?**  
+1. Visit the Google Cloud Console: https://console.cloud.google.com/
+2. Create a new project or select an existing one
+3. Go to "APIs & Services" → "Library"
+4. Search for "Places API (New)" and click "ENABLE"
+5. Go to "Credentials" and click "Create Credentials" → "API Key"
+6. Copy your API key and paste it in the Revix Reviews → Google tab
+7. (Optional) Restrict your API key to your domain for security
+Watch this helpful video tutorial: https://www.youtube.com/watch?v=hsNlz7-abd0
+
+**I've created an API key but reviews still don't show up?**  
+As of December 2025, Google has migrated to the new Places API. Make sure you:
+1. Enable "Places API (New)" in Google Cloud Console (NOT the legacy "Places API")
+2. Your API key must have access to the new Places API
+3. Billing must be enabled on your Google Cloud account (Google requires this even for free tier usage)
+4. Wait a few minutes after enabling the API for it to take effect
+Watch this tutorial for step-by-step guidance: https://www.youtube.com/watch?v=eycjk3APuoI
+
+**What's the difference between Places API and Places API (New)?**  
+Google has deprecated the old Places API. This plugin now uses the new "Places API (New)" which offers:
+- Better performance and reliability
+- More accurate review data
+- Enhanced features and fields
+- Modern API structure
+Make sure to enable "Places API (New)" in your Google Cloud Console, not the legacy version.
+
 ## Screenshots
 
 1. Admin settings panel for Revix Reviews
-2. Native review form on the front end
-3. Display of reviews using shortcodes
-4. Star-rating icons mapped to scores
-5. Company summary with average and total reviews
+2. General Review post type
+3. Trustpilot admin integration panel
+4. Google Reviews settings panel
+5. Google and Trustpilot review displays with SVG icons
+6. Google Reviews
+7. Google Review Settings
+8. General User Feedback submission form
+
+## Changelog
+
+### 1.2.6
+- **IMPORTANT:** Migrated to Google Places API (New) - Legacy API no longer supported
+- **NEW:** Automatic cache clearing when Google or Trustpilot settings are saved
+- **NEW:** Smart caching system (12-hour expiration) for better performance
+- **NEW:** Enhanced text extraction for Trustpilot reviews with 6 fallback strategies
+- **IMPROVED:** Better error logging and debugging for API issues
+- **FIXED:** Google Reviews now work with the new Places API format
+- **FIXED:** Trustpilot review text display issues
+- **Note:** You must enable "Places API (New)" in Google Cloud Console for Google Reviews to work
+
+### 1.2.5
+- Bug fixes
+- Form styling improvements to Modern
+- Using Ajax for form submission
+
+### 1.2.4
+- Performance improvements
+- Bug fixes
+
+### 1.2.3
+- Bug fix and improvement
+
+### 1.2.2
+- Bug Fix
+
+### 1.2.1
+- Add attributes 'words' and masonry for google review shortcode
+
+### 1.2.0
+- **NEW:** Google Reviews integration with `[revix_google_reviews]` shortcode
+- **NEW:** Google summary display with `[revix_google_summary]` shortcode
+- **NEW:** SVG-based star icons for Google ratings
+- **NEW:** Customizable name and label controls for summary
+- **ENHANCED:** Improved shortcode rendering and visual structure
+
+### 1.1.1
+- Count issue fix for `[revix_trustpilot_reviews]` shortcode
+
+### 1.1.0
+- **NEW:** Trustpilot integration
+- **NEW:** Shortcode filters for review count and rating
+- **NEW:** Trustpilot summary support
+- **Tweak:** Improved display and fallback
+
+### 1.0.0
+- Initial release
+
+## Upgrade Notice
+
+### 1.2.6
+**IMPORTANT:** Google has deprecated the old Places API. This version migrates to the new Places API (New). You MUST enable "Places API (New)" in Google Cloud Console for Google Reviews to continue working. Legacy API users will need to update their settings.
+
+### 1.2.0
+Major update: Adds Google Reviews support and display shortcodes. Please configure your Google API Key and Place ID in settings to enable.
+
+## License
+
+This plugin is licensed under the GPLv2 or later.
+
+## Credits
+
+Developed by [Nexiby LLC](https://nexiby.com/)
