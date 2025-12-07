@@ -25,7 +25,7 @@ class GoogleReviews
     {
         $atts = shortcode_atts([
             'masonry' => 'false',
-            'words' => '55',
+            'words' => '100',
             'debug' => 'false'
         ], $atts, 'revix_google_reviews');
 

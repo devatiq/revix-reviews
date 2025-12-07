@@ -62,9 +62,9 @@ Supports:
 **3. `[revix_trustpilot_reviews]`**  
 Displays Trustpilot reviews pulled from your business profile.  
 Supports:
-- `count`
-- `min_rating`
-- `max_rating`
+- `count` – Limit the number of reviews displayed (default: all reviews, example: `count="6"`)
+- `min_rating` – Show only reviews with this rating or higher (1-5 scale, example: `min_rating="4"`)
+- `max_rating` – Show only reviews with this rating or lower (1-5 scale, example: `max_rating="5"`)
 
 **4. `[revix_trustpilot_summary]`**  
 Displays Trustpilot summary: star rating and total number of reviews.
@@ -74,8 +74,8 @@ Displays reviews from a public Google Maps place using your API key.
 Displays:
 - Author, rating stars, time, review text, profile image, and Google logo.
 Supports:
-- `words`
-- `masonry`
+- `words` – Limit review text length by word count (default: `100`, example: `words="30"`)
+- `masonry` – Enable Pinterest-style masonry layout for varying review heights (`masonry="true"` or `masonry="false"`)
 
 **6. `[revix_google_summary]`**  
 Displays summary of Google reviews (place name, average, total count).  
