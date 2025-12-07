@@ -1,14 +1,5 @@
 # Revix Reviews – All-in-One Business Review Manager
 
-**Contributors**: abcplugins, atiqbd4ever, supreoxltd  
-**Tags**: reviews, business reviews, testimonials, trustpilot, google reviews  
-**Requires at least**: 5.4  
-**Tested up to**: 6.8  
-**Stable tag**: 1.2.4  
-**Requires PHP**: 8.0  
-**License**: GPLv2 or later  
-**License URI**: http://www.gnu.org/licenses/gpl-2.0.html  
-
 Revix Reviews helps you collect, import, and display reviews—including Trustpilot and Google—with more platforms coming soon.
 
 ## Description

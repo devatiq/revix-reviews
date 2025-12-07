@@ -25,7 +25,7 @@ class GoogleReviews
     {
         $atts = shortcode_atts([
             'masonry' => 'false',
-            'words' => '500',
+            'words' => '55',
             'debug' => 'false'
         ], $atts, 'revix_google_reviews');
 
@@ -81,7 +81,7 @@ class GoogleReviews
                     echo ' <span class="revix-google-rating-text">' . $rating . '/5</span>';
                 echo '</div>';
                 if (!empty($review['text'])) {
-                    echo '<p class="revix-google-review-text">' . esc_html(wp_trim_words( $review['text'], $atts['words'], '...' )) . '</p>';
+                    echo '<p class="revix-google-review-text">' . esc_html(wp_trim_words($review['text'], intval($atts['words']), '...')) . '</p>';
                 }
                 echo '<div class="revix-google-review-meta">';
                     echo '<div class="revix-google-review-author">';

@@ -1,15 +1,15 @@
-# Copyright (C) 2025 SupreoX Limited
+# Copyright (C) 2025 NexiBy LLC
 # This file is distributed under the GPL2.
 msgid ""
 msgstr ""
-"Project-Id-Version: Revix Reviews – All-in-One Business Review Manager 1.2.5\n"
+"Project-Id-Version: Revix Reviews – All-in-One Business Review Manager 1.2.6\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/revix-reviews\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-07-02T11:46:00+00:00\n"
+"POT-Creation-Date: 2025-12-07T12:03:09+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: revix-reviews\n"
@@ -31,12 +31,12 @@ msgstr ""
 
 #. Author of the plugin
 #: revix-reviews.php
-msgid "SupreoX Limited"
+msgid "NexiBy LLC"
 msgstr ""
 
 #. Author URI of the plugin
 #: revix-reviews.php
-msgid "https://supreox.com/"
+msgid "https://nexiby.com/"
 msgstr ""
 
 #: Admin/Inc/Dashboard/Settings/Settings.php:40
@@ -67,47 +67,55 @@ msgstr ""
 msgid "Set your preferences for the Revix Reviews plugin."
 msgstr ""
 
-#: Admin/Inc/Dashboard/Settings/Settings.php:174
+#: Admin/Inc/Dashboard/Settings/Settings.php:158
+msgid "Enter the URL to redirect users to after they submit a review."
+msgstr ""
+
+#: Admin/Inc/Dashboard/Settings/Settings.php:175
 msgid "Publish"
 msgstr ""
 
-#: Admin/Inc/Dashboard/Settings/Settings.php:177
+#: Admin/Inc/Dashboard/Settings/Settings.php:178
 msgid "Pending"
 msgstr ""
 
-#: Admin/Inc/Dashboard/Settings/Settings.php:180
+#: Admin/Inc/Dashboard/Settings/Settings.php:181
 msgid "Draft"
 msgstr ""
 
-#: Admin/Inc/Dashboard/Tabs/Google/GoogleSettings.php:24
+#: Admin/Inc/Dashboard/Settings/Settings.php:185
+msgid "Select the default status for new reviews. 'Publish' makes them public immediately, 'Pending' requires admin approval, and 'Draft' saves them as drafts."
+msgstr ""
+
+#: Admin/Inc/Dashboard/Tabs/Google/GoogleSettings.php:36
 msgid "Google Maps Reviews Settings"
 msgstr ""
 
-#: Admin/Inc/Dashboard/Tabs/Google/GoogleSettings.php:26
+#: Admin/Inc/Dashboard/Tabs/Google/GoogleSettings.php:38
 msgid "Enter your Google Maps API key and Place ID to fetch reviews."
 msgstr ""
 
-#: Admin/Inc/Dashboard/Tabs/Google/GoogleSettings.php:35
+#: Admin/Inc/Dashboard/Tabs/Google/GoogleSettings.php:47
 msgid "Google API Key"
 msgstr ""
 
-#: Admin/Inc/Dashboard/Tabs/Google/GoogleSettings.php:39
+#: Admin/Inc/Dashboard/Tabs/Google/GoogleSettings.php:51
 msgid "Show"
 msgstr ""
 
-#: Admin/Inc/Dashboard/Tabs/Google/GoogleSettings.php:40
+#: Admin/Inc/Dashboard/Tabs/Google/GoogleSettings.php:52
 msgid "Get your API key from the Google Cloud Console. Enable the Places API and restrict it for security."
 msgstr ""
 
-#: Admin/Inc/Dashboard/Tabs/Google/GoogleSettings.php:50
+#: Admin/Inc/Dashboard/Tabs/Google/GoogleSettings.php:62
 msgid "Google Place ID"
 msgstr ""
 
-#: Admin/Inc/Dashboard/Tabs/Google/GoogleSettings.php:53
+#: Admin/Inc/Dashboard/Tabs/Google/GoogleSettings.php:65
 msgid "Find your Place ID using the official Google Place ID Finder:"
 msgstr ""
 
-#: Admin/Inc/Dashboard/Tabs/Google/GoogleSettings.php:53
+#: Admin/Inc/Dashboard/Tabs/Google/GoogleSettings.php:65
 msgid "Google Place ID Lookup"
 msgstr ""
 
@@ -123,16 +131,20 @@ msgstr ""
 msgid "Google Reviews"
 msgstr ""
 
-#: Admin/Inc/Dashboard/Tabs/Trustpilot/TrustpilotSettings.php:21
+#: Admin/Inc/Dashboard/Tabs/Trustpilot/TrustpilotSettings.php:32
 msgid "Trustpilot Reviews Settings"
 msgstr ""
 
-#: Admin/Inc/Dashboard/Tabs/Trustpilot/TrustpilotSettings.php:23
+#: Admin/Inc/Dashboard/Tabs/Trustpilot/TrustpilotSettings.php:34
 msgid "Enter your public Trustpilot business review page URL."
 msgstr ""
 
-#: Admin/Inc/Dashboard/Tabs/Trustpilot/TrustpilotSettings.php:30
+#: Admin/Inc/Dashboard/Tabs/Trustpilot/TrustpilotSettings.php:41
 msgid "Trustpilot Review Page URL"
+msgstr ""
+
+#: Admin/Inc/Dashboard/Tabs/Trustpilot/TrustpilotSettings.php:44
+msgid "Enter the full URL of your business's Trustpilot review page. This is used to fetch your latest reviews."
 msgstr ""
 
 #: Admin/Inc/Reviews/MetaBox/ReviewsMetaBox.php:32
@@ -189,7 +201,7 @@ msgstr ""
 msgid "All Reviews"
 msgstr ""
 
-#: Public/Inc/Integrations/Trustpilot/TrustpilotFetcher.php:84
+#: Public/Inc/Integrations/Trustpilot/TrustpilotFetcher.php:165
 msgid "Anonymous"
 msgstr ""
 
@@ -205,14 +217,31 @@ msgstr ""
 msgid "Comments:"
 msgstr ""
 
-#: Public/Shortcodes/Google/GoogleReviews.php:34
-msgid "No Google reviews found."
+#: Public/Shortcodes/Google/GoogleReviews.php:39
+msgid "Google API Key or Place ID not configured. Please set them in the WordPress dashboard under Revix Reviews > Google tab."
 msgstr ""
 
-#: Public/Shortcodes/Google/GoogleReviews.php:90
+#: Public/Shortcodes/Google/GoogleReviews.php:56
+msgid "No Google reviews found. Please verify your API Key and Place ID are correct."
+msgstr ""
+
+#: Public/Shortcodes/Google/GoogleReviews.php:120
 msgid "reviews"
 msgstr ""
 
-#: Public/Shortcodes/Google/GoogleReviews.php:96
+#: Public/Shortcodes/Google/GoogleReviews.php:126
 msgid "No summary data available."
+msgstr ""
+
+#: Public/Shortcodes/Trustpilot/TrustpilotShortcode.php:26
+msgid "Trustpilot URL not configured. Please set it in the WordPress dashboard under Revix Reviews > Trustpilot tab."
+msgstr ""
+
+#: Public/Shortcodes/Trustpilot/TrustpilotShortcode.php:43
+#, php-format
+msgid "No Trustpilot reviews found. URL configured: %s"
+msgstr ""
+
+#: Public/Shortcodes/Trustpilot/TrustpilotShortcode.php:107
+msgid "No reviews to display. Fetched "
 msgstr ""
