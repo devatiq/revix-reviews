@@ -5,6 +5,6 @@
   "scripts": {
     "make-pot": "composer run-script make-pot",
     "install-prod": "composer install --no-dev",
-    "bundle": "npm run make-pot && npm run install-prod && dir-archiver --src . --dest ../revix-reviews.zip --exclude .DS_Store .git .distignore .gitattributes .github .gitignore .wordpress-org README.md composer.lock node_modules package-lock.json package.json phpcs.xml.dist"
+    "bundle": "npm run make-pot && npm run install-prod && dir-archiver --src . --dest ../revix-reviews.zip --exclude .DS_Store .git .distignore .gitattributes .github .gitignore .wordpress-org README.md composer.lock node_modules package-lock.json package.json phpcs.xml.dist SECURITY.md"
   }
 }
