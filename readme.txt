@@ -6,7 +6,7 @@ Contributors: abcplugins, atiqbd4ever, nexibyllc, supreoxltd
 Tags: reviews, business reviews, testimonials, trustpilot, google reviews
 Requires at least: 5.4
 Tested up to: 6.8
-Stable tag: 1.2.5
+Stable tag: 1.2.6
 Requires PHP: 8.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -102,14 +102,30 @@ Yes. Use the `name` attribute in `[revix_google_summary]` to hide or replace it.
 Yes, moderation can be turned on/off for native reviews via settings.
 
 = How do I create a Google Maps API key? =
-Watch this helpful video tutorial that walks through the process step-by-step: https://www.youtube.com/watch?v=hsNlz7-abd0
-
-= How do I create a Google Maps API key? =
-Watch this helpful video tutorial that walks through the process step-by-step: https://www.youtube.com/watch?v=hsNlz7-abd0
+1. Visit the Google Cloud Console: https://console.cloud.google.com/
+2. Create a new project or select an existing one
+3. Go to "APIs & Services" → "Library"
+4. Search for "Places API (New)" and click "ENABLE"
+5. Go to "Credentials" and click "Create Credentials" → "API Key"
+6. Copy your API key and paste it in the Revix Reviews → Google tab
+7. (Optional) Restrict your API key to your domain for security
+Watch this helpful video tutorial: https://www.youtube.com/watch?v=hsNlz7-abd0
 
 = I've created an API key but reviews still don't show up? =
-Make sure you have enabled the Places API in your Google Cloud Console. Without the Places API enabled, reviews won't display even with a valid API key. Watch this tutorial for step-by-step guidance: https://www.youtube.com/watch?v=eycjk3APuoI
-Note: Only need Places API, don't need others to enable.
+As of December 2025, Google has migrated to the new Places API. Make sure you:
+1. Enable "Places API (New)" in Google Cloud Console (NOT the legacy "Places API")
+2. Your API key must have access to the new Places API
+3. Billing must be enabled on your Google Cloud account (Google requires this even for free tier usage)
+4. Wait a few minutes after enabling the API for it to take effect
+Watch this tutorial for step-by-step guidance: https://www.youtube.com/watch?v=eycjk3APuoI
+
+= What's the difference between Places API and Places API (New)? =
+Google has deprecated the old Places API. This plugin now uses the new "Places API (New)" which offers:
+- Better performance and reliability
+- More accurate review data
+- Enhanced features and fields
+- Modern API structure
+Make sure to enable "Places API (New)" in your Google Cloud Console, not the legacy version.
 
 
 = Can I customize the review form fields? =
@@ -141,6 +157,16 @@ Yes, moderation can be turned on/off for native reviews via settings.
 8. General User Feedback submission form
 
 == Changelog ==
+= 1.2.6 =
+- IMPORTANT: Migrated to Google Places API (New) - Legacy API no longer supported
+- NEW: Automatic cache clearing when Google or Trustpilot settings are saved
+- NEW: Smart caching system (12-hour expiration) for better performance
+- NEW: Enhanced text extraction for Trustpilot reviews with 6 fallback strategies
+- IMPROVED: Better error logging and debugging for API issues
+- FIXED: Google Reviews now work with the new Places API format
+- FIXED: Trustpilot review text display issues
+- Note: You must enable "Places API (New)" in Google Cloud Console for Google Reviews to work
+
 = 1.2.5 =
 - bug fixes
 - Form styling improvements to Modern
@@ -180,5 +206,8 @@ Yes, moderation can be turned on/off for native reviews via settings.
 * Initial release
 
 == Upgrade Notice ==
+= 1.2.6 =
+IMPORTANT: Google has deprecated the old Places API. This version migrates to the new Places API (New). You MUST enable "Places API (New)" in Google Cloud Console for Google Reviews to continue working. Legacy API users will need to update their settings.
+
 = 1.2.0 =  
 Major update: Adds Google Reviews support and display shortcodes. Please configure your Google API Key and Place ID in settings to enable.
