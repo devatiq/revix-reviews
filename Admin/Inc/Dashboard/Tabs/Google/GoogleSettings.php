@@ -6,6 +6,18 @@ class GoogleSettings
     public function __construct()
     {
         add_action('admin_init', [$this, 'register_settings']);
+        add_action('update_option_revix_google_api_key', [$this, 'clear_cache_on_save'], 10, 2);
+        add_action('update_option_revix_google_place_id', [$this, 'clear_cache_on_save'], 10, 2);
+    }
+
+    /**
+     * Clear Google reviews cache when settings are saved
+     */
+    public function clear_cache_on_save($old_value, $new_value) {
+        // Clear all Google review caches
+        global $wpdb;
+        $wpdb->query("DELETE FROM {$wpdb->options} WHERE option_name LIKE '_transient_revix_google_%'");
+        $wpdb->query("DELETE FROM {$wpdb->options} WHERE option_name LIKE '_transient_timeout_revix_google_%'");
     }
 
     public function register_settings()

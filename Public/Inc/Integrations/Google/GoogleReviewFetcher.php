@@ -5,6 +5,17 @@ namespace RevixReviews\Public\Inc\Integrations\Google;
 class GoogleReviewFetcher {
 
     const API_URL = 'https://places.googleapis.com/v1/places/';
+    const ENABLE_CACHE = true;
+    const CACHE_EXPIRATION = 12; // Hours
+
+    /**
+     * Clear all Google review caches
+     */
+    public static function clear_cache() {
+        global $wpdb;
+        $wpdb->query("DELETE FROM {$wpdb->options} WHERE option_name LIKE '_transient_revix_google_%'");
+        $wpdb->query("DELETE FROM {$wpdb->options} WHERE option_name LIKE '_transient_timeout_revix_google_%'");
+    }
 
     /**
      * Fetch the Google Place Details API response using the new Places API.
@@ -18,6 +29,18 @@ class GoogleReviewFetcher {
         if (empty($api_key) || empty($place_id)) {
             error_log('Revix Google Error: API Key or Place ID is empty');
             return [];
+        }
+
+        // Include version in cache key to bust old cache when code changes
+        $cache_version = '2.0'; // Increment when API format changes
+        $cache_key = 'revix_google_reviews_cache_v' . $cache_version . '_' . md5($place_id);
+        
+        // Check cache first
+        if (self::ENABLE_CACHE) {
+            $cached = get_transient($cache_key);
+            if ($cached && !empty($cached)) {
+                return $cached;
+            }
         }
 
         // New Places API endpoint
@@ -51,6 +74,11 @@ class GoogleReviewFetcher {
         if (empty($data)) {
             error_log('Revix Google Error: Empty API response');
             return [];
+        }
+
+        // Cache the result
+        if (self::ENABLE_CACHE && !empty($data)) {
+            set_transient($cache_key, $data, self::CACHE_EXPIRATION * HOUR_IN_SECONDS);
         }
 
         return $data;
