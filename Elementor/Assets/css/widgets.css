@@ -1,0 +1,49 @@
+/**
+ * Revix Reviews Elementor Widgets Styles
+ * 
+ * @package RevixReviews
+ * @since 1.3.0
+ */
+
+/* Widget Common Styles */
+.revixreviews-elementor-widget {
+    width: 100%;
+}
+
+/* Reviews Grid Widget */
+.revixreviews-elementor-reviews-grid {
+    display: grid;
+    gap: 20px;
+}
+
+/* Review Card */
+.revixreviews-elementor-review-card {
+    padding: 20px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    background: #fff;
+}
+
+/* Star Rating */
+.revixreviews-elementor-stars {
+    display: flex;
+    gap: 2px;
+    margin-bottom: 10px;
+}
+
+/* Summary Widget */
+.revixreviews-elementor-summary {
+    text-align: center;
+    padding: 30px;
+}
+
+.revixreviews-elementor-summary .average-rating {
+    font-size: 48px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.revixreviews-elementor-summary .total-reviews {
+    font-size: 18px;
+    color: #666;
+}
