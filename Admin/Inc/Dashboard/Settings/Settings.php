@@ -104,6 +104,7 @@ class Settings
 	{
 		register_setting('revixreviews', 'revixreviews_redirect_url', array('sanitize_callback' => 'esc_url_raw'));
 		register_setting('revixreviews', 'revixreviews_status', array('sanitize_callback' => 'sanitize_text_field'));
+		register_setting('revixreviews', 'revixreviews_elementor_active', array('sanitize_callback' => 'absint'));
 
 		add_settings_section(
 			'revixreviews_main_section',
@@ -125,6 +126,15 @@ class Settings
 			'revixreviews_status',
 			__('Default Review Status', 'revix-reviews'),
 			array($this, 'revixreviews_status_field_cb'),
+			'revixreviews',
+			'revixreviews_main_section'
+		);
+
+		// Elementor widgets.
+		add_settings_field(
+			'revixreviews_elementor_active',
+			__('Enable Elementor Widgets', 'revix-reviews'),
+			array($this, 'revixreviews_elementor_active_field_cb'),
 			'revixreviews',
 			'revixreviews_main_section'
 		);
@@ -185,5 +195,26 @@ class Settings
             <?php echo esc_html__('Select the default status for new reviews. \'Publish\' makes them public immediately, \'Pending\' requires admin approval, and \'Draft\' saves them as drafts.', 'revix-reviews'); ?>
         </p>
         <?php
+	}
+
+	/**
+	 * Renders the Elementor widgets checkbox field for the Revix Reviews settings page.
+	 *
+	 * Outputs a checkbox to enable/disable Elementor widgets integration.
+	 *
+	 * @since 1.3.0
+	 */
+	public function revixreviews_elementor_active_field_cb()
+	{
+		$is_active = get_option('revixreviews_elementor_active', 0);
+		?>
+		<label for="revixreviews_elementor_active">
+			<input type="checkbox" id="revixreviews_elementor_active" name="revixreviews_elementor_active" value="1" <?php checked($is_active, 1); ?> />
+			<?php echo esc_html__('Enable Elementor widgets for Revix Reviews', 'revix-reviews'); ?>
+		</label>
+		<p class="description">
+			<?php echo esc_html__('When enabled, Revix Reviews widgets will be available in the Elementor editor. Requires Elementor plugin to be installed and activated.', 'revix-reviews'); ?>
+		</p>
+		<?php
 	}
 }

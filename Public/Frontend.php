@@ -10,10 +10,12 @@ if (!defined('ABSPATH')) {
 
 use RevixReviews\Public\Assets\Assets;
 use RevixReviews\Public\Shortcodes\Shortcodes;
+use RevixReviews\Elementor\Configuration as ElementorConfiguration;
 
 class Frontend {
     protected $assets;
 	protected $Shortcodes;
+    protected $elementorConfiguration;
 
     /**
      * Initialize the class and set its properties.
@@ -38,6 +40,12 @@ class Frontend {
     private function init_initialize() {
         $this->assets = new Assets();
         $this->Shortcodes = new Shortcodes();
+
+        // Initialize Elementor widgets if enabled in settings
+        $elementor_active = get_option('revixreviews_elementor_active', 0);
+        if ($elementor_active) {
+            $this->elementorConfiguration = ElementorConfiguration::instance();
+        }
     }
 
 }
