@@ -41,9 +41,9 @@ class Frontend {
         $this->assets = new Assets();
         $this->Shortcodes = new Shortcodes();
 
-        // Initialize Elementor widgets if enabled in settings
+        // Initialize Elementor widgets if enabled in settings and Elementor is active
         $elementor_active = get_option('revixreviews_elementor_active', 0);
-        if ($elementor_active) {
+        if ($elementor_active && did_action('elementor/loaded')) {
             $this->elementorConfiguration = ElementorConfiguration::instance();
         }
     }
