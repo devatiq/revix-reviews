@@ -8,7 +8,7 @@
  * @since 1.3.0
  */
 
-namespace RevixReviews\Elementor\Assets;
+namespace RevixReviews\Public\Elementor\Assets;
 
 if (!defined('ABSPATH')) {
     exit; // Exit if accessed directly.

@@ -10,13 +10,13 @@
  * @since 1.3.0
  */
 
-namespace RevixReviews\Elementor;
+namespace RevixReviews\Public\Elementor;
 
 if (!defined('ABSPATH')) {
     exit; // Exit if accessed directly.
 }
 
-use RevixReviews\Elementor\Assets\Assets;
+use RevixReviews\Public\Elementor\Assets\Assets;
 
 /**
  * Class Configuration
@@ -35,7 +35,7 @@ class Configuration
      *
      * @var string
      */
-    public $version = '1.2.6';
+    public $version = REVIXREVIEWS_VERSION;
 
     /**
      * Minimum Elementor Version.

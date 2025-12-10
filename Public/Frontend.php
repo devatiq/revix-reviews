@@ -10,7 +10,7 @@ if (!defined('ABSPATH')) {
 
 use RevixReviews\Public\Assets\Assets;
 use RevixReviews\Public\Shortcodes\Shortcodes;
-use RevixReviews\Elementor\Configuration as ElementorConfiguration;
+use RevixReviews\Public\Elementor\Configuration as ElementorConfiguration;
 
 class Frontend {
     protected $assets;

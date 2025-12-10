@@ -5,7 +5,7 @@ Author URI: https://nexiby.com/
 Contributors: abcplugins, atiqbd4ever, nexibyllc, supreoxltd
 Tags: reviews, business reviews, testimonials, trustpilot, google reviews
 Requires at least: 5.4
-Tested up to: 6.8
+Tested up to: 6.9
 Stable tag: 1.2.6
 Requires PHP: 8.0
 License: GPLv2 or later
