@@ -203,13 +203,19 @@ class Configuration
     {
         $namespace_base = '\RevixReviews\Public\Elementor\Widgets\\';
 
-        $widgets = [
+        // Widgets with enable/disable option
+        $optional_widgets = [
             'revixreviews_trustpilot_reviews' => 'TrustpilotReviews\Main',
-            'revixreviews_trustpilot_summary' => 'TrustpilotSummary\Main',
-            'revixreviews_google_summary' => 'GoogleSummary\Main',
         ];
 
-        foreach ($widgets as $option_name => $widget_class) {
+        // Always enabled widgets
+        $always_enabled_widgets = [
+            'TrustpilotSummary\Main',
+            'GoogleSummary\Main',
+        ];
+
+        // Register optional widgets
+        foreach ($optional_widgets as $option_name => $widget_class) {
             $is_enabled = get_option($option_name, 1); // Enabled by default.
 
             if ($is_enabled) {
@@ -217,6 +223,14 @@ class Configuration
                 if (class_exists($full_class)) {
                     $widgets_manager->register(new $full_class());
                 }
+            }
+        }
+
+        // Register always enabled widgets
+        foreach ($always_enabled_widgets as $widget_class) {
+            $full_class = $namespace_base . $widget_class;
+            if (class_exists($full_class)) {
+                $widgets_manager->register(new $full_class());
             }
         }
     }
