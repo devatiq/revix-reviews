@@ -146,7 +146,7 @@ class Main extends Widget_Base
                 'min' => 10,
                 'max' => 500,
                 'step' => 5,
-                'description' => esc_html__('Limit review text length by word count', 'revix-reviews'),
+                'description' => esc_html__('Limit review text length by word count. Note: Trustpilot may already truncate long reviews on their website, so this setting only affects reviews that are shorter than Trustpilot\'s limit.', 'revix-reviews'),
             ]
         );
 
@@ -451,12 +451,6 @@ class Main extends Widget_Base
         ];
 
         $debug = ($atts['debug'] === 'true');
-        
-        // Debug: Log the words value
-        if ($debug) {
-            error_log('Revix Trustpilot Debug: Words setting = ' . $atts['words']);
-            error_log('Revix Trustpilot Debug: Settings words raw = ' . print_r($settings['words'], true));
-        }
         
         // Check if URL is configured
         $trustpilot_url = get_option('revix_trustpilot_url');
