@@ -139,11 +139,11 @@ class Main extends Widget_Base
 
         $this->end_controls_section();
 
-        // Style Section
+        // Layout Style Section
         $this->start_controls_section(
-            'style_section',
+            'layout_style_section',
             [
-                'label' => esc_html__('Style', 'revix-reviews'),
+                'label' => esc_html__('Layout', 'revix-reviews'),
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -184,6 +184,230 @@ class Main extends Widget_Base
                 ],
                 'selectors' => [
                     '{{WRAPPER}} .revix-trustpilot-reviews' => 'gap: {{SIZE}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        $this->end_controls_section();
+
+        // Review Card Style Section
+        $this->start_controls_section(
+            'card_style_section',
+            [
+                'label' => esc_html__('Review Card', 'revix-reviews'),
+                'tab' => Controls_Manager::TAB_STYLE,
+            ]
+        );
+
+        $this->add_control(
+            'card_background',
+            [
+                'label' => esc_html__('Background Color', 'revix-reviews'),
+                'type' => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .revix-trustpilot-single-review' => 'background-color: {{VALUE}};',
+                ],
+            ]
+        );
+
+        $this->add_group_control(
+            \Elementor\Group_Control_Border::get_type(),
+            [
+                'name' => 'card_border',
+                'selector' => '{{WRAPPER}} .revix-trustpilot-single-review',
+            ]
+        );
+
+        $this->add_responsive_control(
+            'card_border_radius',
+            [
+                'label' => esc_html__('Border Radius', 'revix-reviews'),
+                'type' => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', '%'],
+                'selectors' => [
+                    '{{WRAPPER}} .revix-trustpilot-single-review' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        $this->add_responsive_control(
+            'card_padding',
+            [
+                'label' => esc_html__('Padding', 'revix-reviews'),
+                'type' => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', 'em', '%'],
+                'selectors' => [
+                    '{{WRAPPER}} .revix-trustpilot-single-review' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        $this->add_group_control(
+            \Elementor\Group_Control_Box_Shadow::get_type(),
+            [
+                'name' => 'card_box_shadow',
+                'selector' => '{{WRAPPER}} .revix-trustpilot-single-review',
+            ]
+        );
+
+        $this->end_controls_section();
+
+        // Author Style Section
+        $this->start_controls_section(
+            'author_style_section',
+            [
+                'label' => esc_html__('Author', 'revix-reviews'),
+                'tab' => Controls_Manager::TAB_STYLE,
+            ]
+        );
+
+        $this->add_control(
+            'author_name_color',
+            [
+                'label' => esc_html__('Name Color', 'revix-reviews'),
+                'type' => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .revix-trustpilot-author strong' => 'color: {{VALUE}};',
+                ],
+            ]
+        );
+
+        $this->add_group_control(
+            \Elementor\Group_Control_Typography::get_type(),
+            [
+                'name' => 'author_name_typography',
+                'label' => esc_html__('Name Typography', 'revix-reviews'),
+                'selector' => '{{WRAPPER}} .revix-trustpilot-author strong',
+            ]
+        );
+
+        $this->add_control(
+            'author_date_color',
+            [
+                'label' => esc_html__('Date Color', 'revix-reviews'),
+                'type' => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .revix-trustpilot-date' => 'color: {{VALUE}};',
+                ],
+            ]
+        );
+
+        $this->add_group_control(
+            \Elementor\Group_Control_Typography::get_type(),
+            [
+                'name' => 'author_date_typography',
+                'label' => esc_html__('Date Typography', 'revix-reviews'),
+                'selector' => '{{WRAPPER}} .revix-trustpilot-date',
+            ]
+        );
+
+        $this->add_responsive_control(
+            'avatar_size',
+            [
+                'label' => esc_html__('Avatar Size', 'revix-reviews'),
+                'type' => Controls_Manager::SLIDER,
+                'size_units' => ['px'],
+                'range' => [
+                    'px' => [
+                        'min' => 30,
+                        'max' => 100,
+                    ],
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .revix-trustpilot-avatar' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .revix-trustpilot-avatar-fallback' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}}; line-height: {{SIZE}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        $this->end_controls_section();
+
+        // Review Text Style Section
+        $this->start_controls_section(
+            'text_style_section',
+            [
+                'label' => esc_html__('Review Text', 'revix-reviews'),
+                'tab' => Controls_Manager::TAB_STYLE,
+            ]
+        );
+
+        $this->add_control(
+            'text_color',
+            [
+                'label' => esc_html__('Text Color', 'revix-reviews'),
+                'type' => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .revix-trustpilot-text' => 'color: {{VALUE}};',
+                ],
+            ]
+        );
+
+        $this->add_group_control(
+            \Elementor\Group_Control_Typography::get_type(),
+            [
+                'name' => 'text_typography',
+                'label' => esc_html__('Typography', 'revix-reviews'),
+                'selector' => '{{WRAPPER}} .revix-trustpilot-text',
+            ]
+        );
+
+        $this->add_responsive_control(
+            'text_margin',
+            [
+                'label' => esc_html__('Margin', 'revix-reviews'),
+                'type' => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', 'em', '%'],
+                'selectors' => [
+                    '{{WRAPPER}} .revix-trustpilot-text' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        $this->end_controls_section();
+
+        // Rating Style Section
+        $this->start_controls_section(
+            'rating_style_section',
+            [
+                'label' => esc_html__('Rating', 'revix-reviews'),
+                'tab' => Controls_Manager::TAB_STYLE,
+            ]
+        );
+
+        $this->add_control(
+            'rating_text_color',
+            [
+                'label' => esc_html__('Text Color', 'revix-reviews'),
+                'type' => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .revix-trustpilot-rating p' => 'color: {{VALUE}};',
+                ],
+            ]
+        );
+
+        $this->add_group_control(
+            \Elementor\Group_Control_Typography::get_type(),
+            [
+                'name' => 'rating_typography',
+                'label' => esc_html__('Typography', 'revix-reviews'),
+                'selector' => '{{WRAPPER}} .revix-trustpilot-rating p',
+            ]
+        );
+
+        $this->add_responsive_control(
+            'rating_stars_size',
+            [
+                'label' => esc_html__('Stars Size', 'revix-reviews'),
+                'type' => Controls_Manager::SLIDER,
+                'size_units' => ['px'],
+                'range' => [
+                    'px' => [
+                        'min' => 50,
+                        'max' => 200,
+                    ],
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .revix-trustpilot-rating img' => 'width: {{SIZE}}{{UNIT}}; height: auto;',
                 ],
             ]
         );
