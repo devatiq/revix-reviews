@@ -387,26 +387,6 @@ class Main extends Widget_Base
             ]
         );
 
-        $this->add_control(
-            'rating_text_color',
-            [
-                'label' => esc_html__('Text Color', 'revix-reviews'),
-                'type' => Controls_Manager::COLOR,
-                'selectors' => [
-                    '{{WRAPPER}} .revix-trustpilot-rating p' => 'color: {{VALUE}};',
-                ],
-            ]
-        );
-
-        $this->add_group_control(
-            \Elementor\Group_Control_Typography::get_type(),
-            [
-                'name' => 'rating_typography',
-                'label' => esc_html__('Typography', 'revix-reviews'),
-                'selector' => '{{WRAPPER}} .revix-trustpilot-rating p',
-            ]
-        );
-
         $this->add_responsive_control(
             'rating_stars_size',
             [
