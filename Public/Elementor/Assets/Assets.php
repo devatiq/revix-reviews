@@ -84,6 +84,15 @@ class Assets
      */
     public function enqueue_scripts()
     {
+        // Enqueue Masonry library
+        wp_enqueue_script(
+            'revixreviews-masonry',
+            REVIXREVIEWS_FRONTEND_ASSETS . '/../Shortcodes/Assets/js/masonry.pkgd.min.js',
+            ['jquery'],
+            REVIXREVIEWS_VERSION,
+            true
+        );
+
         // Enqueue Trustpilot scripts
         wp_enqueue_script(
             'revixreviews-trustpilot-script',

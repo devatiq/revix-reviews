@@ -137,6 +137,32 @@ class Main extends Widget_Base
             ]
         );
 
+        $this->add_control(
+            'words',
+            [
+                'label' => esc_html__('Words Limit', 'revix-reviews'),
+                'type' => Controls_Manager::NUMBER,
+                'default' => 55,
+                'min' => 10,
+                'max' => 500,
+                'step' => 5,
+                'description' => esc_html__('Limit review text length by word count', 'revix-reviews'),
+            ]
+        );
+
+        $this->add_control(
+            'masonry',
+            [
+                'label' => esc_html__('Masonry Layout', 'revix-reviews'),
+                'type' => Controls_Manager::SWITCHER,
+                'label_on' => esc_html__('On', 'revix-reviews'),
+                'label_off' => esc_html__('Off', 'revix-reviews'),
+                'return_value' => 'true',
+                'default' => 'false',
+                'description' => esc_html__('Enable Pinterest-style masonry layout for varying review heights', 'revix-reviews'),
+            ]
+        );
+
         $this->end_controls_section();
 
         // Layout Style Section
@@ -419,7 +445,9 @@ class Main extends Widget_Base
             'count' => $settings['count'],
             'min_rating' => $settings['min_rating'],
             'max_rating' => $settings['max_rating'],
-            'debug' => $settings['debug']
+            'debug' => $settings['debug'],
+            'words' => $settings['words'],
+            'masonry' => $settings['masonry']
         ];
 
         $debug = ($atts['debug'] === 'true');
@@ -464,9 +492,15 @@ class Main extends Widget_Base
             echo '<div class="revix-loader-wrapper"><span class="revix-loader"></span></div>';
         }
         
+        // Build classes array
+        $classes = ['revix-trustpilot-reviews', 'revixreviews-elementor-widget'];
+        if ($atts['masonry'] === 'true') {
+            $classes[] = 'revix-trustpilot-masonry';
+        }
+        
         // In editor mode, show directly; otherwise hide until JS loads
         $display_style = $is_editor ? 'display:grid;' : 'display:none;';
-        echo '<div class="revix-trustpilot-reviews revixreviews-elementor-widget" style="' . esc_attr($display_style) . '">';
+        echo '<div class="' . esc_attr(implode(' ', $classes)) . '" style="' . esc_attr($display_style) . '">';
 
         $rendered_count = 0;
         foreach ($reviews as $review) {
@@ -500,7 +534,8 @@ class Main extends Widget_Base
           
             // Only show text if it exists
             if (!empty($review['text'])) {
-                echo '<div class="revix-trustpilot-text">' . esc_html($review['text']) . '</div>';
+                $review_text = wp_trim_words($review['text'], intval($atts['words']), '...');
+                echo '<div class="revix-trustpilot-text">' . esc_html($review_text) . '</div>';
             }
             
             echo '</div>';
