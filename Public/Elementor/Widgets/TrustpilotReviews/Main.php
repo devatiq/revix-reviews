@@ -320,6 +320,19 @@ class Main extends Widget_Base
             ]
         );
 
+        $this->add_responsive_control(
+            'avatar_border_radius',
+            [
+                'label' => esc_html__('Avatar Border Radius', 'revix-reviews'),
+                'type' => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', '%'],
+                'selectors' => [
+                    '{{WRAPPER}} .revix-trustpilot-avatar' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .revix-trustpilot-avatar-fallback' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+
         $this->end_controls_section();
 
         // Review Text Style Section
