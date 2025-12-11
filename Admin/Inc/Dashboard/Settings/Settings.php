@@ -106,6 +106,7 @@ class Settings
 		register_setting('revixreviews', 'revixreviews_status', array('sanitize_callback' => 'sanitize_text_field'));
 		register_setting('revixreviews', 'revixreviews_elementor_active', array('sanitize_callback' => 'absint'));
 		register_setting('revixreviews', 'revixreviews_google_summary', array('sanitize_callback' => 'absint'));
+		register_setting('revixreviews', 'revixreviews_trustpilot_summary', array('sanitize_callback' => 'absint'));
 
 		add_settings_section(
 			'revixreviews_main_section',
@@ -145,6 +146,15 @@ class Settings
 			'revixreviews_google_summary',
 			__('Enable Google Summary Widget', 'revix-reviews'),
 			array($this, 'revixreviews_google_summary_field_cb'),
+			'revixreviews',
+			'revixreviews_main_section'
+		);
+
+		// Trustpilot Summary widget.
+		add_settings_field(
+			'revixreviews_trustpilot_summary',
+			__('Enable Trustpilot Summary Widget', 'revix-reviews'),
+			array($this, 'revixreviews_trustpilot_summary_field_cb'),
 			'revixreviews',
 			'revixreviews_main_section'
 		);
@@ -245,6 +255,27 @@ class Settings
 		</label>
 		<p class="description">
 			<?php echo esc_html__('When enabled, the Google Reviews Summary widget will be available in the Elementor editor.', 'revix-reviews'); ?>
+		</p>
+		<?php
+	}
+
+	/**
+	 * Renders the Trustpilot Summary widget checkbox field for the Revix Reviews settings page.
+	 *
+	 * Outputs a checkbox to enable/disable Trustpilot Summary Elementor widget.
+	 *
+	 * @since 1.3.0
+	 */
+	public function revixreviews_trustpilot_summary_field_cb()
+	{
+		$is_active = get_option('revixreviews_trustpilot_summary', 1);
+		?>
+		<label for="revixreviews_trustpilot_summary">
+			<input type="checkbox" id="revixreviews_trustpilot_summary" name="revixreviews_trustpilot_summary" value="1" <?php checked($is_active, 1); ?> />
+			<?php echo esc_html__('Enable Trustpilot Summary widget in Elementor', 'revix-reviews'); ?>
+		</label>
+		<p class="description">
+			<?php echo esc_html__('When enabled, the Trustpilot Summary widget will be available in the Elementor editor.', 'revix-reviews'); ?>
 		</p>
 		<?php
 	}
