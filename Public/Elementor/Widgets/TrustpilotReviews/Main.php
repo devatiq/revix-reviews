@@ -240,8 +240,16 @@ class Main extends Widget_Base
             return;
         }
 
-        echo '<div class="revix-loader-wrapper"><span class="revix-loader"></span></div>';
-        echo '<div class="revix-trustpilot-reviews revixreviews-elementor-widget" style="display:none;">';
+        // Check if we're in Elementor editor mode
+        $is_editor = \Elementor\Plugin::$instance->editor->is_edit_mode();
+        
+        if (!$is_editor) {
+            echo '<div class="revix-loader-wrapper"><span class="revix-loader"></span></div>';
+        }
+        
+        // In editor mode, show directly; otherwise hide until JS loads
+        $display_style = $is_editor ? 'display:grid;' : 'display:none;';
+        echo '<div class="revix-trustpilot-reviews revixreviews-elementor-widget" style="' . esc_attr($display_style) . '">';
 
         $rendered_count = 0;
         foreach ($reviews as $review) {
