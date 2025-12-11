@@ -452,6 +452,12 @@ class Main extends Widget_Base
 
         $debug = ($atts['debug'] === 'true');
         
+        // Debug: Log the words value
+        if ($debug) {
+            error_log('Revix Trustpilot Debug: Words setting = ' . $atts['words']);
+            error_log('Revix Trustpilot Debug: Settings words raw = ' . print_r($settings['words'], true));
+        }
+        
         // Check if URL is configured
         $trustpilot_url = get_option('revix_trustpilot_url');
         if (empty($trustpilot_url)) {
