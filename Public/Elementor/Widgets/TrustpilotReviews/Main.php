@@ -446,7 +446,7 @@ class Main extends Widget_Base
             'min_rating' => $settings['min_rating'],
             'max_rating' => $settings['max_rating'],
             'debug' => $settings['debug'],
-            'words' => $settings['words'],
+            'words' => isset($settings['words']) && $settings['words'] !== '' ? intval($settings['words']) : 55,
             'masonry' => $settings['masonry']
         ];
 
@@ -534,7 +534,7 @@ class Main extends Widget_Base
           
             // Only show text if it exists
             if (!empty($review['text'])) {
-                $review_text = wp_trim_words($review['text'], intval($atts['words']), '...');
+                $review_text = wp_trim_words($review['text'], $atts['words'], '...');
                 echo '<div class="revix-trustpilot-text">' . esc_html($review_text) . '</div>';
             }
             
