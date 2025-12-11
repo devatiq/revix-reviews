@@ -175,6 +175,23 @@ class Configuration
     public function init()
     {
         add_action('elementor/widgets/register', [$this, 'register_widgets']);
+        add_action('elementor/elements/categories_registered', [$this, 'register_widget_categories']);
+    }
+
+    /**
+     * Register custom widget categories.
+     *
+     * @param \Elementor\Elements_Manager $elements_manager Elementor elements manager.
+     */
+    public function register_widget_categories($elements_manager)
+    {
+        $elements_manager->add_category(
+            'revix-reviews',
+            [
+                'title' => esc_html__('Revix Reviews', 'revix-reviews'),
+                'icon' => 'fa fa-star',
+            ]
+        );
     }
 
     /**
@@ -184,15 +201,11 @@ class Configuration
      */
     public function register_widgets($widgets_manager)
     {
-        $namespace_base = '\RevixReviews\Elementor\Widgets\\';
+        $namespace_base = '\RevixReviews\Public\Elementor\Widgets\\';
 
         $widgets = [
-            'revixreviews_native_reviews' => 'NativeReviews\Main',
-            'revixreviews_review_form' => 'ReviewForm\Main',
             'revixreviews_trustpilot_reviews' => 'TrustpilotReviews\Main',
             'revixreviews_trustpilot_summary' => 'TrustpilotSummary\Main',
-            'revixreviews_google_reviews' => 'GoogleReviews\Main',
-            'revixreviews_google_summary' => 'GoogleSummary\Main',
         ];
 
         foreach ($widgets as $option_name => $widget_class) {
