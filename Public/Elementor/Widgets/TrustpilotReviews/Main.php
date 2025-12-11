@@ -124,18 +124,18 @@ class Main extends Widget_Base
             ]
         );
 
-        $this->add_control(
-            'debug',
-            [
-                'label' => esc_html__('Debug Mode', 'revix-reviews'),
-                'type' => Controls_Manager::SWITCHER,
-                'label_on' => esc_html__('On', 'revix-reviews'),
-                'label_off' => esc_html__('Off', 'revix-reviews'),
-                'return_value' => 'true',
-                'default' => 'false',
-                'description' => esc_html__('Enable debug mode to see error messages', 'revix-reviews'),
-            ]
-        );
+        // $this->add_control(
+        //     'debug',
+        //     [
+        //         'label' => esc_html__('Debug Mode', 'revix-reviews'),
+        //         'type' => Controls_Manager::SWITCHER,
+        //         'label_on' => esc_html__('On', 'revix-reviews'),
+        //         'label_off' => esc_html__('Off', 'revix-reviews'),
+        //         'return_value' => 'true',
+        //         'default' => 'false',
+        //         'description' => esc_html__('Enable debug mode to see error messages', 'revix-reviews'),
+        //     ]
+        // );
 
         $this->add_control(
             'words',
