@@ -309,7 +309,7 @@ class Settings
 				<div class="revixreviews-card-body">				<!-- Select All Toggle -->
 				<div class="revixreviews-select-all-toggle">
 					<div class="revixreviews-toggle-header">
-						<label class="revixreviews-toggle-label">
+						<label for="revixreviews_select_all_widgets" class="revixreviews-toggle-label">
 							<?php esc_html_e('Enable All Widgets', 'revix-reviews'); ?>
 						</label>
 						<div class="revixreviews-toggle-switch">
