@@ -338,7 +338,7 @@ class Settings
 				</label>
 			</div>
 			<?php if (!empty($description)) : ?>
-				<p class="revixreviews-description">
+				<p class="revixreviews-description" style="margin-top: 12px;">
 					<?php echo esc_html($description); ?>
 				</p>
 			<?php endif; ?>

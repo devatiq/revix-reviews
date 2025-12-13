@@ -1,22 +1,77 @@
 /* Revix Reviews Settings Page Styles */
-.revixreviews-settings-container {
-    max-width: 1400px;
-    margin: 20px 0;
+
+/* Page Title */
+.revixreviews-admin-wrap .revixreviews-page-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 28px;
+    font-weight: 600;
+    color: #1e293b;
+    margin: 0 0 24px;
+    padding-bottom: 16px;
+    border-bottom: 2px solid #f1f5f9;
 }
 
+.revixreviews-title-icon {
+    font-size: 32px;
+}
+
+/* Main Layout */
 .revixreviews-settings-layout {
     display: grid;
     grid-template-columns: 1fr 350px;
     gap: 24px;
     align-items: start;
+    margin-top: 24px;
+}
+
+.revixreviews-settings-main {
+    min-width: 0;
+}
+
+.revixreviews-settings-sidebar {
+    position: sticky;
+    top: 32px;
 }
 
 /* Settings Card */
 .revixreviews-settings-card {
     background: #fff;
-    border-radius: 8px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
     overflow: hidden;
+    margin-bottom: 24px;
+    border: 1px solid #e2e8f0;
+    transition: all 0.3s ease;
+}
+
+.revixreviews-settings-card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+.revixreviews-card-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: #fff;
+    padding: 24px 28px;
+}
+
+.revixreviews-card-header h3 {
+    margin: 0 0 6px;
+    font-size: 18px;
+    font-weight: 600;
+    color: #fff;
+}
+
+.revixreviews-card-description {
+    margin: 0;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 400;
+}
+
+.revixreviews-card-body {
+    padding: 28px;
 }
 
 .revixreviews-settings-header {
@@ -72,7 +127,7 @@
     border-radius: 2px;
 }
 
-/* Form Field */
+/* Form Fields */
 .revixreviews-field {
     margin-bottom: 24px;
 }
@@ -81,93 +136,96 @@
     margin-bottom: 0;
 }
 
-.revixreviews-field-label {
+.revixreviews-label {
     display: block;
     font-size: 14px;
-    font-weight: 500;
+    font-weight: 600;
     color: #334155;
     margin-bottom: 8px;
 }
 
-.revixreviews-field-input {
+.revixreviews-input,
+.revixreviews-select {
     width: 100%;
-    padding: 10px 14px;
-    border: 1px solid #e2e8f0;
-    border-radius: 6px;
-    font-size: 14px;
-    transition: all 0.2s ease;
-}
-
-.revixreviews-field-input:focus {
-    outline: none;
-    border-color: #667eea;
-    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
-}
-
-.revixreviews-field-select {
-    width: 100%;
-    padding: 10px 14px;
-    border: 1px solid #e2e8f0;
-    border-radius: 6px;
-    font-size: 14px;
-    background-color: #fff;
-    cursor: pointer;
-    transition: all 0.2s ease;
-}
-
-.revixreviews-field-select:focus {
-    outline: none;
-    border-color: #667eea;
-    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
-}
-
-.revixreviews-field-description {
-    font-size: 13px;
-    color: #64748b;
-    margin-top: 6px;
-    line-height: 1.5;
-}
-
-/* Toggle Switch */
-.revixreviews-toggle-field {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 16px;
-    background: #f8fafc;
-    border: 1px solid #e2e8f0;
+    padding: 12px 16px;
+    border: 2px solid #e2e8f0;
     border-radius: 8px;
-    margin-bottom: 12px;
+    font-size: 14px;
+    color: #1e293b;
+    background-color: #fff;
     transition: all 0.2s ease;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 
-.revixreviews-toggle-field:hover {
-    background: #f1f5f9;
+.revixreviews-input:hover,
+.revixreviews-select:hover {
     border-color: #cbd5e1;
 }
 
-.revixreviews-toggle-info {
-    flex: 1;
+.revixreviews-input:focus,
+.revixreviews-select:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
 }
 
-.revixreviews-toggle-title {
-    font-size: 14px;
-    font-weight: 500;
-    color: #1e293b;
-    margin: 0 0 4px;
+.revixreviews-select {
+    cursor: pointer;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23334155' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 16px center;
+    padding-right: 48px;
+    appearance: none;
 }
 
-.revixreviews-toggle-desc {
+.revixreviews-description {
     font-size: 13px;
     color: #64748b;
+    margin: 8px 0 0;
+    line-height: 1.6;
+}
+
+/* Toggle Switch Field */
+.revixreviews-toggle-field {
+    padding: 20px;
+    background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+    border: 2px solid #e2e8f0;
+    border-radius: 12px;
+    margin-bottom: 16px;
+    transition: all 0.3s ease;
+}
+
+.revixreviews-toggle-field:last-child {
+    margin-bottom: 0;
+}
+
+.revixreviews-toggle-field:hover {
+    background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+    border-color: #cbd5e1;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.revixreviews-toggle-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.revixreviews-toggle-label {
+    flex: 1;
+    font-size: 15px;
+    font-weight: 600;
+    color: #1e293b;
     margin: 0;
+    cursor: pointer;
 }
 
 .revixreviews-toggle-switch {
     position: relative;
     display: inline-block;
-    width: 52px;
-    height: 28px;
+    width: 56px;
+    height: 30px;
     flex-shrink: 0;
 }
 
@@ -185,33 +243,35 @@
     right: 0;
     bottom: 0;
     background-color: #cbd5e1;
-    transition: 0.3s;
-    border-radius: 28px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 30px;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .revixreviews-toggle-slider:before {
     position: absolute;
     content: "";
-    height: 20px;
-    width: 20px;
-    left: 4px;
-    bottom: 4px;
+    height: 24px;
+    width: 24px;
+    left: 3px;
+    bottom: 3px;
     background-color: white;
-    transition: 0.3s;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     border-radius: 50%;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
 }
 
 .revixreviews-toggle-switch input:checked + .revixreviews-toggle-slider {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15), 0 0 12px rgba(102, 126, 234, 0.3);
 }
 
 .revixreviews-toggle-switch input:focus + .revixreviews-toggle-slider {
-    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
+    box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.2);
 }
 
 .revixreviews-toggle-switch input:checked + .revixreviews-toggle-slider:before {
-    transform: translateX(24px);
+    transform: translateX(26px);
 }
 
 .revixreviews-toggle-switch.loading .revixreviews-toggle-slider {
@@ -219,76 +279,69 @@
     cursor: wait;
 }
 
-/* Save Button */
-.revixreviews-save-button {
+.revixreviews-toggle-switch.loading .revixreviews-toggle-slider:before {
+    animation: revixreviews-pulse 1s ease-in-out infinite;
+}
+
+@keyframes revixreviews-pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+}
+
+/* Submit Button */
+#revixreviews-submit-btn {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: #fff;
     border: none;
-    padding: 12px 32px;
-    font-size: 14px;
+    padding: 14px 36px;
+    font-size: 15px;
     font-weight: 600;
-    border-radius: 6px;
+    border-radius: 8px;
     cursor: pointer;
-    transition: all 0.2s ease;
-    box-shadow: 0 2px 4px rgba(102, 126, 234, 0.3);
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+    margin-top: 8px;
 }
 
-.revixreviews-save-button:hover {
+#revixreviews-submit-btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(102, 126, 234, 0.4);
+    box-shadow: 0 6px 16px rgba(102, 126, 234, 0.4);
 }
 
-.revixreviews-save-button:active {
+#revixreviews-submit-btn:active {
     transform: translateY(0);
 }
 
-.revixreviews-save-button:disabled {
+#revixreviews-submit-btn:disabled {
     opacity: 0.6;
     cursor: not-allowed;
     transform: none;
 }
 
-/* Sidebar */
-.revixreviews-sidebar {
-    position: sticky;
-    top: 32px;
-}
-
-.revixreviews-sidebar-card {
-    background: #fff;
-    border-radius: 8px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-    overflow: hidden;
+/* Sidebar Cards */
+.revixreviews-settings-sidebar .revixreviews-settings-card {
     margin-bottom: 20px;
 }
 
-.revixreviews-sidebar-header {
-    padding: 20px;
-    background: #f8fafc;
-    border-bottom: 1px solid #e2e8f0;
-}
-
-.revixreviews-sidebar-header h3 {
-    margin: 0;
+.revixreviews-settings-sidebar .revixreviews-card-header h3 {
     font-size: 16px;
-    font-weight: 600;
-    color: #1e293b;
+    margin: 0;
 }
 
-.revixreviews-sidebar-body {
-    padding: 20px;
-}
-
-.revixreviews-video-container {
+.revixreviews-video-wrapper {
     position: relative;
     width: 100%;
     padding-bottom: 56.25%;
-    border-radius: 6px;
+    border-radius: 8px;
     overflow: hidden;
     background: #000;
 }
 
-.revixreviews-video-container iframe {
+.revixreviews-video-wrapper iframe {
     position: absolute;
     top: 0;
     left: 0;
@@ -296,37 +349,78 @@
     height: 100%;
 }
 
+.revixreviews-tips-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.revixreviews-tips-list li {
+    padding: 12px 16px;
+    margin-bottom: 10px;
+    background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+    border-left: 4px solid #667eea;
+    border-radius: 6px;
+    font-size: 14px;
+    color: #334155;
+    line-height: 1.6;
+}
+
+.revixreviews-tips-list li:last-child {
+    margin-bottom: 0;
+}
+
+.revixreviews-tips-list li:before {
+    content: "💡";
+    margin-right: 10px;
+    font-size: 16px;
+}
+
 /* Notice Messages */
 .revixreviews-notice {
-    padding: 12px 16px;
-    border-radius: 6px;
-    margin-bottom: 16px;
+    padding: 14px 18px;
+    border-radius: 8px;
+    margin-bottom: 20px;
     display: flex;
     align-items: center;
     gap: 12px;
     font-size: 14px;
+    font-weight: 500;
+    animation: revixreviews-slide-down 0.3s ease;
+}
+
+@keyframes revixreviews-slide-down {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .revixreviews-notice-success {
-    background: #ecfdf5;
-    border: 1px solid #a7f3d0;
+    background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+    border: 2px solid #a7f3d0;
     color: #065f46;
 }
 
 .revixreviews-notice-error {
-    background: #fef2f2;
-    border: 1px solid #fecaca;
+    background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%);
+    border: 2px solid #fecaca;
     color: #991b1b;
 }
 
 .revixreviews-notice-info {
-    background: #eff6ff;
-    border: 1px solid #bfdbfe;
+    background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+    border: 2px solid #bfdbfe;
     color: #1e40af;
 }
 
 .revixreviews-notice-icon {
-    font-size: 18px;
+    font-size: 20px;
+    font-weight: bold;
 }
 
 /* Loading Spinner */
@@ -346,10 +440,11 @@
     }
 }
 
-/* Responsive */
+/* Responsive Design */
 @media (max-width: 1200px) {
     .revixreviews-settings-layout {
         grid-template-columns: 1fr 300px;
+        gap: 20px;
     }
 }
 
@@ -358,23 +453,91 @@
         grid-template-columns: 1fr;
     }
     
-    .revixreviews-sidebar {
+    .revixreviews-settings-sidebar {
         position: static;
     }
 }
 
 @media (max-width: 768px) {
-    .revixreviews-settings-header {
+    .revixreviews-page-title {
+        font-size: 24px;
+    }
+
+    .revixreviews-card-header {
         padding: 20px;
     }
     
-    .revixreviews-settings-body {
+    .revixreviews-card-body {
         padding: 20px;
     }
     
     .revixreviews-toggle-field {
+        padding: 16px;
+    }
+
+    .revixreviews-toggle-header {
         flex-direction: column;
         align-items: flex-start;
         gap: 12px;
     }
+
+    .revixreviews-toggle-switch {
+        align-self: flex-end;
+    }
+
+    #revixreviews-submit-btn {
+        width: 100%;
+    }
+}
+
+/* WordPress Admin Compatibility */
+.revixreviews-admin-wrap {
+    margin-right: 20px;
+}
+
+.revixreviews-admin-wrap .nav-tab-wrapper {
+    margin-bottom: 24px;
+    border-bottom: 2px solid #e2e8f0;
+}
+
+.revixreviews-admin-wrap .nav-tab {
+    border: none;
+    background: transparent;
+    color: #64748b;
+    font-weight: 500;
+    padding: 12px 20px;
+    margin: 0 4px -2px 0;
+    border-bottom: 3px solid transparent;
+    transition: all 0.2s ease;
+}
+
+.revixreviews-admin-wrap .nav-tab:hover {
+    color: #334155;
+    background: #f8fafc;
+    border-bottom-color: #cbd5e1;
+}
+
+.revixreviews-admin-wrap .nav-tab-active {
+    color: #667eea;
+    background: transparent;
+    border-bottom-color: #667eea;
+}
+
+.revixreviews-admin-wrap .nav-tab-active:hover {
+    background: transparent;
+}
+
+/* WordPress Settings Errors Override */
+.revixreviews-settings-main .settings-error {
+    display: none !important;
+}
+
+/* Better WordPress Form Integration */
+.revixreviews-admin-wrap input[type="text"],
+.revixreviews-admin-wrap select {
+    max-width: 100%;
+}
+
+.revixreviews-admin-wrap .regular-text {
+    width: 100%;
 }
