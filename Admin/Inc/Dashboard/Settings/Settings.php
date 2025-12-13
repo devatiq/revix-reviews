@@ -84,14 +84,30 @@ class Settings
 		// Check user capabilities
 		if (!current_user_can('manage_options')) {
 			wp_send_json_error(array('message' => __('You do not have permission to perform this action.', 'revix-reviews')));
+			wp_die(); // Ensure script terminates
 		}
 
 		// Get and sanitize input
 		$option_name = isset($_POST['option']) ? sanitize_key($_POST['option']) : '';
 		$value       = isset($_POST['value']) ? absint($_POST['value']) : 0;
 
-		if (empty($option_name)) {
+		// Whitelist allowed options for extra security
+		$allowed_options = array(
+			'revixreviews_elementor_active',
+			'revixreviews_google_summary',
+			'revixreviews_trustpilot_summary',
+			'revixreviews_google_reviews',
+		);
+
+		if (empty($option_name) || !in_array($option_name, $allowed_options, true)) {
 			wp_send_json_error(array('message' => __('Invalid option name.', 'revix-reviews')));
+			wp_die();
+		}
+
+		// Validate value is 0 or 1
+		if ($value !== 0 && $value !== 1) {
+			wp_send_json_error(array('message' => __('Invalid value.', 'revix-reviews')));
+			wp_die();
 		}
 
 		// Update the option
@@ -100,12 +116,14 @@ class Settings
 		if ($updated || get_option($option_name) == $value) {
 			wp_send_json_success(array(
 				'message' => __('Setting saved successfully.', 'revix-reviews'),
-				'option'  => $option_name,
-				'value'   => $value,
+				'option'  => sanitize_key($option_name),
+				'value'   => absint($value),
 			));
 		} else {
 			wp_send_json_error(array('message' => __('Failed to save setting.', 'revix-reviews')));
 		}
+		
+		wp_die(); // Always terminate AJAX properly
 	}
 
 	/**
@@ -131,7 +149,19 @@ class Settings
 	 */
 	public function revixreviews_create_settings_page()
 	{
+		// Check user capabilities
+		if (!current_user_can('manage_options')) {
+			wp_die(esc_html__('You do not have sufficient permissions to access this page.', 'revix-reviews'));
+		}
+
+		// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- No action taken, just reading for UI display
 		$active_tab = isset($_GET['tab']) ? sanitize_text_field(wp_unslash($_GET['tab'])) : 'general';
+		
+		// Validate tab name
+		$allowed_tabs = array('general', 'trustpilot', 'google');
+		if (!in_array($active_tab, $allowed_tabs, true)) {
+			$active_tab = 'general';
+		}
 		?>
 		<div class="wrap revixreviews-admin-wrap">
 			<h1 class="revixreviews-page-title">
