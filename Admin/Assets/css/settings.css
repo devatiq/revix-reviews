@@ -74,6 +74,13 @@
     padding: 20px 24px;
 }
 
+/* Toggle Grid Layout */
+.revixreviews-toggles-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+}
+
 .revixreviews-settings-header {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: #fff;
@@ -193,6 +200,10 @@
     border-radius: 12px;
     margin-bottom: 12px;
     transition: all 0.3s ease;
+}
+
+.revixreviews-toggles-grid .revixreviews-toggle-field {
+    margin-bottom: 0;
 }
 
 .revixreviews-toggle-field:last-child {
@@ -455,6 +466,11 @@
     
     .revixreviews-settings-sidebar {
         position: static;
+    }
+
+    .revixreviews-toggles-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
     }
 }
 

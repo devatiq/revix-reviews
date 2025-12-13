@@ -253,37 +253,39 @@ class Settings
 				<p class="revixreviews-card-description"><?php esc_html_e('Enable or disable Elementor widgets for the page builder', 'revix-reviews'); ?></p>
 			</div>
 			<div class="revixreviews-card-body">
-				<!-- Enable Elementor Widgets -->
-				<?php $this->render_toggle_field(
-					'revixreviews_elementor_active',
-					__('Enable Elementor Widgets', 'revix-reviews'),
-					__('When enabled, Revix Reviews widgets will be available in the Elementor editor. Requires Elementor plugin to be installed and activated.', 'revix-reviews'),
-					get_option('revixreviews_elementor_active', 0)
-				); ?>
+				<div class="revixreviews-toggles-grid">
+					<!-- Enable Elementor Widgets -->
+					<?php $this->render_toggle_field(
+						'revixreviews_elementor_active',
+						__('Enable Elementor Widgets', 'revix-reviews'),
+						__('When enabled, Revix Reviews widgets will be available in the Elementor editor. Requires Elementor plugin to be installed and activated.', 'revix-reviews'),
+						get_option('revixreviews_elementor_active', 0)
+					); ?>
 
-				<!-- Google Summary Widget -->
-				<?php $this->render_toggle_field(
-					'revixreviews_google_summary',
-					__('Google Summary Widget', 'revix-reviews'),
-					__('Display Google review ratings summary in Elementor.', 'revix-reviews'),
-					get_option('revixreviews_google_summary', 1)
-				); ?>
+					<!-- Google Summary Widget -->
+					<?php $this->render_toggle_field(
+						'revixreviews_google_summary',
+						__('Google Summary Widget', 'revix-reviews'),
+						__('Display Google review ratings summary in Elementor.', 'revix-reviews'),
+						get_option('revixreviews_google_summary', 1)
+					); ?>
 
-				<!-- Trustpilot Summary Widget -->
-				<?php $this->render_toggle_field(
-					'revixreviews_trustpilot_summary',
-					__('Trustpilot Summary Widget', 'revix-reviews'),
-					__('Display Trustpilot review ratings summary in Elementor.', 'revix-reviews'),
-					get_option('revixreviews_trustpilot_summary', 1)
-				); ?>
+					<!-- Trustpilot Summary Widget -->
+					<?php $this->render_toggle_field(
+						'revixreviews_trustpilot_summary',
+						__('Trustpilot Summary Widget', 'revix-reviews'),
+						__('Display Trustpilot review ratings summary in Elementor.', 'revix-reviews'),
+						get_option('revixreviews_trustpilot_summary', 1)
+					); ?>
 
-				<!-- Google Reviews Widget -->
-				<?php $this->render_toggle_field(
-					'revixreviews_google_reviews',
-					__('Google Reviews Widget', 'revix-reviews'),
-					__('Display full Google reviews list in Elementor.', 'revix-reviews'),
-					get_option('revixreviews_google_reviews', 1)
-				); ?>
+					<!-- Google Reviews Widget -->
+					<?php $this->render_toggle_field(
+						'revixreviews_google_reviews',
+						__('Google Reviews Widget', 'revix-reviews'),
+						__('Display full Google reviews list in Elementor.', 'revix-reviews'),
+						get_option('revixreviews_google_reviews', 1)
+					); ?>
+				</div>
 			</div>
 		</div>
 		<?php
