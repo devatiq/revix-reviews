@@ -107,6 +107,7 @@ class Settings
 		register_setting('revixreviews', 'revixreviews_elementor_active', array('sanitize_callback' => 'absint'));
 		register_setting('revixreviews', 'revixreviews_google_summary', array('sanitize_callback' => 'absint'));
 		register_setting('revixreviews', 'revixreviews_trustpilot_summary', array('sanitize_callback' => 'absint'));
+		register_setting('revixreviews', 'revixreviews_google_reviews', array('sanitize_callback' => 'absint'));
 
 		add_settings_section(
 			'revixreviews_main_section',
@@ -155,6 +156,15 @@ class Settings
 			'revixreviews_trustpilot_summary',
 			__('Enable Trustpilot Summary Widget', 'revix-reviews'),
 			array($this, 'revixreviews_trustpilot_summary_field_cb'),
+			'revixreviews',
+			'revixreviews_main_section'
+		);
+
+		// Google Reviews widget.
+		add_settings_field(
+			'revixreviews_google_reviews',
+			__('Enable Google Reviews Widget', 'revix-reviews'),
+			array($this, 'revixreviews_google_reviews_field_cb'),
 			'revixreviews',
 			'revixreviews_main_section'
 		);
@@ -276,6 +286,27 @@ class Settings
 		</label>
 		<p class="description">
 			<?php echo esc_html__('When enabled, the Trustpilot Summary widget will be available in the Elementor editor.', 'revix-reviews'); ?>
+		</p>
+		<?php
+	}
+
+	/**
+	 * Renders the Google Reviews widget checkbox field for the Revix Reviews settings page.
+	 *
+	 * Outputs a checkbox to enable/disable Google Reviews Elementor widget.
+	 *
+	 * @since 1.3.0
+	 */
+	public function revixreviews_google_reviews_field_cb()
+	{
+		$is_active = get_option('revixreviews_google_reviews', 1);
+		?>
+		<label for="revixreviews_google_reviews">
+			<input type="checkbox" id="revixreviews_google_reviews" name="revixreviews_google_reviews" value="1" <?php checked($is_active, 1); ?> />
+			<?php echo esc_html__('Enable Google Reviews widget in Elementor', 'revix-reviews'); ?>
+		</label>
+		<p class="description">
+			<?php echo esc_html__('When enabled, the Google Reviews widget will be available in the Elementor editor.', 'revix-reviews'); ?>
 		</p>
 		<?php
 	}
