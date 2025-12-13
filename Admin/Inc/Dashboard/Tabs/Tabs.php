@@ -15,18 +15,21 @@ class Tabs {
 
     public static function render_tabs($active_tab = 'general') {
         $tabs = [
-            'general'    => __('General', 'revix-reviews'),
-            'trustpilot' => __('TrustPilot', 'revix-reviews'),
-            'google'     => __('Google Reviews', 'revix-reviews')
+            'general'    => ['label' => __('General', 'revix-reviews'), 'icon' => '⚙️'],
+            'trustpilot' => ['label' => __('TrustPilot', 'revix-reviews'), 'icon' => '⭐'],
+            'google'     => ['label' => __('Google Reviews', 'revix-reviews'), 'icon' => '🔍']
         ];
 
-        echo '<h2 class="nav-tab-wrapper">';
-        foreach ($tabs as $tab => $label) {
-            $class = ($active_tab === $tab) ? ' nav-tab-active' : '';
+        echo '<div class="revixreviews-tabs-wrapper">';
+        foreach ($tabs as $tab => $data) {
+            $class = ($active_tab === $tab) ? ' revixreviews-tab-active' : '';
             $url = admin_url('edit.php?post_type=revixreviews&page=revixreviews_settings&tab=' . $tab);
-            echo '<a href="' . esc_url($url) . '" class="nav-tab' . esc_attr($class) . '">' . esc_html($label) . '</a>';
+            echo '<a href="' . esc_url($url) . '" class="revixreviews-tab' . esc_attr($class) . '">';
+            echo '<span class="revixreviews-tab-icon">' . $data['icon'] . '</span>';
+            echo '<span class="revixreviews-tab-label">' . esc_html($data['label']) . '</span>';
+            echo '</a>';
         }
-        echo '</h2>';
+        echo '</div>';
     }
 
     private function class_initialize() {

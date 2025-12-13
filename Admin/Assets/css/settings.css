@@ -587,6 +587,94 @@
     margin-right: 20px;
 }
 
+/* Custom Tabs Styling */
+.revixreviews-tabs-wrapper {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 28px;
+    padding: 8px;
+    background: #f8fafc;
+    border-radius: 12px;
+    border: 2px solid #e2e8f0;
+}
+
+.revixreviews-tab {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 24px;
+    background: #fff;
+    color: #64748b;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 14px;
+    border-radius: 8px;
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.revixreviews-tab:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 0;
+}
+
+.revixreviews-tab-icon,
+.revixreviews-tab-label {
+    position: relative;
+    z-index: 1;
+    transition: all 0.3s ease;
+}
+
+.revixreviews-tab-icon {
+    font-size: 18px;
+    line-height: 1;
+}
+
+.revixreviews-tab:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border-color: #e2e8f0;
+}
+
+.revixreviews-tab:hover .revixreviews-tab-label {
+    color: #334155;
+}
+
+.revixreviews-tab-active {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: #fff !important;
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+    border-color: transparent;
+}
+
+.revixreviews-tab-active:before {
+    opacity: 1;
+}
+
+.revixreviews-tab-active .revixreviews-tab-label {
+    color: #fff !important;
+}
+
+.revixreviews-tab-active:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(102, 126, 234, 0.4);
+}
+
+/* Legacy nav-tab support - hide if exists */
+.revixreviews-admin-wrap .nav-tab-wrapper {
+    display: none;
+}
+
 .revixreviews-admin-wrap .nav-tab-wrapper {
     margin-bottom: 24px;
     border-bottom: 2px solid #e2e8f0;
