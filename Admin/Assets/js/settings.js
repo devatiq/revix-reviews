@@ -33,7 +33,7 @@
             
             // If this is the master Elementor toggle being disabled
             if (optionName === 'revixreviews_elementor_active' && value === 0) {
-                RevixSettings.disableAllWidgets($toggle);
+                RevixSettings.disableAllWidgets($toggle, $wrapper);
                 return;
             }
 
@@ -73,7 +73,7 @@
             });
         },
         
-        disableAllWidgets: function($masterToggle) {
+        disableAllWidgets: function($masterToggle, $masterWrapper) {
             const widgetToggles = [
                 'revixreviews_google_summary',
                 'revixreviews_trustpilot_summary',
@@ -81,8 +81,8 @@
                 'revixreviews_google_reviews'
             ];
             
-            const $masterWrapper = $masterToggle.closest('.revixreviews-toggle-switch');
             let completedRequests = 0;
+            const totalToggles = widgetToggles.length;
             
             // Disable master toggle first
             $.ajax({
@@ -112,19 +112,28 @@
                                     },
                                     success: function() {
                                         $widgetToggle.prop('checked', false);
+                                    },
+                                    complete: function() {
                                         completedRequests++;
                                         
-                                        if (completedRequests === widgetToggles.length) {
+                                        if (completedRequests === totalToggles) {
                                             RevixSettings.showNotice('success', 'Elementor widgets disabled successfully');
+                                            RevixSettings.handleMasterToggleState();
                                         }
                                     }
                                 });
                             } else {
                                 completedRequests++;
+                                
+                                if (completedRequests === totalToggles) {
+                                    RevixSettings.showNotice('success', 'Elementor widgets disabled successfully');
+                                    RevixSettings.handleMasterToggleState();
+                                }
                             }
                         });
-                        
-                        RevixSettings.handleMasterToggleState();
+                    } else {
+                        // If failed, revert the master toggle
+                        $masterToggle.prop('checked', true);
                     }
                 },
                 complete: function() {
