@@ -41,6 +41,27 @@ class Main extends Widget_Base {
             ]
         );
 
+
+        $this->add_responsive_control(
+            'columns',
+            [
+                'label' => esc_html__('Columns', 'revix-reviews'),
+                'type' => Controls_Manager::SELECT,
+                'default' => '3',
+                'tablet_default' => '2',
+                'mobile_default' => '1',
+                'options' => [
+                    '1' => '1',
+                    '2' => '2',
+                    '3' => '3',
+                    '4' => '4',
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .revix-google-reviews' => 'grid-template-columns: repeat({{VALUE}}, 1fr);',
+                ],
+            ]
+        );
+
         $this->add_control(
             'words',
             [
@@ -75,26 +96,6 @@ class Main extends Widget_Base {
             [
                 'label' => esc_html__('Layout', 'revix-reviews'),
                 'tab' => Controls_Manager::TAB_STYLE,
-            ]
-        );
-
-        $this->add_responsive_control(
-            'columns',
-            [
-                'label' => esc_html__('Columns', 'revix-reviews'),
-                'type' => Controls_Manager::SELECT,
-                'default' => '4',
-                'tablet_default' => '2',
-                'mobile_default' => '1',
-                'options' => [
-                    '1' => '1',
-                    '2' => '2',
-                    '3' => '3',
-                    '4' => '4',
-                ],
-                'selectors' => [
-                    '{{WRAPPER}} .revix-google-reviews' => 'grid-template-columns: repeat({{VALUE}}, 1fr);',
-                ],
             ]
         );
 
