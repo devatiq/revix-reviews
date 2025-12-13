@@ -205,86 +205,88 @@ class Settings
 	private function render_general_settings()
 	{
 		?>
-		<div class="revixreviews-settings-card">
-			<div class="revixreviews-card-header">
-				<h3><?php esc_html_e('General Settings', 'revix-reviews'); ?></h3>
-				<p class="revixreviews-card-description"><?php esc_html_e('Configure basic plugin settings and default behaviors', 'revix-reviews'); ?></p>
-			</div>
-			<div class="revixreviews-card-body">
-				<!-- Redirect URL -->
-				<div class="revixreviews-field">
-					<label for="revixreviews_redirect_url" class="revixreviews-label">
-						<?php esc_html_e('Redirect URL', 'revix-reviews'); ?>
-					</label>
-					<input type="text" id="revixreviews_redirect_url" class="revixreviews-input" name="revixreviews_redirect_url" 
-						value="<?php echo esc_attr(get_option('revixreviews_redirect_url')); ?>" 
-						placeholder="<?php echo esc_url(home_url('/thank-you')); ?>" />
-					<p class="revixreviews-description">
-						<?php esc_html_e('Enter the URL to redirect users to after they submit a review.', 'revix-reviews'); ?>
-					</p>
+		<div class="revixreviews-settings-grid">
+			<div class="revixreviews-settings-card">
+				<div class="revixreviews-card-header">
+					<h3><?php esc_html_e('General Settings', 'revix-reviews'); ?></h3>
+					<p class="revixreviews-card-description"><?php esc_html_e('Configure basic plugin settings and default behaviors', 'revix-reviews'); ?></p>
 				</div>
+				<div class="revixreviews-card-body">
+					<!-- Redirect URL -->
+					<div class="revixreviews-field">
+						<label for="revixreviews_redirect_url" class="revixreviews-label">
+							<?php esc_html_e('Redirect URL', 'revix-reviews'); ?>
+						</label>
+						<input type="text" id="revixreviews_redirect_url" class="revixreviews-input" name="revixreviews_redirect_url" 
+							value="<?php echo esc_attr(get_option('revixreviews_redirect_url')); ?>" 
+							placeholder="<?php echo esc_url(home_url('/thank-you')); ?>" />
+						<p class="revixreviews-description">
+							<?php esc_html_e('Enter the URL to redirect users to after they submit a review.', 'revix-reviews'); ?>
+						</p>
+					</div>
 
-				<!-- Default Review Status -->
-				<div class="revixreviews-field">
-					<label for="revixreviews_status" class="revixreviews-label">
-						<?php esc_html_e('Default Review Status', 'revix-reviews'); ?>
-					</label>
-					<select id="revixreviews_status" name="revixreviews_status" class="revixreviews-select">
-						<option value="publish" <?php selected(get_option('revixreviews_status', 'pending'), 'publish'); ?>>
-							<?php esc_html_e('Publish', 'revix-reviews'); ?>
-						</option>
-						<option value="pending" <?php selected(get_option('revixreviews_status', 'pending'), 'pending'); ?>>
-							<?php esc_html_e('Pending', 'revix-reviews'); ?>
-						</option>
-						<option value="draft" <?php selected(get_option('revixreviews_status', 'pending'), 'draft'); ?>>
-							<?php esc_html_e('Draft', 'revix-reviews'); ?>
-						</option>
-					</select>
-					<p class="revixreviews-description">
-						<?php esc_html_e('Select the default status for new reviews. "Publish" makes them public immediately, "Pending" requires admin approval, and "Draft" saves them as drafts.', 'revix-reviews'); ?>
-					</p>
+					<!-- Default Review Status -->
+					<div class="revixreviews-field">
+						<label for="revixreviews_status" class="revixreviews-label">
+							<?php esc_html_e('Default Review Status', 'revix-reviews'); ?>
+						</label>
+						<select id="revixreviews_status" name="revixreviews_status" class="revixreviews-select">
+							<option value="publish" <?php selected(get_option('revixreviews_status', 'pending'), 'publish'); ?>>
+								<?php esc_html_e('Publish', 'revix-reviews'); ?>
+							</option>
+							<option value="pending" <?php selected(get_option('revixreviews_status', 'pending'), 'pending'); ?>>
+								<?php esc_html_e('Pending', 'revix-reviews'); ?>
+							</option>
+							<option value="draft" <?php selected(get_option('revixreviews_status', 'pending'), 'draft'); ?>>
+								<?php esc_html_e('Draft', 'revix-reviews'); ?>
+							</option>
+						</select>
+						<p class="revixreviews-description">
+							<?php esc_html_e('Select the default status for new reviews. "Publish" makes them public immediately, "Pending" requires admin approval, and "Draft" saves them as drafts.', 'revix-reviews'); ?>
+						</p>
+					</div>
 				</div>
 			</div>
-		</div>
 
-		<div class="revixreviews-settings-card">
-			<div class="revixreviews-card-header">
-				<h3><?php esc_html_e('Elementor Integration', 'revix-reviews'); ?></h3>
-				<p class="revixreviews-card-description"><?php esc_html_e('Enable or disable Elementor widgets for the page builder', 'revix-reviews'); ?></p>
-			</div>
-			<div class="revixreviews-card-body">
-				<div class="revixreviews-toggles-grid">
-					<!-- Enable Elementor Widgets -->
-					<?php $this->render_toggle_field(
-						'revixreviews_elementor_active',
-						__('Enable Elementor Widgets', 'revix-reviews'),
-						__('When enabled, Revix Reviews widgets will be available in the Elementor editor. Requires Elementor plugin to be installed and activated.', 'revix-reviews'),
-						get_option('revixreviews_elementor_active', 0)
-					); ?>
+			<div class="revixreviews-settings-card">
+				<div class="revixreviews-card-header">
+					<h3><?php esc_html_e('Elementor Integration', 'revix-reviews'); ?></h3>
+					<p class="revixreviews-card-description"><?php esc_html_e('Enable or disable Elementor widgets for the page builder', 'revix-reviews'); ?></p>
+				</div>
+				<div class="revixreviews-card-body">
+					<div class="revixreviews-toggles-grid">
+						<!-- Enable Elementor Widgets -->
+						<?php $this->render_toggle_field(
+							'revixreviews_elementor_active',
+							__('Enable Elementor Widgets', 'revix-reviews'),
+							__('When enabled, Revix Reviews widgets will be available in the Elementor editor. Requires Elementor plugin to be installed and activated.', 'revix-reviews'),
+							get_option('revixreviews_elementor_active', 0)
+						); ?>
 
-					<!-- Google Summary Widget -->
-					<?php $this->render_toggle_field(
-						'revixreviews_google_summary',
-						__('Google Summary Widget', 'revix-reviews'),
-						__('Display Google review ratings summary in Elementor.', 'revix-reviews'),
-						get_option('revixreviews_google_summary', 1)
-					); ?>
+						<!-- Google Summary Widget -->
+						<?php $this->render_toggle_field(
+							'revixreviews_google_summary',
+							__('Google Summary Widget', 'revix-reviews'),
+							__('Display Google review ratings summary in Elementor.', 'revix-reviews'),
+							get_option('revixreviews_google_summary', 1)
+						); ?>
 
-					<!-- Trustpilot Summary Widget -->
-					<?php $this->render_toggle_field(
-						'revixreviews_trustpilot_summary',
-						__('Trustpilot Summary Widget', 'revix-reviews'),
-						__('Display Trustpilot review ratings summary in Elementor.', 'revix-reviews'),
-						get_option('revixreviews_trustpilot_summary', 1)
-					); ?>
+						<!-- Trustpilot Summary Widget -->
+						<?php $this->render_toggle_field(
+							'revixreviews_trustpilot_summary',
+							__('Trustpilot Summary Widget', 'revix-reviews'),
+							__('Display Trustpilot review ratings summary in Elementor.', 'revix-reviews'),
+							get_option('revixreviews_trustpilot_summary', 1)
+						); ?>
 
-					<!-- Google Reviews Widget -->
-					<?php $this->render_toggle_field(
-						'revixreviews_google_reviews',
-						__('Google Reviews Widget', 'revix-reviews'),
-						__('Display full Google reviews list in Elementor.', 'revix-reviews'),
-						get_option('revixreviews_google_reviews', 1)
-					); ?>
+						<!-- Google Reviews Widget -->
+						<?php $this->render_toggle_field(
+							'revixreviews_google_reviews',
+							__('Google Reviews Widget', 'revix-reviews'),
+							__('Display full Google reviews list in Elementor.', 'revix-reviews'),
+							get_option('revixreviews_google_reviews', 1)
+						); ?>
+					</div>
 				</div>
 			</div>
 		</div>
