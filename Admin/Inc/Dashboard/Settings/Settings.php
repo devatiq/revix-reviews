@@ -96,6 +96,7 @@ class Settings
 			'revixreviews_elementor_active',
 			'revixreviews_google_summary',
 			'revixreviews_trustpilot_summary',
+			'revixreviews_trustpilot_reviews',
 			'revixreviews_google_reviews',
 		);
 
@@ -308,7 +309,13 @@ class Settings
 							__('Display Trustpilot review ratings summary in Elementor.', 'revix-reviews'),
 							get_option('revixreviews_trustpilot_summary', 1)
 						); ?>
-
+					<!-- Trustpilot Reviews Widget -->
+					<?php $this->render_toggle_field(
+						'revixreviews_trustpilot_reviews',
+						__('Trustpilot Reviews Widget', 'revix-reviews'),
+						__('Display full Trustpilot reviews list in Elementor.', 'revix-reviews'),
+						get_option('revixreviews_trustpilot_reviews', 1)
+					); ?>
 						<!-- Google Reviews Widget -->
 						<?php $this->render_toggle_field(
 							'revixreviews_google_reviews',
@@ -413,6 +420,7 @@ class Settings
 		register_setting('revixreviews', 'revixreviews_elementor_active', array('sanitize_callback' => 'absint'));
 		register_setting('revixreviews', 'revixreviews_google_summary', array('sanitize_callback' => 'absint'));
 		register_setting('revixreviews', 'revixreviews_trustpilot_summary', array('sanitize_callback' => 'absint'));
+		register_setting('revixreviews', 'revixreviews_trustpilot_reviews', array('sanitize_callback' => 'absint'));
 		register_setting('revixreviews', 'revixreviews_google_reviews', array('sanitize_callback' => 'absint'));
 
 		add_settings_section(
