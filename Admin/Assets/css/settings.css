@@ -216,6 +216,22 @@
     margin-top: 6px;
 }
 
+.revixreviews-select-all-toggle .revixreviews-toggle-switch input {
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 0;
+    z-index: 102;
+    cursor: pointer;
+}
+
+.revixreviews-select-all-toggle .revixreviews-toggle-slider {
+    pointer-events: none;
+}
+
 /* Settings Cards Grid */
 .revixreviews-settings-grid {
     display: grid;
