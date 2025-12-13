@@ -47,8 +47,10 @@ class GoogleSettings
             __('Google API Key', 'revix-reviews'),
             function () {
                 $value = esc_attr(get_option('revix_google_api_key'));
-                echo '<input type="password" id="revix_google_api_key" name="revix_google_api_key" value="' . $value . '" class="revixreviews-input" placeholder="AIza..." />';
-                echo '<label style="margin-left: 10px;"> <input type="checkbox" id="revix_toggle_api_key" onclick="document.getElementById(\'revix_google_api_key\').type = this.checked ? \'text\' : \'password\'"> ' . esc_html__('Show', 'revix-reviews') . '</label>';
+                echo '<div style="display: flex; align-items: center; gap: 12px;">';
+                echo '<input type="password" id="revix_google_api_key" name="revix_google_api_key" value="' . $value . '" class="revixreviews-input" placeholder="AIza..." style="flex: 1;" />';
+                echo '<label class="revixreviews-show-password"> <input type="checkbox" id="revix_toggle_api_key" onclick="document.getElementById(\'revix_google_api_key\').type = this.checked ? \'text\' : \'password\'"> <span>' . esc_html__('Show', 'revix-reviews') . '</span></label>';
+                echo '</div>';
                 echo '<p class="revixreviews-description">' . esc_html__('Get your API key from the Google Cloud Console. Enable the Places API and restrict it for security.', 'revix-reviews') . '</p>';
             },
             'revixreviews_google',
