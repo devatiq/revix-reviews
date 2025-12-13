@@ -280,20 +280,29 @@ class Settings
 			</div>
 
 			<div class="revixreviews-settings-card">
-				<div class="revixreviews-card-header">
-					<h3><?php esc_html_e('Elementor Integration', 'revix-reviews'); ?></h3>
-					<p class="revixreviews-card-description"><?php esc_html_e('Enable or disable Elementor widgets for the page builder', 'revix-reviews'); ?></p>
+				<div class="revixreviews-card-header revixreviews-card-header-with-toggle">
+					<div class="revixreviews-card-header-content">
+						<h3><?php esc_html_e('Elementor Integration', 'revix-reviews'); ?></h3>
+						<p class="revixreviews-card-description"><?php esc_html_e('Enable or disable Elementor widgets for the page builder', 'revix-reviews'); ?></p>
+					</div>
+					<div class="revixreviews-card-header-toggle">
+						<label class="revixreviews-toggle-label-inline">
+							<?php esc_html_e('Enable Elementor Widgets', 'revix-reviews'); ?>
+						</label>
+						<div class="revixreviews-toggle-switch">
+							<input 
+								type="checkbox" 
+								id="revixreviews_elementor_active" 
+								class="revixreviews-ajax-toggle" 
+								data-option="revixreviews_elementor_active" 
+								<?php checked(get_option('revixreviews_elementor_active', 0), 1); ?> 
+							/>
+							<span class="revixreviews-toggle-slider"></span>
+						</div>
+					</div>
 				</div>
 				<div class="revixreviews-card-body">
 					<div class="revixreviews-toggles-grid">
-						<!-- Enable Elementor Widgets -->
-						<?php $this->render_toggle_field(
-							'revixreviews_elementor_active',
-							__('Enable Elementor Widgets', 'revix-reviews'),
-							__('When enabled, Revix Reviews widgets will be available in the Elementor editor. Requires Elementor plugin to be installed and activated.', 'revix-reviews'),
-							get_option('revixreviews_elementor_active', 0)
-						); ?>
-
 						<!-- Google Summary Widget -->
 						<?php $this->render_toggle_field(
 							'revixreviews_google_summary',

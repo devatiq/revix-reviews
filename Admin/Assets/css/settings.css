@@ -56,6 +56,32 @@
     padding: 20px 24px;
 }
 
+.revixreviews-card-header-with-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+}
+
+.revixreviews-card-header-content {
+    flex: 1;
+}
+
+.revixreviews-card-header-toggle {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-shrink: 0;
+}
+
+.revixreviews-toggle-label-inline {
+    font-size: 14px;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.95);
+    margin: 0;
+    white-space: nowrap;
+}
+
 .revixreviews-card-header h3 {
     margin: 0 0 6px;
     font-size: 18px;
