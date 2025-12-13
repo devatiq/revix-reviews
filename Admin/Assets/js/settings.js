@@ -16,6 +16,9 @@
             
             // Handle form submission
             $('.revixreviews-settings-form').on('submit', this.handleFormSubmit);
+            
+            // Initial check on page load
+            this.handleMasterToggleState();
         },
 
         handleToggleChange: function(e) {
@@ -27,6 +30,12 @@
             // Add loading state
             $wrapper.addClass('loading');
             $toggle.prop('disabled', true);
+            
+            // If this is the master Elementor toggle being disabled
+            if (optionName === 'revixreviews_elementor_active' && value === 0) {
+                RevixSettings.disableAllWidgets($toggle);
+                return;
+            }
 
             // Send AJAX request
             $.ajax({
@@ -41,6 +50,11 @@
                 success: function(response) {
                     if (response.success) {
                         RevixSettings.showNotice('success', response.data.message);
+                        
+                        // If master toggle enabled, re-enable widget controls
+                        if (optionName === 'revixreviews_elementor_active') {
+                            RevixSettings.handleMasterToggleState();
+                        }
                     } else {
                         RevixSettings.showNotice('error', response.data.message || 'Failed to update setting');
                         // Revert toggle state
@@ -55,6 +69,92 @@
                 complete: function() {
                     $wrapper.removeClass('loading');
                     $toggle.prop('disabled', false);
+                }
+            });
+        },
+        
+        disableAllWidgets: function($masterToggle) {
+            const widgetToggles = [
+                'revixreviews_google_summary',
+                'revixreviews_trustpilot_summary',
+                'revixreviews_trustpilot_reviews',
+                'revixreviews_google_reviews'
+            ];
+            
+            const $masterWrapper = $masterToggle.closest('.revixreviews-toggle-switch');
+            let completedRequests = 0;
+            
+            // Disable master toggle first
+            $.ajax({
+                url: revixReviewsSettings.ajaxUrl,
+                type: 'POST',
+                data: {
+                    action: 'revixreviews_toggle_setting',
+                    nonce: revixReviewsSettings.nonce,
+                    option: 'revixreviews_elementor_active',
+                    value: 0
+                },
+                success: function(response) {
+                    if (response.success) {
+                        // Now disable all widget toggles
+                        widgetToggles.forEach(function(widgetOption) {
+                            const $widgetToggle = $('.revixreviews-ajax-toggle[data-option="' + widgetOption + '"]');
+                            
+                            if ($widgetToggle.length && $widgetToggle.is(':checked')) {
+                                $.ajax({
+                                    url: revixReviewsSettings.ajaxUrl,
+                                    type: 'POST',
+                                    data: {
+                                        action: 'revixreviews_toggle_setting',
+                                        nonce: revixReviewsSettings.nonce,
+                                        option: widgetOption,
+                                        value: 0
+                                    },
+                                    success: function() {
+                                        $widgetToggle.prop('checked', false);
+                                        completedRequests++;
+                                        
+                                        if (completedRequests === widgetToggles.length) {
+                                            RevixSettings.showNotice('success', 'Elementor widgets disabled successfully');
+                                        }
+                                    }
+                                });
+                            } else {
+                                completedRequests++;
+                            }
+                        });
+                        
+                        RevixSettings.handleMasterToggleState();
+                    }
+                },
+                complete: function() {
+                    $masterWrapper.removeClass('loading');
+                    $masterToggle.prop('disabled', false);
+                }
+            });
+        },
+        
+        handleMasterToggleState: function() {
+            const $masterToggle = $('.revixreviews-ajax-toggle[data-option="revixreviews_elementor_active"]');
+            const isMasterEnabled = $masterToggle.is(':checked');
+            
+            const widgetToggles = [
+                'revixreviews_google_summary',
+                'revixreviews_trustpilot_summary',
+                'revixreviews_trustpilot_reviews',
+                'revixreviews_google_reviews'
+            ];
+            
+            widgetToggles.forEach(function(widgetOption) {
+                const $widgetToggle = $('.revixreviews-ajax-toggle[data-option="' + widgetOption + '"]');
+                const $widgetField = $widgetToggle.closest('.revixreviews-toggle-field');
+                
+                if (isMasterEnabled) {
+                    $widgetToggle.prop('disabled', false);
+                    $widgetField.removeClass('disabled');
+                } else {
+                    $widgetToggle.prop('disabled', true);
+                    $widgetField.addClass('disabled');
                 }
             });
         },

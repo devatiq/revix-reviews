@@ -288,6 +288,29 @@
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
 }
 
+/* Disabled state for dependent toggles */
+.revixreviews-toggle-field.disabled {
+    opacity: 0.5;
+    pointer-events: none;
+    background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+    border-color: #e2e8f0;
+}
+
+.revixreviews-toggle-field.disabled:hover {
+    background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+    border-color: #e2e8f0;
+    box-shadow: none;
+}
+
+.revixreviews-toggle-field.disabled .revixreviews-toggle-label {
+    color: #94a3b8;
+}
+
+.revixreviews-toggle-field.disabled .revixreviews-toggle-description {
+    color: #cbd5e1;
+}
+
+
 .revixreviews-toggle-header {
     display: flex;
     align-items: center;
