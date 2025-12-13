@@ -286,9 +286,14 @@ class Settings
 						<p class="revixreviews-card-description"><?php esc_html_e('Enable or disable Elementor widgets for the page builder', 'revix-reviews'); ?></p>
 					</div>
 					<div class="revixreviews-card-header-toggle">
+					<div class="revixreviews-toggle-text">
 						<label class="revixreviews-toggle-label-inline">
 							<?php esc_html_e('Enable Elementor Widgets', 'revix-reviews'); ?>
 						</label>
+						<p class="revixreviews-toggle-description-inline">
+							<?php esc_html_e('Activate to use widgets in Elementor', 'revix-reviews'); ?>
+						</p>
+					</div>
 						<div class="revixreviews-toggle-switch">
 							<input 
 								type="checkbox" 

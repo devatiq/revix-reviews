@@ -78,10 +78,24 @@
     position: relative;
 }
 
+.revixreviews-toggle-text {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
 .revixreviews-toggle-label-inline {
     font-size: 14px;
     font-weight: 500;
     color: rgba(255, 255, 255, 0.95);
+    margin: 0;
+    white-space: nowrap;
+}
+
+.revixreviews-toggle-description-inline {
+    font-size: 12px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.75);
     margin: 0;
     white-space: nowrap;
 }
