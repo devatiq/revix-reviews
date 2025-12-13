@@ -306,7 +306,25 @@ class Settings
 						</div>
 					</div>
 				</div>
-				<div class="revixreviews-card-body">
+				<div class="revixreviews-card-body">				<!-- Select All Toggle -->
+				<div class="revixreviews-select-all-toggle">
+					<div class="revixreviews-toggle-header">
+						<label class="revixreviews-toggle-label">
+							<?php esc_html_e('Enable All Widgets', 'revix-reviews'); ?>
+						</label>
+						<div class="revixreviews-toggle-switch">
+							<input 
+								type="checkbox" 
+								id="revixreviews_select_all_widgets" 
+								class="revixreviews-select-all-toggle-input" 
+							/>
+							<span class="revixreviews-toggle-slider"></span>
+						</div>
+					</div>
+					<p class="revixreviews-toggle-description">
+						<?php esc_html_e('Quickly enable or disable all widget toggles below', 'revix-reviews'); ?>
+					</p>
+				</div>
 					<div class="revixreviews-toggles-grid">
 						<!-- Google Summary Widget -->
 						<?php $this->render_toggle_field(

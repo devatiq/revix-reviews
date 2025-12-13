@@ -14,11 +14,15 @@
             // Handle toggle switches with AJAX
             $(document).on('change', '.revixreviews-ajax-toggle', this.handleToggleChange);
             
+            // Handle select all toggle
+            $(document).on('change', '.revixreviews-select-all-toggle-input', this.handleSelectAllToggle);
+            
             // Handle form submission
             $('.revixreviews-settings-form').on('submit', this.handleFormSubmit);
             
             // Initial check on page load
             this.handleMasterToggleState();
+            this.updateSelectAllState();
         },
 
         handleToggleChange: function(e) {
@@ -55,6 +59,9 @@
                         if (optionName === 'revixreviews_elementor_active') {
                             RevixSettings.handleMasterToggleState();
                         }
+                        
+                        // Update select all state when individual widget changes
+                        RevixSettings.updateSelectAllState();
                     } else {
                         RevixSettings.showNotice('error', response.data.message || 'Failed to update setting');
                         // Revert toggle state
@@ -166,6 +173,79 @@
                     $widgetField.addClass('disabled');
                 }
             });
+        },
+        
+        handleSelectAllToggle: function(e) {
+            const $selectAllToggle = $(this);
+            const isChecked = $selectAllToggle.is(':checked');
+            
+            const widgetToggles = [
+                'revixreviews_google_summary',
+                'revixreviews_trustpilot_summary',
+                'revixreviews_trustpilot_reviews',
+                'revixreviews_google_reviews'
+            ];
+            
+            let completedRequests = 0;
+            const totalToggles = widgetToggles.length;
+            
+            widgetToggles.forEach(function(widgetOption) {
+                const $widgetToggle = $('.revixreviews-ajax-toggle[data-option="' + widgetOption + '"]');
+                
+                if ($widgetToggle.length && !$widgetToggle.prop('disabled')) {
+                    const currentValue = $widgetToggle.is(':checked') ? 1 : 0;
+                    const newValue = isChecked ? 1 : 0;
+                    
+                    // Only update if value is different
+                    if (currentValue !== newValue) {
+                        $.ajax({
+                            url: revixReviewsSettings.ajaxUrl,
+                            type: 'POST',
+                            data: {
+                                action: 'revixreviews_toggle_setting',
+                                nonce: revixReviewsSettings.nonce,
+                                option: widgetOption,
+                                value: newValue
+                            },
+                            success: function() {
+                                $widgetToggle.prop('checked', isChecked);
+                            },
+                            complete: function() {
+                                completedRequests++;
+                                
+                                if (completedRequests === totalToggles) {
+                                    const message = isChecked ? 'All widgets enabled' : 'All widgets disabled';
+                                    RevixSettings.showNotice('success', message);
+                                }
+                            }
+                        });
+                    } else {
+                        completedRequests++;
+                    }
+                } else {
+                    completedRequests++;
+                }
+            });
+        },
+        
+        updateSelectAllState: function() {
+            const widgetToggles = [
+                'revixreviews_google_summary',
+                'revixreviews_trustpilot_summary',
+                'revixreviews_trustpilot_reviews',
+                'revixreviews_google_reviews'
+            ];
+            
+            let allChecked = true;
+            
+            widgetToggles.forEach(function(widgetOption) {
+                const $widgetToggle = $('.revixreviews-ajax-toggle[data-option="' + widgetOption + '"]');
+                if ($widgetToggle.length && !$widgetToggle.is(':checked')) {
+                    allChecked = false;
+                }
+            });
+            
+            $('.revixreviews-select-all-toggle-input').prop('checked', allChecked);
         },
 
         handleFormSubmit: function(e) {

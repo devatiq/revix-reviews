@@ -195,6 +195,27 @@
     gap: 16px;
 }
 
+/* Select All Toggle */
+.revixreviews-select-all-toggle {
+    padding: 18px 20px;
+    background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+    border: 2px solid #bae6fd;
+    border-radius: 12px;
+    margin-bottom: 20px;
+}
+
+.revixreviews-select-all-toggle .revixreviews-toggle-label {
+    font-size: 15px;
+    font-weight: 600;
+    color: #0369a1;
+}
+
+.revixreviews-select-all-toggle .revixreviews-toggle-description {
+    font-size: 13px;
+    color: #0c4a6e;
+    margin-top: 6px;
+}
+
 /* Settings Cards Grid */
 .revixreviews-settings-grid {
     display: grid;
