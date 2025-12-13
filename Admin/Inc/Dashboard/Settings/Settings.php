@@ -300,7 +300,17 @@ class Settings
 	 */
 	private function render_trustpilot_settings()
 	{
-		do_settings_sections('revixreviews_trustpilot');
+		?>
+		<div class="revixreviews-settings-card">
+			<div class="revixreviews-card-header">
+				<h3><?php esc_html_e('Trustpilot Reviews Settings', 'revix-reviews'); ?></h3>
+				<p class="revixreviews-card-description"><?php esc_html_e('Enter your public Trustpilot business review page URL', 'revix-reviews'); ?></p>
+			</div>
+			<div class="revixreviews-card-body">
+				<?php do_settings_sections('revixreviews_trustpilot'); ?>
+			</div>
+		</div>
+		<?php
 	}
 
 	/**
@@ -310,7 +320,17 @@ class Settings
 	 */
 	private function render_google_settings()
 	{
-		do_settings_sections('revixreviews_google');
+		?>
+		<div class="revixreviews-settings-card">
+			<div class="revixreviews-card-header">
+				<h3><?php esc_html_e('Google Maps Reviews Settings', 'revix-reviews'); ?></h3>
+				<p class="revixreviews-card-description"><?php esc_html_e('Enter your Google Maps API key and Place ID to fetch reviews', 'revix-reviews'); ?></p>
+			</div>
+			<div class="revixreviews-card-body">
+				<?php do_settings_sections('revixreviews_google'); ?>
+			</div>
+		</div>
+		<?php
 	}
 
 	/**

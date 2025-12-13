@@ -40,8 +40,8 @@ class TrustpilotSettings {
 			'revix_trustpilot_url',
 			__('Trustpilot Review Page URL', 'revix-reviews'),
 			function () {
-				echo '<input type="text" name="revix_trustpilot_url" value="' . esc_attr(get_option('revix_trustpilot_url')) . '" class="regular-text" placeholder="https://www.trustpilot.com/review/yourdomain.com">';
-                echo '<p class="description">' . esc_html__('Enter the full URL of your business\'s Trustpilot review page. This is used to fetch your latest reviews.', 'revix-reviews') . '</p>';
+				echo '<input type="text" name="revix_trustpilot_url" value="' . esc_attr(get_option('revix_trustpilot_url')) . '" class="revixreviews-input" placeholder="https://www.trustpilot.com/review/yourdomain.com">';
+                echo '<p class="revixreviews-description">' . esc_html__('Enter the full URL of your business\'s Trustpilot review page. This is used to fetch your latest reviews.', 'revix-reviews') . '</p>';
 			},
 			'revixreviews_trustpilot',
 			'revix_trustpilot_section'

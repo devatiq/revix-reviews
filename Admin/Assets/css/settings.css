@@ -626,10 +626,55 @@
 
 /* Better WordPress Form Integration */
 .revixreviews-admin-wrap input[type="text"],
+.revixreviews-admin-wrap input[type="password"],
 .revixreviews-admin-wrap select {
     max-width: 100%;
 }
 
 .revixreviews-admin-wrap .regular-text {
     width: 100%;
+}
+
+/* Style WordPress Settings Tables */
+.revixreviews-card-body .form-table {
+    margin: 0;
+    border: none;
+}
+
+.revixreviews-card-body .form-table th {
+    padding: 0 0 8px 0;
+    font-size: 14px;
+    font-weight: 600;
+    color: #334155;
+}
+
+.revixreviews-card-body .form-table td {
+    padding: 0 0 20px 0;
+}
+
+.revixreviews-card-body .form-table tr:last-child td {
+    padding-bottom: 0;
+}
+
+.revixreviews-card-body h2 {
+    display: none;
+}
+
+.revixreviews-card-body p.revixreviews-description,
+.revixreviews-card-body .description {
+    font-size: 13px;
+    color: #64748b;
+    margin: 8px 0 0;
+    line-height: 1.6;
+}
+
+.revixreviews-card-body .description a {
+    color: #667eea;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.revixreviews-card-body .description a:hover {
+    color: #764ba2;
+    text-decoration: underline;
 }
