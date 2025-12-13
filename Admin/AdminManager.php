@@ -90,7 +90,7 @@ class AdminManager
 	 */
 	public function set_constants()
 	{
-		define('REVIXREVIEWS_ADMIN_ASSETS', plugin_dir_url(__FILE__) . 'Assets');
+		define('REVIXREVIEWS_ADMIN_ASSETS', plugin_dir_url(__FILE__) . 'Assets/');
 		define('REVIXREVIEWS_ADMIN_PATH', plugin_dir_path(__FILE__));
 	}
 

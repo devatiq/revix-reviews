@@ -28,6 +28,6 @@ class Assets {
      * @return void
      */
     public function enqueue_admin_styles() {
-        wp_enqueue_style('revix-reviews-admin', REVIXREVIEWS_ADMIN_ASSETS . '/css/admin-style.css', [], REVIXREVIEWS_VERSION);
+        wp_enqueue_style('revix-reviews-admin', REVIXREVIEWS_ADMIN_ASSETS . 'css/admin-style.css', [], REVIXREVIEWS_VERSION);
     }
 }

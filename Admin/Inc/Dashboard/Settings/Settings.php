@@ -21,11 +21,91 @@ class Settings
 		$this->class_initialize();
 		add_action('admin_menu', array($this, 'revixreviews_add_admin_menu'));
 		add_action('admin_init', array($this, 'revixreviews_settings_init'));
+		add_action('admin_enqueue_scripts', array($this, 'enqueue_settings_assets'));
+		add_action('wp_ajax_revixreviews_toggle_setting', array($this, 'handle_ajax_toggle'));
 	}
 
 	private function class_initialize() { 
 
 		$this->tabs = new Tabs();
+	}
+
+	/**
+	 * Enqueue CSS and JavaScript for settings page
+	 *
+	 * @since 1.3.0
+	 */
+	public function enqueue_settings_assets($hook)
+	{
+		// Only load on our settings page
+		if ('revixreviews_page_revixreviews_settings' !== $hook) {
+			return;
+		}
+
+		// Enqueue CSS
+		wp_enqueue_style(
+			'revixreviews-settings',
+			REVIXREVIEWS_ADMIN_ASSETS . 'css/settings.css',
+			array(),
+			REVIXREVIEWS_VERSION
+		);
+
+		// Enqueue JavaScript
+		wp_enqueue_script(
+			'revixreviews-settings',
+			REVIXREVIEWS_ADMIN_ASSETS . 'js/settings.js',
+			array('jquery'),
+			REVIXREVIEWS_VERSION,
+			true
+		);
+
+		// Localize script with AJAX URL and nonce
+		wp_localize_script(
+			'revixreviews-settings',
+			'revixReviewsSettings',
+			array(
+				'ajaxUrl'    => admin_url('admin-ajax.php'),
+				'nonce'      => wp_create_nonce('revixreviews_settings_nonce'),
+				'savingText' => __('Saving...', 'revix-reviews'),
+			)
+		);
+	}
+
+	/**
+	 * Handle AJAX toggle switch changes
+	 *
+	 * @since 1.3.0
+	 */
+	public function handle_ajax_toggle()
+	{
+		// Verify nonce
+		check_ajax_referer('revixreviews_settings_nonce', 'nonce');
+
+		// Check user capabilities
+		if (!current_user_can('manage_options')) {
+			wp_send_json_error(array('message' => __('You do not have permission to perform this action.', 'revix-reviews')));
+		}
+
+		// Get and sanitize input
+		$option_name = isset($_POST['option']) ? sanitize_key($_POST['option']) : '';
+		$value       = isset($_POST['value']) ? absint($_POST['value']) : 0;
+
+		if (empty($option_name)) {
+			wp_send_json_error(array('message' => __('Invalid option name.', 'revix-reviews')));
+		}
+
+		// Update the option
+		$updated = update_option($option_name, $value);
+
+		if ($updated || get_option($option_name) == $value) {
+			wp_send_json_success(array(
+				'message' => __('Setting saved successfully.', 'revix-reviews'),
+				'option'  => $option_name,
+				'value'   => $value,
+			));
+		} else {
+			wp_send_json_error(array('message' => __('Failed to save setting.', 'revix-reviews')));
+		}
 	}
 
 	/**
@@ -53,43 +133,215 @@ class Settings
 	{
 		$active_tab = isset($_GET['tab']) ? sanitize_text_field(wp_unslash($_GET['tab'])) : 'general';
 		?>
-		<div class="wrap revixreviews_admin_wrap">
-			<h2><?php echo esc_html(get_admin_page_title()); ?></h2>
+		<div class="wrap revixreviews-admin-wrap">
+			<h1 class="revixreviews-page-title">
+				<span class="revixreviews-title-icon">⚙️</span>
+				<?php echo esc_html(get_admin_page_title()); ?>
+			</h1>
+			
 			<?php Tabs::render_tabs($active_tab); ?>
 	
-			<div style="display: flex; gap: 20px; align-items: flex-start;">
-				<!-- Main Form Area -->
-				<div style="flex: 2;">
-					<form action="options.php" method="post">
+			<div class="revixreviews-settings-layout">
+				<!-- Main Settings Area -->
+				<div class="revixreviews-settings-main">
+					<?php settings_errors(); ?>
+					
+					<form action="options.php" method="post" id="revixreviews-settings-form">
 						<?php
-						settings_errors();
-	
 						if ($active_tab === 'trustpilot') {
 							settings_fields('revixreviews_trustpilot');
-							do_settings_sections('revixreviews_trustpilot');
+							$this->render_trustpilot_settings();
 						} elseif ($active_tab === 'google') {
 							settings_fields('revixreviews_google');
-							do_settings_sections('revixreviews_google');
+							$this->render_google_settings();
 						} else {
 							settings_fields('revixreviews');
-							do_settings_sections('revixreviews');
+							$this->render_general_settings();
 						}
 	
-						submit_button();
+						submit_button(__('Save All Settings', 'revix-reviews'), 'primary large', 'submit', true, array('id' => 'revixreviews-submit-btn'));
 						?>
 					</form>
 				</div>
 	
 				<!-- Sidebar Area -->
-				<div style="flex: 1; background: #fff; padding: 1rem; border: 1px solid #ddd; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.05);">
-					<h3 style="margin-top: 0;"><?php esc_html_e('Watch Tutorial', 'revix-reviews'); ?></h3>
-					<div style="aspect-ratio: 16 / 9; overflow: hidden; border-radius: 6px;">
-						<iframe width="100%" height="100%" src="https://www.youtube.com/embed/yB0dJ70jS2Y" 
-							title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
-						</iframe>
+				<div class="revixreviews-settings-sidebar">
+					<div class="revixreviews-settings-card">
+						<div class="revixreviews-card-header">
+							<h3><?php esc_html_e('📺 Video Tutorial', 'revix-reviews'); ?></h3>
+						</div>
+						<div class="revixreviews-card-body">
+							<div class="revixreviews-video-wrapper">
+								<iframe width="100%" height="100%" src="https://www.youtube.com/embed/yB0dJ70jS2Y" 
+									title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+								</iframe>
+							</div>
+						</div>
+					</div>
+
+					<div class="revixreviews-settings-card">
+						<div class="revixreviews-card-header">
+							<h3><?php esc_html_e('💡 Quick Tips', 'revix-reviews'); ?></h3>
+						</div>
+						<div class="revixreviews-card-body">
+							<ul class="revixreviews-tips-list">
+								<li><?php esc_html_e('Toggle switches save automatically', 'revix-reviews'); ?></li>
+								<li><?php esc_html_e('Use "Save All Settings" for other changes', 'revix-reviews'); ?></li>
+								<li><?php esc_html_e('Enable Elementor widgets to use in page builder', 'revix-reviews'); ?></li>
+							</ul>
+						</div>
 					</div>
 				</div>
 			</div>
+		</div>
+		<?php
+	}
+
+	/**
+	 * Render general settings tab content
+	 *
+	 * @since 1.3.0
+	 */
+	private function render_general_settings()
+	{
+		?>
+		<div class="revixreviews-settings-card">
+			<div class="revixreviews-card-header">
+				<h3><?php esc_html_e('General Settings', 'revix-reviews'); ?></h3>
+				<p class="revixreviews-card-description"><?php esc_html_e('Configure basic plugin settings and default behaviors', 'revix-reviews'); ?></p>
+			</div>
+			<div class="revixreviews-card-body">
+				<!-- Redirect URL -->
+				<div class="revixreviews-field">
+					<label for="revixreviews_redirect_url" class="revixreviews-label">
+						<?php esc_html_e('Redirect URL', 'revix-reviews'); ?>
+					</label>
+					<input type="text" id="revixreviews_redirect_url" class="revixreviews-input" name="revixreviews_redirect_url" 
+						value="<?php echo esc_attr(get_option('revixreviews_redirect_url')); ?>" 
+						placeholder="<?php echo esc_url(home_url('/thank-you')); ?>" />
+					<p class="revixreviews-description">
+						<?php esc_html_e('Enter the URL to redirect users to after they submit a review.', 'revix-reviews'); ?>
+					</p>
+				</div>
+
+				<!-- Default Review Status -->
+				<div class="revixreviews-field">
+					<label for="revixreviews_status" class="revixreviews-label">
+						<?php esc_html_e('Default Review Status', 'revix-reviews'); ?>
+					</label>
+					<select id="revixreviews_status" name="revixreviews_status" class="revixreviews-select">
+						<option value="publish" <?php selected(get_option('revixreviews_status', 'pending'), 'publish'); ?>>
+							<?php esc_html_e('Publish', 'revix-reviews'); ?>
+						</option>
+						<option value="pending" <?php selected(get_option('revixreviews_status', 'pending'), 'pending'); ?>>
+							<?php esc_html_e('Pending', 'revix-reviews'); ?>
+						</option>
+						<option value="draft" <?php selected(get_option('revixreviews_status', 'pending'), 'draft'); ?>>
+							<?php esc_html_e('Draft', 'revix-reviews'); ?>
+						</option>
+					</select>
+					<p class="revixreviews-description">
+						<?php esc_html_e('Select the default status for new reviews. "Publish" makes them public immediately, "Pending" requires admin approval, and "Draft" saves them as drafts.', 'revix-reviews'); ?>
+					</p>
+				</div>
+			</div>
+		</div>
+
+		<div class="revixreviews-settings-card">
+			<div class="revixreviews-card-header">
+				<h3><?php esc_html_e('Elementor Integration', 'revix-reviews'); ?></h3>
+				<p class="revixreviews-card-description"><?php esc_html_e('Enable or disable Elementor widgets for the page builder', 'revix-reviews'); ?></p>
+			</div>
+			<div class="revixreviews-card-body">
+				<!-- Enable Elementor Widgets -->
+				<?php $this->render_toggle_field(
+					'revixreviews_elementor_active',
+					__('Enable Elementor Widgets', 'revix-reviews'),
+					__('When enabled, Revix Reviews widgets will be available in the Elementor editor. Requires Elementor plugin to be installed and activated.', 'revix-reviews'),
+					get_option('revixreviews_elementor_active', 0)
+				); ?>
+
+				<!-- Google Summary Widget -->
+				<?php $this->render_toggle_field(
+					'revixreviews_google_summary',
+					__('Google Summary Widget', 'revix-reviews'),
+					__('Display Google review ratings summary in Elementor.', 'revix-reviews'),
+					get_option('revixreviews_google_summary', 1)
+				); ?>
+
+				<!-- Trustpilot Summary Widget -->
+				<?php $this->render_toggle_field(
+					'revixreviews_trustpilot_summary',
+					__('Trustpilot Summary Widget', 'revix-reviews'),
+					__('Display Trustpilot review ratings summary in Elementor.', 'revix-reviews'),
+					get_option('revixreviews_trustpilot_summary', 1)
+				); ?>
+
+				<!-- Google Reviews Widget -->
+				<?php $this->render_toggle_field(
+					'revixreviews_google_reviews',
+					__('Google Reviews Widget', 'revix-reviews'),
+					__('Display full Google reviews list in Elementor.', 'revix-reviews'),
+					get_option('revixreviews_google_reviews', 1)
+				); ?>
+			</div>
+		</div>
+		<?php
+	}
+
+	/**
+	 * Render trustpilot settings tab content
+	 *
+	 * @since 1.3.0
+	 */
+	private function render_trustpilot_settings()
+	{
+		do_settings_sections('revixreviews_trustpilot');
+	}
+
+	/**
+	 * Render google settings tab content
+	 *
+	 * @since 1.3.0
+	 */
+	private function render_google_settings()
+	{
+		do_settings_sections('revixreviews_google');
+	}
+
+	/**
+	 * Render a toggle switch field with AJAX functionality
+	 *
+	 * @since 1.3.0
+	 * @param string $option_name The option name
+	 * @param string $label The field label
+	 * @param string $description The field description
+	 * @param int $current_value The current value (0 or 1)
+	 */
+	private function render_toggle_field($option_name, $label, $description, $current_value)
+	{
+		?>
+		<div class="revixreviews-toggle-field">
+			<div class="revixreviews-toggle-header">
+				<label for="<?php echo esc_attr($option_name); ?>" class="revixreviews-toggle-label">
+					<?php echo esc_html($label); ?>
+				</label>
+				<label class="revixreviews-toggle-switch">
+					<input type="checkbox" 
+						id="<?php echo esc_attr($option_name); ?>" 
+						name="<?php echo esc_attr($option_name); ?>" 
+						value="1"
+						class="revixreviews-ajax-toggle"
+						data-option="<?php echo esc_attr($option_name); ?>"
+						<?php checked($current_value, 1); ?> />
+					<span class="revixreviews-toggle-slider"></span>
+				</label>
+			</div>
+			<?php if (!empty($description)) : ?>
+				<p class="revixreviews-description">
+					<?php echo esc_html($description); ?>
+				</p>
+			<?php endif; ?>
 		</div>
 		<?php
 	}
