@@ -161,6 +161,7 @@
                 'revixreviews_google_reviews'
             ];
             
+            // Handle individual widget toggles
             widgetToggles.forEach(function(widgetOption) {
                 const $widgetToggle = $('.revixreviews-ajax-toggle[data-option="' + widgetOption + '"]');
                 const $widgetField = $widgetToggle.closest('.revixreviews-toggle-field');
@@ -173,6 +174,18 @@
                     $widgetField.addClass('disabled');
                 }
             });
+            
+            // Handle select all toggle
+            const $selectAllToggle = $('.revixreviews-select-all-toggle-input');
+            const $selectAllContainer = $('.revixreviews-select-all-toggle');
+            
+            if (isMasterEnabled) {
+                $selectAllToggle.prop('disabled', false);
+                $selectAllContainer.removeClass('disabled');
+            } else {
+                $selectAllToggle.prop('disabled', true);
+                $selectAllContainer.addClass('disabled');
+            }
         },
         
         handleSelectAllToggle: function(e) {
