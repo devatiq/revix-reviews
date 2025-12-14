@@ -209,6 +209,7 @@ class Configuration
             'revixreviews_google_summary' => 'GoogleSummary\Main',
             'revixreviews_google_reviews' => 'GoogleReviews\Main',
             'revixreviews_testimonial_reviews' => 'TestimonialReviews\Main',
+            'revixreviews_submit_form' => 'ReviewSubmitForm\Main',
         ];
 
         foreach ($widgets as $option_name => $widget_class) {

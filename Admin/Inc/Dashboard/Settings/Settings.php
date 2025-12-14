@@ -362,6 +362,13 @@ class Settings
 						__('Testimonial Reviews Widget', 'revix-reviews'),
 						__('Display testimonial reviews in Elementor.', 'revix-reviews'),
 						get_option('revixreviews_testimonial_reviews', 1)
+					); ?>
+					<!-- Review Submit Form Widget -->
+					<?php $this->render_toggle_field(
+						'revixreviews_submit_form',
+						__('Review Submit Form Widget', 'revix-reviews'),
+						__('Display review submission form in Elementor.', 'revix-reviews'),
+						get_option('revixreviews_submit_form', 1)
 					); ?>					</div>
 				</div>
 			</div>
@@ -462,6 +469,7 @@ class Settings
 		register_setting('revixreviews', 'revixreviews_trustpilot_reviews', array('sanitize_callback' => 'absint'));
 		register_setting('revixreviews', 'revixreviews_google_reviews', array('sanitize_callback' => 'absint'));
 		register_setting('revixreviews', 'revixreviews_testimonial_reviews', array('sanitize_callback' => 'absint'));
+		register_setting('revixreviews', 'revixreviews_submit_form', array('sanitize_callback' => 'absint'));
 
 		add_settings_section(
 			'revixreviews_main_section',

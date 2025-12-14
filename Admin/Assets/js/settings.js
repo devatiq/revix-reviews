@@ -86,7 +86,8 @@
                 'revixreviews_trustpilot_summary',
                 'revixreviews_trustpilot_reviews',
                 'revixreviews_google_reviews',
-                'revixreviews_testimonial_reviews'
+                'revixreviews_testimonial_reviews',
+                'revixreviews_submit_form'
             ];
             
             let completedRequests = 0;
@@ -160,7 +161,8 @@
                 'revixreviews_trustpilot_summary',
                 'revixreviews_trustpilot_reviews',
                 'revixreviews_google_reviews',
-                'revixreviews_testimonial_reviews'
+                'revixreviews_testimonial_reviews',
+                'revixreviews_submit_form'
             ];
             
             // Handle individual widget toggles
@@ -199,7 +201,8 @@
                 'revixreviews_trustpilot_summary',
                 'revixreviews_trustpilot_reviews',
                 'revixreviews_google_reviews',
-                'revixreviews_testimonial_reviews'
+                'revixreviews_testimonial_reviews',
+                'revixreviews_submit_form'
             ];
             
             let completedRequests = 0;
@@ -250,7 +253,8 @@
                 'revixreviews_trustpilot_summary',
                 'revixreviews_trustpilot_reviews',
                 'revixreviews_google_reviews',
-                'revixreviews_testimonial_reviews'
+                'revixreviews_testimonial_reviews',
+                'revixreviews_submit_form'
             ];
             
             let allChecked = true;
