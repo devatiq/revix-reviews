@@ -153,10 +153,22 @@
 /*---------------------------
 * Testimonial grids
 -----------------------------*/
-.revix-testimonial-grids {
+.revix-testimonial-grids:not(.revix-testimonial-masonry) {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 30px;
+}
+
+.revix-testimonial-grids.revix-testimonial-masonry {
+  column-count: 2;
+  column-gap: 30px;
+}
+
+.revix-testimonial-masonry .revix-testimonial-single-item {
+  display: inline-block;
+  width: 100%;
+  margin-bottom: 30px;
+  break-inside: avoid;
 }
 
 .revix-testimonial-grids .revix-testimonial-single-item {

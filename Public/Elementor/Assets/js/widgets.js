@@ -21,12 +21,35 @@
          * Initialize masonry layout if needed
          */
         initMasonryLayout: function() {
-            // Masonry initialization can be added here if needed for Elementor widgets
-            if (typeof $.fn.masonry !== 'undefined') {
-                $('.revixreviews-elementor-masonry').masonry({
-                    itemSelector: '.revixreviews-elementor-review-card',
-                    columnWidth: '.revixreviews-elementor-review-card',
-                    percentPosition: true
+            // Initialize masonry for Google reviews
+            if (typeof Masonry !== 'undefined') {
+                $('.revix-google-masonry').each(function() {
+                    new Masonry(this, {
+                        itemSelector: '.revix-google-review-item',
+                        columnWidth: '.revix-google-review-item',
+                        percentPosition: true,
+                        gutter: 25
+                    });
+                });
+
+                // Initialize masonry for Trustpilot reviews
+                $('.revix-trustpilot-masonry').each(function() {
+                    new Masonry(this, {
+                        itemSelector: '.revix-trustpilot-review-item',
+                        columnWidth: '.revix-trustpilot-review-item',
+                        percentPosition: true,
+                        gutter: 25
+                    });
+                });
+
+                // Initialize masonry for Testimonial reviews
+                $('.revix-testimonial-masonry').each(function() {
+                    new Masonry(this, {
+                        itemSelector: '.revix-testimonial-single-item',
+                        columnWidth: '.revix-testimonial-single-item',
+                        percentPosition: true,
+                        gutter: 30
+                    });
                 });
             }
         }
