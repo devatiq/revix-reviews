@@ -99,17 +99,17 @@ class Assets
 
         if (has_shortcode($post->post_content, 'revixreviews_form')) {
             wp_enqueue_script('revixreviews-form', REVIXREVIEWS_SHORTCODE_ASSETS . '/js/revixreviews-form.js', [], REVIXREVIEWS_VERSION, true);
+            
+            wp_enqueue_script(
+                'revixreviews-form-ajax', REVIXREVIEWS_SHORTCODE_ASSETS . '/js/revixreviews-ajax.js', ['jquery'], REVIXREVIEWS_VERSION, true
+            );
+            
+            wp_localize_script('revixreviews-form-ajax', 'revixreviews_ajax_obj', [
+                'ajax_url' => admin_url('admin-ajax.php'),
+                'nonce'    => wp_create_nonce('revixreviews_feedback_nonce_action'),
+                'redirect_url'  => get_option('revixreviews_redirect_url') ?: home_url('/'),
+            ]);
         }
-
-        wp_enqueue_script(
-            'revixreviews-form-ajax', REVIXREVIEWS_SHORTCODE_ASSETS . '/js/revixreviews-ajax.js', ['jquery'], REVIXREVIEWS_VERSION, true
-        );
-        
-        wp_localize_script('revixreviews-form-ajax', 'revixreviews_ajax_obj', [
-            'ajax_url' => admin_url('admin-ajax.php'),
-            'nonce'    => wp_create_nonce('revixreviews_feedback_nonce_action'),
-            'redirect_url'  => get_option('revixreviews_redirect_url') ?: home_url('/'),
-        ]);
     }
     
 }

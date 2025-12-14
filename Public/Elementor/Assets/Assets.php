@@ -103,27 +103,30 @@ class Assets
         );
 
         // Enqueue form scripts (for star rating and AJAX submission)
-        wp_enqueue_script(
-            'revixreviews-form',
-            REVIXREVIEWS_FRONTEND_ASSETS . '/../Shortcodes/Assets/js/revixreviews-form.js',
-            [],
-            REVIXREVIEWS_VERSION,
-            true
-        );
+        // Use the same handle as shortcode to prevent duplicate loading
+        if (!wp_script_is('revixreviews-form-ajax', 'enqueued')) {
+            wp_enqueue_script(
+                'revixreviews-form',
+                REVIXREVIEWS_FRONTEND_ASSETS . '/../Shortcodes/Assets/js/revixreviews-form.js',
+                [],
+                REVIXREVIEWS_VERSION,
+                true
+            );
 
-        // Enqueue AJAX handler for form submission
-        wp_enqueue_script(
-            'revixreviews-ajax',
-            REVIXREVIEWS_FRONTEND_ASSETS . '/../Shortcodes/Assets/js/revixreviews-ajax.js',
-            ['jquery'],
-            REVIXREVIEWS_VERSION,
-            true
-        );
+            wp_enqueue_script(
+                'revixreviews-form-ajax',
+                REVIXREVIEWS_FRONTEND_ASSETS . '/../Shortcodes/Assets/js/revixreviews-ajax.js',
+                ['jquery'],
+                REVIXREVIEWS_VERSION,
+                true
+            );
 
-        // Localize script for AJAX
-        wp_localize_script('revixreviews-ajax', 'revixReviewsAjax', [
-            'ajaxUrl' => admin_url('admin-ajax.php'),
-        ]);
+            wp_localize_script('revixreviews-form-ajax', 'revixreviews_ajax_obj', [
+                'ajax_url' => admin_url('admin-ajax.php'),
+                'nonce'    => wp_create_nonce('revixreviews_feedback_nonce_action'),
+                'redirect_url'  => get_option('revixreviews_redirect_url') ?: home_url('/'),
+            ]);
+        }
 
         // Enqueue main Elementor widgets script
         wp_enqueue_script(
