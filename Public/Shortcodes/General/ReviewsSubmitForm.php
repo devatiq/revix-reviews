@@ -88,6 +88,7 @@ class ReviewsSubmitForm
 		foreach ($required_fields as $field) {
 			if (empty($_POST[$field])) {
 				wp_send_json_error(['message' => 'Please fill all required fields.']);
+				wp_die();
 			}
 		}
 
@@ -100,6 +101,7 @@ class ReviewsSubmitForm
 
 		if (!is_email($email)) {
 			wp_send_json_error(['message' => 'Invalid email address.']);
+			wp_die();
 		}
 
 		$post_status = get_option('revixreviews_status', 'pending');
@@ -120,6 +122,8 @@ class ReviewsSubmitForm
 		} else {
 			wp_send_json_error(['message' => 'Failed to submit feedback.']);
 		}
+		
+		wp_die();
 	}
 
 }
