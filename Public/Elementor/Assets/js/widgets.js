@@ -42,15 +42,8 @@
                     });
                 });
 
-                // Initialize masonry for Testimonial reviews
-                $('.revix-testimonial-masonry').each(function() {
-                    new Masonry(this, {
-                        itemSelector: '.revix-testimonial-single-item',
-                        columnWidth: '.revix-testimonial-single-item',
-                        percentPosition: true,
-                        gutter: 30
-                    });
-                });
+                // Note: Testimonial reviews use CSS columns (column-count) for masonry layout
+                // No JS initialization needed
             }
         }
     };

@@ -133,10 +133,12 @@ class Main extends Widget_Base {
                     ],
                 ],
                 'default' => [
-                    'size' => 20,
+                    'size' => 30,
                 ],
                 'selectors' => [
-                    '{{WRAPPER}} .revix-testimonial-grids' => 'gap: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .revix-testimonial-grids:not(.revix-testimonial-masonry)' => 'gap: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .revix-testimonial-grids.revix-testimonial-masonry' => 'column-gap: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .revix-testimonial-masonry .revix-testimonial-single-item' => 'margin-bottom: {{SIZE}}{{UNIT}};',
                 ],
             ]
         );
