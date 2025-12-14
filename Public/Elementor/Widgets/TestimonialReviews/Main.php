@@ -90,7 +90,8 @@ class Main extends Widget_Base {
                     '4' => '4',
                 ],
                 'selectors' => [
-                    '{{WRAPPER}} .revix-testimonial-grids' => 'grid-template-columns: repeat({{VALUE}}, 1fr);',
+                    '{{WRAPPER}} .revix-testimonial-grids:not(.revix-testimonial-masonry)' => 'grid-template-columns: repeat({{VALUE}}, 1fr);',
+                    '{{WRAPPER}} .revix-testimonial-grids.revix-testimonial-masonry' => 'column-count: {{VALUE}};',
                 ],
             ]
         );
