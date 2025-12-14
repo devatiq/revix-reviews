@@ -98,6 +98,7 @@ class Settings
 			'revixreviews_trustpilot_summary',
 			'revixreviews_trustpilot_reviews',
 			'revixreviews_google_reviews',
+			'revixreviews_testimonial_reviews',
 		);
 
 		if (empty($option_name) || !in_array($option_name, $allowed_options, true)) {
@@ -355,7 +356,13 @@ class Settings
 							__('Display full Google reviews list in Elementor.', 'revix-reviews'),
 							get_option('revixreviews_google_reviews', 1)
 						); ?>
-					</div>
+					<!-- Testimonial Reviews Widget -->
+					<?php $this->render_toggle_field(
+						'revixreviews_testimonial_reviews',
+						__('Testimonial Reviews Widget', 'revix-reviews'),
+						__('Display testimonial reviews in Elementor.', 'revix-reviews'),
+						get_option('revixreviews_testimonial_reviews', 1)
+					); ?>					</div>
 				</div>
 			</div>
 		</div>
@@ -454,6 +461,7 @@ class Settings
 		register_setting('revixreviews', 'revixreviews_trustpilot_summary', array('sanitize_callback' => 'absint'));
 		register_setting('revixreviews', 'revixreviews_trustpilot_reviews', array('sanitize_callback' => 'absint'));
 		register_setting('revixreviews', 'revixreviews_google_reviews', array('sanitize_callback' => 'absint'));
+		register_setting('revixreviews', 'revixreviews_testimonial_reviews', array('sanitize_callback' => 'absint'));
 
 		add_settings_section(
 			'revixreviews_main_section',

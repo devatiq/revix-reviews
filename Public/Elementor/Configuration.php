@@ -208,6 +208,7 @@ class Configuration
             'revixreviews_trustpilot_summary' => 'TrustpilotSummary\Main',
             'revixreviews_google_summary' => 'GoogleSummary\Main',
             'revixreviews_google_reviews' => 'GoogleReviews\Main',
+            'revixreviews_testimonial_reviews' => 'TestimonialReviews\Main',
         ];
 
         foreach ($widgets as $option_name => $widget_class) {
