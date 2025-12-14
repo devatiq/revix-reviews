@@ -80,7 +80,7 @@ class Main extends Widget_Base {
             [
                 'label' => esc_html__('Columns', 'revix-reviews'),
                 'type' => Controls_Manager::SELECT,
-                'default' => '3',
+                'default' => '2',
                 'tablet_default' => '2',
                 'mobile_default' => '1',
                 'options' => [
@@ -92,6 +92,19 @@ class Main extends Widget_Base {
                 'selectors' => [
                     '{{WRAPPER}} .revix-testimonial-grids' => 'grid-template-columns: repeat({{VALUE}}, 1fr);',
                 ],
+            ]
+        );
+
+        $this->add_control(
+            'masonry',
+            [
+                'label' => esc_html__('Masonry Layout', 'revix-reviews'),
+                'type' => Controls_Manager::SWITCHER,
+                'label_on' => esc_html__('On', 'revix-reviews'),
+                'label_off' => esc_html__('Off', 'revix-reviews'),
+                'return_value' => 'true',
+                'default' => 'false',
+                'description' => esc_html__('Enable Pinterest-style masonry layout for varying review heights', 'revix-reviews'),
             ]
         );
 
@@ -367,10 +380,16 @@ class Main extends Widget_Base {
             return;
         }
 
+        // Build classes array
+        $classes = ['revix-testimonial-slider', 'revix-testimonial-grids'];
+        if ($settings['masonry'] === 'true') {
+            $classes[] = 'revix-testimonial-masonry';
+        }
+
         ?>
         <div class="revix-testimonial-wrapper-area">
             <div class="revix-testimonial-wrapper">
-                <div class="revix-testimonial-slider revix-testimonial-grids">
+                <div class="<?php echo esc_attr(implode(' ', $classes)); ?>">
                     <?php while ($query->have_posts()) : $query->the_post();
                         $testimonial_rating = get_post_meta(get_the_ID(), 'revixreviews_rating', true);
                     ?>
