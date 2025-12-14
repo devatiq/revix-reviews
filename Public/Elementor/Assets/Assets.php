@@ -102,6 +102,29 @@ class Assets
             true
         );
 
+        // Enqueue form scripts (for star rating and AJAX submission)
+        wp_enqueue_script(
+            'revixreviews-form',
+            REVIXREVIEWS_FRONTEND_ASSETS . '/../Shortcodes/Assets/js/revixreviews-form.js',
+            [],
+            REVIXREVIEWS_VERSION,
+            true
+        );
+
+        // Enqueue AJAX handler for form submission
+        wp_enqueue_script(
+            'revixreviews-ajax',
+            REVIXREVIEWS_FRONTEND_ASSETS . '/../Shortcodes/Assets/js/revixreviews-ajax.js',
+            ['jquery'],
+            REVIXREVIEWS_VERSION,
+            true
+        );
+
+        // Localize script for AJAX
+        wp_localize_script('revixreviews-ajax', 'revixReviewsAjax', [
+            'ajaxUrl' => admin_url('admin-ajax.php'),
+        ]);
+
         // Enqueue main Elementor widgets script
         wp_enqueue_script(
             'revixreviews-elementor-widgets',
