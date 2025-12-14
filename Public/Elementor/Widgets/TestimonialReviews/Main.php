@@ -75,6 +75,19 @@ class Main extends Widget_Base {
             ]
         );
 
+        $this->add_control(
+            'words',
+            [
+                'label' => esc_html__('Words Limit', 'revix-reviews'),
+                'type' => Controls_Manager::NUMBER,
+                'default' => 100,
+                'min' => 10,
+                'max' => 500,
+                'step' => 5,
+                'description' => esc_html__('Limit review text length by word count', 'revix-reviews'),
+            ]
+        );
+
         $this->add_responsive_control(
             'columns',
             [
@@ -417,7 +430,7 @@ class Main extends Widget_Base {
                             </div>
 
                             <div class="revix-testimonial-content">
-                                <?php the_content(); ?>
+                                <?php echo wp_kses_post(wp_trim_words(get_the_content(), $settings['words'], '...')); ?>
                             </div>
                             <div class="revix-testimonial-quote">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="68" height="50" viewBox="0 0 68 50" fill="none">
