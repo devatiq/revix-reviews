@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-12-07T12:03:09+00:00\n"
+"POT-Creation-Date: 2025-12-15T11:44:32+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: revix-reviews\n"
@@ -39,83 +39,286 @@ msgstr ""
 msgid "https://nexiby.com/"
 msgstr ""
 
-#: Admin/Inc/Dashboard/Settings/Settings.php:40
+#: Admin/Inc/Dashboard/Settings/Settings.php:69
+msgid "Saving..."
+msgstr ""
+
+#: Admin/Inc/Dashboard/Settings/Settings.php:86
+msgid "You do not have permission to perform this action."
+msgstr ""
+
+#: Admin/Inc/Dashboard/Settings/Settings.php:105
+msgid "Invalid option name."
+msgstr ""
+
+#: Admin/Inc/Dashboard/Settings/Settings.php:111
+msgid "Invalid value."
+msgstr ""
+
+#: Admin/Inc/Dashboard/Settings/Settings.php:120
+msgid "Setting saved successfully."
+msgstr ""
+
+#: Admin/Inc/Dashboard/Settings/Settings.php:125
+msgid "Failed to save setting."
+msgstr ""
+
+#: Admin/Inc/Dashboard/Settings/Settings.php:140
 msgid "Revix Reviews Settings"
 msgstr ""
 
-#: Admin/Inc/Dashboard/Settings/Settings.php:41
+#: Admin/Inc/Dashboard/Settings/Settings.php:141
+#: Public/Elementor/Widgets/GoogleReviews/Main.php:40
+#: Public/Elementor/Widgets/GoogleSummary/Main.php:40
+#: Public/Elementor/Widgets/ReviewSubmitForm/Main.php:49
+#: Public/Elementor/Widgets/TestimonialReviews/Main.php:38
+#: Public/Elementor/Widgets/TrustpilotReviews/Main.php:83
+#: Public/Elementor/Widgets/TrustpilotSummary/Main.php:38
 msgid "Settings"
 msgstr ""
 
-#: Admin/Inc/Dashboard/Settings/Settings.php:85
-msgid "Watch Tutorial"
+#: Admin/Inc/Dashboard/Settings/Settings.php:156
+msgid "You do not have sufficient permissions to access this page."
 msgstr ""
 
-#: Admin/Inc/Dashboard/Settings/Settings.php:110
-msgid "Main Settings"
+#: Admin/Inc/Dashboard/Settings/Settings.php:194
+msgid "Save All Settings"
 msgstr ""
 
-#: Admin/Inc/Dashboard/Settings/Settings.php:117
+#: Admin/Inc/Dashboard/Settings/Settings.php:203
+msgid "📺 Video Tutorial"
+msgstr ""
+
+#: Admin/Inc/Dashboard/Settings/Settings.php:216
+msgid "💡 Quick Tips"
+msgstr ""
+
+#: Admin/Inc/Dashboard/Settings/Settings.php:220
+msgid "Toggle switches save automatically"
+msgstr ""
+
+#: Admin/Inc/Dashboard/Settings/Settings.php:221
+msgid "Use \"Save All Settings\" for other changes"
+msgstr ""
+
+#: Admin/Inc/Dashboard/Settings/Settings.php:222
+msgid "Enable Elementor widgets to use in page builder"
+msgstr ""
+
+#: Admin/Inc/Dashboard/Settings/Settings.php:243
+msgid "General Settings"
+msgstr ""
+
+#: Admin/Inc/Dashboard/Settings/Settings.php:244
+msgid "Configure basic plugin settings and default behaviors"
+msgstr ""
+
+#: Admin/Inc/Dashboard/Settings/Settings.php:250
+#: Admin/Inc/Dashboard/Settings/Settings.php:483
 msgid "Redirect URL"
 msgstr ""
 
-#: Admin/Inc/Dashboard/Settings/Settings.php:126
-msgid "Default Review Status"
-msgstr ""
-
-#: Admin/Inc/Dashboard/Settings/Settings.php:144
-msgid "Set your preferences for the Revix Reviews plugin."
-msgstr ""
-
-#: Admin/Inc/Dashboard/Settings/Settings.php:158
+#: Admin/Inc/Dashboard/Settings/Settings.php:256
+#: Admin/Inc/Dashboard/Settings/Settings.php:560
 msgid "Enter the URL to redirect users to after they submit a review."
 msgstr ""
 
-#: Admin/Inc/Dashboard/Settings/Settings.php:175
+#: Admin/Inc/Dashboard/Settings/Settings.php:263
+#: Admin/Inc/Dashboard/Settings/Settings.php:492
+msgid "Default Review Status"
+msgstr ""
+
+#: Admin/Inc/Dashboard/Settings/Settings.php:267
+#: Admin/Inc/Dashboard/Settings/Settings.php:577
 msgid "Publish"
 msgstr ""
 
-#: Admin/Inc/Dashboard/Settings/Settings.php:178
+#: Admin/Inc/Dashboard/Settings/Settings.php:270
+#: Admin/Inc/Dashboard/Settings/Settings.php:580
 msgid "Pending"
 msgstr ""
 
-#: Admin/Inc/Dashboard/Settings/Settings.php:181
+#: Admin/Inc/Dashboard/Settings/Settings.php:273
+#: Admin/Inc/Dashboard/Settings/Settings.php:583
 msgid "Draft"
 msgstr ""
 
-#: Admin/Inc/Dashboard/Settings/Settings.php:185
-msgid "Select the default status for new reviews. 'Publish' makes them public immediately, 'Pending' requires admin approval, and 'Draft' saves them as drafts."
+#: Admin/Inc/Dashboard/Settings/Settings.php:277
+msgid "Select the default status for new reviews. \"Publish\" makes them public immediately, \"Pending\" requires admin approval, and \"Draft\" saves them as drafts."
 msgstr ""
 
-#: Admin/Inc/Dashboard/Tabs/Google/GoogleSettings.php:36
+#: Admin/Inc/Dashboard/Settings/Settings.php:286
+msgid "Elementor Integration"
+msgstr ""
+
+#: Admin/Inc/Dashboard/Settings/Settings.php:287
+msgid "Enable or disable Elementor widgets for the page builder"
+msgstr ""
+
+#: Admin/Inc/Dashboard/Settings/Settings.php:292
+#: Admin/Inc/Dashboard/Settings/Settings.php:501
+msgid "Enable Elementor Widgets"
+msgstr ""
+
+#: Admin/Inc/Dashboard/Settings/Settings.php:295
+msgid "Activate to use widgets in Elementor"
+msgstr ""
+
+#: Admin/Inc/Dashboard/Settings/Settings.php:314
+msgid "Enable All Widgets"
+msgstr ""
+
+#: Admin/Inc/Dashboard/Settings/Settings.php:326
+msgid "Quickly enable or disable all widget toggles below"
+msgstr ""
+
+#: Admin/Inc/Dashboard/Settings/Settings.php:333
+msgid "Google Summary Widget"
+msgstr ""
+
+#: Admin/Inc/Dashboard/Settings/Settings.php:334
+msgid "Display Google review ratings summary in Elementor."
+msgstr ""
+
+#: Admin/Inc/Dashboard/Settings/Settings.php:341
+msgid "Trustpilot Summary Widget"
+msgstr ""
+
+#: Admin/Inc/Dashboard/Settings/Settings.php:342
+msgid "Display Trustpilot review ratings summary in Elementor."
+msgstr ""
+
+#: Admin/Inc/Dashboard/Settings/Settings.php:348
+msgid "Trustpilot Reviews Widget"
+msgstr ""
+
+#: Admin/Inc/Dashboard/Settings/Settings.php:349
+msgid "Display full Trustpilot reviews list in Elementor."
+msgstr ""
+
+#: Admin/Inc/Dashboard/Settings/Settings.php:355
+msgid "Google Reviews Widget"
+msgstr ""
+
+#: Admin/Inc/Dashboard/Settings/Settings.php:356
+msgid "Display full Google reviews list in Elementor."
+msgstr ""
+
+#: Admin/Inc/Dashboard/Settings/Settings.php:362
+msgid "Testimonial Reviews Widget"
+msgstr ""
+
+#: Admin/Inc/Dashboard/Settings/Settings.php:363
+msgid "Display testimonial reviews in Elementor."
+msgstr ""
+
+#: Admin/Inc/Dashboard/Settings/Settings.php:369
+msgid "Review Submit Form Widget"
+msgstr ""
+
+#: Admin/Inc/Dashboard/Settings/Settings.php:370
+msgid "Display review submission form in Elementor."
+msgstr ""
+
+#: Admin/Inc/Dashboard/Settings/Settings.php:389
+#: Admin/Inc/Dashboard/Tabs/Trustpilot/TrustpilotSettings.php:47
+msgid "Trustpilot Reviews Settings"
+msgstr ""
+
+#: Admin/Inc/Dashboard/Settings/Settings.php:390
+msgid "Enter your public Trustpilot business review page URL"
+msgstr ""
+
+#: Admin/Inc/Dashboard/Settings/Settings.php:409
+#: Admin/Inc/Dashboard/Tabs/Google/GoogleSettings.php:51
 msgid "Google Maps Reviews Settings"
 msgstr ""
 
-#: Admin/Inc/Dashboard/Tabs/Google/GoogleSettings.php:38
+#: Admin/Inc/Dashboard/Settings/Settings.php:410
+msgid "Enter your Google Maps API key and Place ID to fetch reviews"
+msgstr ""
+
+#: Admin/Inc/Dashboard/Settings/Settings.php:476
+msgid "Main Settings"
+msgstr ""
+
+#: Admin/Inc/Dashboard/Settings/Settings.php:510
+msgid "Enable Google Summary Widget"
+msgstr ""
+
+#: Admin/Inc/Dashboard/Settings/Settings.php:519
+msgid "Enable Trustpilot Summary Widget"
+msgstr ""
+
+#: Admin/Inc/Dashboard/Settings/Settings.php:528
+msgid "Enable Google Reviews Widget"
+msgstr ""
+
+#: Admin/Inc/Dashboard/Settings/Settings.php:546
+msgid "Set your preferences for the Revix Reviews plugin."
+msgstr ""
+
+#: Admin/Inc/Dashboard/Settings/Settings.php:587
+msgid "Select the default status for new reviews. 'Publish' makes them public immediately, 'Pending' requires admin approval, and 'Draft' saves them as drafts."
+msgstr ""
+
+#: Admin/Inc/Dashboard/Settings/Settings.php:605
+msgid "Enable Elementor widgets for Revix Reviews"
+msgstr ""
+
+#: Admin/Inc/Dashboard/Settings/Settings.php:608
+msgid "When enabled, Revix Reviews widgets will be available in the Elementor editor. Requires Elementor plugin to be installed and activated."
+msgstr ""
+
+#: Admin/Inc/Dashboard/Settings/Settings.php:626
+msgid "Enable Google Summary widget in Elementor"
+msgstr ""
+
+#: Admin/Inc/Dashboard/Settings/Settings.php:629
+msgid "When enabled, the Google Reviews Summary widget will be available in the Elementor editor."
+msgstr ""
+
+#: Admin/Inc/Dashboard/Settings/Settings.php:647
+msgid "Enable Trustpilot Summary widget in Elementor"
+msgstr ""
+
+#: Admin/Inc/Dashboard/Settings/Settings.php:650
+msgid "When enabled, the Trustpilot Summary widget will be available in the Elementor editor."
+msgstr ""
+
+#: Admin/Inc/Dashboard/Settings/Settings.php:668
+msgid "Enable Google Reviews widget in Elementor"
+msgstr ""
+
+#: Admin/Inc/Dashboard/Settings/Settings.php:671
+msgid "When enabled, the Google Reviews widget will be available in the Elementor editor."
+msgstr ""
+
+#: Admin/Inc/Dashboard/Tabs/Google/GoogleSettings.php:53
 msgid "Enter your Google Maps API key and Place ID to fetch reviews."
 msgstr ""
 
-#: Admin/Inc/Dashboard/Tabs/Google/GoogleSettings.php:47
+#: Admin/Inc/Dashboard/Tabs/Google/GoogleSettings.php:62
 msgid "Google API Key"
 msgstr ""
 
-#: Admin/Inc/Dashboard/Tabs/Google/GoogleSettings.php:51
+#: Admin/Inc/Dashboard/Tabs/Google/GoogleSettings.php:67
 msgid "Show"
 msgstr ""
 
-#: Admin/Inc/Dashboard/Tabs/Google/GoogleSettings.php:52
+#: Admin/Inc/Dashboard/Tabs/Google/GoogleSettings.php:69
 msgid "Get your API key from the Google Cloud Console. Enable the Places API and restrict it for security."
 msgstr ""
 
-#: Admin/Inc/Dashboard/Tabs/Google/GoogleSettings.php:62
+#: Admin/Inc/Dashboard/Tabs/Google/GoogleSettings.php:79
 msgid "Google Place ID"
 msgstr ""
 
-#: Admin/Inc/Dashboard/Tabs/Google/GoogleSettings.php:65
+#: Admin/Inc/Dashboard/Tabs/Google/GoogleSettings.php:82
 msgid "Find your Place ID using the official Google Place ID Finder:"
 msgstr ""
 
-#: Admin/Inc/Dashboard/Tabs/Google/GoogleSettings.php:65
+#: Admin/Inc/Dashboard/Tabs/Google/GoogleSettings.php:82
 msgid "Google Place ID Lookup"
 msgstr ""
 
@@ -128,22 +331,19 @@ msgid "TrustPilot"
 msgstr ""
 
 #: Admin/Inc/Dashboard/Tabs/Tabs.php:20
+#: Public/Elementor/Widgets/GoogleReviews/Main.php:19
 msgid "Google Reviews"
 msgstr ""
 
-#: Admin/Inc/Dashboard/Tabs/Trustpilot/TrustpilotSettings.php:32
-msgid "Trustpilot Reviews Settings"
-msgstr ""
-
-#: Admin/Inc/Dashboard/Tabs/Trustpilot/TrustpilotSettings.php:34
+#: Admin/Inc/Dashboard/Tabs/Trustpilot/TrustpilotSettings.php:49
 msgid "Enter your public Trustpilot business review page URL."
 msgstr ""
 
-#: Admin/Inc/Dashboard/Tabs/Trustpilot/TrustpilotSettings.php:41
+#: Admin/Inc/Dashboard/Tabs/Trustpilot/TrustpilotSettings.php:56
 msgid "Trustpilot Review Page URL"
 msgstr ""
 
-#: Admin/Inc/Dashboard/Tabs/Trustpilot/TrustpilotSettings.php:44
+#: Admin/Inc/Dashboard/Tabs/Trustpilot/TrustpilotSettings.php:59
 msgid "Enter the full URL of your business's Trustpilot review page. This is used to fetch your latest reviews."
 msgstr ""
 
@@ -152,22 +352,26 @@ msgid "Review Details"
 msgstr ""
 
 #: Admin/Inc/Reviews/MetaBox/ReviewsMetaBox.php:57
+#: Public/Elementor/Widgets/ReviewSubmitForm/Main.php:399
 #: Public/Shortcodes/General/ReviewsSubmitForm.php:39
 msgid "Name:"
 msgstr ""
 
 #: Admin/Inc/Reviews/MetaBox/ReviewsMetaBox.php:60
+#: Public/Elementor/Widgets/ReviewSubmitForm/Main.php:406
 #: Public/Shortcodes/General/ReviewsSubmitForm.php:45
 msgid "Email:"
 msgstr ""
 
 #: Admin/Inc/Reviews/MetaBox/ReviewsMetaBox.php:64
+#: Public/Elementor/Widgets/ReviewSubmitForm/Main.php:426
 #: Public/Shortcodes/General/ReviewsSubmitForm.php:63
 msgid "Rating:"
 msgstr ""
 
 #: Admin/Inc/Reviews/PostTypes/Reviews.php:33
 #: Admin/Inc/Reviews/PostTypes/Reviews.php:35
+#: Public/Elementor/Widgets/TrustpilotSummary/Main.php:71
 #: Public/Shortcodes/Trustpilot/TrustpilotSummaryShortcode.php:86
 msgid "Reviews"
 msgstr ""
@@ -201,47 +405,545 @@ msgstr ""
 msgid "All Reviews"
 msgstr ""
 
-#: Public/Inc/Integrations/Trustpilot/TrustpilotFetcher.php:165
-msgid "Anonymous"
+#. Translators: 1. Plugin name, 2. Elementor plugin name, 3. Required Elementor version.
+#. Translators: 1. Plugin name, 2. PHP, 3. Required PHP version.
+#: Public/Elementor/Configuration.php:126
+#: Public/Elementor/Configuration.php:141
+#: Public/Elementor/Configuration.php:156
+#, php-format
+msgid "\"%1$s\" requires \"%2$s\" version %3$s or greater."
 msgstr ""
 
+#: Public/Elementor/Configuration.php:127
+#: Public/Elementor/Configuration.php:142
+#: Public/Elementor/Configuration.php:157
+#: Public/Elementor/Configuration.php:191
+msgid "Revix Reviews"
+msgstr ""
+
+#: Public/Elementor/Configuration.php:128
+#: Public/Elementor/Configuration.php:143
+msgid "Elementor"
+msgstr ""
+
+#: Public/Elementor/Configuration.php:158
+msgid "PHP"
+msgstr ""
+
+#: Public/Elementor/Widgets/GoogleReviews/Main.php:48
+#: Public/Elementor/Widgets/TestimonialReviews/Main.php:94
+#: Public/Elementor/Widgets/TrustpilotReviews/Main.php:180
+msgid "Columns"
+msgstr ""
+
+#: Public/Elementor/Widgets/GoogleReviews/Main.php:68
+#: Public/Elementor/Widgets/TestimonialReviews/Main.php:81
+#: Public/Elementor/Widgets/TrustpilotReviews/Main.php:143
+msgid "Words Limit"
+msgstr ""
+
+#: Public/Elementor/Widgets/GoogleReviews/Main.php:74
+#: Public/Elementor/Widgets/TestimonialReviews/Main.php:87
+msgid "Limit review text length by word count"
+msgstr ""
+
+#: Public/Elementor/Widgets/GoogleReviews/Main.php:81
+#: Public/Elementor/Widgets/TestimonialReviews/Main.php:115
+#: Public/Elementor/Widgets/TrustpilotReviews/Main.php:156
+msgid "Masonry Layout"
+msgstr ""
+
+#: Public/Elementor/Widgets/GoogleReviews/Main.php:83
+#: Public/Elementor/Widgets/TestimonialReviews/Main.php:117
+#: Public/Elementor/Widgets/TrustpilotReviews/Main.php:158
+msgid "On"
+msgstr ""
+
+#: Public/Elementor/Widgets/GoogleReviews/Main.php:84
+#: Public/Elementor/Widgets/TestimonialReviews/Main.php:118
+#: Public/Elementor/Widgets/TrustpilotReviews/Main.php:159
+msgid "Off"
+msgstr ""
+
+#: Public/Elementor/Widgets/GoogleReviews/Main.php:87
+#: Public/Elementor/Widgets/TestimonialReviews/Main.php:121
+#: Public/Elementor/Widgets/TrustpilotReviews/Main.php:162
+msgid "Enable Pinterest-style masonry layout for varying review heights"
+msgstr ""
+
+#: Public/Elementor/Widgets/GoogleReviews/Main.php:97
+#: Public/Elementor/Widgets/TestimonialReviews/Main.php:131
+#: Public/Elementor/Widgets/TrustpilotReviews/Main.php:172
+msgid "Layout"
+msgstr ""
+
+#: Public/Elementor/Widgets/GoogleReviews/Main.php:105
+#: Public/Elementor/Widgets/TestimonialReviews/Main.php:139
+#: Public/Elementor/Widgets/TrustpilotReviews/Main.php:198
+#: Public/Elementor/Widgets/TrustpilotSummary/Main.php:126
+msgid "Gap"
+msgstr ""
+
+#: Public/Elementor/Widgets/GoogleReviews/Main.php:129
+#: Public/Elementor/Widgets/TrustpilotReviews/Main.php:223
+msgid "Review Card"
+msgstr ""
+
+#: Public/Elementor/Widgets/GoogleReviews/Main.php:137
+#: Public/Elementor/Widgets/GoogleSummary/Main.php:105
+#: Public/Elementor/Widgets/ReviewSubmitForm/Main.php:89
+#: Public/Elementor/Widgets/ReviewSubmitForm/Main.php:182
+#: Public/Elementor/Widgets/ReviewSubmitForm/Main.php:270
+#: Public/Elementor/Widgets/ReviewSubmitForm/Main.php:301
+#: Public/Elementor/Widgets/TestimonialReviews/Main.php:173
+#: Public/Elementor/Widgets/TrustpilotReviews/Main.php:231
+#: Public/Elementor/Widgets/TrustpilotSummary/Main.php:93
+msgid "Background Color"
+msgstr ""
+
+#: Public/Elementor/Widgets/GoogleReviews/Main.php:156
+#: Public/Elementor/Widgets/GoogleSummary/Main.php:124
+#: Public/Elementor/Widgets/ReviewSubmitForm/Main.php:108
+#: Public/Elementor/Widgets/ReviewSubmitForm/Main.php:203
+#: Public/Elementor/Widgets/ReviewSubmitForm/Main.php:325
+#: Public/Elementor/Widgets/TestimonialReviews/Main.php:192
+#: Public/Elementor/Widgets/TrustpilotReviews/Main.php:250
+#: Public/Elementor/Widgets/TrustpilotSummary/Main.php:177
+msgid "Border Radius"
+msgstr ""
+
+#: Public/Elementor/Widgets/GoogleReviews/Main.php:168
+#: Public/Elementor/Widgets/GoogleSummary/Main.php:136
+#: Public/Elementor/Widgets/ReviewSubmitForm/Main.php:77
+#: Public/Elementor/Widgets/ReviewSubmitForm/Main.php:217
+#: Public/Elementor/Widgets/ReviewSubmitForm/Main.php:337
+#: Public/Elementor/Widgets/TestimonialReviews/Main.php:204
+#: Public/Elementor/Widgets/TrustpilotReviews/Main.php:262
+#: Public/Elementor/Widgets/TrustpilotSummary/Main.php:189
+msgid "Padding"
+msgstr ""
+
+#: Public/Elementor/Widgets/GoogleReviews/Main.php:191
+#: Public/Elementor/Widgets/GoogleSummary/Main.php:232
+#: Public/Elementor/Widgets/TestimonialReviews/Main.php:227
+#: Public/Elementor/Widgets/TrustpilotReviews/Main.php:411
+msgid "Rating"
+msgstr ""
+
+#: Public/Elementor/Widgets/GoogleReviews/Main.php:199
+#: Public/Elementor/Widgets/GoogleSummary/Main.php:254
+#: Public/Elementor/Widgets/ReviewSubmitForm/Main.php:360
+#: Public/Elementor/Widgets/TestimonialReviews/Main.php:235
+msgid "Star Color"
+msgstr ""
+
+#: Public/Elementor/Widgets/GoogleReviews/Main.php:210
+msgid "Empty Star Color"
+msgstr ""
+
+#: Public/Elementor/Widgets/GoogleReviews/Main.php:221
+msgid "Rating Text Color"
+msgstr ""
+
+#: Public/Elementor/Widgets/GoogleReviews/Main.php:232
+#: Public/Elementor/Widgets/TestimonialReviews/Main.php:246
+#: Public/Elementor/Widgets/TrustpilotReviews/Main.php:419
+#: Public/Elementor/Widgets/TrustpilotSummary/Main.php:242
+msgid "Stars Size"
+msgstr ""
+
+#: Public/Elementor/Widgets/GoogleReviews/Main.php:253
+#: Public/Elementor/Widgets/TrustpilotReviews/Main.php:368
+msgid "Review Text"
+msgstr ""
+
+#: Public/Elementor/Widgets/GoogleReviews/Main.php:261
+#: Public/Elementor/Widgets/GoogleSummary/Main.php:210
+#: Public/Elementor/Widgets/GoogleSummary/Main.php:320
+#: Public/Elementor/Widgets/ReviewSubmitForm/Main.php:139
+#: Public/Elementor/Widgets/TestimonialReviews/Main.php:275
+#: Public/Elementor/Widgets/TestimonialReviews/Main.php:305
+#: Public/Elementor/Widgets/TestimonialReviews/Main.php:335
+msgid "Color"
+msgstr ""
+
+#: Public/Elementor/Widgets/GoogleReviews/Main.php:280
+#: Public/Elementor/Widgets/TrustpilotReviews/Main.php:396
+msgid "Margin"
+msgstr ""
+
+#: Public/Elementor/Widgets/GoogleReviews/Main.php:295
+#: Public/Elementor/Widgets/TrustpilotReviews/Main.php:285
+msgid "Author"
+msgstr ""
+
+#: Public/Elementor/Widgets/GoogleReviews/Main.php:303
+#: Public/Elementor/Widgets/TrustpilotReviews/Main.php:293
+msgid "Name Color"
+msgstr ""
+
+#: Public/Elementor/Widgets/GoogleReviews/Main.php:315
+#: Public/Elementor/Widgets/TrustpilotReviews/Main.php:305
+msgid "Name Typography"
+msgstr ""
+
+#: Public/Elementor/Widgets/GoogleReviews/Main.php:323
+#: Public/Elementor/Widgets/TrustpilotReviews/Main.php:313
+msgid "Date Color"
+msgstr ""
+
+#: Public/Elementor/Widgets/GoogleReviews/Main.php:335
+#: Public/Elementor/Widgets/TrustpilotReviews/Main.php:325
+msgid "Date Typography"
+msgstr ""
+
+#: Public/Elementor/Widgets/GoogleReviews/Main.php:343
+#: Public/Elementor/Widgets/TrustpilotReviews/Main.php:333
+msgid "Avatar Size"
+msgstr ""
+
+#: Public/Elementor/Widgets/GoogleReviews/Main.php:361
+#: Public/Elementor/Widgets/TrustpilotReviews/Main.php:352
+msgid "Avatar Border Radius"
+msgstr ""
+
+#: Public/Elementor/Widgets/GoogleReviews/Main.php:388
+#: Public/Elementor/Widgets/GoogleSummary/Main.php:349
+msgid "Google API Key or Place ID not configured. Please set them in WordPress dashboard under Revix Reviews > Google tab."
+msgstr ""
+
+#: Public/Elementor/Widgets/GoogleReviews/Main.php:399
+#: Public/Shortcodes/Google/GoogleReviews.php:56
+msgid "No Google reviews found. Please verify your API Key and Place ID are correct."
+msgstr ""
+
+#: Public/Elementor/Widgets/GoogleSummary/Main.php:19
+msgid "Google Reviews Summary"
+msgstr ""
+
+#: Public/Elementor/Widgets/GoogleSummary/Main.php:47
+msgid "Show Business Name"
+msgstr ""
+
+#: Public/Elementor/Widgets/GoogleSummary/Main.php:49
+#: Public/Elementor/Widgets/GoogleSummary/Main.php:74
+#: Public/Elementor/Widgets/TrustpilotSummary/Main.php:47
+#: Public/Elementor/Widgets/TrustpilotSummary/Main.php:59
+msgid "Yes"
+msgstr ""
+
+#: Public/Elementor/Widgets/GoogleSummary/Main.php:50
+#: Public/Elementor/Widgets/GoogleSummary/Main.php:75
+#: Public/Elementor/Widgets/TrustpilotSummary/Main.php:48
+#: Public/Elementor/Widgets/TrustpilotSummary/Main.php:60
+msgid "No"
+msgstr ""
+
+#: Public/Elementor/Widgets/GoogleSummary/Main.php:59
+msgid "Custom Name Prefix"
+msgstr ""
+
+#: Public/Elementor/Widgets/GoogleSummary/Main.php:61
+msgid "e.g., Customer reviews for"
+msgstr ""
+
+#: Public/Elementor/Widgets/GoogleSummary/Main.php:62
+msgid "Optional: Add custom text before the business name"
+msgstr ""
+
+#: Public/Elementor/Widgets/GoogleSummary/Main.php:72
+#: Public/Elementor/Widgets/TrustpilotSummary/Main.php:45
+msgid "Show Average Rating"
+msgstr ""
+
+#: Public/Elementor/Widgets/GoogleSummary/Main.php:84
+msgid "Reviews Label"
+msgstr ""
+
+#: Public/Elementor/Widgets/GoogleSummary/Main.php:86
+#: Public/Shortcodes/Google/GoogleReviews.php:120
+msgid "reviews"
+msgstr ""
+
+#: Public/Elementor/Widgets/GoogleSummary/Main.php:87
+#: Public/Elementor/Widgets/TrustpilotSummary/Main.php:72
+msgid "Label text for review count"
+msgstr ""
+
+#: Public/Elementor/Widgets/GoogleSummary/Main.php:97
+#: Public/Elementor/Widgets/TrustpilotSummary/Main.php:85
+msgid "Container"
+msgstr ""
+
+#: Public/Elementor/Widgets/GoogleSummary/Main.php:148
+msgid "Gap Between Items"
+msgstr ""
+
+#: Public/Elementor/Widgets/GoogleSummary/Main.php:166
+msgid "Max Width"
+msgstr ""
+
+#: Public/Elementor/Widgets/GoogleSummary/Main.php:199
+msgid "Business Name"
+msgstr ""
+
+#: Public/Elementor/Widgets/GoogleSummary/Main.php:243
+#: Public/Elementor/Widgets/ReviewSubmitForm/Main.php:169
+#: Public/Elementor/Widgets/ReviewSubmitForm/Main.php:259
+#: Public/Elementor/Widgets/ReviewSubmitForm/Main.php:290
+#: Public/Elementor/Widgets/TrustpilotReviews/Main.php:376
+#: Public/Elementor/Widgets/TrustpilotSummary/Main.php:223
+msgid "Text Color"
+msgstr ""
+
+#: Public/Elementor/Widgets/GoogleSummary/Main.php:273
+#: Public/Elementor/Widgets/ReviewSubmitForm/Main.php:371
+msgid "Star Size"
+msgstr ""
+
+#: Public/Elementor/Widgets/GoogleSummary/Main.php:291
+msgid "Gap Between Star and Text"
+msgstr ""
+
+#: Public/Elementor/Widgets/GoogleSummary/Main.php:312
+#: Public/Elementor/Widgets/TrustpilotSummary/Main.php:281
+msgid "Review Count"
+msgstr ""
+
+#: Public/Elementor/Widgets/GoogleSummary/Main.php:360
+msgid "No summary data available. Please verify your API Key and Place ID are correct."
+msgstr ""
+
+#: Public/Elementor/Widgets/ReviewSubmitForm/Main.php:25
+msgid "Review Submit Form"
+msgstr ""
+
+#: Public/Elementor/Widgets/ReviewSubmitForm/Main.php:56
+msgid "Button Text"
+msgstr ""
+
+#: Public/Elementor/Widgets/ReviewSubmitForm/Main.php:58
 #: Public/Shortcodes/General/ReviewsSubmitForm.php:24
 msgid "Submit Feedback"
 msgstr ""
 
+#: Public/Elementor/Widgets/ReviewSubmitForm/Main.php:59
+msgid "Enter button text"
+msgstr ""
+
+#: Public/Elementor/Widgets/ReviewSubmitForm/Main.php:69
+msgid "Form Container"
+msgstr ""
+
+#: Public/Elementor/Widgets/ReviewSubmitForm/Main.php:131
+msgid "Labels"
+msgstr ""
+
+#: Public/Elementor/Widgets/ReviewSubmitForm/Main.php:161
+msgid "Input Fields"
+msgstr ""
+
+#: Public/Elementor/Widgets/ReviewSubmitForm/Main.php:234
+msgid "Submit Button"
+msgstr ""
+
+#: Public/Elementor/Widgets/ReviewSubmitForm/Main.php:252
+msgid "Normal"
+msgstr ""
+
+#: Public/Elementor/Widgets/ReviewSubmitForm/Main.php:283
+msgid "Hover"
+msgstr ""
+
+#: Public/Elementor/Widgets/ReviewSubmitForm/Main.php:352
+msgid "Rating Stars"
+msgstr ""
+
+#: Public/Elementor/Widgets/ReviewSubmitForm/Main.php:413
 #: Public/Shortcodes/General/ReviewsSubmitForm.php:51
 msgid "Subject:"
 msgstr ""
 
+#: Public/Elementor/Widgets/ReviewSubmitForm/Main.php:420
 #: Public/Shortcodes/General/ReviewsSubmitForm.php:57
 msgid "Comments:"
+msgstr ""
+
+#: Public/Elementor/Widgets/TestimonialReviews/Main.php:17
+msgid "Testimonial Reviews"
+msgstr ""
+
+#: Public/Elementor/Widgets/TestimonialReviews/Main.php:45
+#: Public/Elementor/Widgets/TrustpilotReviews/Main.php:91
+msgid "Number of Reviews"
+msgstr ""
+
+#: Public/Elementor/Widgets/TestimonialReviews/Main.php:50
+msgid "Set -1 to display all reviews"
+msgstr ""
+
+#: Public/Elementor/Widgets/TestimonialReviews/Main.php:57
+#: Public/Elementor/Widgets/TrustpilotReviews/Main.php:104
+msgid "Minimum Rating"
+msgstr ""
+
+#: Public/Elementor/Widgets/TestimonialReviews/Main.php:69
+#: Public/Elementor/Widgets/TrustpilotReviews/Main.php:117
+msgid "Maximum Rating"
+msgstr ""
+
+#: Public/Elementor/Widgets/TestimonialReviews/Main.php:165
+msgid "Card"
+msgstr ""
+
+#: Public/Elementor/Widgets/TestimonialReviews/Main.php:267
+msgid "Content"
+msgstr ""
+
+#: Public/Elementor/Widgets/TestimonialReviews/Main.php:297
+msgid "Author Name"
+msgstr ""
+
+#: Public/Elementor/Widgets/TestimonialReviews/Main.php:327
+msgid "Quote Icon"
+msgstr ""
+
+#: Public/Elementor/Widgets/TestimonialReviews/Main.php:346
+msgid "Size"
+msgstr ""
+
+#: Public/Elementor/Widgets/TestimonialReviews/Main.php:393
+msgid "No testimonial reviews found. Add some reviews to display them here."
+msgstr ""
+
+#: Public/Elementor/Widgets/TrustpilotReviews/Main.php:41
+msgid "Trustpilot Reviews"
+msgstr ""
+
+#: Public/Elementor/Widgets/TrustpilotReviews/Main.php:97
+msgid "Maximum number of reviews to display"
+msgstr ""
+
+#: Public/Elementor/Widgets/TrustpilotReviews/Main.php:110
+msgid "Show only reviews with this rating or higher"
+msgstr ""
+
+#: Public/Elementor/Widgets/TrustpilotReviews/Main.php:123
+msgid "Show only reviews with this rating or lower"
+msgstr ""
+
+#: Public/Elementor/Widgets/TrustpilotReviews/Main.php:149
+msgid "Limit review text length by word count. Note: Trustpilot may already truncate long reviews on their website, so this setting only affects reviews that are shorter than Trustpilot's limit."
+msgstr ""
+
+#: Public/Elementor/Widgets/TrustpilotReviews/Main.php:388
+msgid "Typography"
+msgstr ""
+
+#: Public/Elementor/Widgets/TrustpilotReviews/Main.php:458
+#: Public/Shortcodes/Trustpilot/TrustpilotShortcode.php:26
+msgid "Trustpilot URL not configured. Please set it in the WordPress dashboard under Revix Reviews > Trustpilot tab."
+msgstr ""
+
+#: Public/Elementor/Widgets/TrustpilotReviews/Main.php:477
+#: Public/Shortcodes/Trustpilot/TrustpilotShortcode.php:43
+#, php-format
+msgid "No Trustpilot reviews found. URL configured: %s"
+msgstr ""
+
+#: Public/Elementor/Widgets/TrustpilotReviews/Main.php:555
+#: Public/Shortcodes/Trustpilot/TrustpilotShortcode.php:107
+msgid "No reviews to display. Fetched "
+msgstr ""
+
+#: Public/Elementor/Widgets/TrustpilotSummary/Main.php:17
+msgid "Trustpilot Summary"
+msgstr ""
+
+#: Public/Elementor/Widgets/TrustpilotSummary/Main.php:57
+msgid "Show Review Count"
+msgstr ""
+
+#: Public/Elementor/Widgets/TrustpilotSummary/Main.php:69
+msgid "Count Label"
+msgstr ""
+
+#: Public/Elementor/Widgets/TrustpilotSummary/Main.php:104
+msgid "Direction"
+msgstr ""
+
+#: Public/Elementor/Widgets/TrustpilotSummary/Main.php:108
+msgid "Row"
+msgstr ""
+
+#: Public/Elementor/Widgets/TrustpilotSummary/Main.php:112
+msgid "Column"
+msgstr ""
+
+#: Public/Elementor/Widgets/TrustpilotSummary/Main.php:144
+msgid "Alignment"
+msgstr ""
+
+#: Public/Elementor/Widgets/TrustpilotSummary/Main.php:148
+msgid "Left"
+msgstr ""
+
+#: Public/Elementor/Widgets/TrustpilotSummary/Main.php:152
+msgid "Center"
+msgstr ""
+
+#: Public/Elementor/Widgets/TrustpilotSummary/Main.php:156
+msgid "Right"
+msgstr ""
+
+#: Public/Elementor/Widgets/TrustpilotSummary/Main.php:212
+msgid "Average Rating"
+msgstr ""
+
+#: Public/Elementor/Widgets/TrustpilotSummary/Main.php:260
+msgid "Gap Between Rating and Stars"
+msgstr ""
+
+#: Public/Elementor/Widgets/TrustpilotSummary/Main.php:292
+msgid "Number Color"
+msgstr ""
+
+#: Public/Elementor/Widgets/TrustpilotSummary/Main.php:303
+msgid "Label Color"
+msgstr ""
+
+#: Public/Elementor/Widgets/TrustpilotSummary/Main.php:330
+msgid "Trustpilot URL not configured. Please set it in WordPress dashboard under Revix Reviews > Trustpilot tab."
+msgstr ""
+
+#: Public/Elementor/Widgets/TrustpilotSummary/Main.php:340
+msgid "Error fetching Trustpilot page. Please check your URL."
+msgstr ""
+
+#: Public/Elementor/Widgets/TrustpilotSummary/Main.php:382
+msgid "No summary data available. Please verify your Trustpilot URL."
+msgstr ""
+
+#: Public/Frontend.php:66
+msgid "Revix Reviews:"
+msgstr ""
+
+#: Public/Frontend.php:67
+msgid "Elementor widgets are enabled but Elementor plugin is not installed or activated. Please install and activate Elementor to use the widgets."
+msgstr ""
+
+#: Public/Frontend.php:69
+msgid "Install Elementor"
+msgstr ""
+
+#: Public/Inc/Integrations/Trustpilot/TrustpilotFetcher.php:165
+msgid "Anonymous"
 msgstr ""
 
 #: Public/Shortcodes/Google/GoogleReviews.php:39
 msgid "Google API Key or Place ID not configured. Please set them in the WordPress dashboard under Revix Reviews > Google tab."
 msgstr ""
 
-#: Public/Shortcodes/Google/GoogleReviews.php:56
-msgid "No Google reviews found. Please verify your API Key and Place ID are correct."
-msgstr ""
-
-#: Public/Shortcodes/Google/GoogleReviews.php:120
-msgid "reviews"
-msgstr ""
-
 #: Public/Shortcodes/Google/GoogleReviews.php:126
 msgid "No summary data available."
-msgstr ""
-
-#: Public/Shortcodes/Trustpilot/TrustpilotShortcode.php:26
-msgid "Trustpilot URL not configured. Please set it in the WordPress dashboard under Revix Reviews > Trustpilot tab."
-msgstr ""
-
-#: Public/Shortcodes/Trustpilot/TrustpilotShortcode.php:43
-#, php-format
-msgid "No Trustpilot reviews found. URL configured: %s"
-msgstr ""
-
-#: Public/Shortcodes/Trustpilot/TrustpilotShortcode.php:107
-msgid "No reviews to display. Fetched "
 msgstr ""

@@ -355,12 +355,24 @@ class Main extends Widget_Base
         );
 
         $this->add_control(
-            'star_color',
+            'star_empty_color',
             [
-                'label' => esc_html__('Star Color', 'revix-reviews'),
+                'label' => esc_html__('Empty Star Color', 'revix-reviews'),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
-                    '{{WRAPPER}} .rating-stars .star.active' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .rating-stars .star' => 'color: {{VALUE}} !important;',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'star_filled_color',
+            [
+                'label' => esc_html__('Filled Star Color', 'revix-reviews'),
+                'type' => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .rating-stars .star.selected' => 'color: {{VALUE}} !important;',
+                    '{{WRAPPER}} .rating-stars .star:hover' => 'color: {{VALUE}} !important;',
                 ],
             ]
         );
@@ -378,7 +390,7 @@ class Main extends Widget_Base
                     ],
                 ],
                 'selectors' => [
-                    '{{WRAPPER}} .rating-stars .star' => 'font-size: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .rating-stars .star' => 'font-size: {{SIZE}}{{UNIT}} !important;',
                 ],
             ]
         );
