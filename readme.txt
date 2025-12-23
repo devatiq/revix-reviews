@@ -158,6 +158,7 @@ Yes, moderation can be turned on/off for native reviews via settings.
 
 == Changelog ==
 = 1.2.7 =
+- NEW: Modern admin panel UI with improved user experience
 - NEW: Elementor widget styling controls for better visual customization
 - NEW: Review Submit Form Elementor widget - Enhanced star rating controls
 - NEW: Added separate "Empty Star Color" and "Filled Star Color" controls in Elementor
