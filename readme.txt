@@ -158,11 +158,12 @@ Yes, moderation can be turned on/off for native reviews via settings.
 
 == Changelog ==
 = 1.2.7 =
-- IMPROVED: Enhanced Elementor Review Submit Form widget with separate star color controls
-- NEW: Added "Empty Star Color" and "Filled Star Color" controls for better customization
-- IMPROVED: Renamed "Author Name" to "Heading Name" in Testimonial Reviews widget for clarity
+- NEW: Elementor widget styling controls for better visual customization
+- NEW: Review Submit Form Elementor widget - Enhanced star rating controls
+- NEW: Added separate "Empty Star Color" and "Filled Star Color" controls in Elementor
+- IMPROVED: Testimonial Reviews Elementor widget - Renamed "Author Name" to "Heading Name" for clarity
 - FIXED: Rating star color and size controls now work properly in Elementor editor
-- IMPROVED: Star styling controls now properly override default CSS
+- IMPROVED: Star styling controls now properly override default CSS with !important flags
 
 = 1.2.6 =
 - IMPORTANT: Migrated to Google Places API (New) - Legacy API no longer supported
