@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Revix Reviews – All-in-One Business Review Manager
  * Version: 1.2.7
- * Description: A WordPress plugin for managing reviews.
+ * Description: Collect, manage, and display customer reviews with Google Reviews, Trustpilot integration, customizable forms, and Elementor widgets. Boost credibility and conversions with authentic testimonials.
  * Author: NexiBy LLC
  * Author URI: https://nexiby.com/
  * Plugin URI: https://revixreviews.com/
@@ -61,7 +61,7 @@ final class RevixReviews
      */
     private function define_constants(): void
     {
-        define('REVIXREVIEWS_VERSION', '1.2.6');
+        define('REVIXREVIEWS_VERSION', '1.2.7');
         define('REVIXREVIEWS_PATH', plugin_dir_path(__FILE__));
         define('REVIXREVIEWS_URL', plugin_dir_url(__FILE__));
         define('REVIXREVIEWS_FILE', __FILE__);
