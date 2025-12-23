@@ -290,17 +290,17 @@ class Main extends Widget_Base {
 
         $this->end_controls_section();
 
-        // Author Style Section
+        // Heading Style Section
         $this->start_controls_section(
-            'section_author_style',
+            'section_heading_style',
             [
-                'label' => esc_html__('Author Name', 'revix-reviews'),
+                'label' => esc_html__('Heading Name', 'revix-reviews'),
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
 
         $this->add_control(
-            'author_name_color',
+            'heading_name_color',
             [
                 'label' => esc_html__('Color', 'revix-reviews'),
                 'type' => Controls_Manager::COLOR,
@@ -313,7 +313,7 @@ class Main extends Widget_Base {
         $this->add_group_control(
             Group_Control_Typography::get_type(),
             [
-                'name' => 'author_name_typography',
+                'name' => 'heading_name_typography',
                 'selector' => '{{WRAPPER}} .revix-testimonial-client-info h3',
             ]
         );
