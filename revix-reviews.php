@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name: Revix Reviews – All-in-One Business Review Manager
- * Version: 1.2.6
+ * Version: 1.2.7
  * Description: A WordPress plugin for managing reviews.
  * Author: NexiBy LLC
  * Author URI: https://nexiby.com/

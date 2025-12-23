@@ -6,7 +6,7 @@ Contributors: abcplugins, atiqbd4ever, nexibyllc, supreoxltd
 Tags: reviews, business reviews, testimonials, trustpilot, google reviews
 Requires at least: 5.4
 Tested up to: 6.9
-Stable tag: 1.2.6
+Stable tag: 1.2.7
 Requires PHP: 8.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -157,6 +157,13 @@ Yes, moderation can be turned on/off for native reviews via settings.
 8. General User Feedback submission form
 
 == Changelog ==
+= 1.2.7 =
+- IMPROVED: Enhanced Elementor Review Submit Form widget with separate star color controls
+- NEW: Added "Empty Star Color" and "Filled Star Color" controls for better customization
+- IMPROVED: Renamed "Author Name" to "Heading Name" in Testimonial Reviews widget for clarity
+- FIXED: Rating star color and size controls now work properly in Elementor editor
+- IMPROVED: Star styling controls now properly override default CSS
+
 = 1.2.6 =
 - IMPORTANT: Migrated to Google Places API (New) - Legacy API no longer supported
 - NEW: Automatic cache clearing when Google or Trustpilot settings are saved
