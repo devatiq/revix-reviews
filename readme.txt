@@ -143,7 +143,33 @@ Yes. Use the `name` attribute in `[revix_google_summary]` to hide or replace it.
 = Do I need to approve reviews before they appear? =
 Yes, moderation can be turned on/off for native reviews via settings.
 
+= How do I enable Elementor widgets? =
+1. Go to your WordPress admin panel
+2. Navigate to Revix Reviews → Settings
+3. Look for the "Elementor Integration" section
+4. Toggle the "Enable Elementor Widgets" switch to ON
+5. Save your settings
 
+Once enabled, you'll have access to Revix Reviews widgets in the Elementor page builder, including:
+- Review Submit Form widget with customizable star ratings
+- Google Reviews display widget
+- Google Summary widget
+- Trustpilot Reviews widget
+- Trustpilot Summary widget
+- Testimonial Reviews widget
+
+= Can I customize the star rating colors in Elementor? =
+Yes! When using the Review Submit Form widget in Elementor:
+1. Add the widget to your page
+2. Go to the "Style" tab
+3. Look for the "Rating Stars" section
+4. You can customize:
+   - Empty Star Color (for unselected stars)
+   - Filled Star Color (for selected/hovered stars)
+   - Star Size (adjust the size in pixels)
+
+= Do I need Elementor Pro to use Revix Reviews widgets? =
+No, the free version of Elementor is sufficient. All Revix Reviews widgets work with both Elementor Free and Elementor Pro.
 
 == Screenshots ==
 
