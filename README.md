@@ -24,10 +24,11 @@ Whether you're a business owner, freelancer, or eCommerce site, this plugin help
 - 📎 Custom post type support for native review management
 - 🔒 Manual review moderation and approval settings
 - ⚙️ Shortcodes to embed forms, grids, summaries, or third-party reviews
+- 🎨 **Elementor widgets** with advanced styling controls
 
 ### Coming Soon:
 - 🛠️ Yelp, Facebook, and other third-party sources
-- 🎨 Gutenberg & Elementor widgets
+- 🧩 Gutenberg blocks
 - 📈 Analytics dashboard for review insights
 
 ## Installation
@@ -91,6 +92,34 @@ Yes. Use the `name` attribute in `[revix_google_summary]` to hide or replace it.
 **Do I need to approve reviews before they appear?**  
 Yes, moderation can be turned on/off for native reviews via settings.
 
+**How do I enable Elementor widgets?**  
+1. Go to your WordPress admin panel
+2. Navigate to Revix Reviews → Settings
+3. Look for the "Elementor Integration" section
+4. Toggle the "Enable Elementor Widgets" switch to ON
+5. Save your settings
+
+Once enabled, you'll have access to Revix Reviews widgets in the Elementor page builder, including:
+- Review Submit Form widget with customizable star ratings
+- Google Reviews display widget
+- Google Summary widget
+- Trustpilot Reviews widget
+- Trustpilot Summary widget
+- Testimonial Reviews widget
+
+**Can I customize the star rating colors in Elementor?**  
+Yes! When using the Review Submit Form widget in Elementor:
+1. Add the widget to your page
+2. Go to the "Style" tab
+3. Look for the "Rating Stars" section
+4. You can customize:
+   - Empty Star Color (for unselected stars)
+   - Filled Star Color (for selected/hovered stars)
+   - Star Size (adjust the size in pixels)
+
+**Do I need Elementor Pro to use Revix Reviews widgets?**  
+No, the free version of Elementor is sufficient. All Revix Reviews widgets work with both Elementor Free and Elementor Pro.
+
 **How do I create a Google Maps API key?**  
 1. Visit the Google Cloud Console: https://console.cloud.google.com/
 2. Create a new project or select an existing one
@@ -129,6 +158,15 @@ Make sure to enable "Places API (New)" in your Google Cloud Console, not the leg
 8. General User Feedback submission form
 
 ## Changelog
+
+### 1.2.7
+- **NEW:** Modern admin panel UI with improved user experience
+- **NEW:** Elementor widget styling controls for better visual customization
+- **NEW:** Review Submit Form Elementor widget - Enhanced star rating controls
+- **NEW:** Added separate "Empty Star Color" and "Filled Star Color" controls in Elementor
+- **IMPROVED:** Testimonial Reviews Elementor widget - Renamed "Author Name" to "Heading Name" for clarity
+- **FIXED:** Rating star color and size controls now work properly in Elementor editor
+- **IMPROVED:** Star styling controls now properly override default CSS with !important flags
 
 ### 1.2.6
 - **IMPORTANT:** Migrated to Google Places API (New) - Legacy API no longer supported
