@@ -497,13 +497,50 @@ class ImportExportSettings {
                 $author_id = get_current_user_id();
             }
 
+            // Validate and format date
+            $post_date = current_time('mysql');
+            if (isset($review_data['date']) && !empty($review_data['date'])) {
+                $date_string = sanitize_text_field($review_data['date']);
+                
+                // Validate date format (YYYY-MM-DD HH:MM:SS)
+                if (!preg_match('/^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$/', $date_string)) {
+                    $skipped++;
+                    $title = isset($review_data['title']) ? substr($review_data['title'], 0, 30) : __('Unknown', 'revix-reviews');
+                    $skipped_items[] = sprintf(__('Item "%s...": Invalid date format. Expected YYYY-MM-DD HH:MM:SS, got "%s"', 'revix-reviews'), $title, $date_string);
+                    continue;
+                }
+                
+                // Validate that it's a real date
+                $date_parts = explode(' ', $date_string);
+                if (count($date_parts) === 2) {
+                    list($date, $time) = $date_parts;
+                    $date_components = explode('-', $date);
+                    $time_components = explode(':', $time);
+                    
+                    if (count($date_components) === 3 && count($time_components) === 3) {
+                        $year = (int) $date_components[0];
+                        $month = (int) $date_components[1];
+                        $day = (int) $date_components[2];
+                        
+                        if (!checkdate($month, $day, $year)) {
+                            $skipped++;
+                            $title = isset($review_data['title']) ? substr($review_data['title'], 0, 30) : __('Unknown', 'revix-reviews');
+                            $skipped_items[] = sprintf(__('Item "%s...": Invalid date value "%s"', 'revix-reviews'), $title, $date_string);
+                            continue;
+                        }
+                    }
+                }
+                
+                $post_date = $date_string;
+            }
+
             // Prepare post data
             $post_data = [
                 'post_type' => 'revixreviews',
                 'post_title' => sanitize_text_field($review_data['title']),
                 'post_content' => wp_kses_post($review_data['content']),
                 'post_status' => $post_status,
-                'post_date' => isset($review_data['date']) ? sanitize_text_field($review_data['date']) : current_time('mysql'),
+                'post_date' => $post_date,
                 'post_author' => $author_id
             ];
 
