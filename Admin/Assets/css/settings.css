@@ -1192,7 +1192,10 @@
 }
 
 .revixreviews-file-upload-label {
-    display: block;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     width: 100%;
     padding: 40px 24px;
     background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
@@ -1216,10 +1219,13 @@
 }
 
 .revixreviews-file-upload-label .dashicons-cloud-upload {
-    font-size: 48px;
+    font-size: 48px !important;
+    width: 48px !important;
+    height: 48px !important;
     color: #3b82f6;
     display: block !important;
-    margin-bottom: 12px;
+    margin: 0 auto 12px !important;
+    line-height: 1 !important;
 }
 
 .revixreviews-file-upload-label .upload-title {
@@ -1228,12 +1234,14 @@
     font-weight: 600;
     color: #334155;
     margin-bottom: 8px;
+    width: 100%;
 }
 
 .revixreviews-file-upload-label .upload-subtitle {
     display: block !important;
     font-size: 14px;
     color: #64748b;
+    width: 100%;
 }
 
 .revixreviews-file-name {
