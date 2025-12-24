@@ -413,8 +413,8 @@ class ImportExportSettings {
         $filename = isset($_FILES['import_file']['name']) ? sanitize_file_name($_FILES['import_file']['name']) : '';
         $file_extension = strtolower(pathinfo($filename, PATHINFO_EXTENSION));
         
-        if ($file_extension !== 'json') {
-            wp_send_json_error(['message' => __('Invalid file type. Please upload a JSON file.', 'revix-reviews')]);
+        if (!in_array($file_extension, ['json', 'csv'], true)) {
+            wp_send_json_error(['message' => __('Invalid file type. Please upload a JSON or CSV file.', 'revix-reviews')]);
         }
 
         // Validate MIME type
@@ -422,33 +422,47 @@ class ImportExportSettings {
         $mime_type = finfo_file($finfo, $_FILES['import_file']['tmp_name']);
         finfo_close($finfo);
         
-        $allowed_mime_types = ['application/json', 'text/plain'];
+        $allowed_mime_types = ['application/json', 'text/plain', 'text/csv', 'application/csv', 'application/vnd.ms-excel'];
         if (!in_array($mime_type, $allowed_mime_types, true)) {
-            wp_send_json_error(['message' => __('Invalid file format. Only JSON files are allowed.', 'revix-reviews')]);
+            wp_send_json_error(['message' => __('Invalid file format. Only JSON and CSV files are allowed.', 'revix-reviews')]);
         }
 
-        // Read file content
-        // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
-        $json_content = file_get_contents($_FILES['import_file']['tmp_name']);
-        
-        if ($json_content === false) {
-            wp_send_json_error(['message' => __('Failed to read the uploaded file', 'revix-reviews')]);
-        }
+        // Read and parse file content based on file type
+        if ($file_extension === 'csv') {
+            // Handle CSV file
+            $import_data = $this->parse_csv_file($_FILES['import_file']['tmp_name']);
+            
+            if (is_wp_error($import_data)) {
+                wp_send_json_error(['message' => $import_data->get_error_message()]);
+            }
+            
+            if (empty($import_data)) {
+                wp_send_json_error(['message' => __('The CSV file contains no valid review data', 'revix-reviews')]);
+            }
+        } else {
+            // Handle JSON file
+            // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
+            $json_content = file_get_contents($_FILES['import_file']['tmp_name']);
+            
+            if ($json_content === false) {
+                wp_send_json_error(['message' => __('Failed to read the uploaded file', 'revix-reviews')]);
+            }
 
-        $import_data = json_decode($json_content, true);
+            $import_data = json_decode($json_content, true);
 
-        if (json_last_error() !== JSON_ERROR_NONE) {
-            wp_send_json_error(['message' => __('Invalid JSON file format', 'revix-reviews')]);
-        }
+            if (json_last_error() !== JSON_ERROR_NONE) {
+                wp_send_json_error(['message' => __('Invalid JSON file format', 'revix-reviews')]);
+            }
 
-        if (!is_array($import_data) || empty($import_data)) {
-            wp_send_json_error(['message' => __('The JSON file contains no valid review data', 'revix-reviews')]);
-        }
+            if (!is_array($import_data) || empty($import_data)) {
+                wp_send_json_error(['message' => __('The JSON file contains no valid review data', 'revix-reviews')]);
+            }
 
-        // Validate JSON structure
-        foreach ($import_data as $index => $item) {
-            if (!is_array($item)) {
-                wp_send_json_error(['message' => __('Invalid JSON structure. Expected array of review objects.', 'revix-reviews')]);
+            // Validate JSON structure
+            foreach ($import_data as $index => $item) {
+                if (!is_array($item)) {
+                    wp_send_json_error(['message' => __('Invalid JSON structure. Expected array of review objects.', 'revix-reviews')]);
+                }
             }
         }
 
@@ -556,8 +570,12 @@ class ImportExportSettings {
             $row_number++;
             
             if ($row_number === 1) {
-                // First row is headers
-                $headers = array_map('trim', $row);
+                // First row is headers - remove BOM if present
+                $headers = array_map(function($header) {
+                    $header = trim($header);
+                    // Remove UTF-8 BOM from first column if present
+                    return str_replace("\xEF\xBB\xBF", '', $header);
+                }, $row);
                 
                 // Validate required columns
                 if (!in_array('title', $headers, true) || !in_array('content', $headers, true)) {
