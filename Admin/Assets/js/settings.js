@@ -363,7 +363,17 @@
                     $('.revixreviews-file-name .file-name-text').text(file.name);
                     $('.revixreviews-file-name').addClass('active');
                 } else {
-                    alert('Please upload a JSON or CSV file.');
+                    if (typeof Swal !== 'undefined') {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Invalid File Type',
+                            text: 'Please upload a JSON or CSV file.',
+                            confirmButtonText: 'OK',
+                            confirmButtonColor: '#ef4444'
+                        });
+                    } else {
+                        alert('Please upload a JSON or CSV file.');
+                    }
                 }
             }
         });
@@ -409,7 +419,7 @@
             // Check if Swal is available
             if (typeof Swal === 'undefined') {
                 console.error('SweetAlert2 not loaded');
-                alert('Error: SweetAlert2 library not loaded. Please refresh the page.');
+                alert('Error: Required library not loaded. Please refresh the page and try again.');
                 return false;
             }
             
