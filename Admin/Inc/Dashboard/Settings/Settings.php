@@ -696,6 +696,18 @@ class Settings
 			</div>
 			<?php
 		}
+		
+		// Display import error messages
+		// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Safe usage for display only
+		if (isset($_GET['import_error'])) {
+			$error_message = sanitize_text_field(wp_unslash($_GET['import_error']));
+			?>
+			<div class="revixreviews-notice revixreviews-notice-error">
+				<span class="revixreviews-notice-icon">✕</span>
+				<span><?php echo esc_html($error_message); ?></span>
+			</div>
+			<?php
+		}
 		?>
 		<div class="revixreviews-settings-grid">
 			<!-- Export Section -->

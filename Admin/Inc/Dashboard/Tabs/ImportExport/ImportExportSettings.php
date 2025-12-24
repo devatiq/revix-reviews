@@ -97,44 +97,68 @@ class ImportExportSettings {
         // Security check
         if (!isset($_POST['revixreviews_import_nonce']) || 
             !wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['revixreviews_import_nonce'])), 'revixreviews_import_action')) {
-            wp_die(esc_html__('Security check failed', 'revix-reviews'));
+            $this->redirect_with_error('Security check failed');
+            return;
         }
 
         if (!current_user_can('manage_options')) {
-            wp_die(esc_html__('You do not have sufficient permissions', 'revix-reviews'));
+            $this->redirect_with_error('You do not have sufficient permissions');
+            return;
         }
 
         // Check if file was uploaded
         if (!isset($_FILES['import_file']) || $_FILES['import_file']['error'] !== UPLOAD_ERR_OK) {
-            wp_die(esc_html__('No file uploaded or upload error occurred', 'revix-reviews'));
+            $this->redirect_with_error('No file uploaded or upload error occurred');
+            return;
         }
 
-        // Validate file type
-        $file_type = wp_check_filetype($_FILES['import_file']['name']);
-        if ($file_type['ext'] !== 'json') {
-            wp_die(esc_html__('Invalid file type. Please upload a JSON file.', 'revix-reviews'));
+        // Validate file type - check extension directly from the filename
+        $filename = isset($_FILES['import_file']['name']) ? sanitize_file_name($_FILES['import_file']['name']) : '';
+        $file_extension = strtolower(pathinfo($filename, PATHINFO_EXTENSION));
+        
+        if ($file_extension !== 'json') {
+            $this->redirect_with_error('Invalid file type. Please upload a JSON file.');
+            return;
         }
 
         // Read file content
         // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
         $json_content = file_get_contents($_FILES['import_file']['tmp_name']);
+        
+        if ($json_content === false) {
+            $this->redirect_with_error('Failed to read the uploaded file');
+            return;
+        }
+
         $import_data = json_decode($json_content, true);
 
         if (json_last_error() !== JSON_ERROR_NONE) {
-            wp_die(esc_html__('Invalid JSON file format', 'revix-reviews'));
+            $this->redirect_with_error('Invalid JSON file format');
+            return;
+        }
+
+        if (!is_array($import_data) || empty($import_data)) {
+            $this->redirect_with_error('The JSON file contains no valid review data');
+            return;
         }
 
         $imported = 0;
         $skipped = 0;
 
         foreach ($import_data as $review_data) {
+            // Validate required fields
+            if (!isset($review_data['title']) || !isset($review_data['content'])) {
+                $skipped++;
+                continue;
+            }
+
             // Prepare post data
             $post_data = [
                 'post_type' => 'revixreviews',
                 'post_title' => sanitize_text_field($review_data['title']),
                 'post_content' => wp_kses_post($review_data['content']),
-                'post_status' => sanitize_text_field($review_data['status']),
-                'post_date' => sanitize_text_field($review_data['date']),
+                'post_status' => isset($review_data['status']) ? sanitize_text_field($review_data['status']) : 'pending',
+                'post_date' => isset($review_data['date']) ? sanitize_text_field($review_data['date']) : current_time('mysql'),
                 'post_author' => isset($review_data['author']) ? absint($review_data['author']) : get_current_user_id()
             ];
 
@@ -162,6 +186,22 @@ class ImportExportSettings {
             'tab' => 'importexport',
             'imported' => $imported,
             'skipped' => $skipped
+        ], admin_url('edit.php?post_type=revixreviews'));
+
+        wp_safe_redirect($redirect_url);
+        exit;
+    }
+
+    /**
+     * Redirect back to settings page with error message
+     *
+     * @param string $error_message The error message to display
+     */
+    private function redirect_with_error($error_message) {
+        $redirect_url = add_query_arg([
+            'page' => 'revixreviews_settings',
+            'tab' => 'importexport',
+            'import_error' => urlencode($error_message)
         ], admin_url('edit.php?post_type=revixreviews'));
 
         wp_safe_redirect($redirect_url);
