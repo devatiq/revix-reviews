@@ -4,10 +4,12 @@ namespace RevixReviews\Admin\Inc\Dashboard\Tabs;
 
 use RevixReviews\Admin\Inc\Dashboard\Tabs\Trustpilot\TrustpilotSettings;
 use RevixReviews\Admin\Inc\Dashboard\Tabs\Google\GoogleSettings;
+use RevixReviews\Admin\Inc\Dashboard\Tabs\ImportExport\ImportExportSettings;
 class Tabs {
 
     protected $trustpilot; // Trustpilot object
     protected $google; // Google object
+    protected $importexport; // Import/Export object
 
     public function __construct() {
         $this->class_initialize();
@@ -15,9 +17,10 @@ class Tabs {
 
     public static function render_tabs($active_tab = 'general') {
         $tabs = [
-            'general'    => ['label' => __('General', 'revix-reviews'), 'icon' => '⚙️'],
-            'trustpilot' => ['label' => __('TrustPilot', 'revix-reviews'), 'icon' => '⭐'],
-            'google'     => ['label' => __('Google Reviews', 'revix-reviews'), 'icon' => '🔍']
+            'general'      => ['label' => __('General', 'revix-reviews'), 'icon' => '⚙️'],
+            'trustpilot'   => ['label' => __('TrustPilot', 'revix-reviews'), 'icon' => '⭐'],
+            'google'       => ['label' => __('Google Reviews', 'revix-reviews'), 'icon' => '🔍'],
+            'importexport' => ['label' => __('Import/Export', 'revix-reviews'), 'icon' => '📦']
         ];
 
         echo '<div class="revixreviews-tabs-wrapper">';
@@ -36,6 +39,7 @@ class Tabs {
         
         $this->trustpilot = new TrustpilotSettings();
         $this->google     = new GoogleSettings();
+        $this->importexport = new ImportExportSettings();
 
     }
 

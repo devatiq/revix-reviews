@@ -160,7 +160,7 @@ class Settings
 		$active_tab = isset($_GET['tab']) ? sanitize_text_field(wp_unslash($_GET['tab'])) : 'general';
 		
 		// Validate tab name
-		$allowed_tabs = array('general', 'trustpilot', 'google');
+		$allowed_tabs = array('general', 'trustpilot', 'google', 'importexport');
 		if (!in_array($active_tab, $allowed_tabs, true)) {
 			$active_tab = 'general';
 		}
@@ -186,12 +186,16 @@ class Settings
 						} elseif ($active_tab === 'google') {
 							settings_fields('revixreviews_google');
 							$this->render_google_settings();
-						} else {
-							settings_fields('revixreviews');
-							$this->render_general_settings();
-						}
+					} elseif ($active_tab === 'importexport') {
+						$this->render_importexport_settings();
+					} else {
+						settings_fields('revixreviews');
+						$this->render_general_settings();
+					}
 	
+					if ($active_tab !== 'importexport') {
 						submit_button(__('Save All Settings', 'revix-reviews'), 'primary large', 'submit', true, array('id' => 'revixreviews-submit-btn'));
+					}
 						?>
 					</form>
 				</div>
@@ -670,6 +674,104 @@ class Settings
 		<p class="description">
 			<?php echo esc_html__('When enabled, the Google Reviews widget will be available in the Elementor editor.', 'revix-reviews'); ?>
 		</p>
+		<?php
+	}
+
+	/**
+	 * Render import/export settings tab content
+	 *
+	 * @since 1.2.8
+	 */
+	private function render_importexport_settings()
+	{
+		// Display success/error messages
+		// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Safe usage for display only
+		if (isset($_GET['imported'])) {
+			$imported = absint($_GET['imported']);
+			$skipped = isset($_GET['skipped']) ? absint($_GET['skipped']) : 0;
+			?>
+			<div class="revixreviews-notice revixreviews-notice-success">
+				<span class="revixreviews-notice-icon">✓</span>
+				<span>
+					<?php 
+					/* translators: %1$d: number of imported reviews, %2$d: number of skipped reviews */
+					echo esc_html(sprintf(__('Successfully imported %1$d review(s). %2$d skipped.', 'revix-reviews'), $imported, $skipped)); 
+					?>
+				</span>
+			</div>
+			<?php
+		}
+		?>
+		<div class="revixreviews-settings-grid">
+			<!-- Export Section -->
+			<div class="revixreviews-settings-card">
+				<div class="revixreviews-card-header">
+					<h3><?php esc_html_e('📤 Export Reviews', 'revix-reviews'); ?></h3>
+					<p class="revixreviews-card-description"><?php esc_html_e('Download all your reviews as a JSON file', 'revix-reviews'); ?></p>
+				</div>
+				<div class="revixreviews-card-body">
+					<p class="revixreviews-description">
+						<?php esc_html_e('Export all reviews including custom fields, ratings, and metadata. This creates a backup file that can be imported later.', 'revix-reviews'); ?>
+					</p>
+					<form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>">
+						<input type="hidden" name="action" value="revixreviews_export">
+						<?php wp_nonce_field('revixreviews_export_action', 'revixreviews_export_nonce'); ?>
+						<button type="submit" class="button button-primary button-large" style="margin-top: 16px;">
+							<span class="dashicons dashicons-download" style="vertical-align: middle; margin-top: 3px;"></span>
+							<?php esc_html_e('Export All Reviews', 'revix-reviews'); ?>
+						</button>
+					</form>
+				</div>
+			</div>
+
+			<!-- Import Section -->
+			<div class="revixreviews-settings-card">
+				<div class="revixreviews-card-header">
+					<h3><?php esc_html_e('📥 Import Reviews', 'revix-reviews'); ?></h3>
+					<p class="revixreviews-card-description"><?php esc_html_e('Upload a JSON file to import reviews', 'revix-reviews'); ?></p>
+				</div>
+				<div class="revixreviews-card-body">
+					<p class="revixreviews-description">
+						<?php esc_html_e('Import reviews from a previously exported JSON file. All custom fields and metadata will be preserved.', 'revix-reviews'); ?>
+					</p>
+					<form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>" enctype="multipart/form-data">
+						<input type="hidden" name="action" value="revixreviews_import">
+						<?php wp_nonce_field('revixreviews_import_action', 'revixreviews_import_nonce'); ?>
+						
+						<div class="revixreviews-field" style="margin-top: 16px;">
+							<label for="import_file" class="revixreviews-label">
+								<?php esc_html_e('Select JSON File', 'revix-reviews'); ?>
+							</label>
+							<input type="file" id="import_file" name="import_file" accept=".json" required class="revixreviews-input">
+							<p class="revixreviews-description" style="margin-top: 8px;">
+								<?php esc_html_e('Only JSON files exported from Revix Reviews are supported.', 'revix-reviews'); ?>
+							</p>
+						</div>
+
+						<button type="submit" class="button button-primary button-large" style="margin-top: 16px;">
+							<span class="dashicons dashicons-upload" style="vertical-align: middle; margin-top: 3px;"></span>
+							<?php esc_html_e('Import Reviews', 'revix-reviews'); ?>
+						</button>
+					</form>
+				</div>
+			</div>
+		</div>
+
+		<!-- Warning Section -->
+		<div class="revixreviews-settings-card" style="margin-top: 24px;">
+			<div class="revixreviews-card-header" style="background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);">
+				<h3>⚠️ <?php esc_html_e('Important Notes', 'revix-reviews'); ?></h3>
+			</div>
+			<div class="revixreviews-card-body">
+				<ul style="list-style: disc; padding-left: 20px; line-height: 1.8;">
+					<li><?php esc_html_e('Importing reviews will create new posts. It will NOT update or replace existing reviews.', 'revix-reviews'); ?></li>
+					<li><?php esc_html_e('All custom fields and metadata will be imported exactly as they were exported.', 'revix-reviews'); ?></li>
+					<li><?php esc_html_e('The original post dates and author information will be preserved.', 'revix-reviews'); ?></li>
+					<li><?php esc_html_e('Make sure to backup your database before importing large amounts of data.', 'revix-reviews'); ?></li>
+					<li><?php esc_html_e('Only upload JSON files that were exported from Revix Reviews.', 'revix-reviews'); ?></li>
+				</ul>
+			</div>
+		</div>
 		<?php
 	}
 }
