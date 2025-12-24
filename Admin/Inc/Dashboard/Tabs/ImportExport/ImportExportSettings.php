@@ -28,6 +28,7 @@ class ImportExportSettings {
     public function __construct() {
         add_action('admin_init', [$this, 'register_settings']);
         add_action('admin_post_revixreviews_export', [$this, 'handle_export']);
+        add_action('admin_post_revixreviews_export_csv', [$this, 'handle_export_csv']);
         add_action('wp_ajax_revixreviews_import', [$this, 'handle_import_ajax']);
     }
 
@@ -113,6 +114,107 @@ class ImportExportSettings {
 
         // Output JSON
         echo $json; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+        exit;
+    }
+
+    /**
+     * Handle CSV export of reviews
+     */
+    public function handle_export_csv() {
+        // Security check
+        if (!isset($_POST['revixreviews_export_csv_nonce']) || 
+            !wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['revixreviews_export_csv_nonce'])), 'revixreviews_export_csv_action')) {
+            wp_die(esc_html__('Security check failed', 'revix-reviews'));
+        }
+
+        if (!current_user_can('manage_options')) {
+            wp_die(esc_html__('You do not have sufficient permissions', 'revix-reviews'));
+        }
+
+        // Get all reviews
+        $args = [
+            'post_type' => 'revixreviews',
+            'posts_per_page' => -1,
+            'post_status' => ['publish', 'pending', 'draft', 'private']
+        ];
+
+        $reviews = get_posts($args);
+        
+        if (empty($reviews)) {
+            wp_die(esc_html__('No reviews found to export', 'revix-reviews'));
+        }
+
+        // Collect all unique meta keys
+        $all_meta_keys = [];
+        foreach ($reviews as $review) {
+            $meta = get_post_meta($review->ID);
+            foreach ($meta as $key => $value) {
+                if (strpos($key, '_') !== 0 || strpos($key, '_revixreviews') === 0) {
+                    if (!in_array($key, $all_meta_keys, true)) {
+                        $all_meta_keys[] = $key;
+                    }
+                }
+            }
+        }
+        sort($all_meta_keys);
+
+        // Prepare CSV headers
+        $headers = ['title', 'content', 'status', 'date', 'author'];
+        foreach ($all_meta_keys as $meta_key) {
+            $headers[] = 'meta_' . $meta_key;
+        }
+
+        // Create CSV content
+        $filename = 'revixreviews-export-' . gmdate('Y-m-d-H-i-s') . '.csv';
+        
+        // Send headers for download
+        header('Content-Type: text/csv; charset=utf-8');
+        header('Content-Disposition: attachment; filename="' . $filename . '"');
+        header('Pragma: no-cache');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('X-Content-Type-Options: nosniff');
+        header('X-Robots-Tag: noindex, nofollow');
+
+        // Open output stream
+        $output = fopen('php://output', 'w');
+        
+        // Write BOM for UTF-8
+        fprintf($output, chr(0xEF).chr(0xBB).chr(0xBF));
+        
+        // Write headers
+        fputcsv($output, $headers);
+
+        // Write data rows
+        foreach ($reviews as $review) {
+            $row = [
+                $review->post_title,
+                $review->post_content,
+                $review->post_status,
+                $review->post_date,
+                $review->post_author
+            ];
+
+            // Add meta fields
+            $meta = get_post_meta($review->ID);
+            foreach ($all_meta_keys as $meta_key) {
+                if (isset($meta[$meta_key])) {
+                    $value = maybe_unserialize($meta[$meta_key][0]);
+                    // Convert arrays to JSON string for CSV
+                    if (is_array($value)) {
+                        $value = wp_json_encode($value);
+                    }
+                    $row[] = $value;
+                } else {
+                    $row[] = '';
+                }
+            }
+
+            fputcsv($output, $row);
+        }
+
+        // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_fclose
+        fclose($output);
         exit;
     }
 

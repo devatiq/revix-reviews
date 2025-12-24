@@ -1171,6 +1171,16 @@
     box-shadow: 0 6px 16px rgba(16, 185, 129, 0.4);
 }
 
+.revixreviews-export-csv-btn {
+    background: linear-gradient(135deg, #059669 0%, #047857 100%);
+    box-shadow: 0 4px 12px rgba(5, 150, 105, 0.3);
+}
+
+.revixreviews-export-csv-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(5, 150, 105, 0.4);
+}
+
 .revixreviews-import-btn {
     background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
     box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
@@ -1182,6 +1192,7 @@
 }
 
 .revixreviews-export-btn .dashicons,
+.revixreviews-export-csv-btn .dashicons,
 .revixreviews-import-btn .dashicons {
     font-size: 20px;
 }

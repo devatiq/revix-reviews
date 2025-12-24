@@ -720,7 +720,7 @@ class Settings
 				<div class="revixreviews-card-header">
 					<h3>📤 <?php esc_html_e('Export Reviews', 'revix-reviews'); ?></h3>
 					<p class="revixreviews-card-description">
-						<?php esc_html_e('Download all your reviews as a JSON file', 'revix-reviews'); ?>
+						<?php esc_html_e('Download all your reviews as JSON or CSV file', 'revix-reviews'); ?>
 					</p>
 				</div>
 				<div class="revixreviews-card-body">
@@ -730,12 +730,24 @@ class Settings
 							<?php esc_html_e('All reviews including custom fields, ratings, metadata, author information, and post dates. Perfect for creating backups or migrating reviews.', 'revix-reviews'); ?>
 						</p>
 					</div>
-					<form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>" class="revixreviews-export-form">
+					
+					<!-- JSON Export -->
+					<form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>" class="revixreviews-export-form" style="margin-bottom: 12px;">
 						<input type="hidden" name="action" value="revixreviews_export">
 						<?php wp_nonce_field('revixreviews_export_action', 'revixreviews_export_nonce'); ?>
-						<button type="submit" class="revixreviews-export-btn">
-							<span class="dashicons dashicons-download"></span>
-							<span><?php esc_html_e('Export All Reviews', 'revix-reviews'); ?></span>
+						<button type="submit" class="revixreviews-export-btn revixreviews-export-json-btn">
+							<span class="dashicons dashicons-media-code"></span>
+							<span><?php esc_html_e('Export as JSON', 'revix-reviews'); ?></span>
+						</button>
+					</form>
+					
+					<!-- CSV Export -->
+					<form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>" class="revixreviews-export-csv-form">
+						<input type="hidden" name="action" value="revixreviews_export_csv">
+						<?php wp_nonce_field('revixreviews_export_csv_action', 'revixreviews_export_csv_nonce'); ?>
+						<button type="submit" class="revixreviews-export-btn revixreviews-export-csv-btn">
+							<span class="dashicons dashicons-media-spreadsheet"></span>
+							<span><?php esc_html_e('Export as CSV', 'revix-reviews'); ?></span>
 						</button>
 					</form>
 				</div>
