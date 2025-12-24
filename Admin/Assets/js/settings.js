@@ -400,18 +400,24 @@
         );
 
         // Handle AJAX import form submission
-        $('.revixreviews-import-form').on('submit', function(e) {
+        $(document).on('submit', '.revixreviews-import-form', function(e) {
             e.preventDefault();
+            e.stopPropagation();
+            
+            console.log('Import form submitted');
             
             // Check if Swal is available
             if (typeof Swal === 'undefined') {
+                console.error('SweetAlert2 not loaded');
                 alert('Error: SweetAlert2 library not loaded. Please refresh the page.');
-                return;
+                return false;
             }
             
             const formData = new FormData(this);
             formData.append('action', 'revixreviews_import');
             formData.append('nonce', $('#revixreviews_import_nonce').val());
+            
+            console.log('Sending AJAX request...');
             
             // Show loading alert
             Swal.fire({
@@ -432,6 +438,7 @@
                 processData: false,
                 contentType: false,
                 success: function(response) {
+                    console.log('AJAX Success:', response);
                     if (response.success) {
                         let message = `Successfully imported ${response.data.imported} review(s).`;
                         let icon = 'success';
@@ -480,4 +487,6 @@
                     });
                 }
             });
+            
+            return false;
         });
