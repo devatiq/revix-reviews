@@ -761,7 +761,7 @@ class Settings
 						<?php wp_nonce_field('revixreviews_import_action', 'revixreviews_import_nonce'); ?>
 						
 						<div class="revixreviews-file-upload-wrapper" style="margin-bottom: 20px;">
-							<label for="import_file" class="revixreviews-file-upload-label" style="display: block; width: 100%; padding: 40px 24px; background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%); border: 2px dashed #cbd5e1; border-radius: 8px; text-align: center; cursor: pointer; transition: all 0.3s ease;">
+							<label for="import_file" class="revixreviews-file-upload-label" style="display: block; width: 100%; padding: 40px 24px; background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%); border: 2px dashed #cbd5e1; border-radius: 8px; text-align: center; cursor: pointer; transition: all 0.3s ease; box-sizing: border-box;">
 								<span class="dashicons dashicons-cloud-upload" style="font-size: 48px; color: #3b82f6; display: block; margin-bottom: 12px;"></span>
 								<span style="display: block; font-size: 16px; font-weight: 600; color: #334155; margin-bottom: 8px;">
 									<?php esc_html_e('Choose JSON File', 'revix-reviews'); ?>
