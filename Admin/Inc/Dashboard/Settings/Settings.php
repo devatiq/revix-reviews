@@ -716,53 +716,70 @@ class Settings
 		?>
 		<div class="revixreviews-settings-grid">
 			<!-- Export Section -->
-			<div class="revixreviews-settings-card">
-				<div class="revixreviews-card-header">
-					<h3><?php esc_html_e('📤 Export Reviews', 'revix-reviews'); ?></h3>
-					<p class="revixreviews-card-description"><?php esc_html_e('Download all your reviews as a JSON file', 'revix-reviews'); ?></p>
-				</div>
-				<div class="revixreviews-card-body">
-					<p class="revixreviews-description">
-						<?php esc_html_e('Export all reviews including custom fields, ratings, and metadata. This creates a backup file that can be imported later.', 'revix-reviews'); ?>
+			<div class="revixreviews-settings-card revixreviews-export-card">
+				<div class="revixreviews-card-header" style="background: linear-gradient(135deg, #10b981 0%, #059669 100%);">
+					<h3>📤 <?php esc_html_e('Export Reviews', 'revix-reviews'); ?></h3>
+					<p class="revixreviews-card-description" style="margin-top: 8px; opacity: 0.95;">
+						<?php esc_html_e('Download all your reviews as a JSON file', 'revix-reviews'); ?>
 					</p>
-					<form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>">
+				</div>
+				<div class="revixreviews-card-body" style="padding: 32px;">
+					<div class="revixreviews-export-info" style="background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%); padding: 20px; border-radius: 8px; border-left: 4px solid #10b981; margin-bottom: 24px;">
+						<p style="margin: 0; color: #065f46; line-height: 1.6;">
+							<strong style="display: block; margin-bottom: 8px;">💾 <?php esc_html_e('What will be exported:', 'revix-reviews'); ?></strong>
+							<?php esc_html_e('All reviews including custom fields, ratings, metadata, author information, and post dates. Perfect for creating backups or migrating reviews.', 'revix-reviews'); ?>
+						</p>
+					</div>
+					<form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>" class="revixreviews-export-form">
 						<input type="hidden" name="action" value="revixreviews_export">
 						<?php wp_nonce_field('revixreviews_export_action', 'revixreviews_export_nonce'); ?>
-						<button type="submit" class="button button-primary button-large" style="margin-top: 16px;">
-							<span class="dashicons dashicons-download" style="vertical-align: middle; margin-top: 3px;"></span>
-							<?php esc_html_e('Export All Reviews', 'revix-reviews'); ?>
+						<button type="submit" class="revixreviews-export-btn" style="width: 100%; padding: 16px 24px; background: linear-gradient(135deg, #10b981 0%, #059669 100%); color: white; border: none; border-radius: 8px; font-size: 16px; font-weight: 600; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3); display: flex; align-items: center; justify-content: center; gap: 12px;">
+							<span class="dashicons dashicons-download" style="font-size: 20px;"></span>
+							<span><?php esc_html_e('Export All Reviews', 'revix-reviews'); ?></span>
 						</button>
 					</form>
 				</div>
 			</div>
 
 			<!-- Import Section -->
-			<div class="revixreviews-settings-card">
-				<div class="revixreviews-card-header">
-					<h3><?php esc_html_e('📥 Import Reviews', 'revix-reviews'); ?></h3>
-					<p class="revixreviews-card-description"><?php esc_html_e('Upload a JSON file to import reviews', 'revix-reviews'); ?></p>
-				</div>
-				<div class="revixreviews-card-body">
-					<p class="revixreviews-description">
-						<?php esc_html_e('Import reviews from a previously exported JSON file. All custom fields and metadata will be preserved.', 'revix-reviews'); ?>
+			<div class="revixreviews-settings-card revixreviews-import-card">
+				<div class="revixreviews-card-header" style="background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);">
+					<h3>📥 <?php esc_html_e('Import Reviews', 'revix-reviews'); ?></h3>
+					<p class="revixreviews-card-description" style="margin-top: 8px; opacity: 0.95;">
+						<?php esc_html_e('Upload a JSON file to import reviews', 'revix-reviews'); ?>
 					</p>
-					<form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>" enctype="multipart/form-data">
+				</div>
+				<div class="revixreviews-card-body" style="padding: 32px;">
+					<div class="revixreviews-import-info" style="background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); padding: 20px; border-radius: 8px; border-left: 4px solid #3b82f6; margin-bottom: 24px;">
+						<p style="margin: 0; color: #1e40af; line-height: 1.6;">
+							<strong style="display: block; margin-bottom: 8px;">📂 <?php esc_html_e('Supported files:', 'revix-reviews'); ?></strong>
+							<?php esc_html_e('Only JSON files exported from Revix Reviews. All custom fields and metadata will be preserved exactly as exported.', 'revix-reviews'); ?>
+						</p>
+					</div>
+					<form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>" enctype="multipart/form-data" class="revixreviews-import-form">
 						<input type="hidden" name="action" value="revixreviews_import">
 						<?php wp_nonce_field('revixreviews_import_action', 'revixreviews_import_nonce'); ?>
 						
-						<div class="revixreviews-field" style="margin-top: 16px;">
-							<label for="import_file" class="revixreviews-label">
-								<?php esc_html_e('Select JSON File', 'revix-reviews'); ?>
+						<div class="revixreviews-file-upload-wrapper" style="margin-bottom: 20px;">
+							<label for="import_file" class="revixreviews-file-upload-label" style="display: block; width: 100%; padding: 40px 24px; background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%); border: 2px dashed #cbd5e1; border-radius: 8px; text-align: center; cursor: pointer; transition: all 0.3s ease;">
+								<span class="dashicons dashicons-cloud-upload" style="font-size: 48px; color: #3b82f6; display: block; margin-bottom: 12px;"></span>
+								<span style="display: block; font-size: 16px; font-weight: 600; color: #334155; margin-bottom: 8px;">
+									<?php esc_html_e('Choose JSON File', 'revix-reviews'); ?>
+								</span>
+								<span style="display: block; font-size: 14px; color: #64748b;">
+									<?php esc_html_e('or drag and drop here', 'revix-reviews'); ?>
+								</span>
+								<input type="file" id="import_file" name="import_file" accept=".json" required style="display: none;">
 							</label>
-							<input type="file" id="import_file" name="import_file" accept=".json" required class="revixreviews-input">
-							<p class="revixreviews-description" style="margin-top: 8px;">
-								<?php esc_html_e('Only JSON files exported from Revix Reviews are supported.', 'revix-reviews'); ?>
-							</p>
+							<div class="revixreviews-file-name" style="margin-top: 12px; font-size: 14px; color: #64748b; text-align: center; display: none;">
+								<span class="dashicons dashicons-media-document" style="color: #3b82f6;"></span>
+								<span class="file-name-text"></span>
+							</div>
 						</div>
 
-						<button type="submit" class="button button-primary button-large" style="margin-top: 16px;">
-							<span class="dashicons dashicons-upload" style="vertical-align: middle; margin-top: 3px;"></span>
-							<?php esc_html_e('Import Reviews', 'revix-reviews'); ?>
+						<button type="submit" class="revixreviews-import-btn" style="width: 100%; padding: 16px 24px; background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%); color: white; border: none; border-radius: 8px; font-size: 16px; font-weight: 600; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3); display: flex; align-items: center; justify-content: center; gap: 12px;">
+							<span class="dashicons dashicons-upload" style="font-size: 20px;"></span>
+							<span><?php esc_html_e('Import Reviews', 'revix-reviews'); ?></span>
 						</button>
 					</form>
 				</div>

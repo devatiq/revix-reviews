@@ -316,6 +316,68 @@
     // Initialize when document is ready
     $(document).ready(function() {
         RevixSettings.init();
+        
+        // Import/Export UI Enhancements
+        
+        // File upload display
+        $('#import_file').on('change', function() {
+            const fileName = $(this).val().split('\\').pop();
+            if (fileName) {
+                $('.revixreviews-file-name .file-name-text').text(fileName);
+                $('.revixreviews-file-name').fadeIn(200);
+                $('.revixreviews-file-upload-label').css({
+                    'border-color': '#3b82f6',
+                    'background': 'linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%)'
+                });
+            }
+        });
+        
+        // Drag and drop styling
+        $('.revixreviews-file-upload-label').on('dragover', function(e) {
+            e.preventDefault();
+            $(this).css({
+                'border-color': '#3b82f6',
+                'background': 'linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%)',
+                'transform': 'scale(1.02)'
+            });
+        }).on('dragleave drop', function() {
+            $(this).css({
+                'border-color': '#cbd5e1',
+                'background': 'linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%)',
+                'transform': 'scale(1)'
+            });
+        });
+        
+        // Button hover effects
+        $('.revixreviews-export-btn').hover(
+            function() {
+                $(this).css({
+                    'transform': 'translateY(-2px)',
+                    'box-shadow': '0 6px 20px rgba(16, 185, 129, 0.4)'
+                });
+            },
+            function() {
+                $(this).css({
+                    'transform': 'translateY(0)',
+                    'box-shadow': '0 4px 12px rgba(16, 185, 129, 0.3)'
+                });
+            }
+        );
+        
+        $('.revixreviews-import-btn').hover(
+            function() {
+                $(this).css({
+                    'transform': 'translateY(-2px)',
+                    'box-shadow': '0 6px 20px rgba(59, 130, 246, 0.4)'
+                });
+            },
+            function() {
+                $(this).css({
+                    'transform': 'translateY(0)',
+                    'box-shadow': '0 4px 12px rgba(59, 130, 246, 0.3)'
+                });
+            }
+        );
     });
 
 })(jQuery);
