@@ -324,11 +324,7 @@
             const fileName = $(this).val().split('\\').pop();
             if (fileName) {
                 $('.revixreviews-file-name .file-name-text').text(fileName);
-                $('.revixreviews-file-name').fadeIn(200);
-                $('.revixreviews-file-upload-label').css({
-                    'border-color': '#3b82f6',
-                    'background': 'linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%)'
-                });
+                $('.revixreviews-file-name').addClass('active');
             }
         });
         
@@ -339,32 +335,20 @@
         $uploadLabel.on('dragover', function(e) {
             e.preventDefault();
             e.stopPropagation();
-            $(this).css({
-                'border-color': '#3b82f6',
-                'background': 'linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%)',
-                'transform': 'scale(1.02)'
-            });
+            $(this).addClass('dragover');
         });
         
         $uploadLabel.on('dragleave', function(e) {
             e.preventDefault();
             e.stopPropagation();
-            $(this).css({
-                'border-color': '#cbd5e1',
-                'background': 'linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%)',
-                'transform': 'scale(1)'
-            });
+            $(this).removeClass('dragover');
         });
         
         $uploadLabel.on('drop', function(e) {
             e.preventDefault();
             e.stopPropagation();
             
-            $(this).css({
-                'border-color': '#cbd5e1',
-                'background': 'linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%)',
-                'transform': 'scale(1)'
-            });
+            $(this).removeClass('dragover');
             
             const files = e.originalEvent.dataTransfer.files;
             if (files.length > 0) {
@@ -377,11 +361,7 @@
                     
                     // Display the file name
                     $('.revixreviews-file-name .file-name-text').text(file.name);
-                    $('.revixreviews-file-name').fadeIn(200);
-                    $('.revixreviews-file-upload-label').css({
-                        'border-color': '#3b82f6',
-                        'background': 'linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%)'
-                    });
+                    $('.revixreviews-file-name').addClass('active');
                 } else {
                     alert('Please upload a JSON file.');
                 }

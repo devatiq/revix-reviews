@@ -1077,3 +1077,200 @@
     color: #334155;
     font-weight: 500;
 }
+
+/* Import/Export Cards */
+.revixreviews-settings-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    margin-bottom: 24px;
+}
+
+.revixreviews-export-card .revixreviews-card-header {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+}
+
+.revixreviews-import-card .revixreviews-card-header {
+    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+}
+
+.revixreviews-card-description {
+    margin-top: 8px;
+    opacity: 0.95;
+}
+
+.revixreviews-export-card .revixreviews-card-body,
+.revixreviews-import-card .revixreviews-card-body {
+    padding: 32px;
+}
+
+/* Info Boxes */
+.revixreviews-export-info {
+    background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+    padding: 20px;
+    border-radius: 8px;
+    border-left: 4px solid #10b981;
+    margin-bottom: 24px;
+}
+
+.revixreviews-export-info p {
+    margin: 0;
+    color: #065f46;
+    line-height: 1.6;
+}
+
+.revixreviews-export-info strong {
+    display: block;
+    margin-bottom: 8px;
+}
+
+.revixreviews-import-info {
+    background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+    padding: 20px;
+    border-radius: 8px;
+    border-left: 4px solid #3b82f6;
+    margin-bottom: 24px;
+}
+
+.revixreviews-import-info p {
+    margin: 0;
+    color: #1e40af;
+    line-height: 1.6;
+}
+
+.revixreviews-import-info strong {
+    display: block;
+    margin-bottom: 8px;
+}
+
+/* Export/Import Buttons */
+.revixreviews-export-btn,
+.revixreviews-import-btn {
+    width: 100%;
+    padding: 16px 24px;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+}
+
+.revixreviews-export-btn {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+}
+
+.revixreviews-export-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(16, 185, 129, 0.4);
+}
+
+.revixreviews-import-btn {
+    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+.revixreviews-import-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(59, 130, 246, 0.4);
+}
+
+.revixreviews-export-btn .dashicons,
+.revixreviews-import-btn .dashicons {
+    font-size: 20px;
+}
+
+/* File Upload Wrapper */
+.revixreviews-file-upload-wrapper {
+    margin-bottom: 20px;
+}
+
+.revixreviews-file-upload-label {
+    display: block;
+    width: 100%;
+    padding: 40px 24px;
+    background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+    border: 2px dashed #cbd5e1;
+    border-radius: 8px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+}
+
+.revixreviews-file-upload-label:hover {
+    border-color: #3b82f6;
+    background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+}
+
+.revixreviews-file-upload-label.dragover {
+    border-color: #3b82f6;
+    background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+    transform: scale(1.02);
+}
+
+.revixreviews-file-upload-label .dashicons-cloud-upload {
+    font-size: 48px;
+    color: #3b82f6;
+    display: block;
+    margin-bottom: 12px;
+}
+
+.revixreviews-file-upload-label .upload-title {
+    display: block;
+    font-size: 16px;
+    font-weight: 600;
+    color: #334155;
+    margin-bottom: 8px;
+}
+
+.revixreviews-file-upload-label .upload-subtitle {
+    display: block;
+    font-size: 14px;
+    color: #64748b;
+}
+
+.revixreviews-file-name {
+    margin-top: 12px;
+    font-size: 14px;
+    color: #64748b;
+    text-align: center;
+    display: none;
+}
+
+.revixreviews-file-name.active {
+    display: block;
+}
+
+.revixreviews-file-name .dashicons {
+    color: #3b82f6;
+}
+
+/* Warning Section */
+.revixreviews-warning-card .revixreviews-card-header {
+    background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+}
+
+.revixreviews-warning-card .revixreviews-card-body ul {
+    list-style: disc;
+    padding-left: 20px;
+    line-height: 1.8;
+    margin: 0;
+}
+
+.revixreviews-warning-card .revixreviews-card-body ul li {
+    margin-bottom: 8px;
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+    .revixreviews-settings-grid {
+        grid-template-columns: 1fr;
+    }
+}
