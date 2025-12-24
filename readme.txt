@@ -6,7 +6,7 @@ Contributors: abcplugins, atiqbd4ever, nexibyllc, supreoxltd
 Tags: reviews, business reviews, testimonials, trustpilot, google reviews
 Requires at least: 5.4
 Tested up to: 6.9
-Stable tag: 1.2.7
+Stable tag: 1.2.8
 Requires PHP: 8.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -183,7 +183,7 @@ No, the free version of Elementor is sufficient. All Revix Reviews widgets work 
 8. General User Feedback submission form
 
 == Changelog ==
-= 1.2.7 =
+= 1.2.8 =
 - NEW: Modern admin panel UI with improved user experience
 - NEW: Elementor widget styling controls for better visual customization
 - NEW: Review Submit Form Elementor widget - Enhanced star rating controls
@@ -191,6 +191,16 @@ No, the free version of Elementor is sufficient. All Revix Reviews widgets work 
 - IMPROVED: Testimonial Reviews Elementor widget - Renamed "Author Name" to "Heading Name" for clarity
 - FIXED: Rating star color and size controls now work properly in Elementor editor
 - IMPROVED: Star styling controls now properly override default CSS with !important flags
+
+= 1.2.8 =
+- NEW: Import/Export now supports both JSON and CSV with robust validation
+- NEW: SweetAlert2 notifications for all import/export actions and errors
+- NEW: CSV export with dynamic meta fields and Excel compatibility
+- IMPROVED: Drag-and-drop UI and external CSS for admin
+- IMPROVED: Security validation for file uploads and AJAX
+- FIXED: Date format validation and user warnings for CSV import
+- FIXED: Prevent export if no reviews exist (with alert)
+- FIXED: Alert if no file selected on import
 
 = 1.2.6 =
 - IMPORTANT: Migrated to Google Places API (New) - Legacy API no longer supported
