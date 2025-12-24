@@ -24,8 +24,10 @@ class Assets {
         // Enqueue SweetAlert2 and settings JS on settings page
         // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Safe usage for asset loading only
         if ($screen && isset($_GET['page']) && $_GET['page'] === 'revixreviews_settings') {
-            wp_enqueue_style('sweetalert2', REVIXREVIEWS_PUBLIC_ASSETS . 'css/sweetalert2.min.css', [], REVIXREVIEWS_VERSION);
-            wp_enqueue_script('sweetalert2', REVIXREVIEWS_PUBLIC_ASSETS . 'js/sweetalert2.all.min.js', [], REVIXREVIEWS_VERSION, true);
+            // SweetAlert2 assets are in Public/Assets folder
+            $sweetalert_url = plugin_dir_url(dirname(dirname(__FILE__))) . 'Public/Assets/';
+            wp_enqueue_style('sweetalert2', $sweetalert_url . 'css/sweetalert2.min.css', [], REVIXREVIEWS_VERSION);
+            wp_enqueue_script('sweetalert2', $sweetalert_url . 'js/sweetalert2.all.min.js', [], REVIXREVIEWS_VERSION, true);
         }
     }
 
