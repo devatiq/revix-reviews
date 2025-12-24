@@ -746,14 +746,14 @@ class Settings
 				<div class="revixreviews-card-header">
 					<h3>📥 <?php esc_html_e('Import Reviews', 'revix-reviews'); ?></h3>
 					<p class="revixreviews-card-description">
-						<?php esc_html_e('Upload a JSON file to import reviews', 'revix-reviews'); ?>
+						<?php esc_html_e('Upload a JSON or CSV file to import reviews', 'revix-reviews'); ?>
 					</p>
 				</div>
 				<div class="revixreviews-card-body">
 					<div class="revixreviews-import-info">
 						<p>
 							<strong>📂 <?php esc_html_e('Supported files:', 'revix-reviews'); ?></strong>
-							<?php esc_html_e('Only JSON files exported from Revix Reviews. All custom fields and metadata will be preserved exactly as exported.', 'revix-reviews'); ?>
+							<?php esc_html_e('JSON files exported from Revix Reviews, or CSV files with title, content, status, date, author columns. Meta fields can be added with "meta_" prefix (e.g., meta_rating, meta_email).', 'revix-reviews'); ?>
 						</p>
 					</div>
 					<form method="post" enctype="multipart/form-data" class="revixreviews-import-form">
@@ -764,13 +764,13 @@ class Settings
 								<span class="dashicons dashicons-cloud-upload"></span>
 								<div class="upload-text-wrapper">
 									<span class="upload-title">
-										<?php esc_html_e('Choose JSON File', 'revix-reviews'); ?>
-									</span>
-									<span class="upload-subtitle">
-										<?php esc_html_e('or drag and drop here', 'revix-reviews'); ?>
-									</span>
-								</div>
-								<input type="file" id="import_file" name="import_file" accept=".json" required style="display: none;">
+									<?php esc_html_e('Choose JSON or CSV File', 'revix-reviews'); ?>
+								</span>
+								<span class="upload-subtitle">
+									<?php esc_html_e('or drag and drop here', 'revix-reviews'); ?>
+								</span>
+							</div>
+							<input type="file" id="import_file" name="import_file" accept=".json,.csv" required style="display: none;">
 							</label>
 							<div class="revixreviews-file-name">
 								<span class="dashicons dashicons-media-document"></span>

@@ -149,9 +149,8 @@ class ImportExportSettings {
         $filename = isset($_FILES['import_file']['name']) ? sanitize_file_name($_FILES['import_file']['name']) : '';
         $file_extension = strtolower(pathinfo($filename, PATHINFO_EXTENSION));
         
-        if ($file_extension !== 'json') {
-            $this->redirect_with_error('Invalid file type. Please upload a JSON file.');
-            return;
+        if (!in_array($file_extension, ['json', 'csv'], true)) {
+            wp_send_json_error(['message' => __('Invalid file type. Please upload a JSON or CSV file.', 'revix-reviews')]);
         }
 
         // Validate MIME type
@@ -159,26 +158,31 @@ class ImportExportSettings {
         $mime_type = finfo_file($finfo, $_FILES['import_file']['tmp_name']);
         finfo_close($finfo);
         
-        $allowed_mime_types = ['application/json', 'text/plain'];
+        $allowed_mime_types = ['application/json', 'text/plain', 'text/csv', 'application/csv', 'application/vnd.ms-excel'];
         if (!in_array($mime_type, $allowed_mime_types, true)) {
-            $this->redirect_with_error('Invalid file format. Only JSON files are allowed.');
-            return;
+            wp_send_json_error(['message' => __('Invalid file format. Only JSON and CSV files are allowed.', 'revix-reviews')]);
         }
 
-        // Read file content
-        // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
-        $json_content = file_get_contents($_FILES['import_file']['tmp_name']);
-        
-        if ($json_content === false) {
-            $this->redirect_with_error('Failed to read the uploaded file');
-            return;
-        }
+        // Read and parse file based on extension
+        if ($file_extension === 'csv') {
+            $import_data = $this->parse_csv_file($_FILES['import_file']['tmp_name']);
+            if (is_wp_error($import_data)) {
+                wp_send_json_error(['message' => $import_data->get_error_message()]);
+            }
+        } else {
+            // Read JSON file content
+            // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
+            $json_content = file_get_contents($_FILES['import_file']['tmp_name']);
+            
+            if ($json_content === false) {
+                wp_send_json_error(['message' => __('Failed to read the uploaded file', 'revix-reviews')]);
+            }
 
-        $import_data = json_decode($json_content, true);
+            $import_data = json_decode($json_content, true);
 
-        if (json_last_error() !== JSON_ERROR_NONE) {
-            $this->redirect_with_error('Invalid JSON file format');
-            return;
+            if (json_last_error() !== JSON_ERROR_NONE) {
+                wp_send_json_error(['message' => __('Invalid JSON file format', 'revix-reviews')]);
+            }
         }
 
         if (!is_array($import_data) || empty($import_data)) {
@@ -425,6 +429,78 @@ class ImportExportSettings {
             'skipped' => $skipped,
             'skipped_items' => $skipped_items
         ]);
+    }
+
+    /**
+     * Parse CSV file and convert to array format
+     *
+     * @param string $file_path Path to the CSV file
+     * @return array|WP_Error Array of review data or WP_Error on failure
+     */
+    private function parse_csv_file($file_path) {
+        // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_fopen
+        $file = fopen($file_path, 'r');
+        
+        if ($file === false) {
+            return new \WP_Error('file_read_error', __('Failed to open CSV file', 'revix-reviews'));
+        }
+
+        $headers = [];
+        $data = [];
+        $row_number = 0;
+
+        // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_fgetcsv
+        while (($row = fgetcsv($file)) !== false) {
+            $row_number++;
+            
+            if ($row_number === 1) {
+                // First row is headers
+                $headers = array_map('trim', $row);
+                
+                // Validate required columns
+                if (!in_array('title', $headers, true) || !in_array('content', $headers, true)) {
+                    // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_fclose
+                    fclose($file);
+                    return new \WP_Error('invalid_csv', __('CSV must have "title" and "content" columns', 'revix-reviews'));
+                }
+                continue;
+            }
+
+            // Skip empty rows
+            if (empty(array_filter($row))) {
+                continue;
+            }
+
+            // Map row to headers
+            $review = [];
+            foreach ($headers as $index => $header) {
+                if (isset($row[$index])) {
+                    $value = trim($row[$index]);
+                    
+                    // Handle meta fields (columns starting with meta_)
+                    if (strpos($header, 'meta_') === 0) {
+                        if (!isset($review['meta'])) {
+                            $review['meta'] = [];
+                        }
+                        $meta_key = substr($header, 5); // Remove 'meta_' prefix
+                        $review['meta'][$meta_key] = $value;
+                    } else {
+                        $review[$header] = $value;
+                    }
+                }
+            }
+
+            $data[] = $review;
+        }
+
+        // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_fclose
+        fclose($file);
+
+        if (empty($data)) {
+            return new \WP_Error('empty_csv', __('CSV file contains no data rows', 'revix-reviews'));
+        }
+
+        return $data;
     }
 
     /**

@@ -354,8 +354,8 @@
             if (files.length > 0) {
                 const file = files[0];
                 
-                // Check if it's a JSON file
-                if (file.name.endsWith('.json')) {
+                // Check if it's a JSON or CSV file
+                if (file.name.endsWith('.json') || file.name.endsWith('.csv')) {
                     // Set the file to the input
                     fileInput.files = files;
                     
@@ -363,7 +363,7 @@
                     $('.revixreviews-file-name .file-name-text').text(file.name);
                     $('.revixreviews-file-name').addClass('active');
                 } else {
-                    alert('Please upload a JSON file.');
+                    alert('Please upload a JSON or CSV file.');
                 }
             }
         });
