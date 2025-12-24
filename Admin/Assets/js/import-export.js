@@ -6,6 +6,8 @@
     'use strict';
 
     const RevixImportExport = {
+        _exportCheckPassed: false, // Prevents double submit loop
+
         init: function() {
             this.bindEvents();
         },
@@ -119,6 +121,10 @@
         },
 
         handleExportSubmit: function(e) {
+            if (RevixImportExport._exportCheckPassed) {
+                RevixImportExport._exportCheckPassed = false; // reset for next time
+                return true; // allow native submit
+            }
             e.preventDefault();
             
             const $form = $(this);
@@ -154,9 +160,10 @@
                 },
                 success: function(response) {
                     if (response.success) {
-                        // Reviews exist, close modal and submit form
+                        // Reviews exist, close modal and submit form natively
                         Swal.close();
-                        $form.off('submit').submit();
+                        RevixImportExport._exportCheckPassed = true;
+                        $form[0].submit();
                     } else {
                         // No reviews found
                         Swal.fire({
