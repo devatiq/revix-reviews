@@ -178,6 +178,9 @@ class Settings
 				<div class="revixreviews-settings-main">
 					<?php settings_errors(); ?>
 					
+				<?php if ($active_tab === 'importexport') : ?>
+					<?php $this->render_importexport_settings(); ?>
+				<?php else : ?>
 					<form action="options.php" method="post" id="revixreviews-settings-form">
 						<?php
 						if ($active_tab === 'trustpilot') {
@@ -186,23 +189,15 @@ class Settings
 						} elseif ($active_tab === 'google') {
 							settings_fields('revixreviews_google');
 							$this->render_google_settings();
-					} elseif ($active_tab === 'importexport') {
-						$this->render_importexport_settings();
-					} else {
-						settings_fields('revixreviews');
-						$this->render_general_settings();
-					}
-	
-					if ($active_tab !== 'importexport') {
+						} else {
+							settings_fields('revixreviews');
+							$this->render_general_settings();
+						}
+		
 						submit_button(__('Save All Settings', 'revix-reviews'), 'primary large', 'submit', true, array('id' => 'revixreviews-submit-btn'));
-					}
 						?>
 					</form>
-				</div>
-	
-				<!-- Sidebar Area -->
-				<div class="revixreviews-settings-sidebar">
-					<div class="revixreviews-settings-card">
+				<?php endif; ?>
 						<div class="revixreviews-card-header">
 							<h3><?php esc_html_e('📺 Video Tutorial', 'revix-reviews'); ?></h3>
 						</div>
