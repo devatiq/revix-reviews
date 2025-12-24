@@ -223,6 +223,19 @@ class Settings
 						<ul class="revixreviews-tips-list">
 							<li><?php esc_html_e('Toggle switches save automatically', 'revix-reviews'); ?></li>
 							<li><?php esc_html_e('Use "Save All Settings" for other changes', 'revix-reviews'); ?></li>
+							<li><?php esc_html_e('Enable Elementor widgets to use in page builder', 'revix-reviews'); ?></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<?php
+	}
+
+	/**
+	 * Render general settings tab content
+	 *
 	 * @since 1.3.0
 	 */
 	private function render_general_settings()
