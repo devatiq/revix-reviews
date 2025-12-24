@@ -198,11 +198,11 @@ class Settings
 						?>
 					</form>
 				<?php endif; ?>
-						<div class="revixreviews-card-header">
-							<h3><?php esc_html_e('📺 Video Tutorial', 'revix-reviews'); ?></h3>
-						</div>
-						<div class="revixreviews-card-body">
-							<div class="revixreviews-video-wrapper">
+			</div>
+
+			<!-- Sidebar Area -->
+			<div class="revixreviews-settings-sidebar">
+				<div class="revixreviews-settings-card">
 								<iframe width="100%" height="100%" src="https://www.youtube.com/embed/yB0dJ70jS2Y" 
 									title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
 								</iframe>
