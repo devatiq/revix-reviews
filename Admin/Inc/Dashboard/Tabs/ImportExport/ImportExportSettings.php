@@ -203,11 +203,13 @@ class ImportExportSettings {
 
         $imported = 0;
         $skipped = 0;
+        $skipped_items = [];
 
-        foreach ($import_data as $review_data) {
+        foreach ($import_data as $index => $review_data) {
             // Validate required fields
             if (!isset($review_data['title']) || !isset($review_data['content'])) {
                 $skipped++;
+                $skipped_items[] = sprintf('Item #%d: Missing required fields (title or content)', $index + 1);
                 continue;
             }
 
@@ -239,6 +241,8 @@ class ImportExportSettings {
 
             if (is_wp_error($post_id)) {
                 $skipped++;
+                $title = isset($review_data['title']) ? substr($review_data['title'], 0, 30) : 'Unknown';
+                $skipped_items[] = sprintf('Item "%s...": %s', $title, $post_id->get_error_message());
                 continue;
             }
 
@@ -267,12 +271,18 @@ class ImportExportSettings {
             $imported++;
         }
 
-        // Redirect back with success message
+        // Store results in transient for display
+        set_transient('revixreviews_import_result', [
+            'status' => 'success',
+            'imported' => $imported,
+            'skipped' => $skipped,
+            'skipped_items' => $skipped_items
+        ], 60);
+
+        // Redirect back
         $redirect_url = add_query_arg([
             'page' => 'revixreviews_settings',
-            'tab' => 'importexport',
-            'imported' => $imported,
-            'skipped' => $skipped
+            'tab' => 'importexport'
         ], admin_url('edit.php?post_type=revixreviews'));
 
         wp_safe_redirect($redirect_url);
@@ -285,10 +295,15 @@ class ImportExportSettings {
      * @param string $error_message The error message to display
      */
     private function redirect_with_error($error_message) {
+        // Store error in transient
+        set_transient('revixreviews_import_result', [
+            'status' => 'error',
+            'message' => $error_message
+        ], 60);
+
         $redirect_url = add_query_arg([
             'page' => 'revixreviews_settings',
-            'tab' => 'importexport',
-            'import_error' => urlencode($error_message)
+            'tab' => 'importexport'
         ], admin_url('edit.php?post_type=revixreviews'));
 
         wp_safe_redirect($redirect_url);

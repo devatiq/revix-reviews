@@ -684,34 +684,63 @@ class Settings
 	 */
 	private function render_importexport_settings()
 	{
-		// Display success/error messages
-		// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Safe usage for display only
-		if (isset($_GET['imported'])) {
-			$imported = absint($_GET['imported']);
-			$skipped = isset($_GET['skipped']) ? absint($_GET['skipped']) : 0;
-			?>
-			<div class="revixreviews-notice revixreviews-notice-success">
-				<span class="revixreviews-notice-icon">✓</span>
-				<span>
-					<?php 
-					/* translators: %1$d: number of imported reviews, %2$d: number of skipped reviews */
-					echo esc_html(sprintf(__('Successfully imported %1$d review(s). %2$d skipped.', 'revix-reviews'), $imported, $skipped)); 
-					?>
-				</span>
-			</div>
-			<?php
-		}
-		
-		// Display import error messages
-		// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Safe usage for display only
-		if (isset($_GET['import_error'])) {
-			$error_message = sanitize_text_field(wp_unslash($_GET['import_error']));
-			?>
-			<div class="revixreviews-notice revixreviews-notice-error">
-				<span class="revixreviews-notice-icon">✕</span>
-				<span><?php echo esc_html($error_message); ?></span>
-			</div>
-			<?php
+		// Check for import results and prepare SweetAlert2 message
+		$import_result = get_transient('revixreviews_import_result');
+		if ($import_result) {
+			delete_transient('revixreviews_import_result');
+			
+			if ($import_result['status'] === 'success') {
+				$message = sprintf(
+					__('Successfully imported %1$d review(s).', 'revix-reviews'),
+					$import_result['imported']
+				);
+				
+				// Add skipped items details if any
+				if ($import_result['skipped'] > 0) {
+					$message .= '<br><br><strong>' . sprintf(__('%d item(s) were skipped:', 'revix-reviews'), $import_result['skipped']) . '</strong><br>';
+					if (!empty($import_result['skipped_items'])) {
+						$message .= '<div style="text-align: left; margin-top: 10px; max-height: 200px; overflow-y: auto;">';
+						$message .= '<ul style="padding-left: 20px; margin: 0;">';
+						foreach ($import_result['skipped_items'] as $item) {
+							$message .= '<li style="margin: 5px 0;">' . esc_html($item) . '</li>';
+						}
+						$message .= '</ul></div>';
+					}
+				}
+				
+				?>
+				<script type="text/javascript">
+					document.addEventListener('DOMContentLoaded', function() {
+						if (typeof Swal !== 'undefined') {
+							Swal.fire({
+								icon: '<?php echo $import_result['skipped'] > 0 ? 'warning' : 'success'; ?>',
+								title: '<?php echo esc_js(__('Import Completed!', 'revix-reviews')); ?>',
+								html: '<?php echo wp_kses_post($message); ?>',
+								confirmButtonText: '<?php echo esc_js(__('OK', 'revix-reviews')); ?>',
+								confirmButtonColor: '#3b82f6',
+								width: '600px'
+							});
+						}
+					});
+				</script>
+				<?php
+			} else {
+				?>
+				<script type="text/javascript">
+					document.addEventListener('DOMContentLoaded', function() {
+						if (typeof Swal !== 'undefined') {
+							Swal.fire({
+								icon: 'error',
+								title: '<?php echo esc_js(__('Import Failed!', 'revix-reviews')); ?>',
+								html: '<?php echo esc_js($import_result['message']); ?>',
+								confirmButtonText: '<?php echo esc_js(__('OK', 'revix-reviews')); ?>',
+								confirmButtonColor: '#ef4444'
+							});
+						}
+					});
+				</script>
+				<?php
+			}
 		}
 		?>
 		<div class="revixreviews-settings-grid">
