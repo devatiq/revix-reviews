@@ -20,6 +20,9 @@
             // Button hover effects
             this.setupButtonEffects();
             
+            // Handle export button clicks with validation
+            $(document).on('submit', '.revixreviews-export-form, .revixreviews-export-csv-form', this.handleExportSubmit);
+            
             // Handle AJAX import form submission
             $(document).on('submit', '.revixreviews-import-form', this.handleImportSubmit);
         },
@@ -113,6 +116,68 @@
                     });
                 }
             );
+        },
+
+        handleExportSubmit: function(e) {
+            e.preventDefault();
+            
+            const $form = $(this);
+            const isCSV = $form.hasClass('revixreviews-export-csv-form');
+            const exportType = isCSV ? 'CSV' : 'JSON';
+            
+            // Check if Swal is available
+            if (typeof Swal === 'undefined') {
+                console.error('SweetAlert2 not loaded');
+                // Continue with normal form submission
+                e.target.submit();
+                return;
+            }
+            
+            // Show loading
+            Swal.fire({
+                title: 'Checking reviews...',
+                html: 'Please wait',
+                allowOutsideClick: false,
+                allowEscapeKey: false,
+                didOpen: () => {
+                    Swal.showLoading();
+                }
+            });
+            
+            // Check if reviews exist
+            $.ajax({
+                url: revixReviewsSettings.ajaxUrl,
+                type: 'POST',
+                data: {
+                    action: 'revixreviews_check_reviews',
+                    nonce: revixReviewsSettings.nonce
+                },
+                success: function(response) {
+                    if (response.success) {
+                        // Reviews exist, close modal and submit form
+                        Swal.close();
+                        $form.off('submit').submit();
+                    } else {
+                        // No reviews found
+                        Swal.fire({
+                            icon: 'warning',
+                            title: 'No Reviews Found',
+                            html: response.data.message || 'There are no reviews to export.',
+                            confirmButtonText: 'OK',
+                            confirmButtonColor: '#f59e0b'
+                        });
+                    }
+                },
+                error: function() {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        html: 'Failed to check reviews. Please try again.',
+                        confirmButtonText: 'OK',
+                        confirmButtonColor: '#ef4444'
+                    });
+                }
+            });
         },
 
         handleImportSubmit: function(e) {

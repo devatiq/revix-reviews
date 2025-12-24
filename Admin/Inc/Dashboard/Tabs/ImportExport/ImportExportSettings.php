@@ -30,6 +30,7 @@ class ImportExportSettings {
         add_action('admin_post_revixreviews_export', [$this, 'handle_export']);
         add_action('admin_post_revixreviews_export_csv', [$this, 'handle_export_csv']);
         add_action('wp_ajax_revixreviews_import', [$this, 'handle_import_ajax']);
+        add_action('wp_ajax_revixreviews_check_reviews', [$this, 'check_reviews_exist']);
     }
 
     public function register_settings() {
@@ -74,6 +75,11 @@ class ImportExportSettings {
         ];
 
         $reviews = get_posts($args);
+        
+        if (empty($reviews)) {
+            wp_die(esc_html__('No reviews found to export', 'revix-reviews'));
+        }
+        
         $export_data = [];
 
         foreach ($reviews as $review) {
@@ -674,5 +680,31 @@ class ImportExportSettings {
 
         wp_safe_redirect($redirect_url);
         exit;
+    }
+
+    /**
+     * Check if reviews exist for export
+     *
+     * @return void
+     */
+    public function check_reviews_exist() {
+        // Security check
+        if (!isset($_POST['nonce']) || !wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['nonce'])), 'revixreviews_settings_nonce')) {
+            wp_send_json_error(['message' => __('Security check failed', 'revix-reviews')]);
+        }
+
+        if (!current_user_can('manage_options')) {
+            wp_send_json_error(['message' => __('You do not have sufficient permissions', 'revix-reviews')]);
+        }
+
+        // Count reviews
+        $count = wp_count_posts('revixreviews');
+        $total = $count->publish + $count->pending + $count->draft + $count->private;
+
+        if ($total > 0) {
+            wp_send_json_success(['count' => $total]);
+        } else {
+            wp_send_json_error(['message' => __('No reviews found to export', 'revix-reviews')]);
+        }
     }
 }
