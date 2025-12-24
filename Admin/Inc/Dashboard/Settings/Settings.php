@@ -763,12 +763,14 @@ class Settings
 						<div class="revixreviews-file-upload-wrapper">
 							<label for="import_file" class="revixreviews-file-upload-label">
 								<span class="dashicons dashicons-cloud-upload"></span>
-								<span class="upload-title">
-									<?php esc_html_e('Choose JSON File', 'revix-reviews'); ?>
-								</span>
-								<span class="upload-subtitle">
-									<?php esc_html_e('or drag and drop here', 'revix-reviews'); ?>
-								</span>
+								<div class="upload-text-wrapper">
+									<span class="upload-title">
+										<?php esc_html_e('Choose JSON File', 'revix-reviews'); ?>
+									</span>
+									<span class="upload-subtitle">
+										<?php esc_html_e('or drag and drop here', 'revix-reviews'); ?>
+									</span>
+								</div>
 								<input type="file" id="import_file" name="import_file" accept=".json" required style="display: none;">
 							</label>
 							<div class="revixreviews-file-name">
