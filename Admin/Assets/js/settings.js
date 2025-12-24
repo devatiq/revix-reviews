@@ -398,6 +398,79 @@
                 });
             }
         );
-    });
 
-})(jQuery);
+        // Handle AJAX import form submission
+        $('.revixreviews-import-form').on('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            formData.append('action', 'revixreviews_import');
+            formData.append('nonce', $('#revixreviews_import_nonce').val());
+            
+            // Show loading alert
+            Swal.fire({
+                title: 'Importing Reviews...',
+                html: 'Please wait while we process your file.',
+                allowOutsideClick: false,
+                allowEscapeKey: false,
+                didOpen: () => {
+                    Swal.showLoading();
+                }
+            });
+            
+            // Send AJAX request
+            $.ajax({
+                url: ajaxurl,
+                type: 'POST',
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function(response) {
+                    if (response.success) {
+                        let message = `Successfully imported ${response.data.imported} review(s).`;
+                        let icon = 'success';
+                        
+                        if (response.data.skipped > 0) {
+                            icon = 'warning';
+                            message += `<br><br><strong>${response.data.skipped} item(s) were skipped:</strong><br>`;
+                            message += '<div style="text-align: left; margin-top: 10px; max-height: 200px; overflow-y: auto;">';
+                            message += '<ul style="padding-left: 20px; margin: 0;">';
+                            response.data.skipped_items.forEach(function(item) {
+                                message += `<li style="margin: 5px 0;">${item}</li>`;
+                            });
+                            message += '</ul></div>';
+                        }
+                        
+                        Swal.fire({
+                            icon: icon,
+                            title: 'Import Completed!',
+                            html: message,
+                            confirmButtonText: 'OK',
+                            confirmButtonColor: '#3b82f6',
+                            width: '600px'
+                        }).then(() => {
+                            // Reset form and file display
+                            $('.revixreviews-import-form')[0].reset();
+                            $('.revixreviews-file-name').removeClass('active');
+                        });
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Import Failed!',
+                            html: response.data.message,
+                            confirmButtonText: 'OK',
+                            confirmButtonColor: '#ef4444'
+                        });
+                    }
+                },
+                error: function(xhr, status, error) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Import Failed!',
+                        html: 'An unexpected error occurred. Please try again.',
+                        confirmButtonText: 'OK',
+                        confirmButtonColor: '#ef4444'
+                    });
+                }
+            });
+        });

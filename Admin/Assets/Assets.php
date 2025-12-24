@@ -21,7 +21,7 @@ class Assets {
     public function enqueue_assets() {
         $screen = get_current_screen();
         
-        // Enqueue SweetAlert2 on settings page
+        // Enqueue SweetAlert2 and settings JS on settings page
         // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Safe usage for asset loading only
         if ($screen && isset($_GET['page']) && $_GET['page'] === 'revixreviews_settings') {
             wp_enqueue_style('sweetalert2', REVIXREVIEWS_PUBLIC_ASSETS . 'css/sweetalert2.min.css', [], REVIXREVIEWS_VERSION);
