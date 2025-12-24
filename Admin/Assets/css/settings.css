@@ -1299,6 +1299,22 @@
     margin-bottom: 8px;
 }
 
+.revixreviews-warning-card .revixreviews-card-body ul li.revixreviews-csv-warning {
+    background: #fef3c7;
+    padding: 12px;
+    border-left: 4px solid #f59e0b;
+    border-radius: 4px;
+    list-style: none;
+    margin-left: -20px;
+    margin-top: 12px;
+}
+
+.revixreviews-warning-card .revixreviews-card-body ul li.revixreviews-csv-warning strong {
+    color: #d97706;
+    display: block;
+    margin-bottom: 4px;
+}
+
 /* Responsive */
 @media (max-width: 1200px) {
     .revixreviews-settings-grid {

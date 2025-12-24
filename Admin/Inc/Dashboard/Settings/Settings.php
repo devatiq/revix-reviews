@@ -811,6 +811,10 @@ class Settings
 					<li><?php esc_html_e('The original post dates and author information will be preserved.', 'revix-reviews'); ?></li>
 					<li><?php esc_html_e('Make sure to backup your database before importing large amounts of data.', 'revix-reviews'); ?></li>
 					<li><?php esc_html_e('Only upload JSON files that were exported from Revix Reviews.', 'revix-reviews'); ?></li>
+					<li class="revixreviews-csv-warning">
+						<strong><?php esc_html_e('CSV Warning:', 'revix-reviews'); ?></strong>
+						<?php esc_html_e('Editing the CSV file incorrectly can break the import process. Make sure the date column format remains unchanged (YYYY-MM-DD HH:MM:SS). Any format change may result in failed imports.', 'revix-reviews'); ?>
+					</li>
 				</ul>
 			</div>
 		</div>
