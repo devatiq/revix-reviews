@@ -403,6 +403,12 @@
         $('.revixreviews-import-form').on('submit', function(e) {
             e.preventDefault();
             
+            // Check if Swal is available
+            if (typeof Swal === 'undefined') {
+                alert('Error: SweetAlert2 library not loaded. Please refresh the page.');
+                return;
+            }
+            
             const formData = new FormData(this);
             formData.append('action', 'revixreviews_import');
             formData.append('nonce', $('#revixreviews_import_nonce').val());
@@ -420,7 +426,7 @@
             
             // Send AJAX request
             $.ajax({
-                url: ajaxurl,
+                url: revixReviewsSettings.ajaxUrl,
                 type: 'POST',
                 data: formData,
                 processData: false,
@@ -464,10 +470,11 @@
                     }
                 },
                 error: function(xhr, status, error) {
+                    console.log('AJAX Error:', xhr.responseText);
                     Swal.fire({
                         icon: 'error',
                         title: 'Import Failed!',
-                        html: 'An unexpected error occurred. Please try again.',
+                        html: 'An unexpected error occurred. Please try again.<br>Check browser console for details.',
                         confirmButtonText: 'OK',
                         confirmButtonColor: '#ef4444'
                     });
