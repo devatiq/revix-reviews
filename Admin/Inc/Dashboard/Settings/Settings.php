@@ -208,16 +208,11 @@ class Settings
 					</div>
 					<div class="revixreviews-card-body">
 						<div class="revixreviews-video-wrapper">
-					</div>
-
-					<div class="revixreviews-settings-card">
-						<div class="revixreviews-card-header">
-							<h3><?php esc_html_e('💡 Quick Tips', 'revix-reviews'); ?></h3>
+							<iframe width="100%" height="100%" src="https://www.youtube.com/embed/yB0dJ70jS2Y" 
+								title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+							</iframe>
 						</div>
-						<div class="revixreviews-card-body">
-							<ul class="revixreviews-tips-list">
-								<li><?php esc_html_e('Toggle switches save automatically', 'revix-reviews'); ?></li>
-								<li><?php esc_html_e('Use "Save All Settings" for other changes', 'revix-reviews'); ?></li>
+					</div>
 								<li><?php esc_html_e('Enable Elementor widgets to use in page builder', 'revix-reviews'); ?></li>
 							</ul>
 						</div>
