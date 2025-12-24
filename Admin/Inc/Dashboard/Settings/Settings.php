@@ -59,6 +59,15 @@ class Settings
 			true
 		);
 
+		// Enqueue Import/Export JavaScript
+		wp_enqueue_script(
+			'revixreviews-import-export',
+			REVIXREVIEWS_ADMIN_ASSETS . 'js/import-export.js',
+			array('jquery', 'sweetalert2'),
+			REVIXREVIEWS_VERSION,
+			true
+		);
+
 		// Localize script with AJAX URL and nonce
 		wp_localize_script(
 			'revixreviews-settings',
