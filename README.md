@@ -159,6 +159,28 @@ Make sure to enable "Places API (New)" in your Google Cloud Console, not the leg
 
 ## Changelog
 
+### 1.2.9
+- **NEW:** AJAX-based save functionality for settings with no page reload
+- **NEW:** SweetAlert2 success/error notifications for settings save
+- **NEW:** Modern horizontal tab navigation with improved UX
+- **IMPROVED:** Settings page UI with cleaner tab design
+- **IMPROVED:** Better hover states and text visibility in navigation
+- **IMPROVED:** Responsive tab navigation for mobile devices
+- **FIXED:** Button text reset issue after AJAX save
+- **FIXED:** Trustpilot and Google tab field name corrections
+- **FIXED:** Submit Form Widget toggle in "Enable All Widgets"
+- **SECURITY:** Enhanced nonce verification and capability checks for AJAX handlers
+
+### 1.2.8
+- **NEW:** Import/Export Features and now supports both JSON and CSV with robust validation
+- **NEW:** SweetAlert2 notifications for all import/export actions and errors
+- **NEW:** CSV export with dynamic meta fields and Excel compatibility
+- **IMPROVED:** Drag-and-drop UI and external CSS for admin
+- **IMPROVED:** Security validation for file uploads and AJAX
+- **FIXED:** Date format validation and user warnings for CSV import
+- **FIXED:** Prevent export if no reviews exist (with alert)
+- **FIXED:** Alert if no file selected on import
+
 ### 1.2.7
 - **NEW:** Modern admin panel UI with improved user experience
 - **NEW:** Elementor widget styling controls for better visual customization
