@@ -184,7 +184,7 @@ No, the free version of Elementor is sufficient. All Revix Reviews widgets work 
 
 == Changelog ==
 = 1.2.8 =
-- NEW: Import/Export now supports both JSON and CSV with robust validation
+- NEW: Import/Export Features and now supports both JSON and CSV with robust validation
 - NEW: SweetAlert2 notifications for all import/export actions and errors
 - NEW: CSV export with dynamic meta fields and Excel compatibility
 - IMPROVED: Drag-and-drop UI and external CSS for admin
