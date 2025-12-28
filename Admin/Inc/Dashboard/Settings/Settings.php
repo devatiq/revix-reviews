@@ -23,6 +23,7 @@ class Settings
 		add_action('admin_init', array($this, 'revixreviews_settings_init'));
 		add_action('admin_enqueue_scripts', array($this, 'enqueue_settings_assets'));
 		add_action('wp_ajax_revixreviews_toggle_setting', array($this, 'handle_ajax_toggle'));
+		add_action('wp_ajax_revixreviews_save_settings', array($this, 'handle_ajax_save_settings'));
 	}
 
 	private function class_initialize() { 
@@ -68,6 +69,15 @@ class Settings
 			true
 		);
 
+		// Enqueue Settings Save JavaScript
+		wp_enqueue_script(
+			'revixreviews-settings-save',
+			REVIXREVIEWS_ADMIN_ASSETS . 'js/settings-save.js',
+			array('jquery', 'sweetalert2', 'revixreviews-settings'),
+			REVIXREVIEWS_VERSION,
+			true
+		);
+
 		// Localize script with AJAX URL and nonce
 		wp_localize_script(
 			'revixreviews-settings',
@@ -108,6 +118,7 @@ class Settings
 			'revixreviews_trustpilot_reviews',
 			'revixreviews_google_reviews',
 			'revixreviews_testimonial_reviews',
+			'revixreviews_submit_form',
 		);
 
 		if (empty($option_name) || !in_array($option_name, $allowed_options, true)) {
@@ -135,6 +146,77 @@ class Settings
 		}
 		
 		wp_die(); // Always terminate AJAX properly
+	}
+
+	/**
+	 * Handle AJAX save all settings request
+	 *
+	 * @since 1.3.0
+	 */
+	public function handle_ajax_save_settings()
+	{
+		// Verify nonce
+		check_ajax_referer('revixreviews_settings_nonce', 'nonce');
+
+		// Check user capabilities
+		if (!current_user_can('manage_options')) {
+			wp_send_json_error(array('message' => __('You do not have permission to perform this action.', 'revix-reviews')));
+			wp_die();
+		}
+
+		// Get active tab
+		$active_tab = isset($_POST['active_tab']) ? sanitize_text_field(wp_unslash($_POST['active_tab'])) : 'general';
+
+		// Validate tab
+		$allowed_tabs = array('general', 'trustpilot', 'google');
+		if (!in_array($active_tab, $allowed_tabs, true)) {
+			wp_send_json_error(array('message' => __('Invalid tab.', 'revix-reviews')));
+			wp_die();
+		}
+
+		// Define settings for each tab
+		$tab_settings = array(
+			'general' => array(
+				'revixreviews_redirect_url' => 'esc_url_raw',
+				'revixreviews_status' => 'sanitize_text_field',
+			),
+			'trustpilot' => array(
+				'revix_trustpilot_url' => 'esc_url_raw',
+			),
+			'google' => array(
+				'revix_google_api_key' => 'sanitize_text_field',
+				'revix_google_place_id' => 'sanitize_text_field',
+			),
+		);
+
+		// Get settings for the active tab
+		$settings = isset($tab_settings[$active_tab]) ? $tab_settings[$active_tab] : array();
+
+		if (empty($settings)) {
+			wp_send_json_error(array('message' => __('No settings to save for this tab.', 'revix-reviews')));
+			wp_die();
+		}
+
+		// Save each setting
+		$saved_count = 0;
+		foreach ($settings as $option_name => $sanitize_callback) {
+			if (isset($_POST[$option_name])) {
+				$value = call_user_func($sanitize_callback, wp_unslash($_POST[$option_name]));
+				update_option($option_name, $value);
+				$saved_count++;
+			}
+		}
+
+		if ($saved_count > 0) {
+			wp_send_json_success(array(
+				'message' => __('Settings saved successfully!', 'revix-reviews'),
+				'saved_count' => $saved_count,
+			));
+		} else {
+			wp_send_json_error(array('message' => __('No settings were updated.', 'revix-reviews')));
+		}
+
+		wp_die();
 	}
 
 	/**

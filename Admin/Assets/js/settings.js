@@ -8,6 +8,11 @@
     const RevixSettings = {
         init: function() {
             this.bindEvents();
+            
+            // Initialize settings save handler if available
+            if (typeof window.RevixSettingsSave !== 'undefined') {
+                window.RevixSettingsSave.init();
+            }
         },
 
         bindEvents: function() {
