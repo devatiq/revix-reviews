@@ -2,14 +2,14 @@
 # This file is distributed under the GPL2.
 msgid ""
 msgstr ""
-"Project-Id-Version: Revix Reviews – All-in-One Business Review Manager 1.2.7\n"
+"Project-Id-Version: Revix Reviews – All-in-One Business Review Manager 1.2.8\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/revix-reviews\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-12-23T09:42:06+00:00\n"
+"POT-Creation-Date: 2025-12-28T06:52:07+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: revix-reviews\n"
@@ -26,7 +26,7 @@ msgstr ""
 
 #. Description of the plugin
 #: revix-reviews.php
-msgid "A WordPress plugin for managing reviews."
+msgid "Collect, manage, and display customer reviews with Google Reviews, Trustpilot integration, customizable forms, and Elementor widgets. Boost credibility and conversions with authentic testimonials."
 msgstr ""
 
 #. Author of the plugin
@@ -39,35 +39,35 @@ msgstr ""
 msgid "https://nexiby.com/"
 msgstr ""
 
-#: Admin/Inc/Dashboard/Settings/Settings.php:69
+#: Admin/Inc/Dashboard/Settings/Settings.php:78
 msgid "Saving..."
 msgstr ""
 
-#: Admin/Inc/Dashboard/Settings/Settings.php:86
+#: Admin/Inc/Dashboard/Settings/Settings.php:95
 msgid "You do not have permission to perform this action."
 msgstr ""
 
-#: Admin/Inc/Dashboard/Settings/Settings.php:105
+#: Admin/Inc/Dashboard/Settings/Settings.php:114
 msgid "Invalid option name."
 msgstr ""
 
-#: Admin/Inc/Dashboard/Settings/Settings.php:111
+#: Admin/Inc/Dashboard/Settings/Settings.php:120
 msgid "Invalid value."
 msgstr ""
 
-#: Admin/Inc/Dashboard/Settings/Settings.php:120
+#: Admin/Inc/Dashboard/Settings/Settings.php:129
 msgid "Setting saved successfully."
 msgstr ""
 
-#: Admin/Inc/Dashboard/Settings/Settings.php:125
+#: Admin/Inc/Dashboard/Settings/Settings.php:134
 msgid "Failed to save setting."
 msgstr ""
 
-#: Admin/Inc/Dashboard/Settings/Settings.php:140
+#: Admin/Inc/Dashboard/Settings/Settings.php:149
 msgid "Revix Reviews Settings"
 msgstr ""
 
-#: Admin/Inc/Dashboard/Settings/Settings.php:141
+#: Admin/Inc/Dashboard/Settings/Settings.php:150
 #: Public/Elementor/Widgets/GoogleReviews/Main.php:40
 #: Public/Elementor/Widgets/GoogleSummary/Main.php:40
 #: Public/Elementor/Widgets/ReviewSubmitForm/Main.php:49
@@ -77,221 +77,308 @@ msgstr ""
 msgid "Settings"
 msgstr ""
 
-#: Admin/Inc/Dashboard/Settings/Settings.php:156
+#: Admin/Inc/Dashboard/Settings/Settings.php:165
 msgid "You do not have sufficient permissions to access this page."
 msgstr ""
 
-#: Admin/Inc/Dashboard/Settings/Settings.php:194
+#: Admin/Inc/Dashboard/Settings/Settings.php:206
 msgid "Save All Settings"
 msgstr ""
 
-#: Admin/Inc/Dashboard/Settings/Settings.php:203
+#: Admin/Inc/Dashboard/Settings/Settings.php:216
 msgid "📺 Video Tutorial"
 msgstr ""
 
-#: Admin/Inc/Dashboard/Settings/Settings.php:216
+#: Admin/Inc/Dashboard/Settings/Settings.php:229
 msgid "💡 Quick Tips"
 msgstr ""
 
-#: Admin/Inc/Dashboard/Settings/Settings.php:220
+#: Admin/Inc/Dashboard/Settings/Settings.php:233
 msgid "Toggle switches save automatically"
 msgstr ""
 
-#: Admin/Inc/Dashboard/Settings/Settings.php:221
+#: Admin/Inc/Dashboard/Settings/Settings.php:234
 msgid "Use \"Save All Settings\" for other changes"
 msgstr ""
 
-#: Admin/Inc/Dashboard/Settings/Settings.php:222
+#: Admin/Inc/Dashboard/Settings/Settings.php:235
 msgid "Enable Elementor widgets to use in page builder"
 msgstr ""
 
-#: Admin/Inc/Dashboard/Settings/Settings.php:243
+#: Admin/Inc/Dashboard/Settings/Settings.php:256
 msgid "General Settings"
 msgstr ""
 
-#: Admin/Inc/Dashboard/Settings/Settings.php:244
+#: Admin/Inc/Dashboard/Settings/Settings.php:257
 msgid "Configure basic plugin settings and default behaviors"
 msgstr ""
 
-#: Admin/Inc/Dashboard/Settings/Settings.php:250
-#: Admin/Inc/Dashboard/Settings/Settings.php:483
+#: Admin/Inc/Dashboard/Settings/Settings.php:263
+#: Admin/Inc/Dashboard/Settings/Settings.php:496
 msgid "Redirect URL"
 msgstr ""
 
-#: Admin/Inc/Dashboard/Settings/Settings.php:256
-#: Admin/Inc/Dashboard/Settings/Settings.php:560
+#: Admin/Inc/Dashboard/Settings/Settings.php:269
+#: Admin/Inc/Dashboard/Settings/Settings.php:573
 msgid "Enter the URL to redirect users to after they submit a review."
 msgstr ""
 
-#: Admin/Inc/Dashboard/Settings/Settings.php:263
-#: Admin/Inc/Dashboard/Settings/Settings.php:492
+#: Admin/Inc/Dashboard/Settings/Settings.php:276
+#: Admin/Inc/Dashboard/Settings/Settings.php:505
 msgid "Default Review Status"
 msgstr ""
 
-#: Admin/Inc/Dashboard/Settings/Settings.php:267
-#: Admin/Inc/Dashboard/Settings/Settings.php:577
+#: Admin/Inc/Dashboard/Settings/Settings.php:280
+#: Admin/Inc/Dashboard/Settings/Settings.php:590
 msgid "Publish"
 msgstr ""
 
-#: Admin/Inc/Dashboard/Settings/Settings.php:270
-#: Admin/Inc/Dashboard/Settings/Settings.php:580
+#: Admin/Inc/Dashboard/Settings/Settings.php:283
+#: Admin/Inc/Dashboard/Settings/Settings.php:593
 msgid "Pending"
 msgstr ""
 
-#: Admin/Inc/Dashboard/Settings/Settings.php:273
-#: Admin/Inc/Dashboard/Settings/Settings.php:583
+#: Admin/Inc/Dashboard/Settings/Settings.php:286
+#: Admin/Inc/Dashboard/Settings/Settings.php:596
 msgid "Draft"
 msgstr ""
 
-#: Admin/Inc/Dashboard/Settings/Settings.php:277
+#: Admin/Inc/Dashboard/Settings/Settings.php:290
 msgid "Select the default status for new reviews. \"Publish\" makes them public immediately, \"Pending\" requires admin approval, and \"Draft\" saves them as drafts."
 msgstr ""
 
-#: Admin/Inc/Dashboard/Settings/Settings.php:286
+#: Admin/Inc/Dashboard/Settings/Settings.php:299
 msgid "Elementor Integration"
 msgstr ""
 
-#: Admin/Inc/Dashboard/Settings/Settings.php:287
+#: Admin/Inc/Dashboard/Settings/Settings.php:300
 msgid "Enable or disable Elementor widgets for the page builder"
 msgstr ""
 
-#: Admin/Inc/Dashboard/Settings/Settings.php:292
-#: Admin/Inc/Dashboard/Settings/Settings.php:501
+#: Admin/Inc/Dashboard/Settings/Settings.php:305
+#: Admin/Inc/Dashboard/Settings/Settings.php:514
 msgid "Enable Elementor Widgets"
 msgstr ""
 
-#: Admin/Inc/Dashboard/Settings/Settings.php:295
+#: Admin/Inc/Dashboard/Settings/Settings.php:308
 msgid "Activate to use widgets in Elementor"
 msgstr ""
 
-#: Admin/Inc/Dashboard/Settings/Settings.php:314
+#: Admin/Inc/Dashboard/Settings/Settings.php:327
 msgid "Enable All Widgets"
 msgstr ""
 
-#: Admin/Inc/Dashboard/Settings/Settings.php:326
+#: Admin/Inc/Dashboard/Settings/Settings.php:339
 msgid "Quickly enable or disable all widget toggles below"
 msgstr ""
 
-#: Admin/Inc/Dashboard/Settings/Settings.php:333
+#: Admin/Inc/Dashboard/Settings/Settings.php:346
 msgid "Google Summary Widget"
 msgstr ""
 
-#: Admin/Inc/Dashboard/Settings/Settings.php:334
+#: Admin/Inc/Dashboard/Settings/Settings.php:347
 msgid "Display Google review ratings summary in Elementor."
 msgstr ""
 
-#: Admin/Inc/Dashboard/Settings/Settings.php:341
+#: Admin/Inc/Dashboard/Settings/Settings.php:354
 msgid "Trustpilot Summary Widget"
 msgstr ""
 
-#: Admin/Inc/Dashboard/Settings/Settings.php:342
+#: Admin/Inc/Dashboard/Settings/Settings.php:355
 msgid "Display Trustpilot review ratings summary in Elementor."
 msgstr ""
 
-#: Admin/Inc/Dashboard/Settings/Settings.php:348
+#: Admin/Inc/Dashboard/Settings/Settings.php:361
 msgid "Trustpilot Reviews Widget"
 msgstr ""
 
-#: Admin/Inc/Dashboard/Settings/Settings.php:349
+#: Admin/Inc/Dashboard/Settings/Settings.php:362
 msgid "Display full Trustpilot reviews list in Elementor."
 msgstr ""
 
-#: Admin/Inc/Dashboard/Settings/Settings.php:355
+#: Admin/Inc/Dashboard/Settings/Settings.php:368
 msgid "Google Reviews Widget"
 msgstr ""
 
-#: Admin/Inc/Dashboard/Settings/Settings.php:356
+#: Admin/Inc/Dashboard/Settings/Settings.php:369
 msgid "Display full Google reviews list in Elementor."
 msgstr ""
 
-#: Admin/Inc/Dashboard/Settings/Settings.php:362
+#: Admin/Inc/Dashboard/Settings/Settings.php:375
 msgid "Testimonial Reviews Widget"
 msgstr ""
 
-#: Admin/Inc/Dashboard/Settings/Settings.php:363
+#: Admin/Inc/Dashboard/Settings/Settings.php:376
 msgid "Display testimonial reviews in Elementor."
 msgstr ""
 
-#: Admin/Inc/Dashboard/Settings/Settings.php:369
+#: Admin/Inc/Dashboard/Settings/Settings.php:382
 msgid "Review Submit Form Widget"
 msgstr ""
 
-#: Admin/Inc/Dashboard/Settings/Settings.php:370
+#: Admin/Inc/Dashboard/Settings/Settings.php:383
 msgid "Display review submission form in Elementor."
 msgstr ""
 
-#: Admin/Inc/Dashboard/Settings/Settings.php:389
+#: Admin/Inc/Dashboard/Settings/Settings.php:402
 #: Admin/Inc/Dashboard/Tabs/Trustpilot/TrustpilotSettings.php:47
 msgid "Trustpilot Reviews Settings"
 msgstr ""
 
-#: Admin/Inc/Dashboard/Settings/Settings.php:390
+#: Admin/Inc/Dashboard/Settings/Settings.php:403
 msgid "Enter your public Trustpilot business review page URL"
 msgstr ""
 
-#: Admin/Inc/Dashboard/Settings/Settings.php:409
+#: Admin/Inc/Dashboard/Settings/Settings.php:422
 #: Admin/Inc/Dashboard/Tabs/Google/GoogleSettings.php:51
 msgid "Google Maps Reviews Settings"
 msgstr ""
 
-#: Admin/Inc/Dashboard/Settings/Settings.php:410
+#: Admin/Inc/Dashboard/Settings/Settings.php:423
 msgid "Enter your Google Maps API key and Place ID to fetch reviews"
 msgstr ""
 
-#: Admin/Inc/Dashboard/Settings/Settings.php:476
+#: Admin/Inc/Dashboard/Settings/Settings.php:489
 msgid "Main Settings"
 msgstr ""
 
-#: Admin/Inc/Dashboard/Settings/Settings.php:510
+#: Admin/Inc/Dashboard/Settings/Settings.php:523
 msgid "Enable Google Summary Widget"
 msgstr ""
 
-#: Admin/Inc/Dashboard/Settings/Settings.php:519
+#: Admin/Inc/Dashboard/Settings/Settings.php:532
 msgid "Enable Trustpilot Summary Widget"
 msgstr ""
 
-#: Admin/Inc/Dashboard/Settings/Settings.php:528
+#: Admin/Inc/Dashboard/Settings/Settings.php:541
 msgid "Enable Google Reviews Widget"
 msgstr ""
 
-#: Admin/Inc/Dashboard/Settings/Settings.php:546
+#: Admin/Inc/Dashboard/Settings/Settings.php:559
 msgid "Set your preferences for the Revix Reviews plugin."
 msgstr ""
 
-#: Admin/Inc/Dashboard/Settings/Settings.php:587
+#: Admin/Inc/Dashboard/Settings/Settings.php:600
 msgid "Select the default status for new reviews. 'Publish' makes them public immediately, 'Pending' requires admin approval, and 'Draft' saves them as drafts."
 msgstr ""
 
-#: Admin/Inc/Dashboard/Settings/Settings.php:605
+#: Admin/Inc/Dashboard/Settings/Settings.php:618
 msgid "Enable Elementor widgets for Revix Reviews"
 msgstr ""
 
-#: Admin/Inc/Dashboard/Settings/Settings.php:608
+#: Admin/Inc/Dashboard/Settings/Settings.php:621
 msgid "When enabled, Revix Reviews widgets will be available in the Elementor editor. Requires Elementor plugin to be installed and activated."
 msgstr ""
 
-#: Admin/Inc/Dashboard/Settings/Settings.php:626
+#: Admin/Inc/Dashboard/Settings/Settings.php:639
 msgid "Enable Google Summary widget in Elementor"
 msgstr ""
 
-#: Admin/Inc/Dashboard/Settings/Settings.php:629
+#: Admin/Inc/Dashboard/Settings/Settings.php:642
 msgid "When enabled, the Google Reviews Summary widget will be available in the Elementor editor."
 msgstr ""
 
-#: Admin/Inc/Dashboard/Settings/Settings.php:647
+#: Admin/Inc/Dashboard/Settings/Settings.php:660
 msgid "Enable Trustpilot Summary widget in Elementor"
 msgstr ""
 
-#: Admin/Inc/Dashboard/Settings/Settings.php:650
+#: Admin/Inc/Dashboard/Settings/Settings.php:663
 msgid "When enabled, the Trustpilot Summary widget will be available in the Elementor editor."
 msgstr ""
 
-#: Admin/Inc/Dashboard/Settings/Settings.php:668
+#: Admin/Inc/Dashboard/Settings/Settings.php:681
 msgid "Enable Google Reviews widget in Elementor"
 msgstr ""
 
-#: Admin/Inc/Dashboard/Settings/Settings.php:671
+#: Admin/Inc/Dashboard/Settings/Settings.php:684
 msgid "When enabled, the Google Reviews widget will be available in the Elementor editor."
+msgstr ""
+
+#. translators: %1$d: number of imported reviews, %2$d: number of skipped reviews
+#: Admin/Inc/Dashboard/Settings/Settings.php:707
+#, php-format
+msgid "Successfully imported %1$d review(s). %2$d skipped."
+msgstr ""
+
+#: Admin/Inc/Dashboard/Settings/Settings.php:730
+msgid "Export Reviews"
+msgstr ""
+
+#: Admin/Inc/Dashboard/Settings/Settings.php:732
+msgid "Download all your reviews as JSON or CSV file"
+msgstr ""
+
+#: Admin/Inc/Dashboard/Settings/Settings.php:738
+msgid "What will be exported:"
+msgstr ""
+
+#: Admin/Inc/Dashboard/Settings/Settings.php:739
+msgid "All reviews including custom fields, ratings, metadata, author information, and post dates. Perfect for creating backups or migrating reviews."
+msgstr ""
+
+#: Admin/Inc/Dashboard/Settings/Settings.php:749
+msgid "Export as JSON"
+msgstr ""
+
+#: Admin/Inc/Dashboard/Settings/Settings.php:759
+msgid "Export as CSV"
+msgstr ""
+
+#: Admin/Inc/Dashboard/Settings/Settings.php:768
+#: Admin/Inc/Dashboard/Settings/Settings.php:804
+msgid "Import Reviews"
+msgstr ""
+
+#: Admin/Inc/Dashboard/Settings/Settings.php:770
+msgid "Upload a JSON or CSV file to import reviews"
+msgstr ""
+
+#: Admin/Inc/Dashboard/Settings/Settings.php:776
+msgid "Supported files:"
+msgstr ""
+
+#: Admin/Inc/Dashboard/Settings/Settings.php:777
+msgid "JSON files exported from Revix Reviews, or CSV files with title, content, status, date, author columns. Meta fields can be added with \"meta_\" prefix (e.g., meta_rating, meta_email)."
+msgstr ""
+
+#: Admin/Inc/Dashboard/Settings/Settings.php:788
+msgid "Choose JSON or CSV File"
+msgstr ""
+
+#: Admin/Inc/Dashboard/Settings/Settings.php:791
+msgid "or drag and drop here"
+msgstr ""
+
+#: Admin/Inc/Dashboard/Settings/Settings.php:814
+msgid "Important Notes"
+msgstr ""
+
+#: Admin/Inc/Dashboard/Settings/Settings.php:818
+msgid "Importing reviews will create new posts. It will NOT update or replace existing reviews."
+msgstr ""
+
+#: Admin/Inc/Dashboard/Settings/Settings.php:819
+msgid "All custom fields and metadata will be imported exactly as they were exported."
+msgstr ""
+
+#: Admin/Inc/Dashboard/Settings/Settings.php:820
+msgid "The original post dates and author information will be preserved."
+msgstr ""
+
+#: Admin/Inc/Dashboard/Settings/Settings.php:821
+msgid "Make sure to backup your database before importing large amounts of data."
+msgstr ""
+
+#: Admin/Inc/Dashboard/Settings/Settings.php:822
+msgid "Only upload JSON or CSV files that were exported from Revix Reviews."
+msgstr ""
+
+#: Admin/Inc/Dashboard/Settings/Settings.php:824
+msgid "CSV Warning:"
+msgstr ""
+
+#: Admin/Inc/Dashboard/Settings/Settings.php:825
+msgid "Editing the CSV file incorrectly can break the import process. Make sure the date column format remains unchanged (YYYY-MM-DD HH:MM:SS). Any format change may result in failed imports."
 msgstr ""
 
 #: Admin/Inc/Dashboard/Tabs/Google/GoogleSettings.php:53
@@ -322,17 +409,132 @@ msgstr ""
 msgid "Google Place ID Lookup"
 msgstr ""
 
-#: Admin/Inc/Dashboard/Tabs/Tabs.php:18
-msgid "General"
+#: Admin/Inc/Dashboard/Tabs/ImportExport/ImportExportSettings.php:46
+msgid "Import / Export Reviews"
 msgstr ""
 
-#: Admin/Inc/Dashboard/Tabs/Tabs.php:19
-msgid "TrustPilot"
+#: Admin/Inc/Dashboard/Tabs/ImportExport/ImportExportSettings.php:53
+msgid "Export your reviews to a JSON file or import reviews from a previously exported file."
+msgstr ""
+
+#: Admin/Inc/Dashboard/Tabs/ImportExport/ImportExportSettings.php:63
+#: Admin/Inc/Dashboard/Tabs/ImportExport/ImportExportSettings.php:133
+#: Admin/Inc/Dashboard/Tabs/ImportExport/ImportExportSettings.php:400
+#: Admin/Inc/Dashboard/Tabs/ImportExport/ImportExportSettings.php:693
+msgid "Security check failed"
+msgstr ""
+
+#: Admin/Inc/Dashboard/Tabs/ImportExport/ImportExportSettings.php:67
+#: Admin/Inc/Dashboard/Tabs/ImportExport/ImportExportSettings.php:137
+#: Admin/Inc/Dashboard/Tabs/ImportExport/ImportExportSettings.php:404
+#: Admin/Inc/Dashboard/Tabs/ImportExport/ImportExportSettings.php:697
+msgid "You do not have sufficient permissions"
+msgstr ""
+
+#: Admin/Inc/Dashboard/Tabs/ImportExport/ImportExportSettings.php:80
+#: Admin/Inc/Dashboard/Tabs/ImportExport/ImportExportSettings.php:150
+#: Admin/Inc/Dashboard/Tabs/ImportExport/ImportExportSettings.php:707
+msgid "No reviews found to export"
+msgstr ""
+
+#: Admin/Inc/Dashboard/Tabs/ImportExport/ImportExportSettings.php:261
+#: Admin/Inc/Dashboard/Tabs/ImportExport/ImportExportSettings.php:423
+msgid "Invalid file type. Please upload a JSON or CSV file."
+msgstr ""
+
+#: Admin/Inc/Dashboard/Tabs/ImportExport/ImportExportSettings.php:271
+#: Admin/Inc/Dashboard/Tabs/ImportExport/ImportExportSettings.php:433
+msgid "Invalid file format. Only JSON and CSV files are allowed."
+msgstr ""
+
+#: Admin/Inc/Dashboard/Tabs/ImportExport/ImportExportSettings.php:286
+#: Admin/Inc/Dashboard/Tabs/ImportExport/ImportExportSettings.php:454
+msgid "Failed to read the uploaded file"
+msgstr ""
+
+#: Admin/Inc/Dashboard/Tabs/ImportExport/ImportExportSettings.php:292
+#: Admin/Inc/Dashboard/Tabs/ImportExport/ImportExportSettings.php:460
+msgid "Invalid JSON file format"
+msgstr ""
+
+#: Admin/Inc/Dashboard/Tabs/ImportExport/ImportExportSettings.php:409
+msgid "No file uploaded or upload error occurred"
+msgstr ""
+
+#: Admin/Inc/Dashboard/Tabs/ImportExport/ImportExportSettings.php:415
+msgid "File is too large. Maximum size is 10MB"
+msgstr ""
+
+#: Admin/Inc/Dashboard/Tabs/ImportExport/ImportExportSettings.php:446
+msgid "The CSV file contains no valid review data"
+msgstr ""
+
+#: Admin/Inc/Dashboard/Tabs/ImportExport/ImportExportSettings.php:464
+msgid "The JSON file contains no valid review data"
+msgstr ""
+
+#: Admin/Inc/Dashboard/Tabs/ImportExport/ImportExportSettings.php:470
+msgid "Invalid JSON structure. Expected array of review objects."
+msgstr ""
+
+#: Admin/Inc/Dashboard/Tabs/ImportExport/ImportExportSettings.php:478
+#, php-format
+msgid "Too many reviews. Maximum allowed is %d reviews per import."
+msgstr ""
+
+#: Admin/Inc/Dashboard/Tabs/ImportExport/ImportExportSettings.php:489
+#, php-format
+msgid "Item #%d: Missing required fields (title or content)"
+msgstr ""
+
+#: Admin/Inc/Dashboard/Tabs/ImportExport/ImportExportSettings.php:514
+#: Admin/Inc/Dashboard/Tabs/ImportExport/ImportExportSettings.php:533
+#: Admin/Inc/Dashboard/Tabs/ImportExport/ImportExportSettings.php:558
+msgid "Unknown"
+msgstr ""
+
+#: Admin/Inc/Dashboard/Tabs/ImportExport/ImportExportSettings.php:515
+#, php-format
+msgid "Item \"%s...\": Invalid date format. Expected YYYY-MM-DD HH:MM:SS, got \"%s\""
+msgstr ""
+
+#: Admin/Inc/Dashboard/Tabs/ImportExport/ImportExportSettings.php:534
+#, php-format
+msgid "Item \"%s...\": Invalid date value \"%s\""
+msgstr ""
+
+#: Admin/Inc/Dashboard/Tabs/ImportExport/ImportExportSettings.php:559
+#, php-format
+msgid "Item \"%s...\": %s"
+msgstr ""
+
+#: Admin/Inc/Dashboard/Tabs/ImportExport/ImportExportSettings.php:604
+msgid "Failed to open CSV file"
+msgstr ""
+
+#: Admin/Inc/Dashboard/Tabs/ImportExport/ImportExportSettings.php:627
+msgid "CSV must have \"title\" and \"content\" columns"
+msgstr ""
+
+#: Admin/Inc/Dashboard/Tabs/ImportExport/ImportExportSettings.php:663
+msgid "CSV file contains no data rows"
 msgstr ""
 
 #: Admin/Inc/Dashboard/Tabs/Tabs.php:20
+msgid "General"
+msgstr ""
+
+#: Admin/Inc/Dashboard/Tabs/Tabs.php:21
+msgid "TrustPilot"
+msgstr ""
+
+#: Admin/Inc/Dashboard/Tabs/Tabs.php:22
 #: Public/Elementor/Widgets/GoogleReviews/Main.php:19
 msgid "Google Reviews"
+msgstr ""
+
+#: Admin/Inc/Dashboard/Tabs/Tabs.php:23
+msgid "Import/Export"
 msgstr ""
 
 #: Admin/Inc/Dashboard/Tabs/Trustpilot/TrustpilotSettings.php:49
