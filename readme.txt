@@ -6,7 +6,7 @@ Contributors: abcplugins, atiqbd4ever, nexibyllc, supreoxltd
 Tags: reviews, business reviews, testimonials, trustpilot, google reviews
 Requires at least: 5.4
 Tested up to: 6.9
-Stable tag: 1.2.8
+Stable tag: 1.2.9
 Requires PHP: 8.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -183,6 +183,18 @@ No, the free version of Elementor is sufficient. All Revix Reviews widgets work 
 8. General User Feedback submission form
 
 == Changelog ==
+= 1.2.9 =
+- NEW: AJAX-based save functionality for settings with no page reload
+- NEW: SweetAlert2 success/error notifications for settings save
+- NEW: Modern horizontal tab navigation with improved UX
+- IMPROVED: Settings page UI with cleaner tab design
+- IMPROVED: Better hover states and text visibility in navigation
+- IMPROVED: Responsive tab navigation for mobile devices
+- FIXED: Button text reset issue after AJAX save
+- FIXED: Trustpilot and Google tab field name corrections
+- FIXED: Submit Form Widget toggle in "Enable All Widgets"
+- SECURITY: Enhanced nonce verification and capability checks for AJAX handlers
+
 = 1.2.8 =
 - NEW: Import/Export Features and now supports both JSON and CSV with robust validation
 - NEW: SweetAlert2 notifications for all import/export actions and errors
