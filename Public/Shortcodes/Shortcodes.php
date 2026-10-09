@@ -15,6 +15,7 @@ use RevixReviews\Public\Shortcodes\Google\GoogleReviews;
 class Shortcodes
 {
 	protected $assets;
+	protected $reviews_shortcode;
 	protected $reviews_submit_form;
 	protected $trustpilot_shortcode;
 	protected $trustpilot_summary_shortcode;

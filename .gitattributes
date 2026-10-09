@@ -43,3 +43,5 @@ node_modules/           export-ignore
 build/                  export-ignore 
 postcss.config.js       export-ignore
 SECURITY.md             export-ignore
+docs/                   export-ignore
+ARCHITECTURE.md         export-ignore

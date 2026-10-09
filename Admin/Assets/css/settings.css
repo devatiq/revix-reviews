@@ -648,6 +648,77 @@
     font-size: 16px;
 }
 
+/* Trustpilot / setup guide */
+.revixreviews-guide-card .revixreviews-card-body {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.revixreviews-guide-steps {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    counter-reset: revix-guide;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.revixreviews-guide-steps li {
+    counter-increment: revix-guide;
+    display: grid;
+    grid-template-columns: 28px 1fr;
+    gap: 4px 12px;
+    align-items: start;
+    padding: 14px 16px;
+    border-radius: 10px;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+}
+
+.revixreviews-guide-steps li::before {
+    content: counter(revix-guide);
+    grid-row: 1 / span 2;
+    width: 28px;
+    height: 28px;
+    border-radius: 999px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 700;
+    color: #1e3a8a;
+    background: #dbeafe;
+}
+
+.revixreviews-guide-steps li strong {
+    display: block;
+    color: #0f172a;
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+.revixreviews-guide-steps li span {
+    grid-column: 2;
+    color: #475569;
+    font-size: 13px;
+    line-height: 1.55;
+}
+
+.revixreviews-guide-steps code {
+    font-size: 12px;
+    background: #e2e8f0;
+    padding: 1px 5px;
+    border-radius: 4px;
+}
+
+.revixreviews-notice a {
+    color: inherit;
+    font-weight: 700;
+    text-decoration: underline;
+}
+
 /* Notice Messages */
 .revixreviews-notice {
     padding: 14px 18px;

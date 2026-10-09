@@ -45,3 +45,5 @@ build
 postcss.config.js
 .wordpress-org
 SECURITY.md
+docs
+docs/

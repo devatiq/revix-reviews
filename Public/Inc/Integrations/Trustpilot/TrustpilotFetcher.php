@@ -1,183 +1,308 @@
 <?php
 namespace RevixReviews\Public\Inc\Integrations\Trustpilot;
+
+/**
+ * Fetches Trustpilot reviews via the official Public API.
+ *
+ * HTML scraping is no longer viable — Trustpilot serves an AWS WAF
+ * challenge page to non-browser requests.
+ */
 class TrustpilotFetcher
 {
-    const ENABLE_CACHE = true; // Cache enabled for performance
-    const DEBUG = false; // Debug disabled
-    const MAX_PAGES = 10;
+	const API_BASE = 'https://api.trustpilot.com/v1';
+	const ENABLE_CACHE = true;
+	const CACHE_EXPIRATION = 12; // Hours
+	const CACHE_VERSION = '3.0';
 
-    /**
-     * Clear all Trustpilot review caches
-     */
-    public static function clear_cache() {
-        global $wpdb;
-        $wpdb->query("DELETE FROM {$wpdb->options} WHERE option_name LIKE '_transient_revix_trustpilot_%'");
-        $wpdb->query("DELETE FROM {$wpdb->options} WHERE option_name LIKE '_transient_timeout_revix_trustpilot_%'");
-    }
+	/**
+	 * Clear all Trustpilot review caches.
+	 */
+	public static function clear_cache()
+	{
+		global $wpdb;
 
-    public function get_reviews($count = 5, $minRating = 0)
-    {
-        $base_url = get_option('revix_trustpilot_url');
-        if (!$base_url)
-            return [];
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+		$wpdb->query(
+			$wpdb->prepare(
+				"DELETE FROM {$wpdb->options} WHERE option_name LIKE %s",
+				$wpdb->esc_like('_transient_revix_trustpilot_') . '%'
+			)
+		);
 
-        // Include version in cache key to bust old cache when code changes
-        $cache_version = '2.0'; // Increment this when text extraction logic changes
-        $cache_key = 'revix_trustpilot_reviews_cache_v' . $cache_version . '_' . md5($base_url . $count . $minRating);
-        
-        if (self::ENABLE_CACHE) {
-            $cached = get_transient($cache_key);
-            if ($cached && !empty($cached))
-                return $cached;
-        }
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+		$wpdb->query(
+			$wpdb->prepare(
+				"DELETE FROM {$wpdb->options} WHERE option_name LIKE %s",
+				$wpdb->esc_like('_transient_timeout_revix_trustpilot_') . '%'
+			)
+		);
+	}
 
-        $reviews = [];
-        $found = 0;
+	/**
+	 * Whether API credentials and a business identifier are configured.
+	 *
+	 * @return bool
+	 */
+	public static function is_configured()
+	{
+		$api_key = get_option('revix_trustpilot_api_key', '');
+		if (empty($api_key)) {
+			return false;
+		}
 
-        for ($page = 1; $page <= self::MAX_PAGES && $found < $count; $page++) {
-            $url = add_query_arg([
-                'page' => $page,
-                'stars' => $minRating >= 1 ? (int) $minRating : null,
-            ], $base_url);
+		$buid = get_option('revix_trustpilot_business_unit_id', '');
+		$url  = get_option('revix_trustpilot_url', '');
 
-            $response = wp_remote_get($url);
-            if (is_wp_error($response)) {
-                if (self::DEBUG) echo "<!-- Trustpilot error: " . esc_html($response->get_error_message()) . " -->";
-                break;
-            }
+		return !empty($buid) || !empty($url);
+	}
 
-            $html = wp_remote_retrieve_body($response);
-			if (empty($html)) {
-				if (self::DEBUG) {
-					echo "<!-- Trustpilot: empty response body on page " . esc_html($page) . " -->";
-				}
-				break;
+	/**
+	 * Get reviews mapped to the plugin's display format.
+	 *
+	 * @param int   $count     Number of reviews to return.
+	 * @param float $minRating Minimum star rating filter.
+	 * @return array
+	 */
+	public function get_reviews($count = 5, $minRating = 0)
+	{
+		$count     = max(1, (int) $count);
+		$minRating = (float) $minRating;
+
+		if (!self::is_configured()) {
+			return [];
+		}
+
+		$buid = $this->resolve_business_unit_id();
+		if (empty($buid)) {
+			return [];
+		}
+
+		$cache_key = 'revix_trustpilot_reviews_cache_v' . self::CACHE_VERSION . '_' . md5($buid . '|' . $count . '|' . $minRating);
+
+		if (self::ENABLE_CACHE) {
+			$cached = get_transient($cache_key);
+			if (is_array($cached) && !empty($cached)) {
+				return $cached;
+			}
+		}
+
+		// Fetch a slightly larger page, then apply min_rating locally.
+		// Trustpilot's `stars` query is exact-match, not a minimum.
+		$per_page = min(100, max($count * 2, 20));
+		$data     = $this->api_request(
+			'business-units/' . rawurlencode($buid) . '/reviews',
+			[
+				'perPage' => $per_page,
+				'orderBy' => 'createdat.desc',
+			]
+		);
+
+		if (empty($data['reviews']) || !is_array($data['reviews'])) {
+			return [];
+		}
+
+		$reviews = [];
+		foreach ($data['reviews'] as $item) {
+			$stars = isset($item['stars']) ? (int) $item['stars'] : 0;
+			if ($stars < $minRating) {
+				continue;
 			}
 
-            $html = mb_convert_encoding($html, 'HTML-ENTITIES', 'UTF-8');
-            libxml_use_internal_errors(true);
-            $doc = new \DOMDocument();
-            @$doc->loadHTML($html);
-            $xpath = new \DOMXPath($doc);
+			$consumer = isset($item['consumer']) && is_array($item['consumer']) ? $item['consumer'] : [];
+			$author   = !empty($consumer['displayName']) ? $consumer['displayName'] : __('Anonymous', 'revix-reviews');
+			$location = !empty($consumer['displayLocation']) ? $consumer['displayLocation'] : '';
 
-            $review_elements = $xpath->query("//article[contains(@class,'styles_reviewCard')]");
-			if ($review_elements->length === 0) {
-				if (self::DEBUG) {
-					echo "<!-- No reviews found on page " . esc_html($page) . " -->";
-				}
+			$reviews[] = [
+				'author'  => $author,
+				'country' => $location,
+				'avatar'  => '',
+				'title'   => isset($item['title']) ? (string) $item['title'] : '',
+				'text'    => isset($item['text']) ? (string) $item['text'] : '',
+				'rating'  => sprintf('Rated %d out of 5', $stars),
+				'date'    => isset($item['createdAt']) ? (string) $item['createdAt'] : '',
+			];
+
+			if (count($reviews) >= $count) {
 				break;
 			}
+		}
 
-            foreach ($review_elements as $element) {
-                if ($found >= $count) break;
+		if (self::ENABLE_CACHE && !empty($reviews)) {
+			set_transient($cache_key, $reviews, self::CACHE_EXPIRATION * HOUR_IN_SECONDS);
+		}
 
-                $author = $xpath->query(".//span[@data-consumer-name-typography='true']", $element);
-                $country = $xpath->query(".//span[@data-consumer-country-typography='true']", $element);
-                $avatar = $xpath->query(".//img[@data-consumer-avatar-image='true']", $element);
-                $title = $xpath->query(".//h2[@data-service-review-title-typography='true']", $element);
-                $rating = $xpath->query(".//img[contains(@alt,'Rated')]", $element);
-                $date = $xpath->query(".//time", $element);
-                
-                // Multiple strategies to extract review text
-                $text = '';
-                
-                // Strategy 1: Standard data attribute
-                $content = $xpath->query(".//p[@data-service-review-text-typography='true']", $element);
-                if ($content->length > 0) {
-                    $text = trim($content->item(0)->nodeValue);
-                }
-                
-                // Strategy 2: Review content div
-                if (empty($text)) {
-                    $content = $xpath->query(".//div[@data-review-content='true']//p", $element);
-                    if ($content->length > 0) {
-                        $text = trim($content->item(0)->nodeValue);
-                    }
-                }
-                
-                // Strategy 3: Class-based selector
-                if (empty($text)) {
-                    $content = $xpath->query(".//div[contains(@class,'styles_reviewContent')]//p", $element);
-                    if ($content->length > 0) {
-                        $text = trim($content->item(0)->nodeValue);
-                    }
-                }
-                
-                // Strategy 4: Look for data-service-review-text attribute
-                if (empty($text)) {
-                    $content = $xpath->query(".//*[@data-service-review-text-typography]", $element);
-                    if ($content->length > 0) {
-                        $text = trim($content->item(0)->nodeValue);
-                    }
-                }
-                
-                // Strategy 5: Find the longest paragraph (likely the review)
-                if (empty($text)) {
-                    $allParagraphs = $xpath->query(".//p", $element);
-                    $longestText = '';
-                    foreach ($allParagraphs as $p) {
-                        $pText = trim($p->nodeValue);
-                        // Skip if it's rating text, date, or very short
-                        if (strlen($pText) > strlen($longestText) && 
-                            !preg_match('/^(Rated|Date of experience|Reply from|Verified)/i', $pText) &&
-                            strlen($pText) > 20) {
-                            $longestText = $pText;
-                        }
-                    }
-                    $text = $longestText;
-                }
-                
-                // Strategy 6: Look for any div with review text patterns
-                if (empty($text)) {
-                    $allDivs = $xpath->query(".//div", $element);
-                    foreach ($allDivs as $div) {
-                        $divText = trim($div->nodeValue);
-                        // Look for text that looks like a review (longer than author name, etc)
-                        if (strlen($divText) > 50 && strlen($divText) < 5000) {
-                            // Make sure it doesn't contain child elements text we already checked
-                            $hasChildren = $div->childNodes->length > 1;
-                            if (!$hasChildren || strpos($divText, 'Rated') === false) {
-                                $text = $divText;
-                                break;
-                            }
-                        }
-                    }
-                }
+		return $reviews;
+	}
 
-                preg_match('/([0-9]+(?:\\.[0-9])?)/', $rating->length ? $rating->item(0)->getAttribute('alt') : '', $matches);
-                $ratingValue = isset($matches[1]) ? floatval($matches[1]) : 0;
+	/**
+	 * Get aggregate TrustScore and review count.
+	 *
+	 * @return array{average: string, count: string|int}
+	 */
+	public function get_summary()
+	{
+		$empty = [
+			'average' => '',
+			'count'   => '',
+		];
 
-                if ($ratingValue < $minRating) {
-                    continue;
-                }
+		if (!self::is_configured()) {
+			return $empty;
+		}
 
-                // Debug: Log what we found
-                if (self::DEBUG) {
-                    $authorName = $author->length ? trim($author->item(0)->nodeValue) : 'Unknown';
-                    error_log('Revix Trustpilot: Processing review by ' . $authorName);
-                    error_log('Revix Trustpilot: Text length = ' . strlen($text) . ' chars');
-                    if (empty($text)) {
-                        error_log('Revix Trustpilot: WARNING - No text found for this review!');
-                    }
-                }
+		$buid = $this->resolve_business_unit_id();
+		if (empty($buid)) {
+			return $empty;
+		}
 
-                $reviews[] = [
-                    'author' => $author->length ? trim($author->item(0)->nodeValue) : esc_html__('Anonymous', 'revix-reviews'),
-                    'country' => $country->length ? trim($country->item(0)->nodeValue) : '',
-                    'avatar' => $avatar->length ? $avatar->item(0)->getAttribute('src') : '',
-                    'title' => $title->length ? trim($title->item(0)->nodeValue) : '',
-                    'text' => $text,
-                    'rating' => $rating->length ? $rating->item(0)->getAttribute('alt') : '',
-                    'date' => $date->length ? $date->item(0)->getAttribute('datetime') : '',
-                ];
-                $found++;
-            }
-        }
+		$cache_key = 'revix_trustpilot_summary_cache_v' . self::CACHE_VERSION . '_' . md5($buid);
 
-        if (self::ENABLE_CACHE && !empty($reviews)) {
-            set_transient($cache_key, $reviews, 12 * HOUR_IN_SECONDS);
-        }
+		if (self::ENABLE_CACHE) {
+			$cached = get_transient($cache_key);
+			if (is_array($cached) && (isset($cached['average']) || isset($cached['count']))) {
+				return $cached;
+			}
+		}
 
-        return $reviews;
-    }
+		$data = $this->api_request('business-units/' . rawurlencode($buid));
+		if (empty($data) || !is_array($data)) {
+			return $empty;
+		}
+
+		$average = '';
+		if (isset($data['score']['trustScore'])) {
+			$average = (string) $data['score']['trustScore'];
+		} elseif (isset($data['score']['stars'])) {
+			$average = (string) $data['score']['stars'];
+		}
+
+		$count = '';
+		if (isset($data['numberOfReviews']['total'])) {
+			$count = $data['numberOfReviews']['total'];
+		}
+
+		$summary = [
+			'average' => $average,
+			'count'   => $count,
+		];
+
+		if (self::ENABLE_CACHE && ($average !== '' || $count !== '')) {
+			set_transient($cache_key, $summary, self::CACHE_EXPIRATION * HOUR_IN_SECONDS);
+		}
+
+		return $summary;
+	}
+
+	/**
+	 * Resolve Business Unit ID from settings or Trustpilot find API.
+	 *
+	 * @return string
+	 */
+	private function resolve_business_unit_id()
+	{
+		$stored = trim((string) get_option('revix_trustpilot_business_unit_id', ''));
+		if ($stored !== '') {
+			return $stored;
+		}
+
+		$domain = self::extract_domain_from_url(get_option('revix_trustpilot_url', ''));
+		if ($domain === '') {
+			return '';
+		}
+
+		$cache_key = 'revix_trustpilot_buid_v' . self::CACHE_VERSION . '_' . md5($domain);
+		$cached    = get_transient($cache_key);
+		if (is_string($cached) && $cached !== '') {
+			return $cached;
+		}
+
+		$candidates = array_unique(array_filter([
+			$domain,
+			preg_replace('/^www\./i', '', $domain),
+		]));
+
+		foreach ($candidates as $name) {
+			$data = $this->api_request('business-units/find', ['name' => $name]);
+			if (!empty($data['id'])) {
+				$buid = (string) $data['id'];
+				set_transient($cache_key, $buid, WEEK_IN_SECONDS);
+				return $buid;
+			}
+		}
+
+		return '';
+	}
+
+	/**
+	 * Extract domain slug from a Trustpilot review page URL.
+	 *
+	 * @param string $url Trustpilot review URL.
+	 * @return string
+	 */
+	public static function extract_domain_from_url($url)
+	{
+		$url = trim((string) $url);
+		if ($url === '') {
+			return '';
+		}
+
+		$path = (string) wp_parse_url($url, PHP_URL_PATH);
+		if ($path === '') {
+			return '';
+		}
+
+		// Expected: /review/example.com
+		if (preg_match('#/review/([^/]+)/?#i', $path, $matches)) {
+			return rawurldecode($matches[1]);
+		}
+
+		$parts = array_values(array_filter(explode('/', trim($path, '/'))));
+		return !empty($parts) ? rawurldecode(end($parts)) : '';
+	}
+
+	/**
+	 * Perform a Trustpilot Public API GET request.
+	 *
+	 * @param string $path  Path under /v1/.
+	 * @param array  $query Query arguments.
+	 * @return array
+	 */
+	private function api_request($path, $query = [])
+	{
+		$api_key = trim((string) get_option('revix_trustpilot_api_key', ''));
+		if ($api_key === '') {
+			return [];
+		}
+
+		$url = trailingslashit(self::API_BASE) . ltrim($path, '/');
+		if (!empty($query)) {
+			$url = add_query_arg($query, $url);
+		}
+
+		$response = wp_remote_get($url, [
+			'timeout' => 15,
+			'headers' => [
+				'apikey'     => $api_key,
+				'Accept'     => 'application/json',
+				'User-Agent' => 'RevixReviews/' . (defined('REVIXREVIEWS_VERSION') ? REVIXREVIEWS_VERSION : '1.0'),
+			],
+		]);
+
+		if (is_wp_error($response)) {
+			error_log('Revix Trustpilot Error: ' . $response->get_error_message());
+			return [];
+		}
+
+		$code = wp_remote_retrieve_response_code($response);
+		$body = wp_remote_retrieve_body($response);
+		$data = json_decode($body, true);
+
+		if ($code < 200 || $code >= 300) {
+			$message = is_array($data) && isset($data['message']) ? $data['message'] : $body;
+			error_log('Revix Trustpilot API HTTP ' . $code . ': ' . $message);
+			return [];
+		}
+
+		return is_array($data) ? $data : [];
+	}
 }

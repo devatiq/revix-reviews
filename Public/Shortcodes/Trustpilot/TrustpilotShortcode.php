@@ -20,10 +20,8 @@ class TrustpilotShortcode
 
         $debug = ($atts['debug'] === 'true');
         
-        // Check if URL is configured
-        $trustpilot_url = get_option('revix_trustpilot_url');
-        if (empty($trustpilot_url)) {
-            $message = __('Trustpilot URL not configured. Please set it in the WordPress dashboard under Revix Reviews > Trustpilot tab.', 'revix-reviews');
+        if (!TrustpilotFetcher::is_configured()) {
+            $message = __('Trustpilot is not configured. Add your Trustpilot API key and review page URL (or Business Unit ID) under Reviews → Settings → Trustpilot.', 'revix-reviews');
             if ($debug) {
                 return '<div class="revix-trustpilot-error" style="padding:15px;background:#fee;border:1px solid #c33;color:#c33;">' . esc_html($message) . '</div>';
             }
@@ -34,15 +32,11 @@ class TrustpilotShortcode
         $reviews = $fetcher->get_reviews($atts['count'] + 4, floatval($atts['min_rating']));
 
         if ($debug) {
-            error_log('Revix Trustpilot Debug: URL = ' . $trustpilot_url);
             error_log('Revix Trustpilot Debug: Reviews fetched = ' . count($reviews));
         }
 
         if (empty($reviews)) {
-            $message = sprintf(
-                __('No Trustpilot reviews found. URL configured: %s', 'revix-reviews'),
-                $trustpilot_url
-            );
+            $message = __('No Trustpilot reviews found. Check your API key, Business Unit ID/URL, and that the business has public reviews.', 'revix-reviews');
             if ($debug) {
                 return '<div class="revix-trustpilot-error" style="padding:15px;background:#fee;border:1px solid #c33;color:#c33;">' . esc_html($message) . '</div>';
             }

@@ -6,6 +6,7 @@ use Elementor\Controls_Manager;
 use Elementor\Group_Control_Typography;
 use Elementor\Group_Control_Border;
 use Elementor\Group_Control_Box_Shadow;
+use RevixReviews\Public\Inc\Integrations\Trustpilot\TrustpilotFetcher;
 
 class Main extends Widget_Base {
 
@@ -322,64 +323,24 @@ class Main extends Widget_Base {
     protected function render() {
         $settings = $this->get_settings_for_display();
 
-        $url = get_option('revix_trustpilot_url');
-        
-        if (!$url) {
+        if (!TrustpilotFetcher::is_configured()) {
             if (\Elementor\Plugin::$instance->editor->is_edit_mode()) {
                 echo '<div style="padding:15px;background:#fee;border:1px solid #c33;color:#c33;">';
-                echo esc_html__('Trustpilot URL not configured. Please set it in WordPress dashboard under Revix Reviews > Trustpilot tab.', 'revix-reviews');
+                echo esc_html__('Trustpilot is not configured. Add your Trustpilot API key and review page URL (or Business Unit ID) under Reviews → Settings → Trustpilot.', 'revix-reviews');
                 echo '</div>';
             }
             return;
         }
 
-        $response = wp_remote_get($url);
-        if (is_wp_error($response)) {
+        $fetcher = new TrustpilotFetcher();
+        $summary = $fetcher->get_summary();
+        $average = isset($summary['average']) ? $summary['average'] : '';
+        $count   = isset($summary['count']) ? $summary['count'] : '';
+
+        if ($average === '' && ($count === '' || $count === null)) {
             if (\Elementor\Plugin::$instance->editor->is_edit_mode()) {
                 echo '<div style="padding:15px;background:#fee;border:1px solid #c33;color:#c33;">';
-                echo esc_html__('Error fetching Trustpilot page. Please check your URL.', 'revix-reviews');
-                echo '</div>';
-            }
-            return;
-        }
-
-        $html = wp_remote_retrieve_body($response);
-        $html = mb_convert_encoding($html, 'HTML-ENTITIES', 'UTF-8');
-
-        libxml_use_internal_errors(true);
-        $doc = new \DOMDocument();
-        @$doc->loadHTML($html);
-        $xpath = new \DOMXPath($doc);
-
-        $scripts = $xpath->query('//script[@type="application/ld+json"]');
-
-        $average = '';
-        $count = '';
-
-        foreach ($scripts as $script) {
-            $json = json_decode($script->nodeValue, true);
-
-            if (isset($json['aggregateRating']['ratingValue'])) {
-                $average = $json['aggregateRating']['ratingValue'];
-                $count = $json['aggregateRating']['reviewCount'];
-                break;
-            }
-
-            if (isset($json['@graph']) && is_array($json['@graph'])) {
-                foreach ($json['@graph'] as $node) {
-                    if (isset($node['aggregateRating']['ratingValue'])) {
-                        $average = $node['aggregateRating']['ratingValue'];
-                        $count = $node['aggregateRating']['reviewCount'];
-                        break 2;
-                    }
-                }
-            }
-        }
-
-        if (empty($average) && empty($count)) {
-            if (\Elementor\Plugin::$instance->editor->is_edit_mode()) {
-                echo '<div style="padding:15px;background:#fee;border:1px solid #c33;color:#c33;">';
-                echo esc_html__('No summary data available. Please verify your Trustpilot URL.', 'revix-reviews');
+                echo esc_html__('No summary data available. Check your Trustpilot API key and Business Unit ID/URL.', 'revix-reviews');
                 echo '</div>';
             }
             return;
@@ -387,7 +348,7 @@ class Main extends Widget_Base {
 
         ?>
         <div class="revix-summary-wrapper">
-            <?php if ($settings['show_average'] === 'yes' && $average) : ?>
+            <?php if ($settings['show_average'] === 'yes' && $average !== '' && $average !== null) : ?>
                 <?php
                 $rating = floatval($average);
                 if ($rating >= 4.75) {
@@ -417,7 +378,7 @@ class Main extends Widget_Base {
                 </div>
             <?php endif; ?>
 
-            <?php if ($settings['show_count'] === 'yes' && $count) : ?>
+            <?php if ($settings['show_count'] === 'yes' && $count !== '' && $count !== null) : ?>
                 <div class="revix-summary-count">
                     <strong><?php echo esc_html(number_format((int) $count)); ?></strong> <?php echo esc_html($settings['count_label']); ?>
                 </div>

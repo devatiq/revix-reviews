@@ -181,7 +181,9 @@ class Settings
 				'revixreviews_status' => 'sanitize_text_field',
 			),
 			'trustpilot' => array(
+				'revix_trustpilot_api_key' => 'sanitize_text_field',
 				'revix_trustpilot_url' => 'esc_url_raw',
+				'revix_trustpilot_business_unit_id' => 'sanitize_text_field',
 			),
 			'google' => array(
 				'revix_google_api_key' => 'sanitize_text_field',
@@ -479,10 +481,55 @@ class Settings
 	private function render_trustpilot_settings()
 	{
 		?>
+		<div class="revixreviews-settings-card revixreviews-guide-card">
+			<div class="revixreviews-card-header">
+				<h3><?php esc_html_e('Setup Guide', 'revix-reviews'); ?></h3>
+				<p class="revixreviews-card-description"><?php esc_html_e('Trustpilot requires their Public API. Page scraping no longer works because Trustpilot blocks non-browser requests.', 'revix-reviews'); ?></p>
+			</div>
+			<div class="revixreviews-card-body">
+				<ol class="revixreviews-guide-steps">
+					<li>
+						<strong><?php esc_html_e('Create a Trustpilot API application', 'revix-reviews'); ?></strong>
+						<span><?php esc_html_e('Sign in to Trustpilot Business, open Developers / Integrations, and create an application to get a Public API key.', 'revix-reviews'); ?></span>
+					</li>
+					<li>
+						<strong><?php esc_html_e('Paste your API key', 'revix-reviews'); ?></strong>
+						<span><?php esc_html_e('Copy the Public API key into the field below. Keep it private — never put it in frontend JavaScript.', 'revix-reviews'); ?></span>
+					</li>
+					<li>
+						<strong><?php esc_html_e('Add your review page URL or Business Unit ID', 'revix-reviews'); ?></strong>
+						<span><?php esc_html_e('Use your public Trustpilot URL (https://www.trustpilot.com/review/yourdomain.com). Optionally paste the Business Unit ID for faster, more reliable lookups.', 'revix-reviews'); ?></span>
+					</li>
+					<li>
+						<strong><?php esc_html_e('Save and display reviews', 'revix-reviews'); ?></strong>
+						<span><?php
+						echo wp_kses(
+							__('Use shortcodes <code>[revix_trustpilot_summary]</code> and <code>[revix_trustpilot_reviews]</code>, or the Trustpilot Elementor widgets.', 'revix-reviews'),
+							array('code' => array())
+						);
+						?></span>
+					</li>
+				</ol>
+				<div class="revixreviews-notice revixreviews-notice-info" style="margin-bottom:0;">
+					<span class="revixreviews-notice-icon">ℹ</span>
+					<span>
+						<?php esc_html_e('Need more detail?', 'revix-reviews'); ?>
+						<a href="https://github.com/devatiq/revix-reviews/blob/main/docs/trustpilot.md" target="_blank" rel="noopener noreferrer">
+							<?php esc_html_e('Read the full Trustpilot setup guide', 'revix-reviews'); ?>
+						</a>
+						·
+						<a href="https://developers.trustpilot.com/" target="_blank" rel="noopener noreferrer">
+							<?php esc_html_e('Trustpilot API docs', 'revix-reviews'); ?>
+						</a>
+					</span>
+				</div>
+			</div>
+		</div>
+
 		<div class="revixreviews-settings-card">
 			<div class="revixreviews-card-header">
-				<h3><?php esc_html_e('Trustpilot Reviews Settings', 'revix-reviews'); ?></h3>
-				<p class="revixreviews-card-description"><?php esc_html_e('Enter your public Trustpilot business review page URL', 'revix-reviews'); ?></p>
+				<h3><?php esc_html_e('Trustpilot API Settings', 'revix-reviews'); ?></h3>
+				<p class="revixreviews-card-description"><?php esc_html_e('Connect Revix to Trustpilot with your Public API key and business profile', 'revix-reviews'); ?></p>
 			</div>
 			<div class="revixreviews-card-body">
 				<?php do_settings_sections('revixreviews_trustpilot'); ?>
