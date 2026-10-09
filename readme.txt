@@ -6,7 +6,7 @@ Contributors: abcplugins, atiqbd4ever, nexibyllc, supreoxltd
 Tags: reviews, business reviews, testimonials, trustpilot, google reviews
 Requires at least: 5.4
 Tested up to: 7.1.3
-Stable tag: 1.2.9
+Stable tag: 1.3.0
 Requires PHP: 8.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -183,6 +183,16 @@ No, the free version of Elementor is sufficient. All Revix Reviews widgets work 
 8. General User Feedback submission form
 
 == Changelog ==
+= 1.3.0 =
+- IMPORTANT: Trustpilot now uses the official Public API (HTML scraping no longer works due to Trustpilot WAF protection)
+- NEW: Trustpilot API Key and optional Business Unit ID settings
+- NEW: Trustpilot setup guide in the settings tab with step-by-step instructions
+- NEW: Repository docs guide for Trustpilot API setup (docs/trustpilot.md)
+- IMPROVED: Trustpilot summary and reviews shortcodes/Elementor widgets use cached API responses
+- FIXED: PHP 8.2+ dynamic property deprecation in Shortcodes class
+- FIXED: PHP 8.2+ mb_convert_encoding HTML-ENTITIES deprecation in Trustpilot parsers
+- Note: Add your Trustpilot Public API key under Reviews → Settings → Trustpilot after updating
+
 = 1.2.9 =
 - NEW: AJAX-based save functionality for settings with no page reload
 - NEW: SweetAlert2 success/error notifications for settings save

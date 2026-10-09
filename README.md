@@ -159,6 +159,16 @@ Make sure to enable "Places API (New)" in your Google Cloud Console, not the leg
 
 ## Changelog
 
+### 1.3.0
+- **IMPORTANT:** Trustpilot now uses the official Public API (HTML scraping no longer works due to Trustpilot WAF protection)
+- **NEW:** Trustpilot API Key and optional Business Unit ID settings
+- **NEW:** Trustpilot setup guide in the settings tab with step-by-step instructions
+- **NEW:** Repository docs guide for Trustpilot API setup (`docs/trustpilot.md`)
+- **IMPROVED:** Trustpilot summary and reviews shortcodes/Elementor widgets use cached API responses
+- **FIXED:** PHP 8.2+ dynamic property deprecation in Shortcodes class
+- **FIXED:** PHP 8.2+ `mb_convert_encoding` HTML-ENTITIES deprecation in Trustpilot parsers
+- **Note:** Add your Trustpilot Public API key under Reviews → Settings → Trustpilot after updating
+
 ### 1.2.9
 - **NEW:** AJAX-based save functionality for settings with no page reload
 - **NEW:** SweetAlert2 success/error notifications for settings save
